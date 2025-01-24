@@ -1,56 +1,25 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
+import { BrowserRouter as Router } from "react-router-dom";
+import Navbar from "./components/Navbar";
+import Footer from "./components/Footer";
+import AppRoutes from "./routes"; // 引入 routes.jsx
 
 const App = () => {
-  const [posts, setPosts] = useState([]);
-
-  // 使用 useEffect 讀取 JSON 檔案
-  useEffect(() => {
-    fetch("/blogPosts.json")
-      .then((response) => response.json())
-      .then((data) => setPosts(data))
-      .catch((error) => console.error("Error fetching blog posts:", error));
-  }, []);
-
   return (
-    <div className="w-100">
-      <div className="container">
-        <h1>部落格文章</h1>
-        {posts.length > 0 ? (
-          <div>
-            {posts.map((post) => (
-              <div key={post.id} style={{ border: "1px solid #ccc", margin: "10px 0", padding: "10px" }}>
-                <div className="d-flex">
-                  <div>
-                    <img src={post.cover} alt=""
-                      className="me-3"
-                      style={{
-                        width:'200px'
-                      }}
-                       />
-                  </div>
-                  <div>
-                    <h2>{post.title}</h2>
-                    <p>
-                      {post.date}
-                    </p>
-                    <p>{post.content}</p>
+    <Router>
+      <div className="d-flex flex-column min-vh-100">
+        {/* 導航欄 */}
+        <Navbar />
 
-                    <strong>標籤:</strong>
-                    {post.tags.map((tag, index) => (
-                      <span key={index} style={{ marginLeft: "5px", color: "blue" }}>
-                        #{tag}
-                      </span>
-                    ))}
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
-        ) : (
-          <p>載入中...</p>
-        )}
+        {/* 主內容 */}
+        <main className="flex-grow-1 container mt-4">
+          <AppRoutes /> {/* 使用 routes.jsx 配置路由 */}
+        </main>
+
+        {/* 頁腳 */}
+        <Footer />
       </div>
-    </div>
+    </Router>
   );
 };
 
