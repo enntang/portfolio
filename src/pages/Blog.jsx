@@ -5,7 +5,7 @@ const App = () => {
 
   // 使用 useEffect 讀取 JSON 檔案
   useEffect(() => {
-    fetch("/blogPosts.json")
+    fetch("./blogPosts.json")
       .then((response) => response.json())
       .then((data) => setPosts(data))
       .catch((error) => console.error("Error fetching blog posts:", error));
@@ -14,7 +14,7 @@ const App = () => {
   return (
     <div className="w-100">
       <div className="container">
-        <h1>部落格文章</h1>
+        <h1>Blog</h1>
         {posts.length > 0 ? (
           <div>
             {posts.map((post) => (

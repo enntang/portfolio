@@ -1,23 +1,20 @@
-import React from "react";
-import { Routes, Route } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import Home from './pages/Home';
+import ProjectList from './pages/ProjectList';
+import Blog from './pages/Blog';
+import BlogPost from './pages/BlogPost';
+import About from './pages/About';
 
-// 引入頁面元件
-import Home from "./pages/Home";
-import Portfolio from "./pages/Portfolio";
-import Blog from "./pages/Blog";
-import BlogPost from "./pages/BlogPost";
-import Contact from "./pages/Contact";
-
-// 配置路由
 const AppRoutes = () => {
   return (
-    <Routes>
-      <Route path="/" element={<Home />} />
-      <Route path="/portfolio" element={<Portfolio />} />
-      <Route path="/blog" element={<Blog />} />
-      <Route path="/blog/:id" element={<BlogPost />} />
-      <Route path="/contact" element={<Contact />} />
-    </Routes>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/project" element={<ProjectList />} />
+        {/* <Route path="/project/:id" element={<ProjectDetail />} /> */}
+        <Route path="/blog" element={<Blog />} />
+        <Route path="/blog/:id" element={<BlogPost />} />
+        <Route path="/about" element={<About />} />
+      </Routes>
   );
 };
 

@@ -1,0 +1,6 @@
+.card:hover{
+    background-color: #dddddd;
+  }
+  .btn-primary.active{
+    background-color: black;
+  }

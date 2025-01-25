@@ -6,7 +6,7 @@ import AppRoutes from "./routes"; // 引入 routes.jsx
 
 const App = () => {
   return (
-    <Router>
+    <Router basename="/portfolio">
       <div className="d-flex flex-column min-vh-100">
         {/* 導航欄 */}
         <Navbar />

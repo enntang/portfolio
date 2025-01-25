@@ -7,8 +7,7 @@ const Home = () => {
     <div>
     
       <main className="container">
-        <h1>歡迎來到我的網站</h1>
-        <p>這裡可以找到我的作品、部落格和聯絡方式。</p>
+        <h1>About</h1>
       </main>
      
     </div>
