@@ -3,6 +3,7 @@ import Navbar from './components/utilities/Navbar'
 import Footer from './components/utilities/Footer'
 import NotFound from './NotFound'
 import blogPosts, { getPostBySlug } from './assets/blogPosts'
+import { getPublicPath } from './utils/path'
 
 function BlogPost({ slug }) {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
@@ -44,7 +45,7 @@ function BlogPost({ slug }) {
 
           {post.heroImage && (
             <div className='rounded-3xl overflow-hidden bg-[#101625]'>
-              <img src={post.heroImage} alt={post.title} className='w-full h-auto object-cover' />
+              <img src={getPublicPath(post.heroImage)} alt={post.title} className='w-full h-auto object-cover' />
             </div>
           )}
 
@@ -68,7 +69,7 @@ function BlogPost({ slug }) {
                 return (
                   <figure key={index} className='my-8 flex flex-col items-center'>
                     <div className={`${widthClass} rounded-3xl overflow-hidden bg-[#101625]`}>
-                      <img src={block.src} alt={block.alt || ''} className='w-full h-auto object-cover' />
+                      <img src={getPublicPath(block.src)} alt={block.alt || ''} className='w-full h-auto object-cover' />
                     </div>
                     {block.caption && (
                       <figcaption className='mt-3 text-[12px] text-center text-gray-500 max-w-xs mx-auto'>

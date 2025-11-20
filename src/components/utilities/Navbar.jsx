@@ -2,6 +2,7 @@
 import { useEffect, useRef, useState } from 'react'
 import BtnWhite from './BtnWhite'
 import EmailCopy from './EmailCopy'
+import { getPublicPath } from '../../utils/path'
  
 
 function Navbar({ isWhite = false, isMenuOpen = false, onToggleMenu, variant = 'default', onBack }) {
@@ -114,7 +115,7 @@ function Navbar({ isWhite = false, isMenuOpen = false, onToggleMenu, variant = '
                 onClick={handleBack}
                 className="inline-flex items-center justify-center w-10 h-10 rounded-full bg-white shadow-sm  hover:bg-highlight transition-all duration-300 ease-in-out"
               >
-                <img src="/icon-arrow-left.svg" alt="back" className="w-6 h-6" />
+                <img src={getPublicPath("/icon-arrow-left.svg")} alt="back" className="w-6 h-6" />
               </button>
             ) : (
               <a href="#/" aria-label="Go to home" className="inline-block">

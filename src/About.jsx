@@ -4,6 +4,7 @@ import Navbar from './components/utilities/Navbar'
 import ExperienceItem from './components/about/ExperienceItem'
 import AboutSectionTitle from './components/about/AboutSectionTitle'
 import ArchivedWorkItem from './components/about/ArchivedWorkItem'
+import { getPublicPath } from './utils/path'
 
 
 
@@ -12,9 +13,9 @@ function About() {
   const [hoveredWhatIDoKey, setHoveredWhatIDoKey] = useState(null)
   const [lastHoveredWhatIDoKey, setLastHoveredWhatIDoKey] = useState(null)
   const hoverImageByKey = {
-    uiux: '/bg-mentor.png',
-    graphic: '/bg-chivalry.png',
-    illustration: '/bg-penguin.png',
+    uiux: getPublicPath('/bg-mentor.png'),
+    graphic: getPublicPath('/bg-chivalry.png'),
+    illustration: getPublicPath('/bg-penguin.png'),
   }
 
   const profileRef = useRef(null)
@@ -77,7 +78,7 @@ function About() {
           <h1 data-aos="fade-up" data-aos-duration="1000" className='md:col-span-2 text-large-mobile xl:text-large text-gray-300 leading-tight mix-blend-screen mb-8'>
             Making digital products clear, engaging, and meaningful for users.
           </h1>
-          <img data-aos="fade-up" data-aos-duration="2000" src='/portrait.png' alt='profile' className='w-40 h-40 mix-blend-screen absolute right-0 bottom-0' />
+          <img data-aos="fade-up" data-aos-duration="2000" src={getPublicPath('/portrait.png')} alt='profile' className='w-40 h-40 mix-blend-screen absolute right-0 bottom-0' />
         </div>
 
         <div ref={profileRef} className='space-y-3 text-gray-800 mb-40'>
@@ -109,7 +110,7 @@ function About() {
                   <span className='inline-flex items-center gap-2 text-sm tracking-wide text-gray-500 opacity-0 group-hover:opacity-100 transition-opacity duration-200'>
                     watch more
                     <img
-                      src='/icon-arrow-right.svg'
+                      src={getPublicPath('/icon-arrow-right.svg')}
                       alt=''
                       className='w-4 h-4 transition-transform duration-200 ease-out group-hover:translate-x-1'
                     />
@@ -127,7 +128,7 @@ function About() {
                   <span className='inline-flex items-center gap-2 text-sm tracking-wide text-gray-500 opacity-0 group-hover:opacity-100 transition-opacity duration-200'>
                     watch more
                     <img
-                      src='/icon-arrow-right.svg'
+                      src={getPublicPath('/icon-arrow-right.svg')}
                       alt=''
                       className='w-4 h-4 transition-transform duration-200 ease-out group-hover:translate-x-1'
                     />
@@ -145,7 +146,7 @@ function About() {
                   <span className='inline-flex items-center gap-2 text-sm tracking-wide text-gray-500 opacity-0 group-hover:opacity-100 transition-opacity duration-200'>
                     watch more
                     <img
-                      src='/icon-arrow-right.svg'
+                      src={getPublicPath('/icon-arrow-right.svg')}
                       alt=''
                       className='w-4 h-4 transition-transform duration-200 ease-out group-hover:translate-x-1'
                     />

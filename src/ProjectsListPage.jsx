@@ -5,6 +5,7 @@ import projectsData from './assets/projects.json'
 import mentorImg from '../public/projectList-icon-mentor.png'
 import ehairposImg from '../public/projectList-icon-ehairpos.png'
 import penguinImg from '../public/projectList-icon-penguin.png'
+import { getPublicPath } from './utils/path'
 
 function ProjectBanner({
   href,
@@ -119,8 +120,8 @@ function ProjectsList() {
     
     return {
       href: `#/project/${p.slug}`,
-      desktopSrc: `/projectList-bg-${key}-desktop.png`,
-      mobileSrc: `/projectList-bg-${key}-mobile.png`,
+      desktopSrc: getPublicPath(`/projectList-bg-${key}-desktop.png`),
+      mobileSrc: getPublicPath(`/projectList-bg-${key}-mobile.png`),
       title: mainTitle,
       subtitle,
       description: p.description,

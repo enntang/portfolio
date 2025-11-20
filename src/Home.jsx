@@ -6,6 +6,7 @@ import Contact from './components/home/Contact'
 import ImageCarousel from './components/utilities/ImageCarousel'
 import Recommendations from './components/home/Recommendations'
 import Footer from './components/utilities/Footer'
+import { getPublicPath } from './utils/path'
 
 
 function Home() {
@@ -21,11 +22,11 @@ function Home() {
       <div className='bg-white  w-full lg:w-1/2  h-full'>
         <ImageCarousel
           slides={[
-            { src: '/bg-mentor.png', title: 'Intuitive and visually appealing UI design', subtitle: 'I focused on', projectName: 'Mentor: AI-integrated learning platform', slug: 'mentor' },
-            { src: '/bg-illustration.png', title: 'Illustrations that tell stories', subtitle: 'I create', projectName: 'Star', href: '#/projects'},
-            { src: '/bg-ehairpos.png', title: 'Intuitive and visually appealing UI design', subtitle: 'I focused on', projectName: 'eHairPOS', slug: 'ehairpos' },
-            { src: '/bg-textbook.png', title: 'Graphic Design & Editorial Layout', subtitle: 'I specialize', projectName: 'A Traveler’s Guide for Young Historians', href: '#/projects' },
-            { src: '/bg-penguin.png', title: 'Playful Game UI Design', subtitle: 'I do', projectName: 'Penguin Game', slug: 'penguin-territory' },
+            { src: getPublicPath('/bg-mentor.png'), title: 'Intuitive and visually appealing UI design', subtitle: 'I focused on', projectName: 'Mentor: AI-integrated learning platform', slug: 'mentor' },
+            { src: getPublicPath('/bg-illustration.png'), title: 'Illustrations that tell stories', subtitle: 'I create', projectName: 'Star', href: '#/projects'},
+            { src: getPublicPath('/bg-ehairpos.png'), title: 'Intuitive and visually appealing UI design', subtitle: 'I focused on', projectName: 'eHairPOS', slug: 'ehairpos' },
+            { src: getPublicPath('/bg-textbook.png'), title: 'Graphic Design & Editorial Layout', subtitle: 'I specialize', projectName: "A Traveler's Guide for Young Historians", href: '#/projects' },
+            { src: getPublicPath('/bg-penguin.png'), title: 'Playful Game UI Design', subtitle: 'I do', projectName: 'Penguin Game', slug: 'penguin-territory' },
             
           ]}
         />
