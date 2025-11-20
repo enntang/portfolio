@@ -1,0 +1,212 @@
+
+import { useEffect, useRef, useState } from 'react'
+import BtnWhite from './BtnWhite'
+import EmailCopy from './EmailCopy'
+ 
+
+function Navbar({ isWhite = false, isMenuOpen = false, onToggleMenu, variant = 'default', onBack }) {
+  const menuContainerRef = useRef(null)
+  const lastScrollYRef = useRef(0)
+  const [showMenu, setShowMenu] = useState(false)
+  const [isClosing, setIsClosing] = useState(false)
+  const [isHidden, setIsHidden] = useState(false)
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const currentY = window.scrollY || 0
+
+      // 開啟選單時強制顯示 Navbar
+      if (isMenuOpen) {
+        setIsHidden(false)
+        lastScrollYRef.current = currentY
+        return
+      }
+
+      // 回到頂部時顯示
+      if (currentY <= 0) {
+        setIsHidden(false)
+        lastScrollYRef.current = currentY
+        return
+      }
+
+      const diff = currentY - lastScrollYRef.current
+
+      // 加一點 threshold 避免小幅捲動抖動
+      if (diff > 10) {
+        // 向下捲 -> 隱藏
+        setIsHidden(true)
+      } else if (diff < -10) {
+        // 向上捲 -> 顯示
+        setIsHidden(false)
+      }
+
+      lastScrollYRef.current = currentY
+    }
+
+    window.addEventListener('scroll', handleScroll)
+    return () => window.removeEventListener('scroll', handleScroll)
+  }, [isMenuOpen])
+
+  useEffect(() => {
+    let timeoutId
+
+    if (isMenuOpen) {
+      setShowMenu(true)
+      setIsClosing(false)
+    } else if (!isMenuOpen && showMenu) {
+      setIsClosing(true)
+      timeoutId = setTimeout(() => {
+        setShowMenu(false)
+        setIsClosing(false)
+      }, 300)
+    }
+
+    return () => {
+      if (timeoutId) clearTimeout(timeoutId)
+    }
+  }, [isMenuOpen, showMenu])
+  const handleBack = () => {
+    if (typeof onBack === 'function') {
+      onBack()
+    } else {
+      window.history.back()
+    }
+  }
+
+  const navLinks = [
+    {
+      id: '01',
+      href: '#home',
+      text: 'home',
+    },
+    {
+      id: '02',
+      href: '#/projects',
+      text: 'projects',
+    },
+    // {
+    //   id: '03',
+    //   href: '#/blog',
+    //   text: 'blog',
+    // },
+    {
+      id: '03',
+      href: '#/about',
+      text: 'about',
+    },
+
+
+  ]
+
+  return (
+    <>
+      <div
+        className={`w-full fixed top-0 left-0 transition-all duration-300 transform py-4 px-8 z-[70] ${
+          isHidden ? '-translate-y-full' : 'translate-y-0'
+        } ${isWhite ? '' : 'bg-transparent'}`}
+      >
+        <div className="grid grid-cols-3 items-center">
+          {/* Left area */}
+          <div className="flex items-center">
+            {variant === 'arrow' ? (
+              <button
+                aria-label="Go back"
+                onClick={handleBack}
+                className="inline-flex items-center justify-center w-10 h-10 rounded-full bg-white shadow-sm  hover:bg-highlight transition-all duration-300 ease-in-out"
+              >
+                <img src="/icon-arrow-left.svg" alt="back" className="w-6 h-6" />
+              </button>
+            ) : (
+              <a href="#/" aria-label="Go to home" className="inline-block">
+                <h1 className={`text-2xl font-bold ${isWhite ? 'text-gray-400' : 'text-white'
+                  }`}>ENN<br />TANG</h1>
+              </a>
+            )}
+          </div>
+
+          {/* Center area */}
+          <div className="flex items-center justify-center">
+            {variant === 'arrow' && (
+              <h1 className={`text-2xl font-bold text-gray-400`}>ENN&nbsp;TANG</h1>
+            )}
+          </div>
+
+          {/* Right area */}
+          <div className="flex items-center justify-end">
+            <button
+              aria-label={isMenuOpen ? 'Close menu' : 'Open menu'}
+              onClick={onToggleMenu}
+              className="flex flex-col items-center gap-1"
+            >
+              <div className="menu-icon w-6 h-3.5 cursor-pointer relative">
+                <span 
+                  className={`absolute left-0 w-full h-0.5 bg-gray-900 transition-all duration-300 ease-in-out ${
+                    isMenuOpen 
+                      ? 'top-1.5 rotate-45' 
+                      : 'top-0 rotate-0'
+                  }`}
+                />
+                <span 
+                  className={`absolute left-0 w-full h-0.5 bg-gray-900 transition-all duration-300 ease-in-out ${
+                    isMenuOpen 
+                      ? 'opacity-0' 
+                      : 'opacity-100'
+                  }`}
+                  style={{ top: '6px' }}
+                />
+                <span 
+                  className={`absolute left-0 w-full h-0.5 bg-gray-900 transition-all duration-300 ease-in-out ${
+                    isMenuOpen 
+                      ? 'top-1.5 -rotate-45' 
+                      : 'top-3 rotate-0'
+                  }`}
+                />
+              </div>
+              <span className="text-gray-900 text-xs tracking-widest text-bold mt-2">
+                MENU
+              </span>
+            </button>
+          </div>
+        </div>
+      </div>
+      
+      {showMenu && (
+        <div
+          ref={menuContainerRef}
+          className={`fixed inset-0 w-screen h-screen z-[60] bg-bg text-white p-4 md:p-16 lg:p-40 transition-opacity duration-300 ${
+            isClosing ? 'opacity-0' : 'opacity-100'
+          }`}
+          style={{ animation: isClosing ? 'none' : 'modalSlideIn 0.3s ease-out' }}
+        >
+          <div className="flex flex-col md:flex-row w-full h-full">
+            {/* Main Menu */}
+            <nav className="flex flex-col gap-8 h-full w-full mobile:pt-32">
+              {navLinks.map(item => (
+                <div key={item.text} className='flex flex-col'>
+                  <div className='text-caption font-semibold tracking-widest text-gray-800'>{item.id}</div>
+                  <a href={item.href} onClick={onToggleMenu} className="pl-8 text-5xl md:text-6xl font-semibold text-gray-400 hover:text-highlight transition-all duration-300">{item.text}</a>
+                </div>
+              ))}
+            </nav>
+
+            {/* Contact section */}
+            <div className="flex flex-col gap-8 justify-end">
+              <div>
+                <div className="text-caption font-semibold tracking-widest text-gray-400 pb-2">CV</div>
+                <BtnWhite name="Read CV" href="https://www.cake.me/resumes/enn-tang" target="_blank" />
+              </div>
+              <div>
+                <div className="text-caption font-semibold tracking-widest text-gray-400">CONTACT ME</div>
+                <EmailCopy />
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+      )}
+    </>
+  )
+}
+
+export default Navbar

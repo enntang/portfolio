@@ -1,0 +1,54 @@
+[
+  {
+    "title": "Mentor: AI-integrated Learning Platform",
+    "slug": "mentor",
+    "description": "A personalized learning coach that turns study into a journey.",
+    "imageSrc": "/project-cover-mentor.png",
+    "imageAlt": "Mentor platform cover"
+  },
+  {
+    "title": "eHairPOS: Salon Management Tool",
+    "slug": "ehairpos",
+    "description": "A POS system tailored for hair salons with streamlined workflows.",
+    "imageSrc": "/project-cover-ehairpos.png",
+    "imageAlt": "eHairPOS cover"
+  },
+  {
+    "title": "Penguin Territory (Web Game)",
+    "slug": "penguin-territory",
+    "description": "Friendly art direction for a casual strategy web game.",
+    "imageSrc": "/project-cover-penguin.png",
+    "imageAlt": "Penguin game cover"
+  },
+  {
+    "title": "Online Shopping Site",
+    "slug": "shopping-site",
+    "description": "Responsive e-commerce interface and design system foundations.",
+    "imageSrc": "/project-cover-shopping.png",
+    "imageAlt": "Shopping site cover"
+  },
+  {
+    "title": "Basel Convention Website ",
+    "slug": "basel-convention",
+    "description": "Clean, content-first layout for a municipal information portal.",
+    "imageSrc": "/project-cover-basel.png",
+    "imageAlt": "Basel Convention Website  cover"
+  },
+  {
+    "title": "Chivalry: Board Game",
+    "slug": "chivalry",
+    "description": "Illustration-led board game with a medieval aesthetic.",
+    "imageSrc": "/project-cover-chivalry.png",
+    "imageAlt": "Chivalry board game cover",
+    "link": "#/project/chivalry"
+  },
+  {
+    "title": "Masonry Image Gallery",
+    "slug": "masonry-gallery",
+    "description": "A waterfall-style image gallery with a lightbox viewing experience.",
+    "imageSrc": "/project-cover-mentor.png",
+    "imageAlt": "Preview of the masonry gallery project",
+    "link": "#/project/masonry-gallery"
+  }
+]
+
