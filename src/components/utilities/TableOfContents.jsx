@@ -109,7 +109,7 @@ function TableOfContents() {
       {/* 按钮 */}
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="fixed bottom-6 left-6 z-50 bg-white w-12  h-12  shadow-xl rounded-full p-3 hover:bg-highlight transition-all "
+        className="fixed bottom-6 left-8 z-50 bg-white w-12  h-12  shadow-xl rounded-full p-3 hover:bg-highlight transition-all "
         aria-label="Toggle table of contents"
       >
         <div className="menu-icon w-6 h-3.5 cursor-pointer relative">

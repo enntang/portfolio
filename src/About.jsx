@@ -23,7 +23,6 @@ function About() {
   const whatIDoRef = useRef(null)
   const experienceRef = useRef(null)
   const educationRef = useRef(null)
-  const worksRef = useRef(null)
 
   useEffect(() => {
     // If navigated with hash like #/about?section=experience, scroll to it
@@ -34,7 +33,6 @@ function About() {
       what: whatIDoRef,
       experience: experienceRef,
       education: educationRef,
-      works: worksRef,
     }
     if (section && map[section]?.current) {
       map[section].current.scrollIntoView({ behavior: 'smooth', block: 'start' })
@@ -58,7 +56,7 @@ function About() {
   return (
     <div className=' md:flex flex-row bg-bg h-fit md:h-screen'>
       <Navbar
-        isWhite={true}
+        isWhite={false}
         isMenuOpen={isMenuOpen}
         onToggleMenu={() => setIsMenuOpen(prev => !prev)}
       />
@@ -76,12 +74,10 @@ function About() {
           />
         </>
         <div className='pt-16 relative isolate mb-16'>
-          <h1 data-aos="fade-up" data-aos-duration="1000" className='md:col-span-2 text-large-mobile xl:text-large text-gray-300 leading-tight mix-blend-screen mb-8'>
+          <h1 className='md:col-span-2 text-large-mobile xl:text-large text-gray-300 leading-tight mix-blend-screen mb-8'>
             Making digital products clear, engaging, and meaningful for users.
           </h1>
           <LazyImage 
-            data-aos="fade-up" 
-            data-aos-duration="2000" 
             src={getPublicPath('/portrait.png')} 
             alt='profile' 
             className='w-40 h-40 mix-blend-screen absolute right-0 bottom-0'
@@ -105,7 +101,7 @@ function About() {
       <div className='w-full md:w-1/2 min-h-screen p-8 xl:p-16 bg-white h-full overflow-visible  md:overflow-scroll'>
         <div className='flex flex-col gap-10'>
           {/* What I Do */}
-          <section data-aos="fade-up" ref={whatIDoRef} className='space-y-4 pt-16'>
+          <section ref={whatIDoRef} className='space-y-4 pt-16'>
             <AboutSectionTitle>What I Do</AboutSectionTitle>
             <div className='flex flex-col divide-y divide-gray-200'>
               <a
@@ -167,7 +163,7 @@ function About() {
           </section>
 
           {/* Experience */}
-          <section ref={experienceRef} className='space-y-4' data-aos="fade-up">
+          <section ref={experienceRef} className='space-y-4'>
             <AboutSectionTitle>Experience</AboutSectionTitle>
             <div className='space-y-6 text-gray-800'>
               <ExperienceItem
@@ -185,7 +181,8 @@ function About() {
                 period='Jan 2021  - Mar 2023'
                 company='TutorABC'
                 items={[
-                  'Responsible for interface design of brand websites and app products.Established product design guidelines and led Figma training sessions, successfully integrating it into the R&D department’s workflows.'
+                  'Responsible for interface design of brand websites and app products.',
+                  'Established product design guidelines and led Figma training sessions, successfully integrating it into the R&D department’s workflows.',
                 
                 ]}
               />
@@ -194,7 +191,8 @@ function About() {
                 period='Jun 2018 - Dec 2020'
                 company='ACubeDT'
                 items={[
-                  'Led multiple RWD web design and POS system projects, responsible for requirements interviews and UI interface design. Clients included government agencies and educational institutions.'
+                  'Led multiple RWD web design and POS system projects, responsible for requirements interviews and UI interface design.',
+                  'Clients included government agencies and educational institutions.',
                 ]}
               />
               <ExperienceItem
@@ -213,9 +211,9 @@ function About() {
             <AboutSectionTitle>Education</AboutSectionTitle>
             <div className='space-y-6 text-gray-800'>
               <ExperienceItem
-                role='National Taiwan University of Science and Technology'
-                period='Sep 2023 - Jun 2025'
-                company='Department of Design'
+                role={`National Taiwan University of Science and Technology\n(Master’s Degree)`}
+                period={`Sep 2023 - Jun 2025`}
+                company={`Department of Design`}
                 items={[
                 
                 ]}
@@ -231,7 +229,7 @@ function About() {
           </section>
 
           {/* Archived Works */}
-          <section ref={worksRef}  className='space-y-4 pb-24'>
+          <section className='space-y-4 pb-24'>
             <AboutSectionTitle>Archived Works</AboutSectionTitle>
             <div className=''>
               <ArchivedWorkItem
@@ -266,7 +264,7 @@ function About() {
           <button className='py-3' onClick={() => scrollTo(whatIDoRef)}>What I Do</button>
           <button className='py-3' onClick={() => scrollTo(experienceRef)}>Experience</button>
           <button className='py-3' onClick={() => scrollTo(educationRef)}>Education</button>
-          <button className='py-3' onClick={() => scrollTo(worksRef)}>Works</button>
+          
         </div>
       </div>
     </div>

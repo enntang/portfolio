@@ -12,6 +12,20 @@ function Navbar({ isWhite = false, isMenuOpen = false, onToggleMenu, variant = '
   const [showMenu, setShowMenu] = useState(false)
   const [isClosing, setIsClosing] = useState(false)
   const [isHidden, setIsHidden] = useState(false)
+  const [isHome, setIsHome] = useState(false)
+
+  useEffect(() => {
+    const checkIsHome = () => {
+      const hash = window.location.hash || '#/'
+      const path = hash.replace(/^#/, '')
+      setIsHome(path === '/' || path === '')
+    }
+    
+    checkIsHome()
+    const handleHashChange = () => checkIsHome()
+    window.addEventListener('hashchange', handleHashChange)
+    return () => window.removeEventListener('hashchange', handleHashChange)
+  }, [])
 
   useEffect(() => {
     const handleScroll = () => {
@@ -105,7 +119,7 @@ function Navbar({ isWhite = false, isMenuOpen = false, onToggleMenu, variant = '
       <div
         className={`w-full fixed top-0 left-0 transition-all duration-300 transform py-4 px-8 z-[70] ${
           isHidden ? '-translate-y-full' : 'translate-y-0'
-        } ${isWhite ? '' : 'bg-transparent'}`}
+        } ${isHome || !isWhite ? 'bg-transparent' : 'bg-white/50 backdrop-blur-sm'}`}
       >
         <div className="grid grid-cols-3 items-center">
           {/* Left area */}
@@ -129,7 +143,9 @@ function Navbar({ isWhite = false, isMenuOpen = false, onToggleMenu, variant = '
           {/* Center area */}
           <div className="flex items-center justify-center">
             {variant === 'arrow' && (
-              <h1 className={`text-2xl font-bold text-gray-400`}>ENN&nbsp;TANG</h1>
+              <a href="#/" aria-label="Go to home" className="inline-block">
+                <h1 className={`text-2xl font-bold text-gray-800`}>ENN&nbsp;TANG</h1>
+              </a>
             )}
           </div>
 
