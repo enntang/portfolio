@@ -6,12 +6,23 @@ import { useFloatingAnimation } from '../../../hooks/useFloatingAnimation'
 import ImageWithHotspots from '../../../components/utilities/ImageWithHotspots'
 import Footer from '../../../components/utilities/Footer'
 import ProjectNote from '../../../components/projects/ProjectNote'
+import Container from '../../../components/projects/Container'
+import SectionBlock from '../../../components/projects/SectionBlock'
+import TwoColumn from '../../../components/projects/TwoColumn'
 
 gsap.registerPlugin(ScrollTrigger)
 import BG1 from '../../../assets/projects/mentor/projectInfo-mentor-bg-1.png'
 import BG2 from '../../../assets/projects/mentor/projectInfo-mentor-bg-2.png'
 import BG3 from '../../../assets/projects/mentor/projectInfo-mentor-bg-3.png'
 import BG4 from '../../../assets/projects/mentor/projectInfo-mentor-bg-4.png'
+
+// 定义 mentor 项目的背景图片映射
+const mentorBackgrounds = {
+  purple: BG1,
+  dark: BG2,
+  blue: BG3,
+  mentor: BG4,
+}
 
 
 import shineImage from '../../../assets/projects/mentor/projectInfo-mentor-shine.svg'
@@ -46,45 +57,6 @@ import H2 from '../../../components/post/H2'
 import H3 from '../../../components/post/H3'
 import UL from '../../../components/post/UL'
 import LI from '../../../components/post/LI'
-
-
-
-function Container({ children, className = '' }) {
-  return (
-    <div className={`max-w-5xl mobile:max-w-full px-16 mobile:px-8 mx-auto w-full ${className}`}>
-      {children}
-    </div>
-  )
-}
-
-function SectionBlock({ bgVariant, children, className = '' }) {
-  const backgrounds = {
-    purple: BG1,
-    dark: BG2,
-    blue: BG3,
-    mentor: BG4,
-  }
-
-
-  const backgroundImage = backgrounds[bgVariant]
-  const textColor = backgroundImage ? 'text-white' : 'text-gray-900'
-
-  return (
-    <div
-      className={`bg-cover bg-center bg-no-repeat py-32 mx-auto ${textColor} ${className}`}
-      style={
-        backgroundImage
-          ? {
-              backgroundImage: `url(${backgroundImage})`,
-              backgroundAttachment: 'fixed',
-            }
-          : { backgroundColor: 'bg-bg' }
-      }
-    >
-      {children}
-    </div>
-  )
-}
 
 export default function MentorPage() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
@@ -237,11 +209,11 @@ export default function MentorPage() {
       <main className="bg-bg">
         {/* Hero */}
         <header className=" relative overflow-hidden">
-          <SectionBlock bgVariant="purple" className='relative'>
+          <SectionBlock bgVariant="purple" className='relative' backgrounds={mentorBackgrounds}>
             <img src={shineImage} alt="shine" className='absolute top-0 right-0' />
             <img src={glintImage} alt="glint" className='absolute bottom-0 left-0' />
             <Container className='flex flex-col items-center justify-center text-center'>
-              <img ref={mentorImgRef} src={mentor} alt="Mentor" className="h-64 w-64" />
+              <img ref={mentorImgRef} src={mentor} alt="Mentor" className="h-48 w-48 md:h-64 md:w-64" />
               <h1 className='text-large mobile:text-large-mobile'>Mentor</h1>
               <H3 className='mb-24'>AI-integrated learning platform</H3>
               <P className='w-full md:w-2/3'>Designing Mentor was more than just shaping screens—it was about shaping a team, a story, and a shared belief in learning.</P>
@@ -251,7 +223,7 @@ export default function MentorPage() {
         </header>
 
         {/* Project Brief */}
-        <SectionBlock>
+        <SectionBlock backgrounds={mentorBackgrounds}>
           <Container className='flex flex-col items-center justify-center'>
             <div className="text-center mb-10">
               <H2>Project Brief</H2>
@@ -275,11 +247,11 @@ export default function MentorPage() {
 
 
         {/* Responsibilities (dark) */}
-        <SectionBlock bgVariant="mentor">
+        <SectionBlock bgVariant="mentor" backgrounds={mentorBackgrounds}>
           <Container>
             <H2>Key Responsibilities</H2>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
+            <TwoColumn>
               <div>
                 <H3>1. Leadership</H3>
                 <UL>
@@ -287,7 +259,7 @@ export default function MentorPage() {
                     Lead a team of 10+ designers and developers
                   </LI>
                   <LI>
-                    Assigned tasks based on each member’s strengths, guiding their thinking and execution.
+                    Assigned tasks based on each member's strengths, guiding their thinking and execution.
                   </LI>
                   <LI>
                     Facilitated collaboration with PMs and R&D to ensure user-friendly, feasible design output.
@@ -296,13 +268,13 @@ export default function MentorPage() {
                 <P>Under my leadership, I also facilitated regular team discussions on:</P>
                 <UL>
                   <LI>
-                    Early concept exploration and competitor analysis to identify ways to highlight the product’s unique strengths.
+                    Early concept exploration and competitor analysis to identify ways to highlight the product's unique strengths.
                   </LI>
                   <LI>
-                    Design execution strategies, focusing on how to align with developers’ workflows.
+                    Design execution strategies, focusing on how to align with developers' workflows.
                   </LI>
                   <LI>
-                    Enhancing user experience while managing complex structures and large-scale feature requirements.                </LI>
+                    Enhancing user experience while managing complex structures and large-scale feature requirements.                </LI>
                 </UL>
               </div>
               <div>
@@ -316,12 +288,12 @@ export default function MentorPage() {
                     Gathered and refined visual references with the team to build a consistent design language.  </LI>
                 </UL>
               </div>
-            </div>
+            </TwoColumn>
           </Container>
         </SectionBlock>
 
         {/* Workflow */}
-        <SectionBlock className='pb-0'>
+        <SectionBlock className='pb-0' backgrounds={mentorBackgrounds}>
           <Container>
 
             <div className='grid grid-cols-1 md:grid-cols-3 gap-12'>
@@ -338,44 +310,44 @@ export default function MentorPage() {
         </SectionBlock>
 
         {/* Background + Insights alternating backgrounds */}
-        <SectionBlock bgVariant="blue">
+        <SectionBlock bgVariant="blue" backgrounds={mentorBackgrounds}>
           <Container>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
+            <TwoColumn>
               <div>
                 <H2>Background</H2>
                 <P>
-                  Originally, Mentor was envisioned as a mobile companion to the company’s existing desktop-based self-learning software, which featured recorded subject lectures.
+                  Originally, Mentor was envisioned as a mobile companion to the company's existing desktop-based self-learning software, which featured recorded subject lectures.
                 </P>
                 <P>
                   The team originally <strong>envisioned three distinct learning contexts for the app</strong>, each reflecting a typical scenario in which students would engage with the platform.
                 </P>
-                <P className="text-xs text-gray-100">The system was originally designed to control the desktop-based video self-learning software, acting as a remote interface.</P>
+                <P className="text-xs text-gray-100">The system was originally designed to control the desktop-based video self-learning software, acting as a remote interface.</P>
               </div>
-              <div className="grid grid-cols-2 md:grid-cols-1 gap-4">
+              <div className="grid grid-cols-1 gap-4">
                 <div className="bg-white/10 backdrop-blur rounded-sm shadow p-5">
                   <div className="text-sm mb-2 opacity-70">At home, seated at a desk</div>
                   <P>with access to desktop, tablet, and textbooks. </P>
                 </div>
                 <div className="bg-white/10 backdrop-blur rounded-sm shadow p-5">
                   <div className="text-sm mb-2 opacity-70">At school or in a library</div>
-                  <P>with only a tablet and textbooks, students used the platform as a lecture extension.</P>
+                  <P>with only a tablet and textbooks, students used the platform as a lecture extension.</P>
                 </div>
                 <div className="bg-white/10 backdrop-blur rounded-sm shadow p-5">
                   <div className="text-sm mb-2 opacity-70">On the go</div>
-                  <P>with only a tablet, students relied on it as the main learning tool.</P>
+                  <P>with only a tablet, students relied on it as the main learning tool.</P>
                 </div>
               </div>
-            </div>
+            </TwoColumn>
 
 
           </Container>
         </SectionBlock>
 
         {/* Research Insight */}
-        <SectionBlock bgVariant="dark">
+        <SectionBlock bgVariant="dark" backgrounds={mentorBackgrounds}>
           <Container className=' overflow-hidden'>
-            <div className=" mb-10 w-full md:w-2/3 mx-auto">
+            <div className=" mb-10 mx-auto">
               <H2>Research Insights</H2>
               <P>In the early phase of development, we conducted foundational user research to validate assumptions and uncover unmet needs among our two key groups:<strong> parents and students.</strong></P>
               <P>We found a shared problem: <br />
@@ -385,15 +357,15 @@ export default function MentorPage() {
               <div className="flex flex-row justify-center items-center my-16 relative isolate">
                 {/* Parents Circle - Blue gradient */}
                 <div ref={parentsCircleRef} className="relative flex items-center justify-center z-10">
-                  <div className="w-80 h-80 rounded-full bg-gradient-to-br from-blue-500 to-blue-700 flex flex-col items-center justify-center text-center p-12 shadow-2xl">
-                    <p className="mb-6 text-h2">For Parents</p>
+                  <div className="w-64 h-64 md:w-80 md:h-80 rounded-full bg-gradient-to-br from-blue-500 to-blue-700 flex flex-col items-center justify-center text-center p-12 shadow-2xl">
+                    <p className="mb-6 text-h3 md:text-h2">For Parents</p>
                     <p className="text-xl leading-relaxed">"I don't know what the school is teaching or why my kid didn't do well."</p>
                   </div>
                 </div>
                 {/* Students Circle - Purple gradient */}
                 <div ref={studentsCircleRef} className="relative flex items-center justify-center -ml-32 md:-ml-40 z-20 mix-blend-multiply">
-                  <div className="w-80 h-80 rounded-full bg-gradient-to-br from-purple-600 to-purple-800 flex flex-col items-center justify-center text-center p-12 shadow-2xl">
-                    <p className="mb-6 text-h2">For Student</p>
+                  <div className="w-64 h-64 md:w-80 md:h-80 rounded-full bg-gradient-to-br from-purple-600 to-purple-800 flex flex-col items-center justify-center text-center p-12 shadow-2xl">
+                    <p className="mb-6 text-h3 md:text-h2">For Student</p>
                     <p className="text-xl leading-relaxed">"I keep getting things wrong and don't know why."</p>
                   </div>
                 </div>
@@ -406,28 +378,28 @@ export default function MentorPage() {
         </SectionBlock>
 
         {/* how might we */}
-        <SectionBlock>
+        <SectionBlock backgrounds={mentorBackgrounds}>
           <Container>
             <div className="text-center mb-10 flex flex-col items-center justify-center">
               <img src={quoteIcon} alt="quote icon" className='mb-8' />
               <H2 className="text-gray-900">How Might We...</H2>
-              <P className="w-full md:w-2/3 mx-auto text-gray-900">How might we help students and parents who struggle with unclear learning progress and lack of feedback gain clarity, motivation, and personalized next-step suggestions?</P>
+              <P className="mx-auto text-gray-900">How might we help students and parents who struggle with unclear learning progress and lack of feedback gain clarity, motivation, and personalized next-step suggestions?</P>
             </div>
           </Container>
         </SectionBlock>
 
         {/* design goals */}
-        <SectionBlock bgVariant="blue">
+        <SectionBlock bgVariant="blue" backgrounds={mentorBackgrounds}>
           <Container>
-            <div className="grid grid-cols-1 md:grid-cols-2">
+            <TwoColumn>
               <div>
                 <H2>Design Goals</H2>
-                <P className="bg-white/10 backdrop-blur rounded-sm shadow p-5 md:w-2/3">Based on the key insights gathered from our research, we distilled the following three design goals to address the specific concerns of both parents and students:</P>
+                <P className="bg-white/10 backdrop-blur rounded-sm shadow p-5">Based on the key insights gathered from our research, we distilled the following three design goals to address the specific concerns of both parents and students:</P>
               </div>
               <div>
                 <div className="mb-8">
                   <H3>1. Personalized goal-setting and learning guidance</H3>
-                  <P>To reduce cognitive load and give learners a stronger sense of direction, Mentor tailors study plans based on the student’s level, performance history, and recent errors. Students can improve simply by following the AI-guided path step by step.</P>
+                  <P>To reduce cognitive load and give learners a stronger sense of direction, Mentor tailors study plans based on the student's level, performance history, and recent errors. Students can improve simply by following the AI-guided path step by step.</P>
                 </div>
                 <div className="mb-8">
                   <H3>2. Clear, easy-to-read feedback for the next step</H3>
@@ -438,35 +410,35 @@ export default function MentorPage() {
                   <P>By surfacing concrete progress markers—such as reduced mistakes, completed exercises, and streaks—we build emotional momentum and encourage students to keep going.</P>
                 </div>
               </div>
-            </div>
+            </TwoColumn>
           </Container>
         </SectionBlock>
 
         {/* core philosophy */}
-        <SectionBlock bgVariant="dark">
+        <SectionBlock bgVariant="dark" backgrounds={mentorBackgrounds}>
           <Container>
             <img src={chartImg} alt="chart" className='mt-[-200px] shadow-xl rounded-sm' />
             <div className='bg-[#3E3AFF] rounded-sm p-8 mt-16'>
               <div className='flex flex-col md:flex-row gap-4 items-center text-center md:text-left'>
-                <div className='order-2 md:order-1'>
+                <div className='order-2 md:order-1 text-left'>
                   <H2>Core Philosophy</H2>
                   <P>Mentor was ultimately shaped into a personalized learning coach, a clear and memorable concept that unified our design principles, addressed users' emotional and functional needs, and made the product more relatable for both students and parents.</P>
                 </div>
-                <img src={mentor} alt="mentor" className='w-48 h-48 order-1 md:order-2' />
+                <img src={mentor} alt="mentor" className='w-32 h-32 md:w-48 md:h-48 order-1 md:order-2' />
               </div>
             </div>
           </Container>
         </SectionBlock>
 
         {/* Design Deliverables */}
-        <SectionBlock className='pb-0'>
+        <SectionBlock className='pb-0' backgrounds={mentorBackgrounds}>
           <Container className='relative'>
-            <div className='grid grid-cols-1 md:grid-cols-2'>
+            
 
               <H2>Design Deliverables</H2>
               <P>To communicate Mentor’s value as a personalized learning coach, we framed the product experience around a narrative: Mentor is not just an app—it’s a smart companion that helps students set achievable goals, stay on track, and gain confidence through visible progress. With this perspective, I led the visual design and UI system development in alignment with our three core design goals.</P>
-            </div>
-            <ProjectNote className='absolute top-[20%] md:top-[40%] right-1/2 transform translate-x-1/2 translate-y-32'>
+            
+            <ProjectNote className='absolute top-[40%] right-1/2 transform translate-x-1/2 translate-y-32'>
               From wireframes to a mid-fidelity POC to the final themed UI, each iteration helped us refine layout logic and shape the product's narrative identity.
             </ProjectNote>
             <img src={deliverablesDraft} alt="deliverables draft" className='my-16' />
@@ -482,13 +454,13 @@ export default function MentorPage() {
         </SectionBlock>
 
         {/* story of mentor */}
-        <SectionBlock bgVariant="mentor">
+        <SectionBlock bgVariant="mentor" backgrounds={mentorBackgrounds}>
           <Container>
             <H2>Story of Mentor</H2>
-            <div className='grid grid-cols-1 md:grid-cols-2 gap-12'>
+            <TwoColumn>
               <div>
                 <div className="bg-white/10 backdrop-blur rounded-sm shadow p-5 ">
-                  <P className=''>The term “Mentor” originates from Greek mythology, where a wise guardian was entrusted with guiding Odysseus’s son during his journey.</P>
+                  <P className=''>The term "Mentor" originates from Greek mythology, where a wise guardian was entrusted with guiding Odysseus's son during his journey.</P>
                 </div>
               </div>
               <div>
@@ -496,13 +468,13 @@ export default function MentorPage() {
                 <P>Mentor becomes a god of guidance who, in the age of AI and information overload, is accidentally trapped in a cosmic cube.
 
                 </P>
-                <P>To regain his powers and return to Earth, he must guide students through a learning journey across the universe, collecting badges as symbols of growth.<strong> Each student’s progress fuels Mentor’s evolution, turning learning into a shared quest.</strong></P>
-                <P>This allegorical story frames the app experience as more than just education: it’s a mission of transformation for both Mentor and the learner.</P>
+                <P>To regain his powers and return to Earth, he must guide students through a learning journey across the universe, collecting badges as symbols of growth.<strong> Each student's progress fuels Mentor's evolution, turning learning into a shared quest.</strong></P>
+                <P>This allegorical story frames the app experience as more than just education: it's a mission of transformation for both Mentor and the learner.</P>
               </div>
-            </div>
+            </TwoColumn>
           </Container>
         </SectionBlock>
-        <SectionBlock>
+        <SectionBlock backgrounds={mentorBackgrounds}>
           <div className='grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-12'>
             <div>
               <img src={mentorDraft} alt="mentor draft" className=' md:object-cover' />
@@ -516,7 +488,7 @@ export default function MentorPage() {
 
           {/* Mentor as a UI Guide */}
         </SectionBlock>
-        <SectionBlock bgVariant="dark">
+        <SectionBlock bgVariant="dark" backgrounds={mentorBackgrounds}>
           <Container className='w-full md:w-2/3 mx-auto'>
             <H2>Mentor as a UI Guide</H2>
             <P>Mentor sits at the bottom-right corner as a real-time learning agent—offering feedback, reminders, and encouragement based on each student’s actions.
@@ -539,7 +511,7 @@ export default function MentorPage() {
         </SectionBlock>
 
         {/* features */}
-        <SectionBlock>
+        <SectionBlock backgrounds={mentorBackgrounds}>
           <Container>
             <div className=" mb-10  mx-auto">
               <H2>Features</H2>
@@ -621,7 +593,7 @@ export default function MentorPage() {
         </SectionBlock>
 
         {/* Reflection */}
-        <SectionBlock bgVariant="blue">
+        <SectionBlock bgVariant="blue" backgrounds={mentorBackgrounds}>
           <Container className='w-full md:w-2/3 mx-auto'>
             <H2>Reflection</H2>
 
@@ -647,7 +619,7 @@ export default function MentorPage() {
         </SectionBlock>
 
         {/* conclusion */}
-        <SectionBlock bgVariant="dark">
+        <SectionBlock bgVariant="dark" backgrounds={mentorBackgrounds}>
           <Container className='w-full md:w-2/3 mx-auto flex flex-col items-center justify-center mb-24'>
             <P>Designing Mentor was more than just shaping screens—it was about shaping a team, a story, and a shared belief in learning. Early on, I was still a maker: focused on pixels, flows, and UI polish. But as the product scaled, I learned to lead—aligning cross-functional efforts, empowering teammates, and holding the bigger picture.</P>
             <P>These lessons helped me grow from an individual contributor to a design lead. I learned to communicate clearly, translate ideas across roles, and recognize delivery as a collective rhythm. More than anything, this project taught me that good design is not just about clarity and craft, but about aligning vision, people, and outcomes.</P>

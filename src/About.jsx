@@ -5,7 +5,7 @@ import ExperienceItem from './components/about/ExperienceItem'
 import AboutSectionTitle from './components/about/AboutSectionTitle'
 import ArchivedWorkItem from './components/about/ArchivedWorkItem'
 import { getPublicPath } from './utils/path'
-
+import BtnWhite from './components/utilities/BtnWhite'
 
 
 function About() {
@@ -79,6 +79,7 @@ function About() {
             Making digital products clear, engaging, and meaningful for users.
           </h1>
           <img data-aos="fade-up" data-aos-duration="2000" src={getPublicPath('/portrait.png')} alt='profile' className='w-40 h-40 mix-blend-screen absolute right-0 bottom-0' />
+          <BtnWhite name="Read CV" href="https://www.cake.me/resumes/enn-tang" target="_blank" />
         </div>
 
         <div ref={profileRef} className='space-y-3 text-gray-800 mb-40'>

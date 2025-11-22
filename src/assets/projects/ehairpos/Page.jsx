@@ -6,6 +6,9 @@ import { useFloatingAnimation } from '../../../hooks/useFloatingAnimation'
 import ImageWithHotspots from '../../../components/utilities/ImageWithHotspots'
 import Footer from '../../../components/utilities/Footer'
 import ProjectNote from '../../../components/projects/ProjectNote'
+import Container from '../../../components/projects/Container'
+import SectionBlock from '../../../components/projects/SectionBlock'
+import TwoColumn from '../../../components/projects/TwoColumn'
 
 gsap.registerPlugin(ScrollTrigger)
 
@@ -17,6 +20,12 @@ import quote from '../../../../public/icon-quote.svg'
 // Import ehairpos project images
 import BG1 from './projectInfo-ehairpos-bg-1.png'
 import BG2 from './projectInfo-ehairpos-bg-2.png'
+
+// 定义 ehairpos 项目的背景图片映射
+const ehairposBackgrounds = {
+  purple: BG1,
+  photo: BG2,
+}
 import iconEhairpos from './projectList-icon-ehairpos.png'
 import decoIcons1 from './projectInfo-ehairpos-deco-icons1.svg'
 import decoIcons2 from './projectInfo-ehairpos-deco-icons2.svg'
@@ -50,47 +59,6 @@ import H2 from '../../../components/post/H2'
 import H3 from '../../../components/post/H3'
 import UL from '../../../components/post/UL'
 import LI from '../../../components/post/LI'
-
-function Container({ children, className = '' }) {
-  return (
-    <div className={`max-w-5xl mobile:max-w-full px-16 mobile:px-8 mx-auto w-full ${className}`}>
-      {children}
-    </div>
-  )
-}
-
-function SectionBlock({ children, className = '', style = {}, variant }) {
-  const backgrounds = {
-    purple: BG1,
-    photo: BG2,
-  }
-  const backgroundImage = variant && backgrounds[variant] ? backgrounds[variant] : null
-
-  const hasCustomBackground = !!(backgroundImage || style.background || style.backgroundImage)
-  const isWhiteVariant = variant === 'white'
-  const textColor = backgroundImage ? 'text-white' : 'text-gray-900'
-  const backgroundColor = isWhiteVariant ? 'bg-white' : (hasCustomBackground ? '' : 'bg-bg')
-
-  const combinedStyle = { ...style }
-
-  if (backgroundImage) {
-    combinedStyle.backgroundImage = `url(${backgroundImage})`
-    combinedStyle.backgroundSize = 'cover'
-    combinedStyle.backgroundPosition = 'center'
-    combinedStyle.backgroundRepeat = 'no-repeat'
-    combinedStyle.backgroundAttachment = 'fixed'
-  }
-
-  return (
-    <div
-      className={`py-32 mx-auto relative ${backgroundColor} ${textColor} ${className}`}
-      style={combinedStyle}
-    >
-      {children}
-    </div>
-  )
-}
-
 
 export default function EHairPOSPage() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
@@ -278,20 +246,20 @@ export default function EHairPOSPage() {
       <main className="bg-bg">
         {/* Hero */}
         <header className="relative overflow-hidden">
-          <SectionBlock className='w-full h-full relative' style={{ background: 'linear-gradient(30deg, #FFFFFF 0%, #FAEEFF 100%)' }}>
+          <SectionBlock className='w-full h-full relative' style={{ background: 'linear-gradient(30deg, #FFFFFF 0%, #FAEEFF 100%)' }} backgrounds={ehairposBackgrounds}>
             <img
               src={bgWave}
               alt="bgWave"
               className='pointer-events-none select-none absolute inset-x-0 bottom-0 w-full h-auto'
             />
             <Container className='flex flex-col items-center justify-center text-center relative z-10'>
-              <img src={iconEhairpos} ref={iconEhairposRef} alt="eHairPOS" className='w-60 h-60 mb-8' />
+              <img src={iconEhairpos} ref={iconEhairposRef} alt="eHairPOS" className='w-48 h-48 md:w-60 md:h-60 mb-8 z-10' />
               <h1 className='text-large mobile:text-large-mobile text-[#994FDE]'>eHairPOS</h1>
               <H3 className='mb-24 text-gray-900'>Salon Management Tool</H3>
               <P className='w-full md:w-2/3 text-gray-900'>A comprehensive POS system designed specifically for hair salons, streamlining workflows from appointment booking to payment processing.</P>
               <img ref={arrowDownRef} src={arrowDown} alt="Arrow Down" className="mt-16 md:mt-24 w-6 h-6" />
-              <img src={decoIcons1} alt="decoIcons1" className='absolute top-0 right-0 w-60 ' />
-              <img src={decoIcons2} alt="decoIcons2" className='absolute bottom-1/2 left-0 w-32 ' />
+              <img src={decoIcons1} alt="decoIcons1" className='absolute top-4 md:top-0 right-0 w-32 md:w-60 ' />
+              <img src={decoIcons2} alt="decoIcons2" className='absolute top-16 md:top-[10vh] left-0 w-24 md:w-32 ' />
 
 
             </Container>
@@ -300,7 +268,7 @@ export default function EHairPOSPage() {
         </header>
 
         {/* Project Brief */}
-        <SectionBlock>
+        <SectionBlock backgrounds={ehairposBackgrounds}>
           <Container className='flex flex-col items-center justify-center'>
 
             <H2>Project Brief</H2>
@@ -331,7 +299,7 @@ export default function EHairPOSPage() {
         </SectionBlock>
 
         {/* Responsibilities */}
-        <SectionBlock variant="purple">
+        <SectionBlock variant="purple" backgrounds={ehairposBackgrounds}>
           <Container>
             <H2>Key Responsibilities</H2>
 
@@ -344,9 +312,9 @@ export default function EHairPOSPage() {
         </SectionBlock>
 
         {/* target audience */}
-        <SectionBlock variant="photo">
+        <SectionBlock variant="photo" backgrounds={ehairposBackgrounds}>
           <Container>
-            <div className='grid grid-cols-1 md:grid-cols-2 gap-16'>
+          <TwoColumn>
               <H2>Target Audience</H2>
               <div className="grid grid-cols-2 md:grid-cols-1 gap-4">
                 <div className="bg-white/10 backdrop-blur rounded-sm shadow p-5">
@@ -362,12 +330,12 @@ export default function EHairPOSPage() {
                   <P>Vocational institutions incorporating eHairPOS into salon education programs</P>
                 </div>
               </div>
-            </div>
+            </TwoColumn>
           </Container>
         </SectionBlock>
 
         {/* Background */}
-        <SectionBlock variant="white">
+        <SectionBlock variant="white" backgrounds={ehairposBackgrounds}>
           <Container>
             <H2>Background</H2>
             <div className='grid grid-cols-1 md:grid-cols-2 gap-16'>
@@ -395,7 +363,7 @@ export default function EHairPOSPage() {
         </SectionBlock>
 
         {/* Design Deliverables */}
-        <SectionBlock variant="purple">
+        <SectionBlock variant="purple" backgrounds={ehairposBackgrounds}>
           <Container>
             <H2>Design Deliverables</H2>
             <H3>Customer Management with Advanced Filtering</H3>
@@ -431,7 +399,7 @@ export default function EHairPOSPage() {
         </SectionBlock>
 
 
-        <SectionBlock>
+        <SectionBlock backgrounds={ehairposBackgrounds}>
           <Container>
             <H3>Flexible, Intuitive Booking Flow</H3>
             <P className='w-2/3'>Bookings come from two sources: online forms and in-person entries.<br />
@@ -461,7 +429,7 @@ export default function EHairPOSPage() {
         </SectionBlock>
 
 
-        <SectionBlock variant="photo">
+        <SectionBlock variant="photo" backgrounds={ehairposBackgrounds}>
           <Container>
             <H3>Checkout Flow Designed for Salon Complexity</H3>
             <P>
@@ -493,7 +461,7 @@ export default function EHairPOSPage() {
           </Container>
         </SectionBlock>
 
-        <SectionBlock>
+        <SectionBlock backgrounds={ehairposBackgrounds}>
           <Container>
             <H3>Membership Wallet That Feels Real</H3>
             <P>
@@ -516,7 +484,7 @@ export default function EHairPOSPage() {
           </Container>
         </SectionBlock>
 
-        <SectionBlock variant="purple">
+        <SectionBlock variant="purple" backgrounds={ehairposBackgrounds}>
           <Container>
             <H3>Visual Reports for Better Business Decisions</H3>
             <P>To help salon owners not only “see numbers” but actually “understand trends,” we built two layers of reporting:</P>
@@ -539,7 +507,7 @@ export default function EHairPOSPage() {
         </SectionBlock>
 
         {/* Logotype Design */}
-        <SectionBlock variant="white">
+        <SectionBlock variant="white" backgrounds={ehairposBackgrounds}>
           <Container>
             <H2>Logotype Design</H2>
             <div className='grid grid-cols-1 md:grid-cols-2 gap-10'>
@@ -559,7 +527,7 @@ export default function EHairPOSPage() {
         </SectionBlock>
 
         {/* Reflections */}
-        <SectionBlock variant="purple">
+        <SectionBlock variant="purple" backgrounds={ehairposBackgrounds}>
           <Container>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
               <div>
@@ -585,7 +553,7 @@ export default function EHairPOSPage() {
           </Container>
         </SectionBlock>
 
-        <SectionBlock variant="">
+        <SectionBlock variant="" backgrounds={ehairposBackgrounds}>
           <Container>
             <H2>Future Development and Ongoing Influence</H2>
             <P>Although I left the company after completing the first release, the product continued to grow:</P>

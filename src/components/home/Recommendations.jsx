@@ -67,10 +67,10 @@ function Recommendations() {
     return (
         <>
             {/* Section Title */}
-            <SectionTitle name="Recommendations" />
+            <SectionTitle name="How's it like to work with me?" />
 
-            <div className="space-y-0 grid grid-cols-1 gap-24">
-                <div className="flex flex-row gap-4">
+            
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     {recommendations.map((recommendation, index) => (
                         <button
                             key={index}
@@ -84,7 +84,7 @@ function Recommendations() {
                         </button>
                     ))}
                 </div>
-            </div>
+            
 
             {isModalOpen && selectedRecommendation && (
                 <div

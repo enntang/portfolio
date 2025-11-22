@@ -35,9 +35,9 @@ function Home() {
 
         <div className='flex flex-col'>
 
-          <section className='flex flex-col py-16 mobile:py-8 text-gray-900 w-2/3'>
-            <h2 data-aos="fade-up" data-aos-duration="1000" className=' text-4xl mobile:text-2xl text-gray-300 mb-6 text-large mobile:text-large-mobile'>Hello, I'm ENN!</h2>
-            <p data-aos="fade-up" className='text-p mb-6 mobile:mb-4'>I’m a passionate UI designer who puts users first. I create intuitive, user-centered interfaces that enhance usability while ensuring smooth collaboration between design and development teams.</p>
+          <section className='flex flex-col py-16 py-8 text-gray-900 md:w-2/3'>
+            <h2 data-aos="fade-up" data-aos-duration="1000" className=' text-4xl text-2xl text-gray-300 mb-6 text-large text-large-mobile'>Hello, I'm ENN!</h2>
+            <p data-aos="fade-up" className='text-p mb-6 mb-4'>I’m a passionate UI designer who puts users first. I create intuitive, user-centered interfaces that enhance usability while ensuring smooth collaboration between design and development teams.</p>
             <BtnWhite name={'More about me'} className='w-fit' href='#/about' />
           </section>
 

@@ -27,10 +27,10 @@ function ProjectBanner({
 
   return (
     <a href={comingSoon ? undefined : href} className='block group'>
-      <div className='relative rounded-md overflow-hidden shadow-sm mobile:max-h-2/3'>
-        <picture>
+      <div className='relative rounded-md overflow-hidden shadow-sm max-h-[70vh] md:max-h-fit'>
+        <picture className='block sm:h-full sm:w-full'>
           <source media='(max-width: 768px)' srcSet={mobileSrc} />
-          <img src={desktopSrc} alt={title} className='w-full h-auto block mobile:h-full mobile:object-cover' />
+          <img src={desktopSrc} alt={title} className='w-full h-auto block mobile:h-full mobile:object-cover sm:h-full sm:w-full sm:object-cover' />
         </picture>
 
         <div className={`absolute inset-0 p-10 mobile:p-6 flex items-center justify-between ${align === 'right' ? 'mobile:flex-col-reverse' : 'mobile:flex-col'} mobile:justify-center`}>
@@ -40,7 +40,7 @@ function ProjectBanner({
               <img 
                 src={mainImage} 
                 alt='' 
-                className='max-w-[200px] max-h-[200px] w-auto h-auto object-contain transition-transform duration-500 ease-out group-hover:scale-110 group-hover:rotate-[5deg]' 
+                className='max-w-[130px] max-h-[130px] w-auto h-auto object-contain transition-transform duration-500 ease-out group-hover:scale-110 group-hover:rotate-[5deg]' 
               />
             </div>
           )}
@@ -57,7 +57,7 @@ function ProjectBanner({
           )}
 
           <div className={`${align === 'right' ? 'text-right ml-auto mobile:ml-0 mobile:text-center' : 'mobile:text-center'} max-w-[520px] mobile:max-w-full z-10`}>
-            <h3 className={`${textColor} text-h2 leading-tight mobile:text-large-mobile mb-2`}>
+            <h3 className={`${textColor} text-h2 leading-tight mobile:text-h2-mobile mb-2`}>
               {title}
             </h3>
             {subtitle && (
@@ -143,11 +143,11 @@ function ProjectsList() {
       <main className='pt-24 relative'>
         {/* Page Header */}
         <div className='max-w-3xl mx-auto px-8'>
-          <h1 className='text-h1 mobile:text-mobile-h1 mb-6 text-center text-gray-300'>
+          <h1 className='text-h1 mobile:text-mobile-h1 mb-6 text-center text-gray-800'>
             Projects
           </h1>
           <p className='text-p text-center text-gray-600 mb-12'>
-            I’ve been designing since 2016, combining clear structure with visual
+            I've been designing since 2016, combining clear structure with visual
             storytelling to create work that feels both intuitive and expressive.
             Partners describe my approach as professional, thoughtful, and meticulous.
           </p>
@@ -181,7 +181,3 @@ function ProjectsList() {
 }
 
 export default ProjectsList
-
-
-
-
