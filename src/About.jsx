@@ -6,6 +6,7 @@ import AboutSectionTitle from './components/about/AboutSectionTitle'
 import ArchivedWorkItem from './components/about/ArchivedWorkItem'
 import { getPublicPath } from './utils/path'
 import BtnWhite from './components/utilities/BtnWhite'
+import LazyImage from './components/utilities/LazyImage'
 
 
 function About() {
@@ -78,7 +79,14 @@ function About() {
           <h1 data-aos="fade-up" data-aos-duration="1000" className='md:col-span-2 text-large-mobile xl:text-large text-gray-300 leading-tight mix-blend-screen mb-8'>
             Making digital products clear, engaging, and meaningful for users.
           </h1>
-          <img data-aos="fade-up" data-aos-duration="2000" src={getPublicPath('/portrait.png')} alt='profile' className='w-40 h-40 mix-blend-screen absolute right-0 bottom-0' />
+          <LazyImage 
+            data-aos="fade-up" 
+            data-aos-duration="2000" 
+            src={getPublicPath('/portrait.png')} 
+            alt='profile' 
+            className='w-40 h-40 mix-blend-screen absolute right-0 bottom-0'
+            preload={true}
+          />
           <BtnWhite name="Read CV" href="https://www.cake.me/resumes/enn-tang" target="_blank" />
         </div>
 
@@ -110,7 +118,7 @@ function About() {
                   <div className='text-5xl font-semibold text-gray-200 group-hover:text-gray-800 transition-colors duration-200'>UI/UX Design</div>
                   <span className='inline-flex items-center gap-2 text-sm tracking-wide text-gray-500 opacity-0 group-hover:opacity-100 transition-opacity duration-200'>
                     watch more
-                    <img
+                    <LazyImage
                       src={getPublicPath('/icon-arrow-right.svg')}
                       alt=''
                       className='w-4 h-4 transition-transform duration-200 ease-out group-hover:translate-x-1'
@@ -128,7 +136,7 @@ function About() {
                   <div className='text-5xl font-semibold text-gray-200 group-hover:text-gray-800 transition-colors duration-200'>Graphic Design</div>
                   <span className='inline-flex items-center gap-2 text-sm tracking-wide text-gray-500 opacity-0 group-hover:opacity-100 transition-opacity duration-200'>
                     watch more
-                    <img
+                    <LazyImage
                       src={getPublicPath('/icon-arrow-right.svg')}
                       alt=''
                       className='w-4 h-4 transition-transform duration-200 ease-out group-hover:translate-x-1'
@@ -146,7 +154,7 @@ function About() {
                   <div className='text-5xl font-semibold text-gray-200 group-hover:text-gray-800 transition-colors duration-200'>Illustration</div>
                   <span className='inline-flex items-center gap-2 text-sm tracking-wide text-gray-500 opacity-0 group-hover:opacity-100 transition-opacity duration-200'>
                     watch more
-                    <img
+                    <LazyImage
                       src={getPublicPath('/icon-arrow-right.svg')}
                       alt=''
                       className='w-4 h-4 transition-transform duration-200 ease-out group-hover:translate-x-1'

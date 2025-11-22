@@ -3,6 +3,7 @@ import Navbar from './components/utilities/Navbar'
 import Footer from './components/utilities/Footer'
 import blogPosts from './assets/blogPosts'
 import { getPublicPath } from './utils/path'
+import LazyImage from './components/utilities/LazyImage'
 
 function CategoryTabs({ current, onChange }) {
   const tabs = [
@@ -38,7 +39,7 @@ function FeaturedCard({ post }) {
       className='grid grid-cols-1 md:grid-cols-[1.1fr_1.3fr] gap-0 bg-white rounded-3xl overflow-hidden shadow-sm group'
     >
       <div className='aspect-[16/9] md:aspect-auto md:h-72 bg-[#E5EEF6] flex items-center justify-center overflow-hidden'>
-        <img src={getPublicPath(post.heroImage || post.thumbnailImage)} alt={post.title} className='w-full h-full object-cover' />
+        <LazyImage src={getPublicPath(post.heroImage || post.thumbnailImage)} alt={post.title} className='w-full h-full object-cover' />
       </div>
       <div className='p-8 md:p-10 bg-[#0B0F1A] flex flex-col justify-between'>
         <div>
@@ -66,7 +67,7 @@ function GridPostCard({ post }) {
       className='bg-[#101625] rounded-2xl overflow-hidden hover:-translate-y-1 hover:shadow-lg transition-all group flex flex-col'
     >
       <div className='aspect-[4/3] bg-[#1B2132] overflow-hidden'>
-        <img
+        <LazyImage
           src={getPublicPath(post.thumbnailImage)}
           alt={post.title}
           className='w-full h-full object-cover group-hover:scale-[1.02] transition-transform'
@@ -94,7 +95,7 @@ function SpotlightItem({ post }) {
       className='flex gap-4 items-center py-4 hover:bg-[#151C2A] px-3 rounded-xl transition-colors group'
     >
       <div className='w-14 h-14 rounded-xl overflow-hidden flex-shrink-0 bg-[#1B2132]'>
-        <img src={getPublicPath(post.thumbnailImage)} alt={post.title} className='w-full h-full object-cover' />
+        <LazyImage src={getPublicPath(post.thumbnailImage)} alt={post.title} className='w-full h-full object-cover' />
       </div>
       <div className='flex-1 min-w-0'>
         <div className='text-[11px] uppercase tracking-[0.2em] text-blue-300'>{post.categoryLabel}</div>

@@ -7,13 +7,26 @@ import ImageCarousel from './components/utilities/ImageCarousel'
 import Recommendations from './components/home/Recommendations'
 import Footer from './components/utilities/Footer'
 import { getPublicPath } from './utils/path'
+import PreloadImage from './components/utilities/PreloadImage'
 
 
 function Home() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
 
+  // 預載入首頁輪播圖的重要圖片
+  const carouselImages = [
+    getPublicPath('/bg-mentor.png'),
+    getPublicPath('/bg-illustration.png'),
+    getPublicPath('/bg-ehairpos.png'),
+    getPublicPath('/bg-textbook.png'),
+    getPublicPath('/bg-penguin.png'),
+  ]
+
   return (
     <div className='h-screen lg:flex flex-row'>
+      {/* 預載入輪播圖的重要圖片 */}
+      <PreloadImage src={carouselImages} />
+      
       <Navbar
         isWhite={false}
         isMenuOpen={isMenuOpen}

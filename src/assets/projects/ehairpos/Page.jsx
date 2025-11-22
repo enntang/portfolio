@@ -9,6 +9,8 @@ import ProjectNote from '../../../components/projects/ProjectNote'
 import Container from '../../../components/projects/Container'
 import SectionBlock from '../../../components/projects/SectionBlock'
 import TwoColumn from '../../../components/projects/TwoColumn'
+import TableOfContents from '../../../components/utilities/TableOfContents'
+import LazyImage from '../../../components/utilities/LazyImage'
 
 gsap.registerPlugin(ScrollTrigger)
 
@@ -247,6 +249,7 @@ export default function EHairPOSPage() {
         {/* Hero */}
         <header className="relative overflow-hidden">
           <SectionBlock className='w-full h-full relative' style={{ background: 'linear-gradient(30deg, #FFFFFF 0%, #FAEEFF 100%)' }} backgrounds={ehairposBackgrounds}>
+            <TableOfContents />
             <img
               src={bgWave}
               alt="bgWave"
@@ -272,7 +275,7 @@ export default function EHairPOSPage() {
           <Container className='flex flex-col items-center justify-center'>
 
             <H2>Project Brief</H2>
-            <img src={tablet} alt="tablet" className='w-full md:w-2/3 h-auto' />
+            <LazyImage src={tablet} alt="tablet" className='w-full md:w-2/3 h-auto' />
             <div className="grid grid-cols-1 md:grid-cols-3 gap-16 mt-16">
               <div className="md:col-span-2">
                 <P>
@@ -494,11 +497,11 @@ export default function EHairPOSPage() {
             </UL>
             <div className='grid grid-cols-1 md:grid-cols-2 gap-10 mt-16'>
               <div>
-                <img src={screenshot11} alt="screenshot11" className='w-full h-auto rounded-sm' />
+                <LazyImage src={screenshot11} alt="screenshot11" className='w-full h-auto rounded-sm' />
                 <p className='text-caption text-gray-500 font-light mt-4'>Salon Dashboard: Combines revenue, visits, ticket size, and growth metrics with time filters for a clear view of business performance.</p>
               </div>
               <div>
-                <img src={screenshot12} alt="screenshot12" className='w-full h-auto rounded-sm' />
+                <LazyImage src={screenshot12} alt="screenshot12" className='w-full h-auto rounded-sm' />
                 <p className='text-caption text-gray-500 font-light mt-4'>Stylist Dashboard: Each stylist can view their performance trends, client count, and personal growth over time.</p>
               </div>
             </div>

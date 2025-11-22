@@ -1,4 +1,5 @@
 import { getPublicPath } from '../../utils/path'
+import LazyImage from '../utilities/LazyImage'
  
 function ProjectCard({ project, isReversed = false }) {
   const { title, description, imageSrc, imageAlt } = project;
@@ -9,7 +10,7 @@ function ProjectCard({ project, isReversed = false }) {
       <div className="flex-1">
         <div className="relative overflow-hidden">
           {imageSrc ? (
-            <img 
+            <LazyImage 
               src={getPublicPath(imageSrc)}
               alt={imageAlt || title}
               className="w-full h-full object-cover transition-transform duration-500 ease-out group-hover:scale-110 rounded-sm"

@@ -8,6 +8,7 @@ import BlogList from './BlogList.jsx'
 import BlogPost from './BlogPost.jsx'
 import NotFound from './NotFound.jsx'
 import ProjectPageRouter from './ProjectPageRouter.jsx'
+import LoadingAnimation from './components/utilities/LoadingAnimation.jsx'
 
 function Router() {
   const [hash, setHash] = useState(window.location.hash || '#/')
@@ -42,6 +43,9 @@ function Router() {
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
-    <Router />
+    <>
+      <LoadingAnimation />
+      <Router />
+    </>
   </StrictMode>,
 )

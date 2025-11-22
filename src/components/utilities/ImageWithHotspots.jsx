@@ -1,5 +1,6 @@
 import React from 'react'
 import { useImageHotspots } from '../../hooks/useImageHotspots'
+import LazyImage from './LazyImage'
 
 /**
  * Ripple Button Component with concentric circle animation
@@ -112,7 +113,7 @@ export default function ImageWithHotspots({
       className={`relative w-full cursor-pointer ${containerClassName}`}
       onClick={() => setActiveHotspot(null)}
     >
-      <img src={src} alt={alt} className={`w-full rounded-sm ${className}`} />
+      <LazyImage src={src} alt={alt} className={`w-full rounded-sm ${className}`} />
       
       {/* Render hotspot buttons */}
       {hotspots.map((hotspot) => (

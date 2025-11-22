@@ -1,6 +1,7 @@
 import SectionTitle from './SectionTitle';
 import { useEffect, useState } from 'react';
 import { getPublicPath } from '../../utils/path';
+import LazyImage from '../utilities/LazyImage';
 
 function Recommendations() {
     const [isModalOpen, setIsModalOpen] = useState(false);
@@ -114,7 +115,7 @@ function Recommendations() {
                             className="absolute top-3 right-3 w-8 h-8 flex items-center justify-center hover:opacity-70"
                             onClick={closeModal}
                         >
-                            <img src={getPublicPath("/icon-close.svg")} alt="Close" className="w-6 h-6" />
+                            <LazyImage src={getPublicPath("/icon-close.svg")} alt="Close" className="w-6 h-6" />
                         </button>
                         <div className='overflow-y-auto h-full'>
                             <div>

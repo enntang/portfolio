@@ -9,6 +9,7 @@ import ProjectNote from '../../../components/projects/ProjectNote'
 import Container from '../../../components/projects/Container'
 import SectionBlock from '../../../components/projects/SectionBlock'
 import TwoColumn from '../../../components/projects/TwoColumn'
+import TableOfContents from '../../../components/utilities/TableOfContents'
 
 gsap.registerPlugin(ScrollTrigger)
 import BG1 from '../../../assets/projects/mentor/projectInfo-mentor-bg-1.png'
@@ -210,6 +211,7 @@ export default function MentorPage() {
         {/* Hero */}
         <header className=" relative overflow-hidden">
           <SectionBlock bgVariant="purple" className='relative' backgrounds={mentorBackgrounds}>
+            <TableOfContents />
             <img src={shineImage} alt="shine" className='absolute top-0 right-0' />
             <img src={glintImage} alt="glint" className='absolute bottom-0 left-0' />
             <Container className='flex flex-col items-center justify-center text-center'>
