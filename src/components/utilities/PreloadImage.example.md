@@ -57,6 +57,12 @@ import PreloadImage from './components/utilities/PreloadImage'
 />
 
 // 在組件中使用
+import { Swiper, SwiperSlide } from 'swiper/react'
+import { Autoplay, EffectFade } from 'swiper/modules'
+import 'swiper/css'
+import 'swiper/css/effect-fade'
+import PreloadImage from './components/utilities/PreloadImage'
+
 function MyComponent() {
   const carouselImages = [
     '/bg-mentor.png',
@@ -72,8 +78,20 @@ function MyComponent() {
         onLoad={() => setCarouselReady(true)}
       />
       
-      {/* 稍後顯示的輪播組件 */}
-      <ImageCarousel images={carouselImages} />
+      {/* 稍後顯示的輪播組件（使用 Swiper） */}
+      <Swiper
+        modules={[Autoplay, EffectFade]}
+        effect="fade"
+        autoplay={{ delay: 7000 }}
+        loop={true}
+        className="w-full h-full"
+      >
+        {carouselImages.map((img, index) => (
+          <SwiperSlide key={index}>
+            <img src={img} alt={`Slide ${index}`} className="w-full h-full object-cover" />
+          </SwiperSlide>
+        ))}
+      </Swiper>
     </>
   )
 }
@@ -120,6 +138,11 @@ function MyComponent() {
 
 ```jsx
 // Home.jsx
+import { useEffect, useRef, useState } from 'react'
+import { Swiper, SwiperSlide } from 'swiper/react'
+import { Autoplay, EffectFade } from 'swiper/modules'
+import 'swiper/css'
+import 'swiper/css/effect-fade'
 import PreloadImage from './components/utilities/PreloadImage'
 import { getPublicPath } from './utils/path'
 
@@ -135,7 +158,20 @@ function Home() {
       {/* 預載入輪播圖 */}
       <PreloadImage src={carouselImages} />
       
-      <ImageCarousel slides={carouselImages} />
+      {/* 使用 Swiper 實現輪播 */}
+      <Swiper
+        modules={[Autoplay, EffectFade]}
+        effect="fade"
+        autoplay={{ delay: 7000 }}
+        loop={true}
+        className="w-full h-full"
+      >
+        {carouselImages.map((img, index) => (
+          <SwiperSlide key={index}>
+            <img src={img} alt={`Slide ${index}`} className="w-full h-full object-cover" />
+          </SwiperSlide>
+        ))}
+      </Swiper>
     </>
   )
 }

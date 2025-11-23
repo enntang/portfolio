@@ -13,7 +13,7 @@ function Recommendations() {
             name: "Shin Yang",
             title: "Product Manager",
             recommendation:
-                "As design lead, Enn fosters a culture of autonomy and positivity within the design team. She establishes regular and clear communication mechanisms both internally and externally and sets clear directional goals....",
+                "As design lead, Enn fosters a culture of autonomy and positivity within the design team. She establishes regular and clear communication mechanisms both internally and externally and sets clear directional goals. it was evident that Enn was the ideal partner: proactive, organized, and highly responsible.",
             fullParagraphs: [
                 "I was honored to work with Enn at Samebest. Enn joined the company approximately one month before I did, assuming the role of Head of Design. Upon my arrival as a Product Manager, Enn was the first colleague to extend a warm welcome, even though I was not part of the design department. She promptly assisted me in grasping the initial framework of the team's document structure.",
                 "Together, we established a collaborative framework for the entire product team, encompassing the PMO, R&D, Design, QC, and other departments. Under Enn's leadership, the design department has established a resilient and dynamic team.",
@@ -29,7 +29,7 @@ function Recommendations() {
             name: "Nomis Yang",
             title: "Design Lead",
             recommendation:
-                "To me, Enn was more than a manager — she was a mentor who shaped how I think about design. Her patience, passion, and dedication to learning inspired the whole team. Growing under her guidance was one of the most meaningful experiences in my career...",
+                "To me, Enn was more than a manager — she was a mentor who shaped how I think about design. Her patience, passion, and dedication to learning inspired the whole team. Growing under her guidance was one of the most meaningful experiences in my career.",
             fullParagraphs: [
                 "During my time at Samebest as a UI/UX designer, I had the privilege of working with my supervisor, Enn. She used her strong illustration skills and user insight to create a playful and approachable experience for a website designed for children aged 8–14. She carefully balanced the needs of both kids and parents, achieving great results in branding and usability.",
                 "To me, Enn was more than a manager — she was a mentor who shaped how I think about design. Her patience, passion, and dedication to learning inspired the whole team. Growing under her guidance was one of the most meaningful experiences in my career.",
@@ -77,11 +77,11 @@ function Recommendations() {
                             key={index}
                             type="button"
                             onClick={() => openModal(recommendation)}
-                            className="flex flex-col text-left w-full p-4 bg-white rounded-sm border border-gray-200 cursor-pointer hover:shadow-sm focus:outline-none focus:ring-2 focus:ring-gray-300 group hover:translate-y-[-2px] transition-all duration-300"
+                            className="flex flex-col text-left w-full p-4 bg-white rounded-sm  cursor-pointer hover:shadow-sm focus:outline-none focus:ring-2 focus:ring-gray-300 group hover:translate-y-[-2px] transition-all duration-300"
                         >
                             <div className="text-h3 text-gray-700 group-hover:text-gray-400 transition-all duration-300">{recommendation.name}</div>
                             <div className="text-caption text-gray-500 group-hover:text-gray-400 transition-all duration-300">{recommendation.title}</div>
-                            <p className='text-caption text-gray-800 mt-3 group-hover:text-gray-400 transition-all duration-300 line-clamp-5'>{recommendation.recommendation}</p>
+                            <p className='text-caption text-gray-800 mt-3 group-hover:text-gray-400 transition-all duration-300 line-clamp-6'>{recommendation.recommendation}</p>
                         </button>
                     ))}
                 </div>

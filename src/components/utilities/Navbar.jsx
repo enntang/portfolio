@@ -119,7 +119,7 @@ function Navbar({ isWhite = false, isMenuOpen = false, onToggleMenu, variant = '
       <div
         className={`w-full fixed top-0 left-0 transition-all duration-300 transform py-4 px-8 z-[70] ${
           isHidden ? '-translate-y-full' : 'translate-y-0'
-        } ${isHome || !isWhite ? 'bg-transparent' : 'bg-white/50 backdrop-blur-sm'}`}
+        } ${isHome || !isWhite ? 'bg-transparent' : 'backdrop-blur-md'}`}
       >
         <div className="grid grid-cols-3 items-center">
           {/* Left area */}

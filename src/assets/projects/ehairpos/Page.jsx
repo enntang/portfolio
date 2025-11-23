@@ -317,23 +317,23 @@ export default function EHairPOSPage() {
         {/* target audience */}
         <SectionBlock variant="photo" backgrounds={ehairposBackgrounds}>
           <Container>
-          <TwoColumn>
+         
               <H2>Target Audience</H2>
-              <div className="grid grid-cols-2 md:grid-cols-1 gap-4">
+              <div className="grid grid-cols-2 gap-4">
                 <div className="bg-white/10 backdrop-blur rounded-sm shadow p-5">
                   <div className="text-sm mb-2 opacity-70">Salon owners / managers</div>
-                  <P>Mid- to high-end hair salons in Taiwan, often operating multiple locations</P>
+                  <p className='pb-0'>Mid- to high-end hair salons in Taiwan, often operating multiple locations</p>
                 </div>
                 <div className="bg-white/10 backdrop-blur rounded-sm shadow p-5">
                   <div className="text-sm mb-2 opacity-70">Stylists and assistants</div>
-                  <P>Frontline staff who manage clients, appointments, and sales</P>
+                  <p className='pb-0'>Frontline staff who manage clients, appointments, and sales</p>
                 </div>
                 <div className="bg-white/10 backdrop-blur rounded-sm shadow p-5">
                   <div className="text-sm mb-2 opacity-70">Training partners</div>
-                  <P>Vocational institutions incorporating eHairPOS into salon education programs</P>
+                  <p className='pb-0'>Vocational institutions incorporating eHairPOS into salon education programs</p>
                 </div>
               </div>
-            </TwoColumn>
+         
           </Container>
         </SectionBlock>
 
@@ -576,7 +576,7 @@ export default function EHairPOSPage() {
                 <img src={quote} alt="quote" className='mb-8' />
                 <P className=''>It reminded me that good design isn’t just about this version.<br /> It’s about creating a foundation others can build on.</P>
               </div>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
+              <div className="grid grid-cols-1 ">
                 <a href="https://www.ehairpos.com/" className='flex flex-col items-center justify-center p-8 hover:opacity-60 transition-opacity duration-200' target="_blank" rel="noopener noreferrer"><img src={iconLink} alt="iconLink" /> Official promo site</a>
                 <a href="https://apps.apple.com/us/app/ehairpos/id6477988989" className='flex flex-col items-center justify-center p-8 hover:opacity-60 transition-opacity duration-200' target="_blank" rel="noopener noreferrer"><img src={iconIOS} alt="iconIOS" /> iOS download link</a>
               </div>

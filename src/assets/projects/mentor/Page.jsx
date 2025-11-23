@@ -253,7 +253,7 @@ export default function MentorPage() {
           <Container>
             <H2>Key Responsibilities</H2>
 
-            <TwoColumn>
+          
               <div>
                 <H3>1. Leadership</H3>
                 <UL>
@@ -290,7 +290,7 @@ export default function MentorPage() {
                     Gathered and refined visual references with the team to build a consistent design language.  </LI>
                 </UL>
               </div>
-            </TwoColumn>
+            
           </Container>
         </SectionBlock>
 
@@ -329,15 +329,15 @@ export default function MentorPage() {
               <div className="grid grid-cols-1 gap-4">
                 <div className="bg-white/10 backdrop-blur rounded-sm shadow p-5">
                   <div className="text-sm mb-2 opacity-70">At home, seated at a desk</div>
-                  <P>with access to desktop, tablet, and textbooks. </P>
+                  <p className='pb-0'>with access to desktop, tablet, and textbooks. </p>
                 </div>
                 <div className="bg-white/10 backdrop-blur rounded-sm shadow p-5">
                   <div className="text-sm mb-2 opacity-70">At school or in a library</div>
-                  <P>with only a tablet and textbooks, students used the platform as a lecture extension.</P>
+                  <p className='pb-0'>with only a tablet and textbooks, students used the platform as a lecture extension.</p>
                 </div>
                 <div className="bg-white/10 backdrop-blur rounded-sm shadow p-5">
                   <div className="text-sm mb-2 opacity-70">On the go</div>
-                  <P>with only a tablet, students relied on it as the main learning tool.</P>
+                  <p className='pb-0'>with only a tablet, students relied on it as the main learning tool.</p>
                 </div>
               </div>
             </TwoColumn>
@@ -393,7 +393,7 @@ export default function MentorPage() {
         {/* design goals */}
         <SectionBlock bgVariant="blue" backgrounds={mentorBackgrounds}>
           <Container>
-            <TwoColumn>
+            
               <div>
                 <H2>Design Goals</H2>
                 <P className="bg-white/10 backdrop-blur rounded-sm shadow p-5">Based on the key insights gathered from our research, we distilled the following three design goals to address the specific concerns of both parents and students:</P>
@@ -412,7 +412,7 @@ export default function MentorPage() {
                   <P>By surfacing concrete progress markers—such as reduced mistakes, completed exercises, and streaks—we build emotional momentum and encourage students to keep going.</P>
                 </div>
               </div>
-            </TwoColumn>
+            
           </Container>
         </SectionBlock>
 
