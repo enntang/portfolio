@@ -319,7 +319,7 @@ export default function EHairPOSPage() {
           <Container>
          
               <H2>Target Audience</H2>
-              <div className="grid grid-cols-2 gap-4">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div className="bg-white/10 backdrop-blur rounded-sm shadow p-5">
                   <div className="text-sm mb-2 opacity-70">Salon owners / managers</div>
                   <p className='pb-0'>Mid- to high-end hair salons in Taiwan, often operating multiple locations</p>

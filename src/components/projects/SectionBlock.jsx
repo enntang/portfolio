@@ -23,10 +23,18 @@ function SectionBlock({
 
   if (backgroundImage) {
     combinedStyle.backgroundImage = `url(${backgroundImage})`
-    combinedStyle.backgroundSize = 'cover'
-    combinedStyle.backgroundPosition = 'center'
-    combinedStyle.backgroundRepeat = 'no-repeat'
-    combinedStyle.backgroundAttachment = isIOS ? 'unset' : 'fixed'
+    if (isIOS) {
+      // iOS 设备使用 tile（平铺）方式
+      combinedStyle.backgroundSize = 'auto'
+      combinedStyle.backgroundRepeat = 'repeat'
+      combinedStyle.backgroundAttachment = 'unset'
+    } else {
+      // 非 iOS 设备使用 cover 方式
+      combinedStyle.backgroundSize = 'cover'
+      combinedStyle.backgroundPosition = 'center'
+      combinedStyle.backgroundRepeat = 'no-repeat'
+      combinedStyle.backgroundAttachment = 'fixed'
+    }
   }
 
   return (
