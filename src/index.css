@@ -40,3 +40,88 @@
     transform: translateY(0);
   }
 }
+
+/* Swiper custom styles for mentor page */
+
+.responsibilities-swiper .swiper-pagination-bullet,
+.background-swiper .swiper-pagination-bullet,
+.design-goals-swiper .swiper-pagination-bullet,
+.design-deliverables-swiper .swiper-pagination-bullet,
+.story-mentor-swiper .swiper-pagination-bullet,
+.mentor-ui-guide-swiper .swiper-pagination-bullet,
+.features-swiper .swiper-pagination-bullet,
+.reflection-swiper .swiper-pagination-bullet {
+  background: rgba(255, 255, 255, 0.5);
+  opacity: 1;
+  width: 24px;
+  height: 3px;
+  border-radius: 2px;
+  margin: 0 4px;
+}
+
+.responsibilities-swiper .swiper-pagination-bullet-active,
+.background-swiper .swiper-pagination-bullet-active,
+.design-goals-swiper .swiper-pagination-bullet-active,
+.design-deliverables-swiper .swiper-pagination-bullet-active,
+.story-mentor-swiper .swiper-pagination-bullet-active,
+.mentor-ui-guide-swiper .swiper-pagination-bullet-active,
+.features-swiper .swiper-pagination-bullet-active,
+.reflection-swiper .swiper-pagination-bullet-active {
+  background: rgba(255, 255, 255, 1);
+}
+
+/* Dark indicators for light backgrounds */
+.design-deliverables-swiper .swiper-pagination-bullet,
+.features-swiper .swiper-pagination-bullet {
+  background: rgba(0, 0, 0, 0.3);
+}
+
+.design-deliverables-swiper .swiper-pagination-bullet-active,
+.features-swiper .swiper-pagination-bullet-active {
+  background: rgba(0, 0, 0, 0.8);
+}
+
+/* Allow SwiperSlide to use className */
+.responsibilities-swiper .swiper-slide,
+.background-swiper .swiper-slide,
+.design-goals-swiper .swiper-slide,
+.design-deliverables-swiper .swiper-slide,
+.story-mentor-swiper .swiper-slide,
+.mentor-ui-guide-swiper .swiper-slide,
+.features-swiper .swiper-slide,
+.reflection-swiper .swiper-slide {
+  height: auto;
+  box-sizing: border-box;
+  margin-bottom: 24px;
+}
+
+.responsibilities-swiper .swiper-slide:last-child,
+.background-swiper .swiper-slide:last-child,
+.design-goals-swiper .swiper-slide:last-child,
+.design-deliverables-swiper .swiper-slide:last-child,
+.story-mentor-swiper .swiper-slide:last-child,
+.mentor-ui-guide-swiper .swiper-slide:last-child,
+.features-swiper .swiper-slide:last-child,
+.reflection-swiper .swiper-slide:last-child {
+  margin-bottom: 0;
+}
+
+/* Hide navigation arrows */
+.responsibilities-swiper .swiper-button-prev,
+.background-swiper .swiper-button-prev,
+.design-goals-swiper .swiper-button-prev,
+.design-deliverables-swiper .swiper-button-prev,
+.story-mentor-swiper .swiper-button-prev,
+.mentor-ui-guide-swiper .swiper-button-prev,
+.features-swiper .swiper-button-prev,
+.reflection-swiper .swiper-button-prev,
+.responsibilities-swiper .swiper-button-next,
+.background-swiper .swiper-button-next,
+.design-goals-swiper .swiper-button-next,
+.design-deliverables-swiper .swiper-button-next,
+.story-mentor-swiper .swiper-button-next,
+.mentor-ui-guide-swiper .swiper-button-next,
+.features-swiper .swiper-button-next,
+.reflection-swiper .swiper-button-next {
+  display: none !important;
+}
