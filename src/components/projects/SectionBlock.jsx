@@ -27,7 +27,7 @@ function SectionBlock({
       // iOS 设备使用 tile（平铺）方式
       combinedStyle.backgroundSize = 'auto'
       combinedStyle.backgroundRepeat = 'repeat'
-      combinedStyle.backgroundAttachment = 'unset'
+      combinedStyle.backgroundAttachment = 'scroll'
     } else {
       // 非 iOS 设备使用 cover 方式
       combinedStyle.backgroundSize = 'cover'

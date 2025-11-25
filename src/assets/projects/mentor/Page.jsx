@@ -17,7 +17,6 @@ import BG2 from '../../../assets/projects/mentor/projectInfo-mentor-bg-2.png'
 import BG3 from '../../../assets/projects/mentor/projectInfo-mentor-bg-3.png'
 import BG4 from '../../../assets/projects/mentor/projectInfo-mentor-bg-4.png'
 
-// 定义 mentor 项目的背景图片映射
 const mentorBackgrounds = {
   purple: BG1,
   dark: BG2,
@@ -445,8 +444,8 @@ export default function MentorPage() {
             </ProjectNote>
             <img src={deliverablesDraft} alt="deliverables draft" className='my-16' />
             <div className='grid grid-cols-1 md:grid-cols-2 gap-4'>
-              <img src={deliverablesLayout1} alt="deliverables layout 1" className='h-full object-cover' />
-              <img src={deliverablesLayout2} alt="deliverables layout 2" className='h-full object-cover' />
+              <img src={deliverablesLayout1} alt="deliverables layout 1" className='h-full md:object-cover' />
+              <img src={deliverablesLayout2} alt="deliverables layout 2" className='h-full md:object-cover' />
             </div>
             <div className='my-16'>
               <P>As the design lead, I defined the product’s style and worked with the team to build a clear, consistent design system. Since our main users were junior and senior high school students, we needed to match their visual preferences and language habits. This made UX design more challenging. Together, we collected style references, explored different directions, and shaped a system that fits the product tone.</P>
