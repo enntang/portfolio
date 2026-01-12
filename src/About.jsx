@@ -8,10 +8,20 @@ import { getPublicPath } from './utils/path'
 import BtnWhite from './components/utilities/BtnWhite'
 import LazyImage from './components/utilities/LazyImage'
 import P from './components/post/P'
+import { useLanguage } from './contexts/LanguageContext'
+import { useTranslation } from './hooks/useTranslation'
+import { buildPath } from './utils/routing'
 
 
 function About() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
+  const { language } = useLanguage()
+  const { t } = useTranslation()
+
+  // Helper to build path with language prefix
+  const buildHref = (path) => {
+    return buildPath(path, language)
+  }
 
   const profileRef = useRef(null)
   const whatIDoRef = useRef(null)
@@ -60,7 +70,7 @@ function About() {
         <div className='w-full p-8 xl:p-16 flex flex-col gap-8'>
           <div className='pt-16 relative isolate mb-16'>
             <h1 className='text-large-mobile xl:text-large text-gray-300 leading-tight mix-blend-screen mb-8'>
-              Making digital products clear, engaging, and meaningful for users.
+              {t('about.title')}
             </h1>
             <LazyImage
               src={getPublicPath('/portrait.png')}
@@ -68,32 +78,31 @@ function About() {
               className='w-40 h-40 mix-blend-screen absolute right-0 bottom-0'
               preload={true}
             />
-            <BtnWhite name="Read CV" href="https://www.cake.me/resumes/enn-tang" target="_blank" />
+            <BtnWhite name={t('about.readCV')} href="https://www.cake.me/resumes/enn-tang" target="_blank" />
           </div>
 
           <div ref={profileRef} className='space-y-3 text-gray-800 mb-40'>
             
             <P>
-            Hey, I’m Enn. I’ve spent the past decade designing digital products across publishing, education, gaming, and government. I enjoy creating work that makes life a little clearer, easier, or more enjoyable for the people who use it.
+            {t('about.profile.intro')}
             </P>
             <p className='text-p'>
-            A big part of my career has been in the education space, where I’ve led small design teams and shaped end-to-end experiences from early concepts to launch.
-I’m also an illustrator at heart, often blending visual storytelling with interface design to build products that feel both intuitive and visually engaging.</p>
+            {t('about.profile.career')}</p>
           </div>
 
           <div className='flex flex-col gap-10'>
             {/* What I Do */}
             <section ref={whatIDoRef} className='space-y-4'>
-              <AboutSectionTitle>What I Do</AboutSectionTitle>
+              <AboutSectionTitle>{t('about.whatIDo')}</AboutSectionTitle>
               <div className='flex flex-col divide-y divide-gray-200'>
                 <a
-                  href='#/projects'
+                  href={buildHref('/projects')}
                   className='group block text-left py-6 px-4 -mx-4  transition-colors duration-200 hover:bg-highlight'
                 >
                   <div className='flex items-center justify-between'>
                     <div className='text-5xl font-semibold text-gray-200 group-hover:text-gray-800 transition-colors duration-200'>UI/UX Design</div>
                     <span className='inline-flex items-center gap-2 text-sm tracking-wide text-gray-500 opacity-0 group-hover:opacity-100 transition-opacity duration-200'>
-                      watch more
+                      {t('about.watchMore')}
                       <LazyImage
                         src={getPublicPath('/icon-arrow-right.svg')}
                         alt=''
@@ -103,13 +112,13 @@ I’m also an illustrator at heart, often blending visual storytelling with inte
                   </div>
                 </a>
                 <a
-                  href='#/projects'
+                  href={buildHref('/projects')}
                   className='group block text-left py-6 px-4 -mx-4  transition-colors duration-200 hover:bg-highlight'
                 >
                   <div className='flex items-center justify-between'>
                     <div className='text-5xl font-semibold text-gray-200 group-hover:text-gray-800 transition-colors duration-200'>Graphic Design</div>
                     <span className='inline-flex items-center gap-2 text-sm tracking-wide text-gray-500 opacity-0 group-hover:opacity-100 transition-opacity duration-200'>
-                      watch more
+                      {t('about.watchMore')}
                       <LazyImage
                         src={getPublicPath('/icon-arrow-right.svg')}
                         alt=''
@@ -119,13 +128,13 @@ I’m also an illustrator at heart, often blending visual storytelling with inte
                   </div>
                 </a>
                 <a
-                  href='#/projects'
+                  href={buildHref('/projects')}
                   className='group block text-left py-6 px-4 -mx-4  transition-colors duration-200 hover:bg-highlight'
                 >
                   <div className='flex items-center justify-between'>
                     <div className='text-5xl font-semibold text-gray-200 group-hover:text-gray-800 transition-colors duration-200'>Illustration</div>
                     <span className='inline-flex items-center gap-2 text-sm tracking-wide text-gray-500 opacity-0 group-hover:opacity-100 transition-opacity duration-200'>
-                      watch more
+                      {t('about.watchMore')}
                       <LazyImage
                         src={getPublicPath('/icon-arrow-right.svg')}
                         alt=''
@@ -140,7 +149,7 @@ I’m also an illustrator at heart, often blending visual storytelling with inte
 
             {/* Experience */}
             <section ref={experienceRef} className='space-y-4'>
-              <AboutSectionTitle>Experience</AboutSectionTitle>
+              <AboutSectionTitle>{t('about.experience')}</AboutSectionTitle>
               <div className='space-y-6 text-gray-800'>
                 <ExperienceItem
                   role='Design Lead'
@@ -184,7 +193,7 @@ I’m also an illustrator at heart, often blending visual storytelling with inte
 
             {/* Education */}
             <section ref={educationRef} className='space-y-4'>
-              <AboutSectionTitle>Education</AboutSectionTitle>
+              <AboutSectionTitle>{t('about.education')}</AboutSectionTitle>
               <div className='space-y-6 text-gray-800'>
                 <ExperienceItem
                   role={`National Taiwan University of Science and Technology\n(Master’s Degree)`}
@@ -206,7 +215,7 @@ I’m also an illustrator at heart, often blending visual storytelling with inte
 
             {/* Archived Works */}
             <section className='space-y-4 pb-24'>
-              <AboutSectionTitle>Archived Works</AboutSectionTitle>
+              <AboutSectionTitle>{t('about.archivedWorks')}</AboutSectionTitle>
               <div className=''>
                 <ArchivedWorkItem
                   title='tutorJr 2022 New Official Website UI Design'
@@ -236,10 +245,10 @@ I’m also an illustrator at heart, often blending visual storytelling with inte
         {/* Mobile bottom tab bar */}
         <div className='fixed bottom-0 left-0 right-0 z-40 lg:hidden bg-white/90 backdrop-blur border-t border-gray-200'>
           <div className='grid grid-cols-5 text-sm text-gray-400'>
-            <button className='py-3' onClick={() => scrollTo(profileRef)}>Profile</button>
-            <button className='py-3' onClick={() => scrollTo(whatIDoRef)}>What I Do</button>
-            <button className='py-3' onClick={() => scrollTo(experienceRef)}>Experience</button>
-            <button className='py-3' onClick={() => scrollTo(educationRef)}>Education</button>
+            <button className='py-3' onClick={() => scrollTo(profileRef)}>{t('about.mobileTabs.profile')}</button>
+            <button className='py-3' onClick={() => scrollTo(whatIDoRef)}>{t('about.mobileTabs.whatIDo')}</button>
+            <button className='py-3' onClick={() => scrollTo(experienceRef)}>{t('about.mobileTabs.experience')}</button>
+            <button className='py-3' onClick={() => scrollTo(educationRef)}>{t('about.mobileTabs.education')}</button>
 
           </div>
         </div>

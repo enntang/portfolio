@@ -4,10 +4,22 @@ import ProjectCard from './ProjectCard';
 import ProjectCardVertical from './ProjectCardVertical';
 import BtnWhite from '../utilities/BtnWhite';
 import SectionTitle from '../home/SectionTitle';
-import projectsData from '../../assets/projects.json'
+import { useLanguage } from '../../contexts/LanguageContext';
+import { useTranslation } from '../../hooks/useTranslation';
+import { getProjectsByLanguage } from '../../utils/projectsLoader';
+import { buildPath } from '../../utils/routing';
 
-function Projects({ projects, title = 'Projects', showMoreButton = true, showSectionTitle = true, direction = 'horizontal' }) {
+function Projects({ projects, title, showMoreButton = true, showSectionTitle = true, direction = 'horizontal' }) {
+  const { language } = useLanguage();
+  const { t } = useTranslation();
+  const projectsData = getProjectsByLanguage(language);
+  const defaultTitle = title || t('projects.title');
   const data = projects && projects.length ? projects : projectsData.slice(0, 3);
+
+  // Helper to build path with language prefix
+  const buildHref = (path) => {
+    return buildPath(path, language)
+  }
 
 
   return (
@@ -15,7 +27,7 @@ function Projects({ projects, title = 'Projects', showMoreButton = true, showSec
       <section className="mb-32">
         {/* Section Title */}
         {showSectionTitle &&
-          <SectionTitle name={title} />}
+          <SectionTitle name={defaultTitle} />}
 
         {/* Projects */}
         <div className={`space-y-0 grid gap-12 ${direction === 'vertical' ? 'grid-cols-2 mobile:grid-cols-1' : 'grid-cols-1'}`}>
@@ -39,7 +51,7 @@ function Projects({ projects, title = 'Projects', showMoreButton = true, showSec
         {/* More Projects Button */}
         {showMoreButton && (
           <div className="flex justify-center mt-16 mobile:mt-8">
-            <BtnWhite name="More Projects" href="#/projects" />
+            <BtnWhite name={t('projects.title')} href={buildHref('/projects')} />
           </div>
         )}
       </section>

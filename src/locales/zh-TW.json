@@ -1,0 +1,58 @@
+{
+  "nav": {
+    "home": "首頁",
+    "projects": "作品",
+    "about": "關於",
+    "blog": "部落格"
+  },
+  "home": {
+    "greeting": "你好，我是 ENN！",
+    "description": "我是一位以使用者為優先的 UI 設計師。我創造直覺、以使用者為中心的介面，提升可用性，同時確保設計與開發團隊之間順暢的協作。",
+    "moreAboutMe": "了解更多",
+    "discoverMore": "探索更多",
+    "carousel": {
+      "focusedOn": "我專注於",
+      "create": "我創造",
+      "specialize": "我專精於",
+      "do": "我從事"
+    }
+  },
+  "about": {
+    "title": "讓數位產品對使用者來說清晰、吸引人且有意義。",
+    "readCV": "查看履歷",
+    "profile": {
+      "intro": "你好，我是 Enn。過去十年來，我在出版、教育、遊戲和政府等領域設計數位產品。我喜歡創造能讓使用者的生活更清晰、更容易或更愉快的作品。",
+      "career": "我職業生涯中很大一部分是在教育領域，我領導小型設計團隊，從早期概念到發布，塑造端到端的體驗。我也是一位插畫家，經常將視覺敘事與介面設計結合，打造既直覺又視覺吸引人的產品。"
+    },
+    "whatIDo": "我的專長",
+    "watchMore": "查看更多",
+    "experience": "工作經驗",
+    "education": "教育背景",
+    "archivedWorks": "已歸檔作品",
+    "mobileTabs": {
+      "profile": "個人簡介",
+      "whatIDo": "我的專長",
+      "experience": "工作經驗",
+      "education": "教育背景"
+    }
+  },
+  "projects": {
+    "title": "作品集",
+    "description": "我從 2016 年開始設計，結合清晰的結構與視覺敘事，創造既直覺又富有表現力的作品。合作夥伴形容我的方法專業、深思熟慮且細緻。",
+    "caseStudy": "個案研究",
+    "comingSoon": "即將推出"
+  },
+  "blog": {
+    "title": "部落格",
+    "subtitle": "紀錄我在產品設計、工具使用與職涯成長上的一些觀察與想法，目前內容以中文為主。",
+    "all": "全部",
+    "design": "設計",
+    "tooling": "工具與實踐",
+    "self": "自我成長",
+    "spotlight": "精選"
+  },
+  "common": {
+    "contactMe": "聯絡我",
+    "copyright": "版權所有 © Enn Tang"
+  }
+}

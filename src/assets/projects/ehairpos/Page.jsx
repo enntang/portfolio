@@ -1,6 +1,10 @@
 import { useState, useEffect, useRef } from 'react'
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
+import { Swiper, SwiperSlide } from 'swiper/react'
+import { Pagination } from 'swiper/modules'
+import 'swiper/css'
+import 'swiper/css/pagination'
 import Navbar from '../../../components/utilities/Navbar'
 import { useFloatingAnimation } from '../../../hooks/useFloatingAnimation'
 import ImageWithHotspots from '../../../components/utilities/ImageWithHotspots'
@@ -368,97 +372,256 @@ export default function EHairPOSPage() {
         {/* Design Deliverables */}
         <SectionBlock variant="purple" backgrounds={ehairposBackgrounds}>
           <Container>
-            <H2>Design Deliverables</H2>
-            <H3>Customer Management with Advanced Filtering</H3>
-            <P>We moved away from modal-based browsing and adopted a split-view layout. Users can now browse the customer list and view full details side-by-side—cutting down on lookup time and reducing clicks.</P>
-            <P>Old version: When browsing the customer list, viewing details opened a full-screen modal. Closing it was required to return to the list.</P>
-            <div className='grid grid-cols-1 md:grid-cols-2 gap-16 mb-16'>
-              <img src={old1} alt="old1" className='w-full h-auto mt-16 rounded-xs' />
-              <img src={old2} alt="old1" className='w-full h-auto mt-16 rounded-xs' />
+          <H2>Design Deliverables</H2>
+            {/* Mobile Swiper */}
+            <div className="md:hidden">
+              <Swiper
+                modules={[Pagination]}
+                pagination={{ clickable: true }}
+                spaceBetween={24}
+                slidesPerView={1}
+                className="design-deliverables-swiper"
+              >
+                <SwiperSlide>
+                  <div>
+                   
+                    <H3>Customer Management with Advanced Filtering</H3>
+                    <P>We moved away from modal-based browsing and adopted a split-view layout. Users can now browse the customer list and view full details side-by-side—cutting down on lookup time and reducing clicks.</P>
+                  </div>
+                </SwiperSlide>
+                <SwiperSlide>
+                  <div>
+                    <P>Old version: When browsing the customer list, viewing details opened a full-screen modal. Closing it was required to return to the list.</P>
+                    <div className='grid grid-cols-1 gap-4 mb-8'>
+                      <img src={old1} alt="old1" className='w-full h-auto mt-8 rounded-xs' />
+                      <img src={old2} alt="old2" className='w-full h-auto rounded-xs' />
+                    </div>
+                  </div>
+                </SwiperSlide>
+                <SwiperSlide>
+                  <div>
+                    <P>The new version adopts a split-view layout: clicking a customer in the list will instantly show their details on the right side.</P>
+                    <ImageWithHotspots
+                      src={screenshot01}
+                      alt="Customers list"
+                      hotspots={customersHotspots}
+                      className='mb-8'
+                    />
+                  </div>
+                </SwiperSlide>
+                <SwiperSlide>
+                  <div>
+                    <P>Notes from different stylists are shown in a timeline view, giving teams a shared record of client preferences.</P>
+                    <ImageWithHotspots
+                      src={screenshot02}
+                      alt="Customer notes"
+                      hotspots={customersNotesHotspots}
+                      className='mb-8'
+                    />
+                  </div>
+                </SwiperSlide>
+                <SwiperSlide>
+                  <div>
+                    <P>Visual charts summarize visit frequency, spending, and service mix, helping owners spot VIPs.</P>
+                    <ImageWithHotspots
+                      src={screenshot03}
+                      alt="Customer charts"
+                      hotspots={customersChartsHotspots}
+                    />
+                  </div>
+                </SwiperSlide>
+              </Swiper>
             </div>
-            <P>The new version adopts a split-view layout: clicking a customer in the list will instantly show their details on the right side.</P>
-            <ImageWithHotspots
-              src={screenshot01}
-              alt="Customers list"
-              hotspots={customersHotspots}
-              className='mb-8'
-            />
-            <P>Notes from different stylists are shown in a timeline view, giving teams a shared record of client preferences.</P>
 
-            <ImageWithHotspots
-              src={screenshot02}
-              alt="Customer notes"
-              hotspots={customersNotesHotspots}
-              className='mb-8'
-            />
+            {/* Desktop Layout */}
+            <div className="hidden md:block">
+              
+              <H3>Customer Management with Advanced Filtering</H3>
+              <P>We moved away from modal-based browsing and adopted a split-view layout. Users can now browse the customer list and view full details side-by-side—cutting down on lookup time and reducing clicks.</P>
+              <P>Old version: When browsing the customer list, viewing details opened a full-screen modal. Closing it was required to return to the list.</P>
+              <div className='grid grid-cols-1 md:grid-cols-2 gap-16 mb-16'>
+                <img src={old1} alt="old1" className='w-full h-auto mt-16 rounded-xs' />
+                <img src={old2} alt="old1" className='w-full h-auto mt-16 rounded-xs' />
+              </div>
+              <P>The new version adopts a split-view layout: clicking a customer in the list will instantly show their details on the right side.</P>
+              <ImageWithHotspots
+                src={screenshot01}
+                alt="Customers list"
+                hotspots={customersHotspots}
+                className='mb-8'
+              />
+              <P>Notes from different stylists are shown in a timeline view, giving teams a shared record of client preferences.</P>
 
-            <P>Visual charts summarize visit frequency, spending, and service mix, helping owners spot VIPs.</P>
-            <ImageWithHotspots
-              src={screenshot03}
-              alt="Customer charts"
-              hotspots={customersChartsHotspots}
-            />
+              <ImageWithHotspots
+                src={screenshot02}
+                alt="Customer notes"
+                hotspots={customersNotesHotspots}
+                className='mb-8'
+              />
+
+              <P>Visual charts summarize visit frequency, spending, and service mix, helping owners spot VIPs.</P>
+              <ImageWithHotspots
+                src={screenshot03}
+                alt="Customer charts"
+                hotspots={customersChartsHotspots}
+              />
+            </div>
           </Container>
         </SectionBlock>
 
 
         <SectionBlock backgrounds={ehairposBackgrounds}>
           <Container>
-            <H3>Flexible, Intuitive Booking Flow</H3>
-            <P className='w-2/3'>Bookings come from two sources: online forms and in-person entries.<br />
-              We adopted interaction patterns from tools users already know—like Google Calendar—to allow for quick drag-and-drop booking, unscheduled holds, and both daily/monthly views.</P>
-
-            <div className='flex justify-end'>
-              <img src={draft2} alt="draft2" className='w-[80%] h-auto  rounded-xs mix-blend-multiply opacity-50 ' />
+            {/* Mobile Swiper */}
+            <div className="md:hidden">
+              <Swiper
+                modules={[Pagination]}
+                pagination={{ clickable: true }}
+                spaceBetween={24}
+                slidesPerView={1}
+                className="booking-flow-swiper"
+              >
+                <SwiperSlide>
+                  <div>
+                    <H3>Flexible, Intuitive Booking Flow</H3>
+                    <P>Bookings come from two sources: online forms and in-person entries.<br />
+                      We adopted interaction patterns from tools users already know—like Google Calendar—to allow for quick drag-and-drop booking, unscheduled holds, and both daily/monthly views.</P>
+                  </div>
+                </SwiperSlide>
+                <SwiperSlide>
+                  <div>
+                    <div className='flex justify-center'>
+                      <img src={draft2} alt="draft2" className='w-full h-auto rounded-xs mix-blend-multiply opacity-50' />
+                    </div>
+                  </div>
+                </SwiperSlide>
+                <SwiperSlide>
+                  <div>
+                    <ImageWithHotspots
+                      src={screenshot04}
+                      alt="Calendar view"
+                      hotspots={calendarHotspots1}
+                      className='mb-8'
+                    />
+                  </div>
+                </SwiperSlide>
+                <SwiperSlide>
+                  <div>
+                    <P>The calendar can be switched to a monthly view, making it easier to review and adjust the entire schedule at a glance.</P>
+                    <ImageWithHotspots
+                      src={screenshot05}
+                      alt="Calendar view"
+                      hotspots={calendarHotspots2}
+                    />
+                  </div>
+                </SwiperSlide>
+              </Swiper>
             </div>
 
+            {/* Desktop Layout */}
+            <div className="hidden md:block">
+              <H3>Flexible, Intuitive Booking Flow</H3>
+              <P className='w-2/3'>Bookings come from two sources: online forms and in-person entries.<br />
+                We adopted interaction patterns from tools users already know—like Google Calendar—to allow for quick drag-and-drop booking, unscheduled holds, and both daily/monthly views.</P>
 
+              <div className='flex justify-end'>
+                <img src={draft2} alt="draft2" className='w-[80%] h-auto  rounded-xs mix-blend-multiply opacity-50 ' />
+              </div>
 
-
-
-            <ImageWithHotspots
-              src={screenshot04}
-              alt="Calendar view"
-              hotspots={calendarHotspots1}
-              className='mb-8'
-            />
-            <P>The calendar can be switched to a monthly view, making it easier to review and adjust the entire schedule at a glance.</P>
-            <ImageWithHotspots
-              src={screenshot05}
-              alt="Calendar view"
-              hotspots={calendarHotspots2}
-            />
+              <ImageWithHotspots
+                src={screenshot04}
+                alt="Calendar view"
+                hotspots={calendarHotspots1}
+                className='mb-8'
+              />
+              <P>The calendar can be switched to a monthly view, making it easier to review and adjust the entire schedule at a glance.</P>
+              <ImageWithHotspots
+                src={screenshot05}
+                alt="Calendar view"
+                hotspots={calendarHotspots2}
+              />
+            </div>
           </Container>
         </SectionBlock>
 
 
         <SectionBlock variant="photo" backgrounds={ehairposBackgrounds}>
           <Container>
-            <H3>Checkout Flow Designed for Salon Complexity</H3>
-            <P>
-              Unlike retail POS, salon purchases are often complex: A client might get a cut, color, and buy a product—all in one visit.<br />
-              Our new UI lets staff apply discounts per item, choose payment types, and switch between products quickly. Visual hierarchy and iconography were improved for clarity and speed.</P>
-
-            <div className="relative">
-              <ProjectNote className='absolute top-[30%] right-1/2 w-60 translate-y-1/2 translate-x-1/2 text-gray-800'>Old version: Lots of unused space. Information lacked hierarchy and was hard to distinguish.</ProjectNote>
-              <img src={old3} alt="old3" className='w-full h-auto rounded-xs mb-8' />
+            {/* Mobile Swiper */}
+            <div className="md:hidden">
+              <Swiper
+                modules={[Pagination]}
+                pagination={{ clickable: true }}
+                spaceBetween={24}
+                slidesPerView={1}
+                className="checkout-flow-swiper"
+              >
+                <SwiperSlide>
+                  <div>
+                    <H3>Checkout Flow Designed for Salon Complexity</H3>
+                    <P>
+                      Unlike retail POS, salon purchases are often complex: A client might get a cut, color, and buy a product—all in one visit.<br />
+                      Our new UI lets staff apply discounts per item, choose payment types, and switch between products quickly. Visual hierarchy and iconography were improved for clarity and speed.</P>
+                  </div>
+                </SwiperSlide>
+                <SwiperSlide>
+                  <div>
+                    <ProjectNote className='mb-4 text-gray-800'>Old version: Lots of unused space. Information lacked hierarchy and was hard to distinguish.</ProjectNote>
+                    <img src={old3} alt="old3" className='w-full h-auto rounded-xs mb-8' />
+                  </div>
+                </SwiperSlide>
+                <SwiperSlide>
+                  <div>
+                    <P>The New version sets clear product categories with icons to improve readability.</P>
+                    <ImageWithHotspots
+                      src={screenshot06}
+                      alt="shopping list"
+                      hotspots={shoppingHistoryHotspots}
+                      className='mb-8'
+                    />
+                  </div>
+                </SwiperSlide>
+                <SwiperSlide>
+                  <div>
+                    <P>During checkout, the sidebar displays the purchase amount for staff to review and confirm.</P>
+                    <ImageWithHotspots
+                      src={screenshot07}
+                      alt="shopping list"
+                      hotspots={checkoutHotspots}
+                    />
+                  </div>
+                </SwiperSlide>
+              </Swiper>
             </div>
-            <div>
 
-              <P>The New version sets clear product categories with icons to improve readability.</P>
+            {/* Desktop Layout */}
+            <div className="hidden md:block">
+              <H3>Checkout Flow Designed for Salon Complexity</H3>
+              <P>
+                Unlike retail POS, salon purchases are often complex: A client might get a cut, color, and buy a product—all in one visit.<br />
+                Our new UI lets staff apply discounts per item, choose payment types, and switch between products quickly. Visual hierarchy and iconography were improved for clarity and speed.</P>
 
-              <ImageWithHotspots
-                src={screenshot06}
-                alt="shopping list"
-                hotspots={shoppingHistoryHotspots}
-                className='mb-8'
-              />
-              <P>During checkout, the sidebar displays the purchase amount for staff to review and confirm.</P>
-              <ImageWithHotspots
-                src={screenshot07}
-                alt="shopping list"
-                hotspots={checkoutHotspots}
-              />
+              <div className="relative">
+                <ProjectNote className='absolute top-[30%] right-1/2 w-60 translate-y-1/2 translate-x-1/2 text-gray-800'>Old version: Lots of unused space. Information lacked hierarchy and was hard to distinguish.</ProjectNote>
+                <img src={old3} alt="old3" className='w-full h-auto rounded-xs mb-8' />
+              </div>
+              <div>
+
+                <P>The New version sets clear product categories with icons to improve readability.</P>
+
+                <ImageWithHotspots
+                  src={screenshot06}
+                  alt="shopping list"
+                  hotspots={shoppingHistoryHotspots}
+                  className='mb-8'
+                />
+                <P>During checkout, the sidebar displays the purchase amount for staff to review and confirm.</P>
+                <ImageWithHotspots
+                  src={screenshot07}
+                  alt="shopping list"
+                  hotspots={checkoutHotspots}
+                />
+              </div>
             </div>
 
           </Container>
@@ -466,65 +629,188 @@ export default function EHairPOSPage() {
 
         <SectionBlock backgrounds={ehairposBackgrounds}>
           <Container>
-            <H3>Membership Wallet That Feels Real</H3>
-            <P>
-              Instead of multiple loyalty cards, we designed a unified digital wallet.
-              Clients simply provide their phone number, and staff can instantly access any stored-value cards, membership points, or available coupons.<br />
-              The wallet interface mimics a real wallet—organized, easy to read, and quick to apply at checkout.
-            </P>
-            <ImageWithHotspots
-              src={screenshot09}
-              alt="membership wallet"
-              hotspots={memberCardHotspots}
-              className='mb-8'
-            />
-            <ImageWithHotspots
-              src={screenshot10}
-              alt="membership wallet"
-              hotspots={discountHotspots}
-              className='mb-8'
-            />
+            {/* Mobile Swiper */}
+            <div className="md:hidden">
+              <Swiper
+                modules={[Pagination]}
+                pagination={{ clickable: true }}
+                spaceBetween={24}
+                slidesPerView={1}
+                className="membership-wallet-swiper"
+              >
+                <SwiperSlide>
+                  <div>
+                    <H3>Membership Wallet That Feels Real</H3>
+                    <P>
+                      Instead of multiple loyalty cards, we designed a unified digital wallet.
+                      Clients simply provide their phone number, and staff can instantly access any stored-value cards, membership points, or available coupons.<br />
+                      The wallet interface mimics a real wallet—organized, easy to read, and quick to apply at checkout.
+                    </P>
+                  </div>
+                </SwiperSlide>
+                <SwiperSlide>
+                  <div>
+                    <ImageWithHotspots
+                      src={screenshot09}
+                      alt="membership wallet"
+                      hotspots={memberCardHotspots}
+                      className='mb-8'
+                    />
+                  </div>
+                </SwiperSlide>
+                <SwiperSlide>
+                  <div>
+                    <ImageWithHotspots
+                      src={screenshot10}
+                      alt="membership wallet"
+                      hotspots={discountHotspots}
+                      className='mb-8'
+                    />
+                  </div>
+                </SwiperSlide>
+              </Swiper>
+            </div>
+
+            {/* Desktop Layout */}
+            <div className="hidden md:block">
+              <H3>Membership Wallet That Feels Real</H3>
+              <P>
+                Instead of multiple loyalty cards, we designed a unified digital wallet.
+                Clients simply provide their phone number, and staff can instantly access any stored-value cards, membership points, or available coupons.<br />
+                The wallet interface mimics a real wallet—organized, easy to read, and quick to apply at checkout.
+              </P>
+              <ImageWithHotspots
+                src={screenshot09}
+                alt="membership wallet"
+                hotspots={memberCardHotspots}
+                className='mb-8'
+              />
+              <ImageWithHotspots
+                src={screenshot10}
+                alt="membership wallet"
+                hotspots={discountHotspots}
+                className='mb-8'
+              />
+            </div>
           </Container>
         </SectionBlock>
 
         <SectionBlock variant="purple" backgrounds={ehairposBackgrounds}>
           <Container>
-            <H3>Visual Reports for Better Business Decisions</H3>
-            <P>To help salon owners not only “see numbers” but actually “understand trends,” we built two layers of reporting:</P>
-            <UL>
-              <LI><strong>Salon-level dashboard:</strong> Revenue, visit counts, average ticket size, and campaign ROI—viewable over different timeframes</LI>
-              <LI><strong>Stylist-level reports:</strong> Track individual performance, client return rate, and sales goals over time</LI>
-            </UL>
-            <div className='grid grid-cols-1 md:grid-cols-2 gap-10 mt-16'>
-              <div>
-                <LazyImage src={screenshot11} alt="screenshot11" className='w-full h-auto rounded-sm' />
-                <p className='text-caption text-gray-500 font-light mt-4'>Salon Dashboard: Combines revenue, visits, ticket size, and growth metrics with time filters for a clear view of business performance.</p>
-              </div>
-              <div>
-                <LazyImage src={screenshot12} alt="screenshot12" className='w-full h-auto rounded-sm' />
-                <p className='text-caption text-gray-500 font-light mt-4'>Stylist Dashboard: Each stylist can view their performance trends, client count, and personal growth over time.</p>
-              </div>
+            {/* Mobile Swiper */}
+            <div className="md:hidden">
+              <Swiper
+                modules={[Pagination]}
+                pagination={{ clickable: true }}
+                spaceBetween={24}
+                slidesPerView={1}
+                className="visual-reports-swiper"
+              >
+                <SwiperSlide>
+                  <div>
+                    <H3>Visual Reports for Better Business Decisions</H3>
+                    <P>To help salon owners not only "see numbers" but actually "understand trends," we built two layers of reporting:</P>
+                    <UL>
+                      <LI><strong>Salon-level dashboard:</strong> Revenue, visit counts, average ticket size, and campaign ROI—viewable over different timeframes</LI>
+                      <LI><strong>Stylist-level reports:</strong> Track individual performance, client return rate, and sales goals over time</LI>
+                    </UL>
+                  </div>
+                </SwiperSlide>
+                <SwiperSlide>
+                  <div>
+                    <LazyImage src={screenshot11} alt="screenshot11" className='w-full h-auto rounded-sm' />
+                    <p className='text-caption text-gray-500 font-light mt-4'>Salon Dashboard: Combines revenue, visits, ticket size, and growth metrics with time filters for a clear view of business performance.</p>
+                  </div>
+                </SwiperSlide>
+                <SwiperSlide>
+                  <div>
+                    <LazyImage src={screenshot12} alt="screenshot12" className='w-full h-auto rounded-sm' />
+                    <p className='text-caption text-gray-500 font-light mt-4'>Stylist Dashboard: Each stylist can view their performance trends, client count, and personal growth over time.</p>
+                  </div>
+                </SwiperSlide>
+                <SwiperSlide>
+                  <div>
+                    <P>These dashboards allow both owners and stylists to take ownership of their performance and plan with data, not guesswork.</P>
+                  </div>
+                </SwiperSlide>
+              </Swiper>
             </div>
-            <P className='mt-16'>These dashboards allow both owners and stylists to take ownership of their performance and plan with data, not guesswork.</P>
+
+            {/* Desktop Layout */}
+            <div className="hidden md:block">
+              <H3>Visual Reports for Better Business Decisions</H3>
+              <P>To help salon owners not only "see numbers" but actually "understand trends," we built two layers of reporting:</P>
+              <UL>
+                <LI><strong>Salon-level dashboard:</strong> Revenue, visit counts, average ticket size, and campaign ROI—viewable over different timeframes</LI>
+                <LI><strong>Stylist-level reports:</strong> Track individual performance, client return rate, and sales goals over time</LI>
+              </UL>
+              <div className='grid grid-cols-1 md:grid-cols-2 gap-10 mt-16'>
+                <div>
+                  <LazyImage src={screenshot11} alt="screenshot11" className='w-full h-auto rounded-sm' />
+                  <p className='text-caption text-gray-500 font-light mt-4'>Salon Dashboard: Combines revenue, visits, ticket size, and growth metrics with time filters for a clear view of business performance.</p>
+                </div>
+                <div>
+                  <LazyImage src={screenshot12} alt="screenshot12" className='w-full h-auto rounded-sm' />
+                  <p className='text-caption text-gray-500 font-light mt-4'>Stylist Dashboard: Each stylist can view their performance trends, client count, and personal growth over time.</p>
+                </div>
+              </div>
+              <P className='mt-16'>These dashboards allow both owners and stylists to take ownership of their performance and plan with data, not guesswork.</P>
+            </div>
           </Container>
         </SectionBlock>
 
         {/* Logotype Design */}
         <SectionBlock variant="white" backgrounds={ehairposBackgrounds}>
           <Container>
-            <H2>Logotype Design</H2>
-            <div className='grid grid-cols-1 md:grid-cols-2 gap-10'>
-              <div>
-                <P><strong>Concept:</strong> The logo merges the letters “e” and “P” with the infinity symbol and a pair of salon scissors, creating a ribbon-like shape that feels both soft and professional—symbolizing endless service and creativity in the salon industry.</P>
-
-              </div>
-              <div>
-                <P><strong>Color Palette:</strong> Inspired by the app’s core visual language, the logo uses an analogous purple color scheme to maintain brand consistency and visual harmony.</P>
-              </div>
+            {/* Mobile Swiper */}
+            <div className="md:hidden">
+              <Swiper
+                modules={[Pagination]}
+                pagination={{ clickable: true }}
+                spaceBetween={24}
+                slidesPerView={1}
+                className="logotype-design-swiper"
+              >
+                <SwiperSlide>
+                  <div>
+                    <H2>Logotype Design</H2>
+                    <P><strong>Concept:</strong> The logo merges the letters "e" and "P" with the infinity symbol and a pair of salon scissors, creating a ribbon-like shape that feels both soft and professional—symbolizing endless service and creativity in the salon industry.</P>
+                  </div>
+                </SwiperSlide>
+                <SwiperSlide>
+                  <div>
+                    <P><strong>Color Palette:</strong> Inspired by the app's core visual language, the logo uses an analogous purple color scheme to maintain brand consistency and visual harmony.</P>
+                  </div>
+                </SwiperSlide>
+                <SwiperSlide>
+                  <div>
+                    <img src={logo} alt="logo" className='w-full h-auto rounded-xs' />
+                  </div>
+                </SwiperSlide>
+                <SwiperSlide>
+                  <div>
+                    <img src={logo2} alt="logo2" className='w-full h-auto rounded-xs' />
+                  </div>
+                </SwiperSlide>
+              </Swiper>
             </div>
 
-            <img src={logo} alt="logo" className='w-full h-auto rounded-xs' />
-            <img src={logo2} alt="logo2" className='w-full h-auto rounded-xs' />
+            {/* Desktop Layout */}
+            <div className="hidden md:block">
+              <H2>Logotype Design</H2>
+              <div className='grid grid-cols-1 md:grid-cols-2 gap-10'>
+                <div>
+                  <P><strong>Concept:</strong> The logo merges the letters "e" and "P" with the infinity symbol and a pair of salon scissors, creating a ribbon-like shape that feels both soft and professional—symbolizing endless service and creativity in the salon industry.</P>
+
+                </div>
+                <div>
+                  <P><strong>Color Palette:</strong> Inspired by the app's core visual language, the logo uses an analogous purple color scheme to maintain brand consistency and visual harmony.</P>
+                </div>
+              </div>
+
+              <img src={logo} alt="logo" className='w-full h-auto rounded-xs' />
+              <img src={logo2} alt="logo2" className='w-full h-auto rounded-xs' />
+            </div>
 
           </Container>
         </SectionBlock>
@@ -532,24 +818,64 @@ export default function EHairPOSPage() {
         {/* Reflections */}
         <SectionBlock variant="purple" backgrounds={ehairposBackgrounds}>
           <Container>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
-              <div>
-                <H2>Reflections</H2>
-                <P>After launch, the system was adopted by several mid-to-large salon chains. One owner shared:</P>
-                <div className="bg-white/10 backdrop-blur rounded-sm shadow p-5 mb-8">
-                  <img src={quote} alt="quote" className='mb-8' />
-                  <P className=''>“eHairPOS solved our multi-branch management pain points. Revenue and inventory are now clear at a glance. Our customers love the online booking, too. Highly recommended!”</P>
-                </div>
-                <P>That feedback validated our core goal—turning POS from a passive system into a decision-making assistant.</P>
-              </div>
-              <div>
+            {/* Mobile Swiper */}
+            <div className="md:hidden">
+              <Swiper
+                modules={[Pagination]}
+                pagination={{ clickable: true }}
+                spaceBetween={24}
+                slidesPerView={1}
+                className="reflections-swiper"
+              >
+                <SwiperSlide>
+                  <div>
+                    <H2>Reflections</H2>
+                    <P>After launch, the system was adopted by several mid-to-large salon chains. One owner shared:</P>
+                  </div>
+                </SwiperSlide>
+                <SwiperSlide>
+                  <div>
+                    <div className="bg-white/10 backdrop-blur rounded-sm shadow p-5 mb-8">
+                      <img src={quote} alt="quote" className='mb-8' />
+                      <P className=''>"eHairPOS solved our multi-branch management pain points. Revenue and inventory are now clear at a glance. Our customers love the online booking, too. Highly recommended!"</P>
+                    </div>
+                    <P>That feedback validated our core goal—turning POS from a passive system into a decision-making assistant.</P>
+                  </div>
+                </SwiperSlide>
+                <SwiperSlide>
+                  <div>
+                    <H2>Takeaways</H2>
+                    <UL>
+                      <LI>Design starts with understanding how people work, not what screens they tap</LI>
+                      <LI>Every layout decision should answer: Does this make their task easier or clearer?</LI>
+                      <LI>Collaborating with frontline staff during design helped us ship what truly mattered</LI>
+                    </UL>
+                  </div>
+                </SwiperSlide>
+              </Swiper>
+            </div>
 
-                <H2>Takeaways</H2>
-                <UL>
-                  <LI>Design starts with understanding how people work, not what screens they tap</LI>
-                  <LI>Every layout decision should answer: Does this make their task easier or clearer?</LI>
-                  <LI>Collaborating with frontline staff during design helped us ship what truly mattered</LI>
-                </UL>
+            {/* Desktop Layout */}
+            <div className="hidden md:block">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
+                <div>
+                  <H2>Reflections</H2>
+                  <P>After launch, the system was adopted by several mid-to-large salon chains. One owner shared:</P>
+                  <div className="bg-white/10 backdrop-blur rounded-sm shadow p-5 mb-8">
+                    <img src={quote} alt="quote" className='mb-8' />
+                    <P className=''>"eHairPOS solved our multi-branch management pain points. Revenue and inventory are now clear at a glance. Our customers love the online booking, too. Highly recommended!"</P>
+                  </div>
+                  <P>That feedback validated our core goal—turning POS from a passive system into a decision-making assistant.</P>
+                </div>
+                <div>
+
+                  <H2>Takeaways</H2>
+                  <UL>
+                    <LI>Design starts with understanding how people work, not what screens they tap</LI>
+                    <LI>Every layout decision should answer: Does this make their task easier or clearer?</LI>
+                    <LI>Collaborating with frontline staff during design helped us ship what truly mattered</LI>
+                  </UL>
+                </div>
               </div>
             </div>
 

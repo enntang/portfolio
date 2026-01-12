@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Portfolio - Redirecting...</title>
+    <script>
+      // GitHub Pages 404 fallback for SPA routing
+      // Redirect to index.html with the current path preserved
+      const path = window.location.pathname;
+      const basePath = '/portfolio';
+      
+      // If path doesn't end with .html, redirect to index.html with the path
+      // This allows GitHub Pages to serve the SPA correctly
+      if (!path.endsWith('.html') && !path.endsWith('/')) {
+        // Preserve the path and redirect to index.html
+        // The SPA router will handle the routing
+        window.location.replace(basePath + '/index.html' + window.location.search + window.location.hash);
+      } else {
+        // Already at index.html or root, just reload
+        window.location.replace(basePath + '/index.html');
+      }
+    </script>
+  </head>
+  <body>
+    <p>Redirecting...</p>
+  </body>
+</html>

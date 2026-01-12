@@ -1,0 +1,53 @@
+[
+  {
+    "title": "Mentor：AI統合学習プラットフォーム",
+    "slug": "mentor",
+    "description": "学習を旅に変えるパーソナライズされた学習コーチ。",
+    "imageSrc": "/project-cover-mentor.png",
+    "imageAlt": "Mentorプラットフォームカバー"
+  },
+  {
+    "title": "eHairPOS：サロン管理ツール",
+    "slug": "ehairpos",
+    "description": "美容院向けに調整された合理化されたワークフローを持つPOSシステム。",
+    "imageSrc": "/project-cover-ehairpos.png",
+    "imageAlt": "eHairPOSカバー"
+  },
+  {
+    "title": "ペンギンテリトリー（ウェブゲーム）",
+    "slug": "penguin-territory",
+    "description": "カジュアル戦略ウェブゲームのフレンドリーなアートディレクション。",
+    "imageSrc": "/project-cover-penguin.png",
+    "imageAlt": "ペンギンゲームカバー"
+  },
+  {
+    "title": "オンラインショッピングサイト",
+    "slug": "shopping-site",
+    "description": "レスポンシブなEコマースインターフェースとデザインシステムの基盤。",
+    "imageSrc": "/project-cover-shopping.png",
+    "imageAlt": "ショッピングサイトカバー"
+  },
+  {
+    "title": "バーゼル条約ウェブサイト",
+    "slug": "basel-convention",
+    "description": "市政情報ポータルのクリーンでコンテンツファーストなレイアウト。",
+    "imageSrc": "/project-cover-basel.png",
+    "imageAlt": "バーゼル条約ウェブサイトカバー"
+  },
+  {
+    "title": "騎士道：ボードゲーム",
+    "slug": "chivalry",
+    "description": "中世の美学を持つイラスト主導のボードゲーム。",
+    "imageSrc": "/project-cover-chivalry.png",
+    "imageAlt": "騎士道ボードゲームカバー",
+    "link": "#/project/chivalry"
+  },
+  {
+    "title": "メイソンリー画像ギャラリー",
+    "slug": "masonry-gallery",
+    "description": "ライトボックス閲覧体験を備えたウォーターフォールスタイルの画像ギャラリー。",
+    "imageSrc": "/project-cover-mentor.png",
+    "imageAlt": "メイソンリーギャラリープロジェクトのプレビュー",
+    "link": "#/project/masonry-gallery"
+  }
+]

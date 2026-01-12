@@ -1,11 +1,14 @@
 import { useState } from 'react'
 import Navbar from './components/utilities/Navbar'
 import BtnWhite from './components/utilities/BtnWhite'
-import projectsData from './assets/projects.json'
 import mentorImg from '../public/projectList-icon-mentor.png'
 import ehairposImg from '../public/projectList-icon-ehairpos.png'
 import penguinImg from '../public/projectList-icon-penguin.png'
 import { getPublicPath } from './utils/path'
+import { useLanguage } from './contexts/LanguageContext'
+import { useTranslation } from './hooks/useTranslation'
+import { getProjectsByLanguage } from './utils/projectsLoader'
+import { buildPath } from './utils/routing'
 
 function ProjectBanner({
   href,
@@ -19,6 +22,7 @@ function ProjectBanner({
   comingSoon = false,
   variant = 'dark', // 'dark' or 'light'
   mainImage, // 主图
+  t, // translation function
 }) {
   // 根据 variant 决定文字颜色
   const textColor = variant === 'dark' ? 'text-white' : 'text-gray-900'
@@ -73,12 +77,12 @@ function ProjectBanner({
 
             {!comingSoon ? (
               <BtnWhite 
-                name={cta} 
+                name={cta || (t ? t('projects.caseStudy') : 'Case Study')} 
                 variant={variant === 'light' ? 'bordered' : 'default'} 
               />
             ) : (
               <span className='inline-flex items-center bg-white/80 text-gray-700 rounded-full px-4 py-1.5 text-sm font-medium'>
-                Coming Soon
+                {t ? t('projects.comingSoon') : 'Coming Soon'}
               </span>
             )}
           </div>
@@ -101,7 +105,15 @@ function ProjectBanner({
 
 function ProjectsList() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
+  const { language } = useLanguage()
+  const { t } = useTranslation()
+  const projectsData = getProjectsByLanguage(language)
   const imageKeyMap = { 'mentor': 'memtor', 'ehairpos': 'ehairpos', 'penguin-territory': 'penguin' }
+
+  // Helper to build path with language prefix
+  const buildHref = (path) => {
+    return buildPath(path, language)
+  }
 
   const banners = projectsData.slice(0, 3).map((p, index) => {
     const hasColon = p.title.includes(':')
@@ -119,7 +131,7 @@ function ProjectsList() {
     else if (p.slug === 'penguin-territory') mainImage = penguinImg
     
     return {
-      href: `#/project/${p.slug}`,
+      href: buildHref(`/project/${p.slug}`),
       desktopSrc: getPublicPath(`/projectList-bg-${key}-desktop.png`),
       mobileSrc: getPublicPath(`/projectList-bg-${key}-mobile.png`),
       title: mainTitle,
@@ -144,12 +156,10 @@ function ProjectsList() {
         {/* Page Header */}
         <div className='max-w-3xl mx-auto px-8'>
           <h1 className='text-h1 mobile:text-mobile-h1 mb-6 text-center text-gray-800'>
-            Projects
+            {t('projects.title')}
           </h1>
           <p className='text-p text-center text-gray-600 mb-12'>
-            I've been designing since 2016, combining clear structure with visual
-            storytelling to create work that feels both intuitive and expressive.
-            Partners describe my approach as professional, thoughtful, and meticulous.
+            {t('projects.description')}
           </p>
         </div>
 
@@ -168,12 +178,13 @@ function ProjectsList() {
               comingSoon={b.comingSoon}
               variant={b.variant}
               mainImage={b.mainImage}
+              t={t}
             />
           ))}
         </div>
 
         <div className='max-w-6xl mx-auto px-8 pb-16 text-center text-sm text-gray-400'>
-          Copyright © Enn Tang
+          {t('common.copyright')}
         </div>
       </main>
     </div>

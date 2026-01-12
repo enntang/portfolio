@@ -115,6 +115,12 @@
 .mentor-ui-guide-swiper .swiper-button-prev,
 .features-swiper .swiper-button-prev,
 .reflection-swiper .swiper-button-prev,
+.checkout-flow-swiper .swiper-button-prev,
+.visual-reports-swiper .swiper-button-prev,
+.reflections-swiper .swiper-button-prev,
+.membership-wallet-swiper .swiper-button-prev,
+.logotype-design-swiper .swiper-button-prev,
+.booking-flow-swiper .swiper-button-prev,
 .responsibilities-swiper .swiper-button-next,
 .background-swiper .swiper-button-next,
 .design-goals-swiper .swiper-button-next,
@@ -122,6 +128,74 @@
 .story-mentor-swiper .swiper-button-next,
 .mentor-ui-guide-swiper .swiper-button-next,
 .features-swiper .swiper-button-next,
-.reflection-swiper .swiper-button-next {
+.reflection-swiper .swiper-button-next,
+.checkout-flow-swiper .swiper-button-next,
+.visual-reports-swiper .swiper-button-next,
+.reflections-swiper .swiper-button-next,
+.membership-wallet-swiper .swiper-button-next,
+.logotype-design-swiper .swiper-button-next,
+.booking-flow-swiper .swiper-button-next {
   display: none !important;
+}
+
+/* Swiper custom styles for ehairpos page */
+/* White indicators for dark backgrounds (purple and photo variants) */
+.design-deliverables-swiper .swiper-pagination-bullet,
+.checkout-flow-swiper .swiper-pagination-bullet,
+.visual-reports-swiper .swiper-pagination-bullet,
+.reflections-swiper .swiper-pagination-bullet {
+  background: rgba(255, 255, 255, 0.5);
+  opacity: 1;
+  width: 24px;
+  height: 3px;
+  border-radius: 2px;
+  margin: 0 4px;
+}
+
+.design-deliverables-swiper .swiper-pagination-bullet-active,
+.checkout-flow-swiper .swiper-pagination-bullet-active,
+.visual-reports-swiper .swiper-pagination-bullet-active,
+.reflections-swiper .swiper-pagination-bullet-active {
+  background: rgba(255, 255, 255, 1);
+}
+
+/* Dark indicators for light backgrounds (white variant and default) */
+.membership-wallet-swiper .swiper-pagination-bullet,
+.logotype-design-swiper .swiper-pagination-bullet,
+.booking-flow-swiper .swiper-pagination-bullet {
+  background: rgba(0, 0, 0, 0.3);
+  opacity: 1;
+  width: 24px;
+  height: 3px;
+  border-radius: 2px;
+  margin: 0 4px;
+}
+
+.membership-wallet-swiper .swiper-pagination-bullet-active,
+.logotype-design-swiper .swiper-pagination-bullet-active,
+.booking-flow-swiper .swiper-pagination-bullet-active {
+  background: rgba(0, 0, 0, 0.8);
+}
+
+/* Allow SwiperSlide to use className */
+.design-deliverables-swiper .swiper-slide,
+.checkout-flow-swiper .swiper-slide,
+.visual-reports-swiper .swiper-slide,
+.reflections-swiper .swiper-slide,
+.membership-wallet-swiper .swiper-slide,
+.logotype-design-swiper .swiper-slide,
+.booking-flow-swiper .swiper-slide {
+  height: auto;
+  box-sizing: border-box;
+  margin-bottom: 24px;
+}
+
+.design-deliverables-swiper .swiper-slide:last-child,
+.checkout-flow-swiper .swiper-slide:last-child,
+.visual-reports-swiper .swiper-slide:last-child,
+.reflections-swiper .swiper-slide:last-child,
+.membership-wallet-swiper .swiper-slide:last-child,
+.logotype-design-swiper .swiper-slide:last-child,
+.booking-flow-swiper .swiper-slide:last-child {
+  margin-bottom: 0;
 }

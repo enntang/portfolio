@@ -1,11 +1,19 @@
 import { getPublicPath } from '../../utils/path'
 import LazyImage from '../utilities/LazyImage'
+import { useLanguage } from '../../contexts/LanguageContext'
+import { buildPath } from '../../utils/routing'
  
 function ProjectCard({ project, isReversed = false }) {
   const { title, description, imageSrc, imageAlt } = project;
+  const { language } = useLanguage();
+
+  // Helper to build path with language prefix
+  const buildHref = (path) => {
+    return buildPath(path, language)
+  }
 
   return (
-    <a href={project?.slug ? `#/project/${project.slug}` : '#/projects'} className={`group flex flex-row mobile:flex-col gap-5 mobile:gap-4 ${isReversed ? 'flex-row-reverse mobile:flex-col' : ''}`}>
+    <a href={project?.slug ? buildHref(`/project/${project.slug}`) : buildHref('/projects')} className={`group flex flex-row mobile:flex-col gap-5 mobile:gap-4 ${isReversed ? 'flex-row-reverse mobile:flex-col' : ''}`}>
       {/* Project Image */}
       <div className="flex-1">
         <div className="relative overflow-hidden">

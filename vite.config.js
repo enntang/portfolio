@@ -5,7 +5,9 @@ import path from 'node:path'
 
 // https://vite.dev/config/
 export default defineConfig({
-  base: '/portfolio/',
+  // We want Home at `/` (no `/portfolio` prefix). `/portfolio` is a real route.
+  // So the app base must be `/` (not a deployment subpath).
+  base: '/',
   plugins: [
     react()
   ],

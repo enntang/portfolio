@@ -12,9 +12,14 @@ import Footer from './components/utilities/Footer'
 import Tooltip from './components/utilities/Tooltip'
 import { getPublicPath } from './utils/path'
 import PreloadImage from './components/utilities/PreloadImage'
+import { useLanguage } from './contexts/LanguageContext'
+import { useTranslation } from './hooks/useTranslation'
+import { buildPath, navigate } from './utils/routing'
 
 
 function Home() {
+  const { language } = useLanguage()
+  const { t } = useTranslation()
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const [isHovered, setIsHovered] = useState(false)
   const [cursor, setCursor] = useState({ x: 0, y: 0 })
@@ -31,12 +36,17 @@ function Home() {
     getPublicPath('/bg-penguin.png'),
   ]
 
+  // Helper to build path with language prefix
+  const buildHref = (path) => {
+    return buildPath(path, language)
+  }
+
   const slides = [
-    { src: getPublicPath('/bg-mentor.png'), title: 'Intuitive and visually appealing UI design', subtitle: 'I focused on', projectName: 'Mentor: AI-integrated learning platform', slug: 'mentor' },
-    { src: getPublicPath('/bg-illustration.png'), title: 'Illustrations that tell stories', subtitle: 'I create', projectName: 'Star', href: '#/projects'},
-    { src: getPublicPath('/bg-ehairpos.png'), title: 'Intuitive and visually appealing UI design', subtitle: 'I focused on', projectName: 'eHairPOS', slug: 'ehairpos' },
-    { src: getPublicPath('/bg-textbook.png'), title: 'Graphic Design & Editorial Layout', subtitle: 'I specialize', projectName: "A Traveler's Guide for Young Historians", href: '#/projects' },
-    { src: getPublicPath('/bg-penguin.png'), title: 'Playful Game UI Design', subtitle: 'I do', projectName: 'Penguin Game', slug: 'penguin-territory' },
+    { src: getPublicPath('/bg-mentor.png'), title: 'Intuitive and visually appealing UI design', subtitle: t('home.carousel.focusedOn'), projectName: 'Mentor: AI-integrated learning platform', slug: 'mentor' },
+    { src: getPublicPath('/bg-illustration.png'), title: 'Illustrations that tell stories', subtitle: t('home.carousel.create'), projectName: 'Star', href: '#/projects'},
+    { src: getPublicPath('/bg-ehairpos.png'), title: 'Intuitive and visually appealing UI design', subtitle: t('home.carousel.focusedOn'), projectName: 'eHairPOS', slug: 'ehairpos' },
+    { src: getPublicPath('/bg-textbook.png'), title: 'Graphic Design & Editorial Layout', subtitle: t('home.carousel.specialize'), projectName: "A Traveler's Guide for Young Historians", href: '#/projects' },
+    { src: getPublicPath('/bg-penguin.png'), title: 'Playful Game UI Design', subtitle: t('home.carousel.do'), projectName: 'Penguin Game', slug: 'penguin-territory' },
   ]
 
   useEffect(() => {
@@ -59,19 +69,22 @@ function Home() {
 
   const handleSlideClick = () => {
     const activeSlide = slides[activeIndex]
+    
     if (!activeSlide) {
-      window.location.hash = '#/projects'
+      navigate('/projects', language)
       return
     }
     if (activeSlide.href) {
-      window.location.hash = activeSlide.href.replace(/^#/, '')
+      // activeSlide.href 可能是 '#/projects'，需要轉換
+      const path = activeSlide.href.replace(/^#/, '') || '/projects'
+      navigate(path, language)
       return
     }
     if (activeSlide.slug) {
-      window.location.hash = `#/project/${encodeURIComponent(activeSlide.slug)}`
+      navigate(`/project/${encodeURIComponent(activeSlide.slug)}`, language)
       return
     }
-    window.location.hash = '#/projects'
+    navigate('/projects', language)
   }
 
   const activeSlide = slides[activeIndex]
@@ -173,7 +186,7 @@ function Home() {
             y={cursor.y}
             containerRef={containerRef}
           >
-            {'discover more'}
+            {t('home.discoverMore')}
           </Tooltip>
         </div>
       </div>
@@ -182,9 +195,9 @@ function Home() {
         <div className='flex flex-col'>
 
           <section className='flex flex-col py-16 py-8 text-gray-900 md:w-2/3'>
-            <h2 className=' text-4xl text-2xl text-gray-300 mb-6 text-large text-large-mobile'>Hello, I'm ENN!</h2>
-            <p className='text-p mb-6 mb-4'>I'm a passionate UI designer who puts users first. I create intuitive, user-centered interfaces that enhance usability while ensuring smooth collaboration between design and development teams.</p>
-            <BtnWhite name={'More about me'} className='w-fit' href='#/about' />
+            <h2 className=' text-4xl text-2xl text-gray-300 mb-6 text-large text-large-mobile'>{t('home.greeting')}</h2>
+            <p className='text-p mb-6 mb-4'>{t('home.description')}</p>
+            <BtnWhite name={t('home.moreAboutMe')} className='w-fit' href={buildHref('/about')} />
           </section>
 
           {/* Projects Section */}

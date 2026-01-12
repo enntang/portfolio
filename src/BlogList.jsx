@@ -4,13 +4,16 @@ import Footer from './components/utilities/Footer'
 import blogPosts from './assets/blogPosts'
 import { getPublicPath } from './utils/path'
 import LazyImage from './components/utilities/LazyImage'
+import { useLanguage } from './contexts/LanguageContext'
+import { useTranslation } from './hooks/useTranslation'
+import { buildPath } from './utils/routing'
 
-function CategoryTabs({ current, onChange }) {
+function CategoryTabs({ current, onChange, t }) {
   const tabs = [
-    { key: 'all', label: 'All' },
-    { key: 'design', label: 'Design' },
-    { key: 'tooling', label: 'Tools & Practice' },
-    { key: 'self', label: 'Self Growth' },
+    { key: 'all', label: t('blog.all') },
+    { key: 'design', label: t('blog.design') },
+    { key: 'tooling', label: t('blog.tooling') },
+    { key: 'self', label: t('blog.self') },
   ]
 
   return (
@@ -30,12 +33,12 @@ function CategoryTabs({ current, onChange }) {
   )
 }
 
-function FeaturedCard({ post }) {
+function FeaturedCard({ post, buildHref }) {
   if (!post) return null
 
   return (
     <a
-      href={`#/blog/post/${post.slug}`}
+      href={buildHref(`/blog/post/${post.slug}`)}
       className='grid grid-cols-1 md:grid-cols-[1.1fr_1.3fr] gap-0 bg-white rounded-3xl overflow-hidden shadow-sm group'
     >
       <div className='aspect-[16/9] md:aspect-auto md:h-72 bg-[#E5EEF6] flex items-center justify-center overflow-hidden'>
@@ -60,10 +63,10 @@ function FeaturedCard({ post }) {
   )
 }
 
-function GridPostCard({ post }) {
+function GridPostCard({ post, buildHref }) {
   return (
     <a
-      href={`#/blog/post/${post.slug}`}
+      href={buildHref(`/blog/post/${post.slug}`)}
       className='bg-[#101625] rounded-2xl overflow-hidden hover:-translate-y-1 hover:shadow-lg transition-all group flex flex-col'
     >
       <div className='aspect-[4/3] bg-[#1B2132] overflow-hidden'>
@@ -88,10 +91,10 @@ function GridPostCard({ post }) {
   )
 }
 
-function SpotlightItem({ post }) {
+function SpotlightItem({ post, buildHref }) {
   return (
     <a
-      href={`#/blog/post/${post.slug}`}
+      href={buildHref(`/blog/post/${post.slug}`)}
       className='flex gap-4 items-center py-4 hover:bg-[#151C2A] px-3 rounded-xl transition-colors group'
     >
       <div className='w-14 h-14 rounded-xl overflow-hidden flex-shrink-0 bg-[#1B2132]'>
@@ -111,12 +114,13 @@ function SpotlightItem({ post }) {
 function BlogList() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const [category, setCategory] = useState('all')
-  const originalLangRef = useRef(null)
+  const { language } = useLanguage()
+  const { t } = useTranslation()
 
-  useEffect(() => {
-    // no-op: language pack removed
-    originalLangRef.current = 'zh-TW'
-  }, [])
+  // Helper to build path with language prefix
+  const buildHref = (path) => {
+    return buildPath(path, language)
+  }
 
   const filtered = blogPosts.filter((post) => (category === 'all' ? true : post.category === category))
   const featuredPost = filtered.find((p) => p.featured) || filtered[0]
@@ -134,37 +138,37 @@ function BlogList() {
       <div className='w-full min-h-screen pt-24 px-6 md:px-10 xl:px-16 pb-20 flex flex-col gap-10'>
         {/* Header */}
         <header className='flex flex-col gap-3'>
-          <p className='text-xs tracking-[0.25em] uppercase text-gray-500'>Enn’s Notes</p>
-          <h1 className='text-4xl md:text-5xl font-semibold text-[#B4C0DF]'>Blog</h1>
+          <p className='text-xs tracking-[0.25em] uppercase text-gray-500'>Enn's Notes</p>
+          <h1 className='text-4xl md:text-5xl font-semibold text-[#B4C0DF]'>{t('blog.title')}</h1>
           <p className='text-xs md:text-sm text-gray-400 max-w-xl'>
-            紀錄我在產品設計、工具使用與職涯成長上的一些觀察與想法，目前內容以中文為主。
+            {t('blog.subtitle')}
           </p>
         </header>
 
         {/* Tabs */}
         <div className='flex items-center justify-between flex-wrap gap-4'>
-          <CategoryTabs current={category} onChange={setCategory} />
+          <CategoryTabs current={category} onChange={setCategory} t={t} />
         </div>
 
         {/* Main layout: left column cards + right column spotlight */}
         <div className='grid grid-cols-1 lg:grid-cols-[minmax(0,2fr)_minmax(0,1.2fr)] gap-8 lg:gap-12 pb-8'>
           <div className='space-y-8'>
-            <FeaturedCard post={featuredPost} />
+            <FeaturedCard post={featuredPost} buildHref={buildHref} />
 
             <div className='grid grid-cols-1 md:grid-cols-2 gap-6'>
               {remaining.map((post) => (
-                <GridPostCard key={post.id} post={post} />
+                <GridPostCard key={post.id} post={post} buildHref={buildHref} />
               ))}
             </div>
           </div>
 
           <aside className='space-y-4'>
             <div>
-              <div className='text-xs uppercase tracking-[0.25em] text-gray-500 mb-2'>Spotlight</div>
+              <div className='text-xs uppercase tracking-[0.25em] text-gray-500 mb-2'>{t('blog.spotlight')}</div>
             </div>
             <div className='bg-[#101625] rounded-3xl p-3 md:p-4 flex flex-col divide-y divide-gray-800/60'>
               {spotlightPosts.map((post) => (
-                <SpotlightItem key={post.id} post={post} />
+                <SpotlightItem key={post.id} post={post} buildHref={buildHref} />
               ))}
             </div>
           </aside>

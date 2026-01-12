@@ -272,8 +272,7 @@ export default function MentorPage() {
                     <H3>1. Leadership</H3>
                     <UL>
                       <LI>
-                        Lead a team of 10+ designers and developers
-                      </LI>
+                      Led a team of 4 designers through the 0–1 product incubation process.                      </LI>
                       <LI>
                         Assigned tasks based on each member's strengths, guiding their thinking and execution.
                       </LI>

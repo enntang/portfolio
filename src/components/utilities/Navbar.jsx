@@ -4,9 +4,14 @@ import BtnWhite from './BtnWhite'
 import EmailCopy from './EmailCopy'
 import { getPublicPath } from '../../utils/path'
 import LazyImage from './LazyImage'
+import { useLanguage } from '../../contexts/LanguageContext'
+import { useTranslation } from '../../hooks/useTranslation'
+import { buildPath, navigate, parsePath } from '../../utils/routing'
  
 
 function Navbar({ isWhite = false, isMenuOpen = false, onToggleMenu, variant = 'default', onBack }) {
+  const { language, changeLanguage, getLanguagePrefix } = useLanguage()
+  const { t } = useTranslation()
   const menuContainerRef = useRef(null)
   const lastScrollYRef = useRef(0)
   const [showMenu, setShowMenu] = useState(false)
@@ -89,30 +94,44 @@ function Navbar({ isWhite = false, isMenuOpen = false, onToggleMenu, variant = '
     }
   }
 
+  // Helper function to build path with language prefix
+  const buildHref = (path) => {
+    return buildPath(path, language)
+  }
+
   const navLinks = [
     {
       id: '01',
-      href: '#home',
-      text: 'home',
+      path: '/',
+      text: t('nav.home'),
     },
     {
       id: '02',
-      href: '#/projects',
-      text: 'projects',
+      path: '/projects',
+      text: t('nav.projects'),
     },
     // {
     //   id: '03',
-    //   href: '#/blog',
-    //   text: 'blog',
+    //   path: '/blog',
+    //   text: t('nav.blog'),
     // },
     {
       id: '03',
-      href: '#/about',
-      text: 'about',
+      path: '/about',
+      text: t('nav.about'),
     },
-
-
   ]
+
+  const handleLanguageChange = (newLang) => {
+    // 獲取當前路徑
+    const { path: currentPath } = parsePath(window.location.pathname)
+    
+    // 更新語言狀態
+    changeLanguage(newLang)
+    
+    // 導航到相同路徑但使用新語言
+    navigate(currentPath, newLang)
+  }
 
   return (
     <>
@@ -133,7 +152,7 @@ function Navbar({ isWhite = false, isMenuOpen = false, onToggleMenu, variant = '
                 <LazyImage src={getPublicPath("/icon-arrow-left.svg")} alt="back" className="w-6 h-6" />
               </button>
             ) : (
-              <a href="#/" aria-label="Go to home" className="inline-block">
+              <a href={buildHref('/')} aria-label="Go to home" className="inline-block">
                 <h1 className={`text-2xl font-bold ${isWhite ? 'text-gray-400' : 'text-white'
                   }`}>ENN<br />TANG</h1>
               </a>
@@ -143,14 +162,53 @@ function Navbar({ isWhite = false, isMenuOpen = false, onToggleMenu, variant = '
           {/* Center area */}
           <div className="flex items-center justify-center">
             {variant === 'arrow' && (
-              <a href="#/" aria-label="Go to home" className="inline-block">
+              <a href={buildHref('/')} aria-label="Go to home" className="inline-block">
                 <h1 className={`text-2xl font-bold text-gray-800`}>ENN&nbsp;TANG</h1>
               </a>
             )}
           </div>
 
           {/* Right area */}
-          <div className="flex items-center justify-end">
+          <div className="flex items-center justify-end gap-4">
+            {/* Language Switcher */}
+            <div className="flex items-center gap-2">
+              <button
+                onClick={() => handleLanguageChange('en-US')}
+                className={`text-xs px-2 py-1 rounded transition-colors ${
+                  language === 'en-US' 
+                    ? 'text-gray-900 font-semibold' 
+                    : 'text-gray-500 hover:text-gray-700'
+                }`}
+                aria-label="Switch to English"
+              >
+                EN
+              </button>
+              <span className="text-gray-300">|</span>
+              <button
+                onClick={() => handleLanguageChange('zh-TW')}
+                className={`text-xs px-2 py-1 rounded transition-colors ${
+                  language === 'zh-TW' 
+                    ? 'text-gray-900 font-semibold' 
+                    : 'text-gray-500 hover:text-gray-700'
+                }`}
+                aria-label="Switch to Traditional Chinese"
+              >
+                中
+              </button>
+              <span className="text-gray-300">|</span>
+              <button
+                onClick={() => handleLanguageChange('ja-JP')}
+                className={`text-xs px-2 py-1 rounded transition-colors ${
+                  language === 'ja-JP' 
+                    ? 'text-gray-900 font-semibold' 
+                    : 'text-gray-500 hover:text-gray-700'
+                }`}
+                aria-label="Switch to Japanese"
+              >
+                日
+              </button>
+            </div>
+            
             <button
               aria-label={isMenuOpen ? 'Close menu' : 'Open menu'}
               onClick={onToggleMenu}
@@ -202,7 +260,7 @@ function Navbar({ isWhite = false, isMenuOpen = false, onToggleMenu, variant = '
               {navLinks.map(item => (
                 <div key={item.text} className='flex flex-col'>
                   <div className='text-caption font-semibold tracking-widest text-gray-800'>{item.id}</div>
-                  <a href={item.href} onClick={onToggleMenu} className="pl-8 text-5xl md:text-6xl font-semibold text-gray-400 hover:text-highlight transition-all duration-300">{item.text}</a>
+                  <a href={buildHref(item.path)} onClick={onToggleMenu} className="pl-8 text-5xl md:text-6xl font-semibold text-gray-400 hover:text-highlight transition-all duration-300">{item.text}</a>
                 </div>
               ))}
             </nav>
@@ -211,10 +269,10 @@ function Navbar({ isWhite = false, isMenuOpen = false, onToggleMenu, variant = '
             <div className="flex flex-col gap-8 justify-end">
               <div>
                 <div className="text-caption font-semibold tracking-widest text-gray-400 pb-2">CV</div>
-                <BtnWhite name="Read CV" href="https://www.cake.me/resumes/enn-tang" target="_blank" />
+                <BtnWhite name={t('about.readCV')} href="https://www.cake.me/resumes/enn-tang" target="_blank" />
               </div>
               <div>
-                <div className="text-caption font-semibold tracking-widest text-gray-400">CONTACT ME</div>
+                <div className="text-caption font-semibold tracking-widest text-gray-400">{t('common.contactMe')}</div>
                 <EmailCopy />
               </div>
             </div>

@@ -1,11 +1,19 @@
 import { getPublicPath } from '../../utils/path'
 import LazyImage from '../utilities/LazyImage'
+import { useLanguage } from '../../contexts/LanguageContext'
+import { buildPath } from '../../utils/routing'
  
 function ProjectCardVertical({ project }) {
   const { title, description, imageSrc, imageAlt } = project;
+  const { language } = useLanguage();
+
+  // Helper to build path with language prefix
+  const buildHref = (path) => {
+    return buildPath(path, language)
+  }
 
   return (
-    <a href={project?.slug ? `#/project/${project.slug}` : '#/projects'} className="group flex flex-col mobile:flex-col gap-5 mobile:gap-4">
+    <a href={project?.slug ? buildHref(`/project/${project.slug}`) : buildHref('/projects')} className="group flex flex-col mobile:flex-col gap-5 mobile:gap-4">
       {/* Project Image */}
       <div className="flex-1">
         <div className="relative overflow-hidden">
