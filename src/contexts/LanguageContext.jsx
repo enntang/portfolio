@@ -1,5 +1,5 @@
 import { createContext, useContext, useState, useEffect } from 'react'
-import { parsePath } from '../utils/routing'
+import { getCurrentLocationPath, parsePath } from '../utils/routing'
 
 const LanguageContext = createContext()
 
@@ -17,7 +17,7 @@ const DEFAULT_LANGUAGE = 'en-US'
 export function LanguageProvider({ children }) {
   const [language, setLanguage] = useState(() => {
     // 從路徑讀取語言
-    const { lang } = parsePath(window.location.pathname)
+    const { lang } = parsePath(getCurrentLocationPath())
     
     if (lang && SUPPORTED_LANGUAGES[lang]) {
       return SUPPORTED_LANGUAGES[lang]
@@ -35,7 +35,7 @@ export function LanguageProvider({ children }) {
   // 當路徑改變時更新語言
   useEffect(() => {
     const handlePopState = () => {
-      const { lang } = parsePath(window.location.pathname)
+      const { lang } = parsePath(getCurrentLocationPath())
       
       if (lang && SUPPORTED_LANGUAGES[lang]) {
         const newLang = SUPPORTED_LANGUAGES[lang]
@@ -51,10 +51,13 @@ export function LanguageProvider({ children }) {
     
     // 監聽瀏覽器前進/後退
     window.addEventListener('popstate', handlePopState)
+    // 監聽 hash routing（legacy）
+    window.addEventListener('hashchange', handlePopState)
     // 監聽程式化導航（routing.navigate 會 dispatch 'navigate'）
     window.addEventListener('navigate', handlePopState)
     return () => {
       window.removeEventListener('popstate', handlePopState)
+      window.removeEventListener('hashchange', handlePopState)
       window.removeEventListener('navigate', handlePopState)
     }
   }, [language])

@@ -6,7 +6,7 @@ import { getPublicPath } from '../../utils/path'
 import LazyImage from './LazyImage'
 import { useLanguage } from '../../contexts/LanguageContext'
 import { useTranslation } from '../../hooks/useTranslation'
-import { buildPath, navigate, parsePath } from '../../utils/routing'
+import { buildPath, getCurrentLocationPath, navigate, parsePath } from '../../utils/routing'
  
 
 function Navbar({ isWhite = false, isMenuOpen = false, onToggleMenu, variant = 'default', onBack }) {
@@ -21,15 +21,20 @@ function Navbar({ isWhite = false, isMenuOpen = false, onToggleMenu, variant = '
 
   useEffect(() => {
     const checkIsHome = () => {
-      const hash = window.location.hash || '#/'
-      const path = hash.replace(/^#/, '')
+      const { path } = parsePath(getCurrentLocationPath())
       setIsHome(path === '/' || path === '')
     }
     
     checkIsHome()
-    const handleHashChange = () => checkIsHome()
-    window.addEventListener('hashchange', handleHashChange)
-    return () => window.removeEventListener('hashchange', handleHashChange)
+    const handleRouteChange = () => checkIsHome()
+    window.addEventListener('hashchange', handleRouteChange)
+    window.addEventListener('popstate', handleRouteChange)
+    window.addEventListener('navigate', handleRouteChange)
+    return () => {
+      window.removeEventListener('hashchange', handleRouteChange)
+      window.removeEventListener('popstate', handleRouteChange)
+      window.removeEventListener('navigate', handleRouteChange)
+    }
   }, [])
 
   useEffect(() => {
@@ -124,7 +129,7 @@ function Navbar({ isWhite = false, isMenuOpen = false, onToggleMenu, variant = '
 
   const handleLanguageChange = (newLang) => {
     // 獲取當前路徑
-    const { path: currentPath } = parsePath(window.location.pathname)
+    const { path: currentPath } = parsePath(getCurrentLocationPath())
     
     // 更新語言狀態
     changeLanguage(newLang)

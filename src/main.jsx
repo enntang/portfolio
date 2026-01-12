@@ -9,30 +9,34 @@ import BlogPost from './BlogPost.jsx'
 import NotFound from './NotFound.jsx'
 import ProjectPageRouter from './ProjectPageRouter.jsx'
 import LoadingAnimation from './components/utilities/LoadingAnimation.jsx'
+import ErrorBoundary from './components/utilities/ErrorBoundary.jsx'
 import { LanguageProvider } from './contexts/LanguageContext.jsx'
-import { parsePath } from './utils/routing'
+import { getCurrentLocationPath, parsePath } from './utils/routing'
 
 function Router() {
   const [pathname, setPathname] = useState(() => {
-    return window.location.pathname
+    return getCurrentLocationPath()
   })
 
   useEffect(() => {
     const handlePopState = () => {
-      setPathname(window.location.pathname)
+      setPathname(getCurrentLocationPath())
     }
     
     // 監聽瀏覽器前進/後退
     window.addEventListener('popstate', handlePopState)
+    // 監聽 hash routing（legacy links like #/projects）
+    window.addEventListener('hashchange', handlePopState)
     
     // 監聽自定義的導航事件（用於程式化導航）
     const handleNavigation = () => {
-      setPathname(window.location.pathname)
+      setPathname(getCurrentLocationPath())
     }
     window.addEventListener('navigate', handleNavigation)
     
     return () => {
       window.removeEventListener('popstate', handlePopState)
+      window.removeEventListener('hashchange', handlePopState)
       window.removeEventListener('navigate', handleNavigation)
     }
   }, [])
@@ -67,8 +71,10 @@ function Router() {
 createRoot(document.getElementById('root')).render(
   <StrictMode>
     <LanguageProvider>
-      <LoadingAnimation />
-      <Router />
+      <ErrorBoundary>
+        <LoadingAnimation />
+        <Router />
+      </ErrorBoundary>
     </LanguageProvider>
   </StrictMode>,
 )

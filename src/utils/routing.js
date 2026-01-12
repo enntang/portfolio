@@ -160,3 +160,14 @@ export function navigate(path, lang = 'en-US') {
   // 觸發自定義事件通知路由更新
   window.dispatchEvent(new Event('navigate'))
 }
+
+/**
+ * Get the effective client-side route path.
+ * Supports legacy hash routing (#/...) and normal history routing.
+ * @returns {string}
+ */
+export function getCurrentLocationPath() {
+  const hash = window.location.hash || ''
+  if (hash.startsWith('#/')) return hash.slice(1) // '/...'
+  return window.location.pathname || '/'
+}
