@@ -5,68 +5,68 @@ import { Swiper, SwiperSlide } from 'swiper/react'
 import { Pagination } from 'swiper/modules'
 import 'swiper/css'
 import 'swiper/css/pagination'
-import Navbar from '../../../components/utilities/Navbar'
-import { useFloatingAnimation } from '../../../hooks/useFloatingAnimation'
-import ImageWithHotspots from '../../../components/utilities/ImageWithHotspots'
-import Footer from '../../../components/utilities/Footer'
-import ProjectNote from '../../../components/projects/ProjectNote'
-import Container from '../../../components/projects/Container'
-import SectionBlock from '../../../components/projects/SectionBlock'
-import TwoColumn from '../../../components/projects/TwoColumn'
-import TableOfContents from '../../../components/utilities/TableOfContents'
-import LazyImage from '../../../components/utilities/LazyImage'
+import Navbar from '../../../../components/utilities/Navbar'
+import { useFloatingAnimation } from '../../../../hooks/useFloatingAnimation'
+import ImageWithHotspots from '../../../../components/utilities/ImageWithHotspots'
+import Footer from '../../../../components/utilities/Footer'
+import ProjectNote from '../../../../components/projects/ProjectNote'
+import Container from '../../../../components/projects/Container'
+import SectionBlock from '../../../../components/projects/SectionBlock'
+import TwoColumn from '../../../../components/projects/TwoColumn'
+import TableOfContents from '../../../../components/utilities/TableOfContents'
+import LazyImage from '../../../../components/utilities/LazyImage'
 
 gsap.registerPlugin(ScrollTrigger)
 
 // Import images - you'll need to add these images to the ehairpos folder
-import arrowDown from '../../../../public/icon-arrow-down.svg'
-import quote from '../../../../public/icon-quote.svg'
+import arrowDown from '../../../../../public/icon-arrow-down.svg'
+import quote from '../../../../../public/icon-quote.svg'
 
 
 // Import ehairpos project images
-import BG1 from './en/projectInfo-ehairpos-bg-1.png'
-import BG2 from './en/projectInfo-ehairpos-bg-2.png'
+import BG1 from '../en/projectInfo-ehairpos-bg-1.png'
+import BG2 from '../en/projectInfo-ehairpos-bg-2.png'
 
 // 定义 ehairpos 项目的背景图片映射
 const ehairposBackgrounds = {
   purple: BG1,
   photo: BG2,
 }
-import iconEhairpos from './en/projectList-icon-ehairpos.png'
-import decoIcons1 from './en/projectInfo-ehairpos-deco-icons1.svg'
-import decoIcons2 from './en/projectInfo-ehairpos-deco-icons2.svg'
-import bgWave from './en/projectInfo-ehairpos-bg-wave.svg'
-import iconLink from './en/projectInfo-ehairpos-icon-link.svg'
-import iconIOS from './en/projectInfo-ehairpos-icon-ios.svg'
-import tablet from './en/projectInfo-ehairpos-tablet.png'
+import iconEhairpos from '../en/projectList-icon-ehairpos.png'
+import decoIcons1 from '../en/projectInfo-ehairpos-deco-icons1.svg'
+import decoIcons2 from '../en/projectInfo-ehairpos-deco-icons2.svg'
+import bgWave from '../en/projectInfo-ehairpos-bg-wave.svg'
+import iconLink from '../en/projectInfo-ehairpos-icon-link.svg'
+import iconIOS from '../en/projectInfo-ehairpos-icon-ios.svg'
+import tablet from '../en/projectInfo-ehairpos-tablet.png'
 
-import screenshot01 from './en/projectInfo-ehairpos-screenshot01.png'
-import screenshot02 from './en/projectInfo-ehairpos-screenshot02.png'
-import screenshot03 from './en/projectInfo-ehairpos-screenshot03.png'
-import screenshot04 from './en/projectInfo-ehairpos-screenshot04.png'
-import screenshot05 from './en/projectInfo-ehairpos-screenshot05.png'
-import screenshot06 from './en/projectInfo-ehairpos-screenshot06.png'
-import screenshot07 from './en/projectInfo-ehairpos-screenshot07.png'
-import screenshot08 from './en/projectInfo-ehairpos-screenshot08.png'
-import screenshot09 from './en/projectInfo-ehairpos-screenshot09.png'
-import screenshot10 from './en/projectInfo-ehairpos-screenshot10.png'
-import screenshot11 from './en/projectInfo-ehairpos-screenshot11.png'
-import screenshot12 from './en/projectInfo-ehairpos-screenshot12.png'
-import draft1 from './en/projectInfo-ehairpos-draft1.png'
-import draft2 from './en/projectInfo-ehairpos-draft2.jpg'
-import old1 from './en/projectInfo-ehairpos-old1.jpg'
-import old2 from './en/projectInfo-ehairpos-old2.png'
-import old3 from './en/projectInfo-ehairpos-old3.png'
-import logo from './en/projectInfo-ehairpos-logo_concept1.png'
-import logo2 from './en/projectInfo-ehairpos-logo_concept2.png'
+import screenshot01 from '../en/projectInfo-ehairpos-screenshot01.png'
+import screenshot02 from '../en/projectInfo-ehairpos-screenshot02.png'
+import screenshot03 from '../en/projectInfo-ehairpos-screenshot03.png'
+import screenshot04 from '../en/projectInfo-ehairpos-screenshot04.png'
+import screenshot05 from '../en/projectInfo-ehairpos-screenshot05.png'
+import screenshot06 from '../en/projectInfo-ehairpos-screenshot06.png'
+import screenshot07 from '../en/projectInfo-ehairpos-screenshot07.png'
+import screenshot08 from '../en/projectInfo-ehairpos-screenshot08.png'
+import screenshot09 from '../en/projectInfo-ehairpos-screenshot09.png'
+import screenshot10 from '../en/projectInfo-ehairpos-screenshot10.png'
+import screenshot11 from '../en/projectInfo-ehairpos-screenshot11.png'
+import screenshot12 from '../en/projectInfo-ehairpos-screenshot12.png'
+import draft1 from '../en/projectInfo-ehairpos-draft1.png'
+import draft2 from '../en/projectInfo-ehairpos-draft2.jpg'
+import old1 from '../en/projectInfo-ehairpos-old1.jpg'
+import old2 from '../en/projectInfo-ehairpos-old2.png'
+import old3 from '../en/projectInfo-ehairpos-old3.png'
+import logo from '../en/projectInfo-ehairpos-logo_concept1.png'
+import logo2 from '../en/projectInfo-ehairpos-logo_concept2.png'
 
-import P from '../../../components/post/P'
-import H2 from '../../../components/post/H2'
-import H3 from '../../../components/post/H3'
-import UL from '../../../components/post/UL'
-import LI from '../../../components/post/LI'
+import P from '../../../../components/post/P'
+import H2 from '../../../../components/post/H2'
+import H3 from '../../../../components/post/H3'
+import UL from '../../../../components/post/UL'
+import LI from '../../../../components/post/LI'
 
-export default function EHairPOSPage() {
+export default function EHairPOSPageZh() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
 
   // Use floating animation for arrow down icon
@@ -80,14 +80,14 @@ export default function EHairPOSPage() {
       id: 'point1',
       x: 18,
       y: 23,
-      content: 'Search filters allow sorting by birthday, tags, and purchase history.',
+      content: '搜尋篩選可依生日、標籤與消費紀錄排序。',
       arrowPosition: 'top',
     },
     {
       id: 'point2',
       x: 4,
       y: 30,
-      content: 'Stylists can tag customers with color-coded stars based on in-store preferences or internal workflows.',
+      content: '設計師可用不同顏色星號為顧客加註標記，用於店內偏好或內部工作流程。',
       arrowPosition: 'top',
     },
   ]
@@ -97,7 +97,7 @@ export default function EHairPOSPage() {
       id: 'point1',
       x: 64,
       y: 32,
-      content: 'Stylists from different branches can leave notes on a shared timeline',
+      content: '不同分店的設計師可在共用時間軸留下備註。',
       arrowPosition: 'bottom',
     },
   ]
@@ -107,14 +107,14 @@ export default function EHairPOSPage() {
       id: 'point1',
       x: 22,
       y: 42,
-      content: 'The analysis system highlights each customer’s spending power and purchase preferences',
+      content: '分析系統會標示每位顧客的消費力與購買偏好。',
       arrowPosition: 'bottom',
     },
     {
       id: 'point2',
       x: 64,
       y: 62,
-      content: 'This chart is ranked by purchase frequency.',
+      content: '此圖表以購買頻率排序。',
       arrowPosition: 'bottom',
     },
   ]
@@ -124,21 +124,21 @@ export default function EHairPOSPage() {
       id: 'point1',
       x: 13,
       y: 4,
-      content: 'Switch between full-month and single-day views to match different planning needs.',
+      content: '可在整月與單日視圖之間切換，符合不同排程需求。',
       arrowPosition: 'bottom',
     },
     {
       id: 'point2',
       x: 8,
       y: 42,
-      content: 'The left sidebar lists all customers scheduled for the selected day for quick reference.',
+      content: '左側欄列出所選日期的所有預約顧客，方便快速查找。',
       arrowPosition: 'bottom',
     },
     {
       id: 'point3',
       x: 80,
       y: 18,
-      content: 'Customers from different stylists are shown together on the same timeline.',
+      content: '不同設計師的顧客會在同一條時間軸上一起顯示。',
       arrowPosition: 'bottom',
     },
   ]
@@ -148,14 +148,14 @@ export default function EHairPOSPage() {
       id: 'point1',
       x: 60,
       y: 34,
-      content: 'List all customers scheduled for the selected day for quick reference.',
+      content: '列出所選日期的所有預約顧客，方便快速查找。',
       arrowPosition: 'top',
     },
     {
       id: 'point2',
       x: 49,
       y: 68,
-      content: 'Day-off information is marked directly on the calendar cells.',
+      content: '休假資訊會直接標記在月曆格上。',
       arrowPosition: 'top',
     },
   ]
@@ -164,14 +164,14 @@ export default function EHairPOSPage() {
       id: 'point1',
       x: 78,
       y: 52,
-      content: 'Click a category to instantly expand and browse all items within it.',
+      content: '點選分類即可展開，快速瀏覽該分類下的所有品項。',
       arrowPosition: 'top',
     },
     {
       id: 'point2',
       x: 8,
       y: 22,
-      content: 'Use filters to more accurately find specific products.',
+      content: '使用篩選器可更精準找到特定商品。',
       arrowPosition: 'bottom',
     },
   ]
@@ -181,14 +181,14 @@ export default function EHairPOSPage() {
       id: 'point1',
       x: 78,
       y: 60,
-      content: 'Amounts can be split between cash and credit card payments (accept both simultaneously).',
+      content: '金額可分拆為現金與信用卡同時付款。',
       arrowPosition: 'bottom',
     },
     {
       id: 'point2',
       x: 12,
       y: 22,
-      content: 'List all transaction details.',
+      content: '列出所有交易明細。',
       arrowPosition: 'bottom',
     },
   ]
@@ -199,7 +199,7 @@ export default function EHairPOSPage() {
       id: 'point1',
       x: 30,
       y: 58,
-      content: 'The use of stored-value cards is clear at a glance.',
+      content: '儲值卡使用狀況一目了然。',
       arrowPosition: 'bottom',
     },
   ]
@@ -209,14 +209,14 @@ export default function EHairPOSPage() {
       id: 'point1',
       x: 70,
       y: 57,
-      content: 'Stylists can offer coupons to clients, who can easily find them in the app through search or filters.',
+      content: '設計師可發放優惠券給顧客；顧客可透過搜尋或篩選在 App 內快速找到。',
       arrowPosition: 'top',
     },
     {
       id: 'point2',
       x: 9,
       y: 22,
-      content: 'Filters allow more accurate searching for specific coupons.',
+      content: '透過篩選可更精準搜尋特定優惠券。',
       arrowPosition: 'top',
     },
   ]
@@ -226,7 +226,7 @@ export default function EHairPOSPage() {
       id: 'performance-store',
       x: 18,
       y: 24,
-      content: 'Store performance: revenue, visit count, and key KPIs across branches.',
+      content: '店鋪績效：各分店營收、來客數與關鍵 KPI。',
       arrowPosition: 'right',
     },
   ]
@@ -236,7 +236,7 @@ export default function EHairPOSPage() {
       id: 'performance-personal',
       x: 70,
       y: 30,
-      content: 'Personal performance: stylist-level metrics that support coaching, rewards, and growth.',
+      content: '個人績效：設計師層級指標，用於輔導、獎勵與成長。',
       arrowPosition: 'left',
     },
   ]
@@ -262,8 +262,8 @@ export default function EHairPOSPage() {
             <Container className='flex flex-col items-center justify-center text-center relative z-10'>
               <img src={iconEhairpos} ref={iconEhairposRef} alt="eHairPOS" className='w-48 h-48 md:w-60 md:h-60 mb-8 z-10' />
               <h1 className='text-large mobile:text-large-mobile text-[#994FDE]'>eHairPOS</h1>
-              <H3 className='mb-24 text-gray-900'>Salon Management Tool</H3>
-              <P className='w-full md:w-2/3 text-gray-900'>A comprehensive POS system designed specifically for hair salons, streamlining workflows from appointment booking to payment processing.</P>
+              <H3 className='mb-24 text-gray-900'>美髮沙龍管理工具</H3>
+              <P className='w-full md:w-2/3 text-gray-900'>專為美髮沙龍打造的全方位 POS 系統，從預約到結帳一站式串連，讓工作流程更順暢。</P>
               <img ref={arrowDownRef} src={arrowDown} alt="Arrow Down" className="mt-16 md:mt-24 w-6 h-6" />
               <img src={decoIcons1} alt="decoIcons1" className='absolute top-4 md:top-0 right-0 w-32 md:w-60 ' />
               <img src={decoIcons2} alt="decoIcons2" className='absolute top-16 md:top-[10vh] left-0 w-24 md:w-32 ' />
@@ -278,22 +278,22 @@ export default function EHairPOSPage() {
         <SectionBlock backgrounds={ehairposBackgrounds}>
           <Container className='flex flex-col items-center justify-center'>
 
-            <H2>Project Brief</H2>
+            <H2>專案簡介</H2>
             <LazyImage src={tablet} alt="tablet" className='w-full md:w-2/3 h-auto' />
             <div className="grid grid-cols-1 md:grid-cols-3 gap-16 mt-16">
               <div className="md:col-span-2">
                 <P>
-                  This project began as a redesign of our company’s in-house POS system, reimagined specifically for the needs of hair salons.
-                  The result was a tailored, salon-specific solution that streamlined both front-of-house and backend operations—built as an iPad app for daily use by salon staff, connected to a centralized management system for inventory, client, and sales data.
+                  本專案起初是將公司內部自用的 POS 系統重新改版，並以美髮沙龍的實際需求為核心重新定義。
+                  最終產出是一套為沙龍量身打造的解決方案：前台與後台流程被整合與簡化；日常由店內人員使用 iPad App 操作，並串接中控管理系統，統一管理庫存、顧客與銷售數據。
                 </P>
-                <p className='text-caption text-gray-500 font-light'>Note: All names, phone numbers, and birthdays shown in the following screens are computer-generated dummy data. They have no connection to real people.</p>
+                <p className='text-caption text-gray-500 font-light'>註：以下畫面中的姓名、電話與生日皆為電腦產生的假資料，與真實人物無關。</p>
               </div>
               <div className='flex flex-col gap-2'>
-                <p className='text-h3'>Role</p>
-                <P>UI/UX Designer</P>
-                <p className='text-h3'>Timeline</p>
+                <p className='text-h3'>角色</p>
+                <P>UI/UX 設計師</P>
+                <p className='text-h3'>時程</p>
                 <P>2020 – 2021</P>
-                <p className='text-h3'>Tools</p>
+                <p className='text-h3'>工具</p>
                 <P>
                   Sketch<br />
                   Adobe Photoshop<br />
@@ -308,12 +308,12 @@ export default function EHairPOSPage() {
         {/* Responsibilities */}
         <SectionBlock variant="purple" backgrounds={ehairposBackgrounds}>
           <Container>
-            <H2>Key Responsibilities</H2>
+            <H2>主要職責</H2>
 
             <UL>
-              <LI>Led the redesign planning: from information architecture and visual direction to wireframes and UI mockups</LI>
-              <LI>Worked closely with a PHP backend engineer and an iOS developer</LI>
-              <LI>Created the app’s logotype</LI>
+              <LI>主導改版規劃：從資訊架構、視覺方向到線框與 UI Mockup</LI>
+              <LI>與 PHP 後端工程師與 iOS 工程師密切協作</LI>
+              <LI>設計 App 的 Logo / Logotype</LI>
             </UL>
           </Container>
         </SectionBlock>
@@ -322,19 +322,19 @@ export default function EHairPOSPage() {
         <SectionBlock variant="photo" backgrounds={ehairposBackgrounds}>
           <Container>
          
-              <H2>Target Audience</H2>
+              <H2>目標使用者</H2>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div className="bg-white/10 backdrop-blur rounded-sm shadow p-5">
-                  <div className="text-sm mb-2 opacity-70">Salon owners / managers</div>
-                  <p className='pb-0'>Mid- to high-end hair salons in Taiwan, often operating multiple locations</p>
+                  <div className="text-sm mb-2 opacity-70">店主 / 店長</div>
+                  <p className='pb-0'>台灣中高端美髮沙龍，常見多店營運</p>
                 </div>
                 <div className="bg-white/10 backdrop-blur rounded-sm shadow p-5">
-                  <div className="text-sm mb-2 opacity-70">Stylists and assistants</div>
-                  <p className='pb-0'>Frontline staff who manage clients, appointments, and sales</p>
+                  <div className="text-sm mb-2 opacity-70">設計師與助理</div>
+                  <p className='pb-0'>第一線人員：管理顧客、預約與銷售</p>
                 </div>
                 <div className="bg-white/10 backdrop-blur rounded-sm shadow p-5">
-                  <div className="text-sm mb-2 opacity-70">Training partners</div>
-                  <p className='pb-0'>Vocational institutions incorporating eHairPOS into salon education programs</p>
+                  <div className="text-sm mb-2 opacity-70">合作培訓單位</div>
+                  <p className='pb-0'>將 eHairPOS 納入美髮教育課程的技職院校</p>
                 </div>
               </div>
          
@@ -344,35 +344,35 @@ export default function EHairPOSPage() {
         {/* Background */}
         <SectionBlock variant="white" backgrounds={ehairposBackgrounds}>
           <Container>
-            <H2>Background</H2>
+            <H2>背景</H2>
             <div className='grid grid-cols-1 md:grid-cols-2 gap-16'>
               <div>
-                <H3>Why Redesign?</H3>
-                <P>The original POS system was a general-use tool with little consideration for the salon environment. Its outdated UI and disconnected workflows caused:</P>
+                <H3>為何要改版？</H3>
+                <P>原本的 POS 系統屬於通用型工具，較少考量沙龍現場使用情境；過時的 UI 與割裂的流程導致：</P>
                 <UL>
-                  <LI>Long onboarding times for new employees</LI>
-                  <LI>Fragmented customer data across different screens</LI>
-                  <LI>Inefficient checkout and booking processes</LI>
+                  <LI>新進員工上手時間長</LI>
+                  <LI>顧客資料分散在不同頁面</LI>
+                  <LI>結帳與預約流程效率低</LI>
                 </UL>
-                <P>We set out to create a solution that actually matched how salon teams work day-to-day: intuitive, unified, and designed with both business goals and service flow in mind.</P>
+                <P>因此我們希望打造一套真正符合沙龍日常工作方式的解決方案：直覺、整合，並同時兼顧營運目標與服務流程。</P>
               </div>
               <div>
-                <H3>Design Goals</H3>
+                <H3>設計目標</H3>
                 <UL>
-                  <LI><strong>Unify customer operations: </strong>All client-related actions (booking, record edits, checkout, membership cards, coupon use) were brought into a single screen. Stylists no longer need to jump between modules just to serve one client.</LI>
-                  <LI><strong>Add business value: </strong>We designed not just for daily transactions, but for long-term insight. Visual reporting tools help owners see customer trends and plan strategies.</LI>
+                  <LI><strong>整合顧客操作：</strong>將顧客相關行為（預約、資料編輯、結帳、會員卡、優惠券）整合到同一畫面，設計師不必為服務單一顧客而在模組間來回跳轉。</LI>
+                  <LI><strong>提升商業價值：</strong>不只解決每日交易，更提供長期洞察；透過視覺化報表協助店主看見顧客趨勢並規劃策略。</LI>
                 </UL>
               </div>
             </div>
             <img src={draft1} alt="draft1" className='w-full h-auto mt-16 rounded-xs' />
-            <p className='text-caption text-gray-500 font-light mt-4'>Avoided piecemeal UI; drafted and compared layouts as a whole.</p>
+            <p className='text-caption text-gray-500 font-light mt-4'>避免零碎式拼貼 UI；以整體角度先草擬並比較不同版面。</p>
           </Container>
         </SectionBlock>
 
         {/* Design Deliverables */}
         <SectionBlock variant="purple" backgrounds={ehairposBackgrounds}>
           <Container>
-          <H2>Design Deliverables</H2>
+          <H2>設計成果</H2>
             {/* Mobile Swiper */}
             <div className="md:hidden">
               <Swiper
@@ -385,13 +385,13 @@ export default function EHairPOSPage() {
                 <SwiperSlide>
                   <div>
                    
-                    <H3>Customer Management with Advanced Filtering</H3>
-                    <P>We moved away from modal-based browsing and adopted a split-view layout. Users can now browse the customer list and view full details side-by-side—cutting down on lookup time and reducing clicks.</P>
+                    <H3>顧客管理：進階篩選與分割視圖</H3>
+                    <P>我們捨棄以彈窗為主的瀏覽方式，改採分割視圖。使用者可同時瀏覽顧客清單與右側完整資料，大幅縮短查找時間並減少點擊次數。</P>
                   </div>
                 </SwiperSlide>
                 <SwiperSlide>
                   <div>
-                    <P>Old version: When browsing the customer list, viewing details opened a full-screen modal. Closing it was required to return to the list.</P>
+                    <P>舊版：瀏覽顧客清單時，點入明細會開啟全螢幕彈窗；必須先關閉才能回到清單。</P>
                     <div className='grid grid-cols-1 gap-4 mb-8'>
                       <img src={old1} alt="old1" className='w-full h-auto mt-8 rounded-xs' />
                       <img src={old2} alt="old2" className='w-full h-auto rounded-xs' />
@@ -400,7 +400,7 @@ export default function EHairPOSPage() {
                 </SwiperSlide>
                 <SwiperSlide>
                   <div>
-                    <P>The new version adopts a split-view layout: clicking a customer in the list will instantly show their details on the right side.</P>
+                    <P>新版：採用分割視圖，點選清單中的顧客即可在右側即時顯示詳細資訊。</P>
                     <ImageWithHotspots
                       src={screenshot01}
                       alt="Customers list"
@@ -411,7 +411,7 @@ export default function EHairPOSPage() {
                 </SwiperSlide>
                 <SwiperSlide>
                   <div>
-                    <P>Notes from different stylists are shown in a timeline view, giving teams a shared record of client preferences.</P>
+                    <P>不同設計師的備註以時間軸形式呈現，讓團隊共享顧客偏好紀錄。</P>
                     <ImageWithHotspots
                       src={screenshot02}
                       alt="Customer notes"
@@ -422,7 +422,7 @@ export default function EHairPOSPage() {
                 </SwiperSlide>
                 <SwiperSlide>
                   <div>
-                    <P>Visual charts summarize visit frequency, spending, and service mix, helping owners spot VIPs.</P>
+                    <P>以圖表摘要來店頻率、消費與服務組合，協助店主快速辨識 VIP 顧客。</P>
                     <ImageWithHotspots
                       src={screenshot03}
                       alt="Customer charts"
@@ -436,21 +436,21 @@ export default function EHairPOSPage() {
             {/* Desktop Layout */}
             <div className="hidden md:block">
               
-              <H3>Customer Management with Advanced Filtering</H3>
-              <P>We moved away from modal-based browsing and adopted a split-view layout. Users can now browse the customer list and view full details side-by-side—cutting down on lookup time and reducing clicks.</P>
-              <P>Old version: When browsing the customer list, viewing details opened a full-screen modal. Closing it was required to return to the list.</P>
+              <H3>顧客管理：進階篩選與分割視圖</H3>
+              <P>我們捨棄以彈窗為主的瀏覽方式，改採分割視圖。使用者可同時瀏覽顧客清單與右側完整資料，大幅縮短查找時間並減少點擊次數。</P>
+              <P>舊版：瀏覽顧客清單時，點入明細會開啟全螢幕彈窗；必須先關閉才能回到清單。</P>
               <div className='grid grid-cols-1 md:grid-cols-2 gap-16 mb-16'>
                 <img src={old1} alt="old1" className='w-full h-auto mt-16 rounded-xs' />
                 <img src={old2} alt="old1" className='w-full h-auto mt-16 rounded-xs' />
               </div>
-              <P>The new version adopts a split-view layout: clicking a customer in the list will instantly show their details on the right side.</P>
+              <P>新版：採用分割視圖，點選清單中的顧客即可在右側即時顯示詳細資訊。</P>
               <ImageWithHotspots
                 src={screenshot01}
                 alt="Customers list"
                 hotspots={customersHotspots}
                 className='mb-8'
               />
-              <P>Notes from different stylists are shown in a timeline view, giving teams a shared record of client preferences.</P>
+              <P>不同設計師的備註以時間軸形式呈現，讓團隊共享顧客偏好紀錄。</P>
 
               <ImageWithHotspots
                 src={screenshot02}
@@ -459,7 +459,7 @@ export default function EHairPOSPage() {
                 className='mb-8'
               />
 
-              <P>Visual charts summarize visit frequency, spending, and service mix, helping owners spot VIPs.</P>
+              <P>以圖表摘要來店頻率、消費與服務組合，協助店主快速辨識 VIP 顧客。</P>
               <ImageWithHotspots
                 src={screenshot03}
                 alt="Customer charts"
@@ -483,9 +483,9 @@ export default function EHairPOSPage() {
               >
                 <SwiperSlide>
                   <div>
-                    <H3>Flexible, Intuitive Booking Flow</H3>
-                    <P>Bookings come from two sources: online forms and in-person entries.<br />
-                      We adopted interaction patterns from tools users already know—like Google Calendar—to allow for quick drag-and-drop booking, unscheduled holds, and both daily/monthly views.</P>
+                    <H3>彈性且直覺的預約流程</H3>
+                    <P>預約來源有兩種：線上表單與現場新增。<br />
+                      我們借鑑使用者熟悉的互動模式（如 Google Calendar），支援快速拖曳排程、未排定的保留時段，以及日/週期（月）視圖切換。</P>
                   </div>
                 </SwiperSlide>
                 <SwiperSlide>
@@ -499,7 +499,7 @@ export default function EHairPOSPage() {
                   <div>
                     <ImageWithHotspots
                       src={screenshot04}
-                      alt="Calendar view"
+                      alt="行事曆視圖"
                       hotspots={calendarHotspots1}
                       className='mb-8'
                     />
@@ -507,10 +507,10 @@ export default function EHairPOSPage() {
                 </SwiperSlide>
                 <SwiperSlide>
                   <div>
-                    <P>The calendar can be switched to a monthly view, making it easier to review and adjust the entire schedule at a glance.</P>
+                    <P>行事曆可切換為月視圖，方便一眼檢視並調整整體排程。</P>
                     <ImageWithHotspots
                       src={screenshot05}
-                      alt="Calendar view"
+                      alt="行事曆視圖"
                       hotspots={calendarHotspots2}
                     />
                   </div>
@@ -520,9 +520,9 @@ export default function EHairPOSPage() {
 
             {/* Desktop Layout */}
             <div className="hidden md:block">
-              <H3>Flexible, Intuitive Booking Flow</H3>
-              <P className='w-2/3'>Bookings come from two sources: online forms and in-person entries.<br />
-                We adopted interaction patterns from tools users already know—like Google Calendar—to allow for quick drag-and-drop booking, unscheduled holds, and both daily/monthly views.</P>
+              <H3>彈性且直覺的預約流程</H3>
+              <P className='w-2/3'>預約來源有兩種：線上表單與現場新增。<br />
+                我們借鑑使用者熟悉的互動模式（如 Google Calendar），支援快速拖曳排程、未排定的保留時段，以及日/週期（月）視圖切換。</P>
 
               <div className='flex justify-end'>
                 <img src={draft2} alt="draft2" className='w-[80%] h-auto  rounded-xs mix-blend-multiply opacity-50 ' />
@@ -534,7 +534,7 @@ export default function EHairPOSPage() {
                 hotspots={calendarHotspots1}
                 className='mb-8'
               />
-              <P>The calendar can be switched to a monthly view, making it easier to review and adjust the entire schedule at a glance.</P>
+              <P>行事曆可切換為月視圖，方便一眼檢視並調整整體排程。</P>
               <ImageWithHotspots
                 src={screenshot05}
                 alt="Calendar view"
@@ -558,7 +558,7 @@ export default function EHairPOSPage() {
               >
                 <SwiperSlide>
                   <div>
-                    <H3>Checkout Flow Designed for Salon Complexity</H3>
+                    <H3>結帳流程：因應沙龍現場的複雜性</H3>
                     <P>
                       Unlike retail POS, salon purchases are often complex: A client might get a cut, color, and buy a product—all in one visit.<br />
                       Our new UI lets staff apply discounts per item, choose payment types, and switch between products quickly. Visual hierarchy and iconography were improved for clarity and speed.</P>
@@ -566,13 +566,13 @@ export default function EHairPOSPage() {
                 </SwiperSlide>
                 <SwiperSlide>
                   <div>
-                    <ProjectNote className='mb-4 text-gray-800'>Old version: Lots of unused space. Information lacked hierarchy and was hard to distinguish.</ProjectNote>
+                    <ProjectNote className='mb-4 text-gray-800'>舊版：留白過多，資訊層級不清，辨識度低。</ProjectNote>
                     <img src={old3} alt="old3" className='w-full h-auto rounded-xs mb-8' />
                   </div>
                 </SwiperSlide>
                 <SwiperSlide>
                   <div>
-                    <P>The New version sets clear product categories with icons to improve readability.</P>
+                    <P>新版以圖示建立清楚的商品分類，提升可讀性。</P>
                     <ImageWithHotspots
                       src={screenshot06}
                       alt="shopping list"
@@ -583,7 +583,7 @@ export default function EHairPOSPage() {
                 </SwiperSlide>
                 <SwiperSlide>
                   <div>
-                    <P>During checkout, the sidebar displays the purchase amount for staff to review and confirm.</P>
+                    <P>結帳時，側欄會顯示購買金額，方便店員檢視與確認。</P>
                     <ImageWithHotspots
                       src={screenshot07}
                       alt="shopping list"
@@ -596,18 +596,18 @@ export default function EHairPOSPage() {
 
             {/* Desktop Layout */}
             <div className="hidden md:block">
-              <H3>Checkout Flow Designed for Salon Complexity</H3>
+              <H3>結帳流程：因應沙龍現場的複雜性</H3>
               <P>
                 Unlike retail POS, salon purchases are often complex: A client might get a cut, color, and buy a product—all in one visit.<br />
                 Our new UI lets staff apply discounts per item, choose payment types, and switch between products quickly. Visual hierarchy and iconography were improved for clarity and speed.</P>
 
               <div className="relative">
-                <ProjectNote className='absolute top-[30%] right-1/2 w-60 translate-y-1/2 translate-x-1/2 text-gray-800'>Old version: Lots of unused space. Information lacked hierarchy and was hard to distinguish.</ProjectNote>
+                <ProjectNote className='absolute top-[30%] right-1/2 w-60 translate-y-1/2 translate-x-1/2 text-gray-800'>舊版：留白過多，資訊層級不清，辨識度低。</ProjectNote>
                 <img src={old3} alt="old3" className='w-full h-auto rounded-xs mb-8' />
               </div>
               <div>
 
-                <P>The New version sets clear product categories with icons to improve readability.</P>
+                <P>新版以圖示建立清楚的商品分類，提升可讀性。</P>
 
                 <ImageWithHotspots
                   src={screenshot06}
@@ -615,7 +615,7 @@ export default function EHairPOSPage() {
                   hotspots={shoppingHistoryHotspots}
                   className='mb-8'
                 />
-                <P>During checkout, the sidebar displays the purchase amount for staff to review and confirm.</P>
+                <P>結帳時，側欄會顯示購買金額，方便店員檢視與確認。</P>
                 <ImageWithHotspots
                   src={screenshot07}
                   alt="shopping list"
@@ -640,11 +640,11 @@ export default function EHairPOSPage() {
               >
                 <SwiperSlide>
                   <div>
-                    <H3>Membership Wallet That Feels Real</H3>
+                    <H3>像真實錢包一樣的會員錢包</H3>
                     <P>
-                      Instead of multiple loyalty cards, we designed a unified digital wallet.
-                      Clients simply provide their phone number, and staff can instantly access any stored-value cards, membership points, or available coupons.<br />
-                      The wallet interface mimics a real wallet—organized, easy to read, and quick to apply at checkout.
+                      我們不再讓顧客持有多張會員卡，而是設計一個統一的數位錢包。
+                      顧客只要提供手機號碼，店員即可立即查看儲值卡、會員點數與可用優惠券。<br />
+                      介面以真實錢包為靈感：有條理、好閱讀，並能在結帳時快速套用。
                     </P>
                   </div>
                 </SwiperSlide>
@@ -652,7 +652,7 @@ export default function EHairPOSPage() {
                   <div>
                     <ImageWithHotspots
                       src={screenshot09}
-                      alt="membership wallet"
+                      alt="會員錢包"
                       hotspots={memberCardHotspots}
                       className='mb-8'
                     />
@@ -662,7 +662,7 @@ export default function EHairPOSPage() {
                   <div>
                     <ImageWithHotspots
                       src={screenshot10}
-                      alt="membership wallet"
+                      alt="會員錢包"
                       hotspots={discountHotspots}
                       className='mb-8'
                     />
@@ -673,21 +673,21 @@ export default function EHairPOSPage() {
 
             {/* Desktop Layout */}
             <div className="hidden md:block">
-              <H3>Membership Wallet That Feels Real</H3>
+              <H3>像真實錢包一樣的會員錢包</H3>
               <P>
-                Instead of multiple loyalty cards, we designed a unified digital wallet.
-                Clients simply provide their phone number, and staff can instantly access any stored-value cards, membership points, or available coupons.<br />
-                The wallet interface mimics a real wallet—organized, easy to read, and quick to apply at checkout.
+                我們不再讓顧客持有多張會員卡，而是設計一個統一的數位錢包。
+                顧客只要提供手機號碼，店員即可立即查看儲值卡、會員點數與可用優惠券。<br />
+                介面以真實錢包為靈感：有條理、好閱讀，並能在結帳時快速套用。
               </P>
               <ImageWithHotspots
                 src={screenshot09}
-                alt="membership wallet"
+                alt="會員錢包"
                 hotspots={memberCardHotspots}
                 className='mb-8'
               />
               <ImageWithHotspots
                 src={screenshot10}
-                alt="membership wallet"
+                alt="會員錢包"
                 hotspots={discountHotspots}
                 className='mb-8'
               />
@@ -708,29 +708,29 @@ export default function EHairPOSPage() {
               >
                 <SwiperSlide>
                   <div>
-                    <H3>Visual Reports for Better Business Decisions</H3>
-                    <P>To help salon owners not only "see numbers" but actually "understand trends," we built two layers of reporting:</P>
+                    <H3>視覺化報表：讓經營決策更有依據</H3>
+                    <P>為了讓店主不只「看到數字」，更能「理解趨勢」，我們建立了兩層報表：</P>
                     <UL>
-                      <LI><strong>Salon-level dashboard:</strong> Revenue, visit counts, average ticket size, and campaign ROI—viewable over different timeframes</LI>
-                      <LI><strong>Stylist-level reports:</strong> Track individual performance, client return rate, and sales goals over time</LI>
+                      <LI><strong>店鋪儀表板：</strong>營收、來客數、客單價、活動 ROI，可依不同時間區間切換查看</LI>
+                      <LI><strong>設計師報表：</strong>追蹤個人表現、回訪率與銷售目標的長期變化</LI>
                     </UL>
                   </div>
                 </SwiperSlide>
                 <SwiperSlide>
                   <div>
                     <LazyImage src={screenshot11} alt="screenshot11" className='w-full h-auto rounded-sm' />
-                    <p className='text-caption text-gray-500 font-light mt-4'>Salon Dashboard: Combines revenue, visits, ticket size, and growth metrics with time filters for a clear view of business performance.</p>
+                    <p className='text-caption text-gray-500 font-light mt-4'>店鋪儀表板：整合營收、來客數、客單價與成長指標，搭配時間篩選，清楚掌握經營表現。</p>
                   </div>
                 </SwiperSlide>
                 <SwiperSlide>
                   <div>
                     <LazyImage src={screenshot12} alt="screenshot12" className='w-full h-auto rounded-sm' />
-                    <p className='text-caption text-gray-500 font-light mt-4'>Stylist Dashboard: Each stylist can view their performance trends, client count, and personal growth over time.</p>
+                    <p className='text-caption text-gray-500 font-light mt-4'>設計師儀表板：每位設計師可查看個人績效趨勢、顧客數與成長軌跡。</p>
                   </div>
                 </SwiperSlide>
                 <SwiperSlide>
                   <div>
-                    <P>These dashboards allow both owners and stylists to take ownership of their performance and plan with data, not guesswork.</P>
+                    <P>這些儀表板讓店主與設計師都能更有掌控感：用數據制定計畫，而不是靠直覺猜測。</P>
                   </div>
                 </SwiperSlide>
               </Swiper>
@@ -738,23 +738,23 @@ export default function EHairPOSPage() {
 
             {/* Desktop Layout */}
             <div className="hidden md:block">
-              <H3>Visual Reports for Better Business Decisions</H3>
-              <P>To help salon owners not only "see numbers" but actually "understand trends," we built two layers of reporting:</P>
+              <H3>視覺化報表：讓經營決策更有依據</H3>
+              <P>為了讓店主不只「看到數字」，更能「理解趨勢」，我們建立了兩層報表：</P>
               <UL>
-                <LI><strong>Salon-level dashboard:</strong> Revenue, visit counts, average ticket size, and campaign ROI—viewable over different timeframes</LI>
-                <LI><strong>Stylist-level reports:</strong> Track individual performance, client return rate, and sales goals over time</LI>
+                <LI><strong>店鋪儀表板：</strong>營收、來客數、客單價、活動 ROI，可依不同時間區間切換查看</LI>
+                <LI><strong>設計師報表：</strong>追蹤個人表現、回訪率與銷售目標的長期變化</LI>
               </UL>
               <div className='grid grid-cols-1 md:grid-cols-2 gap-10 mt-16'>
                 <div>
                   <LazyImage src={screenshot11} alt="screenshot11" className='w-full h-auto rounded-sm' />
-                  <p className='text-caption text-gray-500 font-light mt-4'>Salon Dashboard: Combines revenue, visits, ticket size, and growth metrics with time filters for a clear view of business performance.</p>
+                  <p className='text-caption text-gray-500 font-light mt-4'>店鋪儀表板：整合營收、來客數、客單價與成長指標，搭配時間篩選，清楚掌握經營表現。</p>
                 </div>
                 <div>
                   <LazyImage src={screenshot12} alt="screenshot12" className='w-full h-auto rounded-sm' />
-                  <p className='text-caption text-gray-500 font-light mt-4'>Stylist Dashboard: Each stylist can view their performance trends, client count, and personal growth over time.</p>
+                  <p className='text-caption text-gray-500 font-light mt-4'>設計師儀表板：每位設計師可查看個人績效趨勢、顧客數與成長軌跡。</p>
                 </div>
               </div>
-              <P className='mt-16'>These dashboards allow both owners and stylists to take ownership of their performance and plan with data, not guesswork.</P>
+              <P className='mt-16'>這些儀表板讓店主與設計師都能更有掌控感：用數據制定計畫，而不是靠直覺猜測。</P>
             </div>
           </Container>
         </SectionBlock>
@@ -773,13 +773,13 @@ export default function EHairPOSPage() {
               >
                 <SwiperSlide>
                   <div>
-                    <H2>Logotype Design</H2>
-                    <P><strong>Concept:</strong> The logo merges the letters "e" and "P" with the infinity symbol and a pair of salon scissors, creating a ribbon-like shape that feels both soft and professional—symbolizing endless service and creativity in the salon industry.</P>
+                    <H2>Logotype 設計</H2>
+                    <P><strong>概念：</strong>將字母「e」與「P」結合無限符號與美髮剪刀，形成帶狀的視覺輪廓；兼具柔和與專業感，象徵沙龍產業中「無限延伸的服務」與「創意能量」。</P>
                   </div>
                 </SwiperSlide>
                 <SwiperSlide>
                   <div>
-                    <P><strong>Color Palette:</strong> Inspired by the app's core visual language, the logo uses an analogous purple color scheme to maintain brand consistency and visual harmony.</P>
+                    <P><strong>色彩：</strong>延續 App 的核心視覺語言，採用相近色紫色系，維持品牌一致性與視覺和諧。</P>
                   </div>
                 </SwiperSlide>
                 <SwiperSlide>
@@ -797,14 +797,14 @@ export default function EHairPOSPage() {
 
             {/* Desktop Layout */}
             <div className="hidden md:block">
-              <H2>Logotype Design</H2>
+              <H2>Logotype 設計</H2>
               <div className='grid grid-cols-1 md:grid-cols-2 gap-10'>
                 <div>
-                  <P><strong>Concept:</strong> The logo merges the letters "e" and "P" with the infinity symbol and a pair of salon scissors, creating a ribbon-like shape that feels both soft and professional—symbolizing endless service and creativity in the salon industry.</P>
+                  <P><strong>概念：</strong>將字母「e」與「P」結合無限符號與美髮剪刀，形成帶狀的視覺輪廓；兼具柔和與專業感，象徵沙龍產業中「無限延伸的服務」與「創意能量」。</P>
 
                 </div>
                 <div>
-                  <P><strong>Color Palette:</strong> Inspired by the app's core visual language, the logo uses an analogous purple color scheme to maintain brand consistency and visual harmony.</P>
+                  <P><strong>色彩：</strong>延續 App 的核心視覺語言，採用相近色紫色系，維持品牌一致性與視覺和諧。</P>
                 </div>
               </div>
 
@@ -829,26 +829,26 @@ export default function EHairPOSPage() {
               >
                 <SwiperSlide>
                   <div>
-                    <H2>Reflections</H2>
-                    <P>After launch, the system was adopted by several mid-to-large salon chains. One owner shared:</P>
+                    <H2>心得回顧</H2>
+                    <P>上線後，系統被多家中大型連鎖沙龍採用。一位店主分享：</P>
                   </div>
                 </SwiperSlide>
                 <SwiperSlide>
                   <div>
                     <div className="bg-white/10 backdrop-blur rounded-sm shadow p-5 mb-8">
                       <img src={quote} alt="quote" className='mb-8' />
-                      <P className=''>"eHairPOS solved our multi-branch management pain points. Revenue and inventory are now clear at a glance. Our customers love the online booking, too. Highly recommended!"</P>
+                      <P className=''>「eHairPOS 解決了我們多店管理的痛點，營收與庫存一目了然；顧客也很喜歡線上預約。非常推薦！」</P>
                     </div>
-                    <P>That feedback validated our core goal—turning POS from a passive system into a decision-making assistant.</P>
+                    <P>這段回饋驗證了我們的核心目標：讓 POS 從被動紀錄工具，轉變成協助決策的助手。</P>
                   </div>
                 </SwiperSlide>
                 <SwiperSlide>
                   <div>
-                    <H2>Takeaways</H2>
+                    <H2>重點收穫</H2>
                     <UL>
-                      <LI>Design starts with understanding how people work, not what screens they tap</LI>
-                      <LI>Every layout decision should answer: Does this make their task easier or clearer?</LI>
-                      <LI>Collaborating with frontline staff during design helped us ship what truly mattered</LI>
+                      <LI>設計的起點是理解人如何工作，而不是他們點了哪些畫面</LI>
+                      <LI>每一個版面決策都該回到一個問題：是否讓任務更容易、更清楚？</LI>
+                      <LI>在設計過程中與第一線人員協作，能幫助我們交付真正重要的內容</LI>
                     </UL>
                   </div>
                 </SwiperSlide>
@@ -859,21 +859,21 @@ export default function EHairPOSPage() {
             <div className="hidden md:block">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
                 <div>
-                  <H2>Reflections</H2>
-                  <P>After launch, the system was adopted by several mid-to-large salon chains. One owner shared:</P>
+                  <H2>心得回顧</H2>
+                  <P>上線後，系統被多家中大型連鎖沙龍採用。一位店主分享：</P>
                   <div className="bg-white/10 backdrop-blur rounded-sm shadow p-5 mb-8">
                     <img src={quote} alt="quote" className='mb-8' />
-                    <P className=''>"eHairPOS solved our multi-branch management pain points. Revenue and inventory are now clear at a glance. Our customers love the online booking, too. Highly recommended!"</P>
+                    <P className=''>「eHairPOS 解決了我們多店管理的痛點，營收與庫存一目了然；顧客也很喜歡線上預約。非常推薦！」</P>
                   </div>
-                  <P>That feedback validated our core goal—turning POS from a passive system into a decision-making assistant.</P>
+                  <P>這段回饋驗證了我們的核心目標：讓 POS 從被動紀錄工具，轉變成協助決策的助手。</P>
                 </div>
                 <div>
 
-                  <H2>Takeaways</H2>
+                  <H2>重點收穫</H2>
                   <UL>
-                    <LI>Design starts with understanding how people work, not what screens they tap</LI>
-                    <LI>Every layout decision should answer: Does this make their task easier or clearer?</LI>
-                    <LI>Collaborating with frontline staff during design helped us ship what truly mattered</LI>
+                    <LI>設計的起點是理解人如何工作，而不是他們點了哪些畫面</LI>
+                    <LI>每一個版面決策都該回到一個問題：是否讓任務更容易、更清楚？</LI>
+                    <LI>在設計過程中與第一線人員協作，能幫助我們交付真正重要的內容</LI>
                   </UL>
                 </div>
               </div>
@@ -884,27 +884,27 @@ export default function EHairPOSPage() {
 
         <SectionBlock variant="" backgrounds={ehairposBackgrounds}>
           <Container>
-            <H2>Future Development and Ongoing Influence</H2>
-            <P>Although I left the company after completing the first release, the product continued to grow:</P>
+            <H2>後續發展與影響</H2>
+            <P>雖然我在第一版完成後離開公司，但產品仍持續成長：</P>
             <UL>
-              <LI>It officially launched on the iOS App Store for iPad</LI>
-              <LI>Later evolved into a cross-device system also usable on mobile</LI>
+              <LI>正式於 iOS App Store 上架（iPad 版）</LI>
+              <LI>後續也演進為可跨裝置使用、包含手機端的系統</LI>
             </UL>
-            <P>What made this possible was the early design work:</P>
+            <P>這些發展得以成立，關鍵在於前期設計打下的基礎：</P>
             <UL>
-              <LI>Scalable architecture that supported new devices without rethinking the UI from scratch</LI>
-              <LI>Clear documentation and visual consistency that made it easy for future teams to continue</LI>
+              <LI>可延展的架構：支援新裝置而不必從零重做 UI</LI>
+              <LI>清楚的文件與一致的視覺規範：讓後續團隊能更容易延續與擴充</LI>
             </UL>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
 
 
               <div className="bg-white/10 backdrop-blur rounded-sm shadow p-5 mb-8">
                 <img src={quote} alt="quote" className='mb-8' />
-                <P className=''>It reminded me that good design isn’t just about this version.<br /> It’s about creating a foundation others can build on.</P>
+                <P className=''>它提醒我：好的設計不只關乎這一版。<br />更重要的是建立一個讓後人能延續的基礎。</P>
               </div>
               <div className="grid grid-cols-1 ">
-                <a href="https://www.ehairpos.com/" className='flex flex-col items-center justify-center p-8 hover:opacity-60 transition-opacity duration-200' target="_blank" rel="noopener noreferrer"><img src={iconLink} alt="iconLink" /> Official promo site</a>
-                <a href="https://apps.apple.com/us/app/ehairpos/id6477988989" className='flex flex-col items-center justify-center p-8 hover:opacity-60 transition-opacity duration-200' target="_blank" rel="noopener noreferrer"><img src={iconIOS} alt="iconIOS" /> iOS download link</a>
+                <a href="https://www.ehairpos.com/" className='flex flex-col items-center justify-center p-8 hover:opacity-60 transition-opacity duration-200' target="_blank" rel="noopener noreferrer"><img src={iconLink} alt="iconLink" /> 官方宣傳網站</a>
+                <a href="https://apps.apple.com/us/app/ehairpos/id6477988989" className='flex flex-col items-center justify-center p-8 hover:opacity-60 transition-opacity duration-200' target="_blank" rel="noopener noreferrer"><img src={iconIOS} alt="iconIOS" /> iOS 下載連結</a>
               </div>
             </div>
             <div className="flex flex-col items-center justify-center mt-16">

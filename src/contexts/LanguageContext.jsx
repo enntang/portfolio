@@ -51,7 +51,12 @@ export function LanguageProvider({ children }) {
     
     // 監聽瀏覽器前進/後退
     window.addEventListener('popstate', handlePopState)
-    return () => window.removeEventListener('popstate', handlePopState)
+    // 監聽程式化導航（routing.navigate 會 dispatch 'navigate'）
+    window.addEventListener('navigate', handlePopState)
+    return () => {
+      window.removeEventListener('popstate', handlePopState)
+      window.removeEventListener('navigate', handlePopState)
+    }
   }, [language])
 
   const changeLanguage = (newLang) => {

@@ -12,6 +12,11 @@ import NotFound from './NotFound.jsx'
 // Load all page variants
 const pageModules = import.meta.glob('./assets/projects/*/Page*.jsx', { eager: true, import: 'default' })
 const indexModules = import.meta.glob('./assets/projects/*/index.jsx', { eager: true, import: 'default' })
+// New convention: per-language folder
+// - src/assets/projects/<slug>/en/Page.jsx
+// - src/assets/projects/<slug>/zh/Page.jsx
+// - src/assets/projects/<slug>/ja/Page.jsx
+const folderPageModules = import.meta.glob('./assets/projects/*/*/Page.jsx', { eager: true, import: 'default' })
 
 function buildSlugToComponentMap() {
   const map = {}
@@ -34,10 +39,31 @@ function buildSlugToComponentMap() {
     
     return { slug, lang }
   }
+
+  // Helper to extract slug and language from folder page path
+  const parseFolderPath = (path) => {
+    const afterBase = path.split('/assets/projects/')[1] || ''
+    const parts = afterBase.split('/')
+    const slug = parts[0] || ''
+    const langFolder = parts[1] || 'en'
+    const lang = (langFolder === 'zh' || langFolder === 'ja' || langFolder === 'en') ? langFolder : 'en'
+    return { slug, lang }
+  }
   
   // Process Page*.jsx files
   Object.entries(pageModules).forEach(([path, Comp]) => {
     const { slug, lang } = parsePath(path)
+    if (slug && Comp) {
+      if (!map[slug]) {
+        map[slug] = {}
+      }
+      map[slug][lang] = Comp
+    }
+  })
+
+  // Process <lang>/Page.jsx folder convention (preferred if both exist)
+  Object.entries(folderPageModules).forEach(([path, Comp]) => {
+    const { slug, lang } = parseFolderPath(path)
     if (slug && Comp) {
       if (!map[slug]) {
         map[slug] = {}

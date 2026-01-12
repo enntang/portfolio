@@ -1,10 +1,5 @@
 # GitHub Pages 部署說明
 
-## 已完成配置
-
-1. ✅ 已更新 `vite.config.js`，設置 base 路徑為 `/portfolio/`
-2. ✅ 已創建 GitHub Actions workflow (`.github/workflows/deploy.yml`)
-
 ## 部署步驟
 
 ### 1. 啟用 GitHub Pages
@@ -34,8 +29,9 @@ git push origin main
 
 ### 4. 訪問網站
 
-部署完成後，網站將在以下 URL 可用：
-- `https://enntang.github.io/portfolio/`
+部署完成後，網站 URL 取決於 Pages 類型：
+- **User site**（repo 名稱是 `<username>.github.io`）：`https://<username>.github.io/`
+- **Project site**（一般 repo）：`https://<username>.github.io/<repo>/`
 
 ## 自動部署
 
@@ -46,7 +42,19 @@ git push origin main
 
 ## 注意事項
 
-- 項目使用 hash routing (`#/`)，這對 GitHub Pages 很友好，無需額外配置
-- 如果更改了倉庫名稱，記得更新 `vite.config.js` 中的 `base` 路徑
-- 部署可能需要幾分鐘時間，請耐心等待
+- 本專案使用 **History API 路由**（不是 hash routing）。
+- 為了支援 GitHub Pages 的深連結（例如直接打開 `/about`），`npm run build` 會自動把 `dist/index.html` 複製成 `dist/404.html` 當作 SPA fallback。
+- GitHub Actions 會自動設置 `VITE_BASE`：
+  - user site：`/`
+  - project site：`/<repo>/`
+- 如果你的 repo 名稱剛好叫 `portfolio`，而你也有 `'/portfolio'` 這個站內路由，project site URL 會變成 `.../portfolio/portfolio`（可接受但不美觀）。想避免的話可以：
+  - 把 repo 改名（建議），或
+  - 把站內路由 `/portfolio` 改成別的（例如 `/work`）。
+
+## 本機驗證（可選）
+
+```bash
+npm run build
+npm run preview
+```
 

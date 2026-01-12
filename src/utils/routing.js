@@ -29,14 +29,53 @@ const PREFIX_TO_LANGUAGE = {
   '': 'en-US',
 }
 
+function normalizeBaseUrl(baseUrl) {
+  let base = baseUrl || '/'
+  if (!base.startsWith('/')) base = '/' + base
+  // Vite's import.meta.env.BASE_URL is typically '/' or '/repo/' (with trailing slash)
+  if (!base.endsWith('/')) base = base + '/'
+  return base
+}
+
+function stripBaseUrl(pathname) {
+  const base = normalizeBaseUrl(import.meta.env.BASE_URL)
+  let raw = pathname || '/'
+  if (!raw.startsWith('/')) raw = '/' + raw
+
+  // Root deploy
+  if (base === '/') return raw
+
+  // Exact base path like '/repo' or '/repo/'
+  const baseNoTrailing = base.endsWith('/') ? base.slice(0, -1) : base
+  if (raw === baseNoTrailing || raw === base) return '/'
+
+  if (raw.startsWith(base)) {
+    const rest = raw.slice(base.length)
+    return rest ? '/' + rest : '/'
+  }
+
+  return raw
+}
+
+function withBaseUrl(pathname) {
+  const base = normalizeBaseUrl(import.meta.env.BASE_URL)
+  let p = pathname || '/'
+  if (!p.startsWith('/')) p = '/' + p
+
+  if (base === '/') return p
+  // base already ends with '/'
+  const joined = base + p.slice(1)
+  // Remove trailing slash unless it's the root
+  return joined.length > 1 && joined.endsWith('/') ? joined.slice(0, -1) : joined
+}
+
 /**
  * 從路徑中提取語言和實際路徑
  * @param {string} pathname - 完整路徑，例如 '/' 或 '/tw/portfolio' 或 '/project/mentor'
  * @returns {{lang: string, path: string}} - 語言代碼和實際路徑
  */
 export function parsePath(pathname) {
-  let raw = pathname || '/'
-  if (!raw.startsWith('/')) raw = '/' + raw
+  let raw = stripBaseUrl(pathname)
 
   // Root: English home
   if (raw === '/' || raw === '') {
@@ -93,8 +132,10 @@ export function buildPath(path, lang = 'en-US') {
   }
 
   // Other routes
-  if (!prefix) return normalizedPath
-  return `/${prefix}${normalizedPath}`
+  let externalPath = normalizedPath
+  if (prefix) externalPath = `/${prefix}${normalizedPath}`
+
+  return withBaseUrl(externalPath)
 }
 
 /**

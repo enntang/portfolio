@@ -37,13 +37,13 @@ src/assets/projects/<slug>/
 ├── images/               (共用圖片資料夾)
 │   ├── icon-arrow-down.svg
 │   └── ...
-├── images-en/            (英文版專屬圖片)
+├── en/                   (英文版專屬圖片)
 │   ├── projectInfo-xxx-screenshot1.png
 │   └── ...
-├── images-zh/            (中文版專屬圖片)
+├── zh/                   (中文版專屬圖片)
 │   ├── projectInfo-xxx-screenshot1.png
 │   └── ...
-└── images-ja/            (日文版專屬圖片)
+└── ja/                   (日文版專屬圖片)
     ├── projectInfo-xxx-screenshot1.png
     └── ...
 ```
@@ -57,9 +57,9 @@ src/assets/projects/<slug>/
 // 共用圖片（從 images/ 資料夾）
 import arrowDown from './images/icon-arrow-down.svg'
 
-// 中文版專屬圖片（從 images-zh/ 資料夾）
-import screenshot1 from './images-zh/projectInfo-mentor-screenshot1.png'
-import bg1 from './images-zh/projectInfo-mentor-bg-1.png'
+// 中文版專屬圖片（從 zh/ 資料夾）
+import screenshot1 from './zh/projectInfo-mentor-screenshot1.png'
+import bg1 from './zh/projectInfo-mentor-bg-1.png'
 ```
 
 **Page.en.jsx (英文版)**
@@ -68,8 +68,8 @@ import bg1 from './images-zh/projectInfo-mentor-bg-1.png'
 import arrowDown from './images/icon-arrow-down.svg'
 
 // 英文版專屬圖片
-import screenshot1 from './images-en/projectInfo-mentor-screenshot1.png'
-import bg1 from './images-en/projectInfo-mentor-bg-1.png'
+import screenshot1 from './en/projectInfo-mentor-screenshot1.png'
+import bg1 from './en/projectInfo-mentor-bg-1.png'
 ```
 
 **Page.ja.jsx (日文版)**
@@ -78,8 +78,8 @@ import bg1 from './images-en/projectInfo-mentor-bg-1.png'
 import arrowDown from './images/images/icon-arrow-down.svg'
 
 // 日文版專屬圖片
-import screenshot1 from './images-ja/projectInfo-mentor-screenshot1.png'
-import bg1 from './images-ja/projectInfo-mentor-bg-1.png'
+import screenshot1 from './ja/projectInfo-mentor-screenshot1.png'
+import bg1 from './ja/projectInfo-mentor-bg-1.png'
 ```
 
 ### 4. 專案列表資料
@@ -151,7 +151,7 @@ Navbar 右上角已加入語言切換器，點擊即可切換語言：
    - `Page.jsx` 作為預設/英文版（當找不到對應語言時使用）
 
 2. **圖片資料夾命名**：
-   - 必須使用 `images-zh/`、`images-en/`、`images-ja/` 的格式
+   - 必須使用 `zh/`、`en/`、`ja/` 的格式
    - 共用圖片放在 `images/` 資料夾
 
 3. **預設語言**：
