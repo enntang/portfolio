@@ -63,6 +63,9 @@ function withBaseUrl(pathname) {
   if (!p.startsWith('/')) p = '/' + p
 
   if (base === '/') return p
+  // If navigating to app "root", preserve trailing slash so hash anchors become `${base}#...`
+  // e.g. GitHub Pages base '/portfolio/' => '/portfolio/#home'
+  if (p === '/') return base
   // base already ends with '/'
   const joined = base + p.slice(1)
   // Remove trailing slash unless it's the root
@@ -120,15 +123,15 @@ export function buildPath(path, lang = 'en-US') {
 
   // Home
   if (normalizedPath === '/') {
-    if (!prefix) return '/'
+    if (!prefix) return withBaseUrl('/')
     // Simonlin style language home path
-    return `/${prefix}/home`
+    return withBaseUrl(`/${prefix}/home`)
   }
 
   // Projects list maps to /portfolio
   if (normalizedPath === '/projects') {
-    if (!prefix) return '/portfolio'
-    return `/${prefix}/portfolio`
+    if (!prefix) return withBaseUrl('/portfolio')
+    return withBaseUrl(`/${prefix}/portfolio`)
   }
 
   // Other routes

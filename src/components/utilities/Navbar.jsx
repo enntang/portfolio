@@ -157,7 +157,7 @@ function Navbar({ isWhite = false, isMenuOpen = false, onToggleMenu, variant = '
                 <LazyImage src={getPublicPath("/icon-arrow-left.svg")} alt="back" className="w-6 h-6" />
               </button>
             ) : (
-              <a href={buildHref('/')} aria-label="Go to home" className="inline-block">
+              <a href={`${buildHref('/')}#home`} aria-label="Go to home" className="inline-block">
                 <h1 className={`text-2xl font-bold ${isWhite ? 'text-gray-400' : 'text-white'
                   }`}>ENN<br />TANG</h1>
               </a>
@@ -167,7 +167,7 @@ function Navbar({ isWhite = false, isMenuOpen = false, onToggleMenu, variant = '
           {/* Center area */}
           <div className="flex items-center justify-center">
             {variant === 'arrow' && (
-              <a href={buildHref('/')} aria-label="Go to home" className="inline-block">
+              <a href={`${buildHref('/')}#home`} aria-label="Go to home" className="inline-block">
                 <h1 className={`text-2xl font-bold text-gray-800`}>ENN&nbsp;TANG</h1>
               </a>
             )}
