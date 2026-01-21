@@ -80,17 +80,17 @@ Procreate
 
 登入遊戲後的流程相當單純：使玩家進入等待序列 → 選企鵝 → 房間等待。
 
-![登入.png](%E2%AD%90%EF%B8%8F%E4%BC%81%E9%B5%9D%E6%90%B6%E5%9C%B0/%E7%99%BB%E5%85%A5.png)
+![login.png](login.png)
 
 房間列表縱向捲動，不同狀態區別化顯示：開放中的房間可隨時加入；滿員的房間會顯示「即將開始」並且禁止進入。
 
 採用符合使用習慣的四角佈局：右上方為登出按鈕，右下角則可以開關背景音樂。
 
-![房間列表.png](%E2%AD%90%EF%B8%8F%E4%BC%81%E9%B5%9D%E6%90%B6%E5%9C%B0/%E6%88%BF%E9%96%93%E5%88%97%E8%A1%A8.png)
+![room-list.png](room-list.png)
 
 加入遊戲房間後，左右切換喜歡的企鵝，選定之後按下「我準備好了」進入等待狀態；房間內所有人都準備好的時候就可以開始遊戲。
 
-![房間-玩家本人尚未準備好.png](%E2%AD%90%EF%B8%8F%E4%BC%81%E9%B5%9D%E6%90%B6%E5%9C%B0/%E6%88%BF%E9%96%93-%E7%8E%A9%E5%AE%B6%E6%9C%AC%E4%BA%BA%E5%B0%9A%E6%9C%AA%E6%BA%96%E5%82%99%E5%A5%BD.png)
+![room-waiting-not-ready.png](room-waiting-not-ready.png)
 
 ## 核心互動流程：遊戲開始
 
@@ -108,17 +108,17 @@ Procreate
 
 當輪到該位玩家的時候，出現蓋版訊息，用意是讓玩家不會輕易忽略狀態，導致整體遊戲時間延宕。
 
-![輪到玩家本人-01.png](%E2%AD%90%EF%B8%8F%E4%BC%81%E9%B5%9D%E6%90%B6%E5%9C%B0/%E8%BC%AA%E5%88%B0%E7%8E%A9%E5%AE%B6%E6%9C%AC%E4%BA%BA-01.png)
+![turn-self-01.png](turn-self-01.png)
 
 我在設計上利用側邊欄顯示戰況，畫面左右分別是玩家順序和即時計分。
 
 在地圖板塊上，使用顏色、光暈、地板亮起等方式標示「能走」「不能走」「分裂後的目標」，提升可圖性，玩家可依照引導進行點擊和分配企鵝到其他版圖。
 
-![輪到玩家本人-02.png](%E2%AD%90%EF%B8%8F%E4%BC%81%E9%B5%9D%E6%90%B6%E5%9C%B0/%E8%BC%AA%E5%88%B0%E7%8E%A9%E5%AE%B6%E6%9C%AC%E4%BA%BA-02.png)
+![turn-self-02.png](turn-self-02.png)
 
 分配時，來源與目的的「數字」是重要資訊，所以以黑色底襯托。
 
-![輪到玩家本人-04.png](%E2%AD%90%EF%B8%8F%E4%BC%81%E9%B5%9D%E6%90%B6%E5%9C%B0/%E8%BC%AA%E5%88%B0%E7%8E%A9%E5%AE%B6%E6%9C%AC%E4%BA%BA-04.png)
+![turn-self-04.png](turn-self-04.png)
 
 ## 清楚的規則說明
 
@@ -134,21 +134,21 @@ Procreate
 
 當勝利條件達成時，遊戲結束，並顯示結算畫面。最高分的勝利者會在最大的欄位閃耀光芒，其餘玩家的分數也會一並顯示在面板上、依序排名。
 
-![結算.png](%E2%AD%90%EF%B8%8F%E4%BC%81%E9%B5%9D%E6%90%B6%E5%9C%B0/%E7%B5%90%E7%AE%97.png)
+![result.png](result.png)
 
 # Visual Design
 
 整體使用冰原、海水為主的清爽配色，並且用手繪風格增加親切感。在介面上採用大量圓角、柔和陰影，營造友善輕鬆的遊戲氛圍。
 
-![新增房間.png](%E2%AD%90%EF%B8%8F%E4%BC%81%E9%B5%9D%E6%90%B6%E5%9C%B0/%E6%96%B0%E5%A2%9E%E6%88%BF%E9%96%93.png)
+![add-room.png](add-room.png)
 
 企鵝插圖穿插在 UI 狀態與操作提示上，形成一致的風格增加遊玩沈浸感。
 
-![確認登出popup.png](%E2%AD%90%EF%B8%8F%E4%BC%81%E9%B5%9D%E6%90%B6%E5%9C%B0/%E7%A2%BA%E8%AA%8D%E7%99%BB%E5%87%BApopup.png)
+![logout-popup.png](logout-popup.png)
 
 想讓遊戲的視覺更具有故事感，所以企鵝的美術設計皆以手繪完成，媒材主要是不透明水彩。紙上作畫後，拍照掃描進電腦後製完成。
 
-![使用不透明水彩繪製的原稿](%E2%AD%90%EF%B8%8F%E4%BC%81%E9%B5%9D%E6%90%B6%E5%9C%B0/IMG_6913.jpg)
+![watercolor-original.jpg](watercolor-original.jpg)
 
 使用不透明水彩繪製的原稿
 

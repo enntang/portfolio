@@ -4,7 +4,8 @@ function SectionBlock({
   children, 
   className = '', 
   style = {},
-  backgrounds = {} 
+  backgrounds = {},
+  textDarkOnBg = false 
 }) {
   // 支持 bgVariant 和 variant 两种命名方式（为了兼容不同项目）
   const variantKey = bgVariant || variant
@@ -16,7 +17,9 @@ function SectionBlock({
   const backgroundImage = variantKey && backgrounds[variantKey] ? backgrounds[variantKey] : null
   const hasCustomBackground = !!(backgroundImage || style.background || style.backgroundImage)
   const isWhiteVariant = variantKey === 'white'
-  const textColor = backgroundImage ? 'text-white' : 'text-gray-900'
+  const textColor = backgroundImage
+    ? (textDarkOnBg ? 'text-gray-900' : 'text-white')
+    : 'text-gray-900'
   const backgroundColor = isWhiteVariant ? 'bg-white' : (hasCustomBackground ? '' : 'bg-bg')
 
   const combinedStyle = { ...style }

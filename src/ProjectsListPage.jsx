@@ -1,9 +1,6 @@
 import { useState } from 'react'
 import Navbar from './components/utilities/Navbar'
 import BtnWhite from './components/utilities/BtnWhite'
-import mentorImg from '../public/projectList-icon-mentor.png'
-import ehairposImg from '../public/projectList-icon-ehairpos.png'
-import penguinImg from '../public/projectList-icon-penguin.png'
 import { getPublicPath } from './utils/path'
 import { useLanguage } from './contexts/LanguageContext'
 import { useTranslation } from './hooks/useTranslation'
@@ -21,7 +18,7 @@ function ProjectBanner({
   cta = 'Case Study',
   comingSoon = false,
   variant = 'dark', // 'dark' or 'light'
-  mainImage, // 主图
+  mainImage, 
   t, // translation function
 }) {
   // 根据 variant 决定文字颜色
@@ -38,7 +35,7 @@ function ProjectBanner({
         </picture>
 
         <div className={`absolute inset-0 p-10 mobile:p-6 flex items-center justify-between ${align === 'right' ? 'mobile:flex-col-reverse' : 'mobile:flex-col'} mobile:justify-center`}>
-          {/* 移动端：主图（默认在上方，penguin在下方） */}
+          
           {mainImage && (
             <div className={`hidden mobile:flex mobile:justify-center ${align === 'right' ? 'mt-4' : 'mb-4'}`}>
               <img 
@@ -49,7 +46,7 @@ function ProjectBanner({
             </div>
           )}
 
-          {/* 桌面端：align=right 时主图在左侧 */}
+          
           {mainImage && align === 'right' && (
             <div className='mobile:hidden mr-8'>
               <img 
@@ -79,6 +76,8 @@ function ProjectBanner({
               <BtnWhite 
                 name={cta || (t ? t('projects.caseStudy') : 'Case Study')} 
                 variant={variant === 'light' ? 'bordered' : 'default'} 
+                // Avoid nested <a> inside the outer banner <a>
+                as="span"
               />
             ) : (
               <span className='inline-flex items-center bg-white/80 text-gray-700 rounded-full px-4 py-1.5 text-sm font-medium'>
@@ -87,7 +86,7 @@ function ProjectBanner({
             )}
           </div>
 
-          {/* 桌面端：align=left 时主图在右侧 */}
+          
           {mainImage && align === 'left' && (
             <div className='mobile:hidden ml-8'>
               <img 
@@ -109,6 +108,11 @@ function ProjectsList() {
   const { t } = useTranslation()
   const projectsData = getProjectsByLanguage(language)
   const imageKeyMap = { 'mentor': 'memtor', 'ehairpos': 'ehairpos', 'penguin-territory': 'penguin' }
+  // Public assets should be referenced by URL (and base-prefixed via getPublicPath),
+  // not imported from /public (Vite disallows that).
+  const mentorImg = getPublicPath('/projectList-icon-mentor.png')
+  const ehairposImg = getPublicPath('/projectList-icon-ehairpos.png')
+  const penguinImg = getPublicPath('/projectList-icon-penguin.png')
 
   // Helper to build path with language prefix
   const buildHref = (path) => {
@@ -121,10 +125,10 @@ function ProjectsList() {
     const subtitle = hasColon ? p.title.split(':').slice(1).join(':').trim() : ''
     const key = imageKeyMap[p.slug] || p.slug
     
-    // 根据项目决定 variant (深色底配白字 或 淡色底配深色字)
+    
     const variant = (p.slug === 'ehairpos' || p.slug === 'penguin-territory') ? 'light' : 'dark'
     
-    // 根据项目分配主图
+    
     let mainImage = null
     if (p.slug === 'mentor') mainImage = mentorImg
     else if (p.slug === 'ehairpos') mainImage = ehairposImg
@@ -138,7 +142,8 @@ function ProjectsList() {
       subtitle,
       description: p.description,
       align: p.slug === 'penguin-territory' ? 'right' : 'left',
-      comingSoon: p.slug === 'penguin-territory',
+      // Penguin Territory page is now live; do not force "coming soon" state.
+      comingSoon: false,
       variant,
       mainImage,
     }
