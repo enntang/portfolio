@@ -797,7 +797,7 @@ export default function EHairPOSPage() {
 
             {/* Desktop Layout */}
             <div className="hidden md:block">
-              <H2>Logotype Design</H2>
+              <H2 id="logotype-design">Logotype Design</H2>
               <div className='grid grid-cols-1 md:grid-cols-2 gap-10'>
                 <div>
                   <P><strong>Concept:</strong> The logo merges the letters "e" and "P" with the infinity symbol and a pair of salon scissors, creating a ribbon-like shape that feels both soft and professional—symbolizing endless service and creativity in the salon industry.</P>
@@ -859,7 +859,7 @@ export default function EHairPOSPage() {
             <div className="hidden md:block">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
                 <div>
-                  <H2>Reflections</H2>
+                  <H2 id="reflections">Reflections</H2>
                   <P>After launch, the system was adopted by several mid-to-large salon chains. One owner shared:</P>
                   <div className="bg-white/10 backdrop-blur rounded-sm shadow p-5 mb-8">
                     <img src={quote} alt="quote" className='mb-8' />
@@ -869,7 +869,7 @@ export default function EHairPOSPage() {
                 </div>
                 <div>
 
-                  <H2>Takeaways</H2>
+                  <H2 id="takeaways">Takeaways</H2>
                   <UL>
                     <LI>Design starts with understanding how people work, not what screens they tap</LI>
                     <LI>Every layout decision should answer: Does this make their task easier or clearer?</LI>

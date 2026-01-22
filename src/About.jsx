@@ -242,16 +242,7 @@ function About() {
           </div>
         </div>
 
-        {/* Mobile bottom tab bar */}
-        <div className='fixed bottom-0 left-0 right-0 z-40 lg:hidden bg-white/90 backdrop-blur border-t border-gray-200'>
-          <div className='grid grid-cols-5 text-sm text-gray-400'>
-            <button className='py-3' onClick={() => scrollTo(profileRef)}>{t('about.mobileTabs.profile')}</button>
-            <button className='py-3' onClick={() => scrollTo(whatIDoRef)}>{t('about.mobileTabs.whatIDo')}</button>
-            <button className='py-3' onClick={() => scrollTo(experienceRef)}>{t('about.mobileTabs.experience')}</button>
-            <button className='py-3' onClick={() => scrollTo(educationRef)}>{t('about.mobileTabs.education')}</button>
-
-          </div>
-        </div>
+       
       </div>
     </div>
   )

@@ -395,7 +395,7 @@ export default function MentorPageZh() {
             <div className="hidden md:block">
               <TwoColumn>
                 <div>
-                  <H2>背景</H2>
+                  <H2 id="背景">背景</H2>
                   <P>
                     Mentor 最初被構想為公司既有桌面端自學軟體（提供錄播課程）的行動端伴侶。
                   </P>
@@ -528,7 +528,7 @@ export default function MentorPageZh() {
             {/* Desktop Layout */}
             <div className="hidden md:block">
               <div>
-                <H2>設計目標</H2>
+                <H2 id="設計目標">設計目標</H2>
                 <P className="bg-white/10 backdrop-blur rounded-sm shadow p-5">
                   依據研究洞察，我們整理出三個設計目標，以回應家長與學生的主要疑慮：
                 </P>
@@ -626,7 +626,7 @@ export default function MentorPageZh() {
 
             {/* Desktop Layout */}
             <div className="hidden md:block">
-              <H2>設計產出</H2>
+              <H2 id="設計產出">設計產出</H2>
               <P>
                 為了傳達 Mentor 作為個人化學習教練的價值，我們以敘事方式去設計整體體驗：Mentor 不只是一個 App，而是陪伴學生設定可達成目標、保持節奏、並在可見進步中建立自信的智慧夥伴。以此視角，我主導視覺設計與 UI 系統建立，並與三個核心設計目標對齊。
               </P>
@@ -690,7 +690,7 @@ export default function MentorPageZh() {
 
             {/* Desktop Layout */}
             <div className="hidden md:block">
-              <H2>Mentor 的故事</H2>
+              <H2 id="mentor-的故事">Mentor 的故事</H2>
               <TwoColumn>
                 <div>
                   <div className="bg-white/10 backdrop-blur rounded-sm shadow p-5 ">
@@ -782,7 +782,7 @@ export default function MentorPageZh() {
 
             {/* Desktop Layout */}
             <div className="hidden md:block">
-              <H2>Mentor 作為介面引導者</H2>
+              <H2 id="mentor-作為介面引導者">Mentor 作為介面引導者</H2>
               <P>
                 Mentor 會停留在右下角，作為即時的學習代理：依學生操作提供回饋、提醒與鼓勵。
               </P>
@@ -1122,7 +1122,7 @@ export default function MentorPageZh() {
 
             {/* Desktop Layout */}
             <div className="hidden md:block">
-              <H2>反思</H2>
+              <H2 id="反思">反思</H2>
 
               <div>
                 <P>

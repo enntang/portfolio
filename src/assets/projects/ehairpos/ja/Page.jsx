@@ -797,7 +797,7 @@ export default function EHairPOSPageJa() {
 
             {/* Desktop Layout */}
             <div className="hidden md:block">
-              <H2>ロゴタイプデザイン</H2>
+              <H2 id="ロゴタイプデザイン">ロゴタイプデザイン</H2>
               <div className='grid grid-cols-1 md:grid-cols-2 gap-10'>
                 <div>
                   <P><strong>コンセプト：</strong>「e」と「P」を無限記号、サロンのハサミと組み合わせ、リボンのような形状に落とし込みました。柔らかさとプロフェッショナルさを両立し、「終わりのないサービス」と「創造性」を象徴しています。</P>
@@ -859,7 +859,7 @@ export default function EHairPOSPageJa() {
             <div className="hidden md:block">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
                 <div>
-                  <H2>振り返り</H2>
+                  <H2 id="振り返り">振り返り</H2>
                   <P>リリース後、本システムは複数の中〜大規模サロンチェーンに採用されました。あるオーナーからは次の声がありました：</P>
                   <div className="bg-white/10 backdrop-blur rounded-sm shadow p-5 mb-8">
                     <img src={quote} alt="quote" className='mb-8' />
@@ -869,7 +869,7 @@ export default function EHairPOSPageJa() {
                 </div>
                 <div>
 
-                  <H2>学び</H2>
+                  <H2 id="学び">学び</H2>
                   <UL>
                     <LI>デザインは「どの画面をタップするか」ではなく「人がどう働くか」を理解することから始まる</LI>
                     <LI>レイアウトの判断は常に問い直す：作業はより簡単に、より明確になったか？</LI>

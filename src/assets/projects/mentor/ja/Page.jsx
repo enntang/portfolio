@@ -395,7 +395,7 @@ export default function MentorPageJa() {
             <div className="hidden md:block">
               <TwoColumn>
                 <div>
-                  <H2>背景</H2>
+                  <H2 id="背景">背景</H2>
                   <P>
                     Mentor は当初、録画授業を提供する既存のデスクトップ自学習ソフトを補完する「モバイルコンパニオン」として構想されました。
                   </P>
@@ -528,7 +528,7 @@ export default function MentorPageJa() {
             {/* Desktop Layout */}
             <div className="hidden md:block">
               <div>
-                <H2>デザイン目標</H2>
+                <H2 id="デザイン目標">デザイン目標</H2>
                 <P className="bg-white/10 backdrop-blur rounded-sm shadow p-5">
                   リサーチで得たインサイトをもとに、保護者と学生の主要な不安に応える 3 つの目標を設定しました：
                 </P>
@@ -626,7 +626,7 @@ export default function MentorPageJa() {
 
             {/* Desktop Layout */}
             <div className="hidden md:block">
-              <H2>デザイン成果物</H2>
+              <H2 id="デザイン成果物">デザイン成果物</H2>
               <P>
                 Mentor を「パーソナライズ学習コーチ」として伝えるために、体験全体を物語として設計しました。Mentor は単なるアプリではなく、達成可能な目標設定、ペース維持、可視化された成長による自信形成を支えるスマートな相棒です。この視点のもと、私はビジュアルデザインとUIシステム構築をリードし、3つのデザイン目標に整合させました。
               </P>
@@ -690,7 +690,7 @@ export default function MentorPageJa() {
 
             {/* Desktop Layout */}
             <div className="hidden md:block">
-              <H2>Mentor の物語</H2>
+              <H2 id="mentor-の物語">Mentor の物語</H2>
               <TwoColumn>
                 <div>
                   <div className="bg-white/10 backdrop-blur rounded-sm shadow p-5 ">
@@ -782,7 +782,7 @@ export default function MentorPageJa() {
 
             {/* Desktop Layout */}
             <div className="hidden md:block">
-              <H2>UIガイドとしての Mentor</H2>
+              <H2 id="uiガイドとしての-mentor">UIガイドとしての Mentor</H2>
               <P>
                 Mentor は画面右下に常駐し、リアルタイムの学習エージェントとして、操作に応じたフィードバック、リマインド、励ましを提供します。
               </P>
@@ -1122,7 +1122,7 @@ export default function MentorPageJa() {
 
             {/* Desktop Layout */}
             <div className="hidden md:block">
-              <H2>振り返り</H2>
+              <H2 id="振り返り">振り返り</H2>
 
               <div>
                 <P>

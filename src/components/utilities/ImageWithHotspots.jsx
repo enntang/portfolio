@@ -5,7 +5,40 @@ import LazyImage from './LazyImage'
 /**
  * Ripple Button Component with concentric circle animation
  */
-function RippleButton({ x, y, onClick, isActive }) {
+function RippleButton({ x, y, onClick, isActive, colorVariant = 'blue' }) {
+  const colorClasses = {
+    blue: {
+      ripple: 'bg-blue-500',
+      rippleActive: 'bg-blue-600',
+      dot: isActive ? 'bg-blue-600' : 'bg-blue-500',
+      dotHover: 'group-hover:bg-blue-600',
+      rippleClass: 'bg-blue-500',
+    },
+    purple: {
+      ripple: 'bg-purple-500',
+      rippleActive: 'bg-purple-600',
+      dot: isActive ? 'bg-purple-600' : 'bg-purple-500',
+      dotHover: 'group-hover:bg-purple-600',
+      rippleClass: 'bg-purple-500',
+    },
+    highlight: {
+      ripple: 'bg-highlight',
+      rippleActive: 'bg-highlight',
+      dot: isActive ? 'bg-highlight' : 'bg-highlight',
+      dotHover: 'group-hover:bg-highlight',
+      rippleClass: 'bg-highlight',
+    },
+  }
+
+  const colors = colorClasses[colorVariant] || colorClasses.blue
+  
+  // For custom colors like highlight, use inline styles for opacity
+  const useInlineOpacity = colorVariant === 'highlight'
+  const rippleStyle1 = useInlineOpacity ? { backgroundColor: 'rgba(204, 235, 111, 0.3)' } : {}
+  const rippleStyle2 = useInlineOpacity ? { backgroundColor: 'rgba(204, 235, 111, 0.2)' } : {}
+  const rippleStyle3 = useInlineOpacity ? { backgroundColor: 'rgba(204, 235, 111, 0.15)' } : {}
+  const rippleStyle4 = useInlineOpacity ? { backgroundColor: 'rgba(204, 235, 111, 0.4)' } : {}
+
   return (
     <button
       onClick={onClick}
@@ -17,26 +50,27 @@ function RippleButton({ x, y, onClick, isActive }) {
       <div className="relative w-12 h-12 flex items-center justify-center">
         {/* Outer ripple 1 */}
         <span 
-          className="absolute inset-0 rounded-full bg-blue-500/30 animate-ping" 
-          style={{ animationDuration: '2s' }} 
+          className={`absolute inset-0 rounded-full ${useInlineOpacity ? '' : colors.rippleClass + '/30'} animate-ping`}
+          style={{ animationDuration: '2s', ...rippleStyle1 }} 
         />
         {/* Outer ripple 2 */}
         <span 
-          className="absolute inset-0 rounded-full bg-blue-500/20 animate-ping" 
-          style={{ animationDuration: '2s', animationDelay: '0.5s' }} 
+          className={`absolute inset-0 rounded-full ${useInlineOpacity ? '' : colors.rippleClass + '/20'} animate-ping`}
+          style={{ animationDuration: '2s', animationDelay: '0.5s', ...rippleStyle2 }} 
         />
         {/* Outer ripple 3 */}
         <span 
-          className="absolute inset-0 rounded-full bg-blue-500/15 animate-ping" 
-          style={{ animationDuration: '2s', animationDelay: '1s' }} 
+          className={`absolute inset-0 rounded-full ${useInlineOpacity ? '' : colors.rippleClass + '/15'} animate-ping`}
+          style={{ animationDuration: '2s', animationDelay: '1s', ...rippleStyle3 }} 
         />
         {/* Middle circle */}
-        <span className="absolute inset-0 rounded-full bg-blue-500/40 scale-[0.6]" />
+        <span 
+          className={`absolute inset-0 rounded-full ${useInlineOpacity ? '' : colors.rippleClass + '/40'} scale-[0.6]`}
+          style={rippleStyle4}
+        />
         {/* Inner dot */}
         <span 
-          className={`relative z-10 w-5 h-5 rounded-full transition-colors ${
-            isActive ? 'bg-blue-600' : 'bg-blue-500'
-          } group-hover:bg-blue-600`} 
+          className={`relative z-10 w-5 h-5 rounded-full transition-colors ${colors.dot} ${colors.dotHover}`}
         />
       </div>
     </button>
@@ -85,6 +119,7 @@ function Tooltip({ content, x, y, arrowPosition = 'bottom' }) {
  * @param {Array} hotspots - Array of hotspot configurations
  * @param {string} className - Additional CSS classes for the image
  * @param {string} containerClassName - Additional CSS classes for the container
+ * @param {string} colorVariant - Color variant: 'blue', 'purple', or 'highlight' (default: 'blue')
  * 
  * @example
  * const hotspots = [
@@ -96,6 +131,7 @@ function Tooltip({ content, x, y, arrowPosition = 'bottom' }) {
  *   src={myImage} 
  *   alt="My image" 
  *   hotspots={hotspots}
+ *   colorVariant="purple"
  * />
  */
 export default function ImageWithHotspots({ 
@@ -104,6 +140,7 @@ export default function ImageWithHotspots({
   hotspots = [],
   className = '',
   containerClassName = '',
+  colorVariant = 'blue',
 }) {
   const { containerRef, activeHotspot, setActiveHotspot, handleHotspotClick } = useImageHotspots()
 
@@ -123,6 +160,7 @@ export default function ImageWithHotspots({
           y={hotspot.y}
           onClick={(e) => handleHotspotClick(hotspot.id, e)}
           isActive={activeHotspot === hotspot.id}
+          colorVariant={colorVariant}
         />
       ))}
 

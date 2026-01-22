@@ -417,7 +417,7 @@ export default function MentorPage() {
             <div className="hidden md:block">
               <TwoColumn>
                 <div>
-                  <H2>Background</H2>
+                  <H2 id="background">Background</H2>
                   <P>
                     Originally, Mentor was envisioned as a mobile companion to the company's existing desktop-based self-learning software, which featured recorded subject lectures.
                   </P>
@@ -533,7 +533,7 @@ export default function MentorPage() {
             {/* Desktop Layout */}
             <div className="hidden md:block">
               <div>
-                <H2>Design Goals</H2>
+                <H2 id="design-goals">Design Goals</H2>
                 <P className="bg-white/10 backdrop-blur rounded-sm shadow p-5">Based on the key insights gathered from our research, we distilled the following three design goals to address the specific concerns of both parents and students:</P>
               </div>
               <div>
@@ -618,7 +618,7 @@ export default function MentorPage() {
 
             {/* Desktop Layout */}
             <div className="hidden md:block">
-              <H2>Design Deliverables</H2>
+              <H2 id="design-deliverables">Design Deliverables</H2>
               <P>To communicate Mentor's value as a personalized learning coach, we framed the product experience around a narrative: Mentor is not just an app—it's a smart companion that helps students set achievable goals, stay on track, and gain confidence through visible progress. With this perspective, I led the visual design and UI system development in alignment with our three core design goals.</P>
 
               <ProjectNote className='absolute top-[40%] right-1/2 transform translate-x-1/2 translate-y-32'>
@@ -670,7 +670,7 @@ export default function MentorPage() {
 
             {/* Desktop Layout */}
             <div className="hidden md:block">
-              <H2>Story of Mentor</H2>
+              <H2 id="story-of-mentor">Story of Mentor</H2>
               <TwoColumn>
                 <div>
                   <div className="bg-white/10 backdrop-blur rounded-sm shadow p-5 ">
@@ -745,7 +745,7 @@ export default function MentorPage() {
 
             {/* Desktop Layout */}
             <div className="hidden md:block">
-              <H2>Mentor as a UI Guide</H2>
+              <H2 id="mentor-as-a-ui-guide">Mentor as a UI Guide</H2>
               <P>Mentor sits at the bottom-right corner as a real-time learning agent—offering feedback, reminders, and encouragement based on each student's actions.
               </P>
               <P>Its glowing, sci-fi cube avatar blends intelligence with a sense of myth, creating a two-layer interaction model:</P>
@@ -1012,7 +1012,7 @@ export default function MentorPage() {
 
             {/* Desktop Layout */}
             <div className="hidden md:block">
-              <H2>Reflection</H2>
+              <H2 id="reflection">Reflection</H2>
 
               <div>
                 <P>Designing Mentor was more than a visual or functional challenge—it was a deeply collaborative, iterative process that stretched across teams and disciplines. Looking back, here are three key reflections from my role as the design lead:</P>

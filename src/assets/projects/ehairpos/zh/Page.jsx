@@ -797,7 +797,7 @@ export default function EHairPOSPageZh() {
 
             {/* Desktop Layout */}
             <div className="hidden md:block">
-              <H2>Logotype 設計</H2>
+              <H2 id="logotype-設計">Logotype 設計</H2>
               <div className='grid grid-cols-1 md:grid-cols-2 gap-10'>
                 <div>
                   <P><strong>概念：</strong>將字母「e」與「P」結合無限符號與美髮剪刀，形成帶狀的視覺輪廓；兼具柔和與專業感，象徵沙龍產業中「無限延伸的服務」與「創意能量」。</P>
@@ -859,7 +859,7 @@ export default function EHairPOSPageZh() {
             <div className="hidden md:block">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
                 <div>
-                  <H2>心得回顧</H2>
+                  <H2 id="心得回顧">心得回顧</H2>
                   <P>上線後，系統被多家中大型連鎖沙龍採用。一位店主分享：</P>
                   <div className="bg-white/10 backdrop-blur rounded-sm shadow p-5 mb-8">
                     <img src={quote} alt="quote" className='mb-8' />
@@ -869,7 +869,7 @@ export default function EHairPOSPageZh() {
                 </div>
                 <div>
 
-                  <H2>重點收穫</H2>
+                  <H2 id="重點收穫">重點收穫</H2>
                   <UL>
                     <LI>設計的起點是理解人如何工作，而不是他們點了哪些畫面</LI>
                     <LI>每一個版面決策都該回到一個問題：是否讓任務更容易、更清楚？</LI>

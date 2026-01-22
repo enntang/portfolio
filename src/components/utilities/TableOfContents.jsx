@@ -23,15 +23,45 @@ function TableOfContents() {
       
       const headingList = []
       
+      const seenIds = new Set()
+      const seenTexts = new Set()
+      
       h2Elements.forEach((h2, index) => {
+        // 檢查元素是否可見
+        const style = window.getComputedStyle(h2)
+        const rect = h2.getBoundingClientRect()
+        const isVisible = style.display !== 'none' && 
+                         style.visibility !== 'hidden' &&
+                         rect.width > 0 && 
+                         rect.height > 0
+        
+        if (!isVisible) {
+          return
+        }
+        
+        const text = h2.textContent?.trim() || ''
+        
+        // 如果這個文本已經出現過，跳過它（避免重複）
+        if (seenTexts.has(text)) {
+          return
+        }
+        
         // 如果没有 id，自动生成一个
         if (!h2.id) {
-          const text = h2.textContent?.trim().toLowerCase().replace(/[^\w\s-]/g, '').replace(/\s+/g, '-') || `h2-${index}`
-          h2.id = text
+          const idText = text.toLowerCase().replace(/[^\w\s-]/g, '').replace(/\s+/g, '-') || `h2-${index}`
+          h2.id = idText
         }
+        
+        // 如果這個 ID 已經出現過，跳過它（避免重複）
+        if (seenIds.has(h2.id)) {
+          return
+        }
+        
+        seenIds.add(h2.id)
+        seenTexts.add(text)
         headingList.push({
           id: h2.id,
-          text: h2.textContent?.trim() || '',
+          text: text,
           element: h2
         })
       })

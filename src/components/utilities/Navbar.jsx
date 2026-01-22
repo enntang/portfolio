@@ -175,45 +175,6 @@ function Navbar({ isWhite = false, isMenuOpen = false, onToggleMenu, variant = '
 
           {/* Right area */}
           <div className="flex items-center justify-end gap-4">
-            {/* Language Switcher */}
-            <div className="flex items-center gap-2">
-              <button
-                onClick={() => handleLanguageChange('en-US')}
-                className={`text-xs px-2 py-1 rounded transition-colors ${
-                  language === 'en-US' 
-                    ? 'text-gray-900 font-semibold' 
-                    : 'text-gray-500 hover:text-gray-700'
-                }`}
-                aria-label="Switch to English"
-              >
-                EN
-              </button>
-              <span className="text-gray-300">|</span>
-              <button
-                onClick={() => handleLanguageChange('zh-TW')}
-                className={`text-xs px-2 py-1 rounded transition-colors ${
-                  language === 'zh-TW' 
-                    ? 'text-gray-900 font-semibold' 
-                    : 'text-gray-500 hover:text-gray-700'
-                }`}
-                aria-label="Switch to Traditional Chinese"
-              >
-                中
-              </button>
-              <span className="text-gray-300">|</span>
-              <button
-                onClick={() => handleLanguageChange('ja-JP')}
-                className={`text-xs px-2 py-1 rounded transition-colors ${
-                  language === 'ja-JP' 
-                    ? 'text-gray-900 font-semibold' 
-                    : 'text-gray-500 hover:text-gray-700'
-                }`}
-                aria-label="Switch to Japanese"
-              >
-                日
-              </button>
-            </div>
-            
             <button
               aria-label={isMenuOpen ? 'Close menu' : 'Open menu'}
               onClick={onToggleMenu}
@@ -250,11 +211,11 @@ function Navbar({ isWhite = false, isMenuOpen = false, onToggleMenu, variant = '
           </div>
         </div>
       </div>
-      
+
       {showMenu && (
         <div
           ref={menuContainerRef}
-          className={`fixed inset-0 w-screen h-screen z-[60] bg-bg text-white p-4 md:p-16 lg:p-40 transition-opacity duration-300 ${
+          className={`fixed inset-0 w-screen h-screen z-[60] bg-bg text-white p-4 md:p-28 lg:p-40 transition-opacity duration-300 ${
             isClosing ? 'opacity-0' : 'opacity-100'
           }`}
           style={{ animation: isClosing ? 'none' : 'modalSlideIn 0.3s ease-out' }}
@@ -277,9 +238,50 @@ function Navbar({ isWhite = false, isMenuOpen = false, onToggleMenu, variant = '
                 <BtnWhite name={t('about.readCV')} href="https://www.cake.me/resumes/enn-tang" target="_blank" />
               </div>
               <div>
+                <div className="text-caption font-semibold tracking-widest text-gray-400 pb-2">Language</div>
+                <div className="flex items-center gap-2">
+                  <button
+                    onClick={() => handleLanguageChange('en-US')}
+                    className={`text-sm px-2 py-1 rounded-full transition-colors ${
+                      language === 'en-US'
+                        ? 'text-gray-900 font-semibold'
+                        : 'text-gray-500 hover:bg-highlight'
+                    }`}
+                    aria-label="Switch to English"
+                  >
+                    EN
+                  </button>
+                  <span className="text-gray-300">|</span>
+                  <button
+                    onClick={() => handleLanguageChange('zh-TW')}
+                    className={`text-sm px-2 py-1 rounded-full transition-colors ${
+                      language === 'zh-TW'
+                        ? 'text-gray-900 font-semibold'
+                        : 'text-gray-500 hover:bg-highlight'
+                    }`}
+                    aria-label="Switch to Traditional Chinese"
+                  >
+                    中
+                  </button>
+                  <span className="text-gray-300">|</span>
+                  <button
+                    onClick={() => handleLanguageChange('ja-JP')}
+                    className={`text-sm px-2 py-1 rounded-full transition-colors ${
+                      language === 'ja-JP'
+                        ? 'text-gray-900 font-semibold'
+                        : 'text-gray-500 hover:bg-highlight'
+                    }`}
+                    aria-label="Switch to Japanese"
+                  >
+                    日
+                  </button>
+                </div>
+              </div>
+              <div>
                 <div className="text-caption font-semibold tracking-widest text-gray-400">{t('common.contactMe')}</div>
                 <EmailCopy />
               </div>
+             
             </div>
           </div>
         </div>
