@@ -18,7 +18,7 @@ function EmailCopy({
   const displayText = label || email
 
   return (
-    <div ref={internalContainerRef} className="relative inline-block text-4xl mobile:text-3xl text-gray-300 font-medium mb-16 mobile:mb-8">
+    <div ref={internalContainerRef} className="relative inline-block text-xl md:text-2xl  text-gray-300 font-medium mb-16 mobile:mb-8">
       <button
         type="button"
         aria-label="Click to copy email"

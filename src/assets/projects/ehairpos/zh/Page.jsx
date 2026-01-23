@@ -260,7 +260,7 @@ export default function EHairPOSPageZh() {
               className='pointer-events-none select-none absolute inset-x-0 bottom-0 w-full h-auto'
             />
             <Container className='flex flex-col items-center justify-center text-center relative z-10'>
-              <img src={iconEhairpos} ref={iconEhairposRef} alt="eHairPOS" className='w-48 h-48 md:w-60 md:h-60 mb-8 z-10' />
+              <img src={iconEhairpos} ref={iconEhairposRef} alt="eHairPOS" className='w-48 h-48 md:w-60 md:h-60 mb-8 z-10 rounded-lg' />
               <h1 className='text-large mobile:text-large-mobile text-[#994FDE]'>eHairPOS</h1>
               <H3 className='mb-24 text-gray-900'>美髮沙龍管理工具</H3>
               <P className='w-full md:w-2/3 text-gray-900'>專為美髮沙龍打造的全方位 POS 系統，從預約到結帳一站式串連，讓工作流程更順暢。</P>
@@ -279,7 +279,7 @@ export default function EHairPOSPageZh() {
           <Container className='flex flex-col items-center justify-center'>
 
             <H2>專案簡介</H2>
-            <LazyImage src={tablet} alt="tablet" className='w-full md:w-2/3 h-auto' />
+            <LazyImage src={tablet} alt="tablet" className='w-full md:w-2/3 h-auto rounded-lg' />
             <div className="grid grid-cols-1 md:grid-cols-3 gap-16 mt-16">
               <div className="md:col-span-2">
                 <P>
@@ -364,7 +364,7 @@ export default function EHairPOSPageZh() {
                 </UL>
               </div>
             </div>
-            <img src={draft1} alt="draft1" className='w-full h-auto mt-16 rounded-xs' />
+            <img src={draft1} alt="draft1" className='w-full h-auto mt-16 rounded-lg' />
             <p className='text-caption text-gray-500 font-light mt-4'>避免零碎式拼貼 UI；以整體角度先草擬並比較不同版面。</p>
           </Container>
         </SectionBlock>
@@ -392,20 +392,21 @@ export default function EHairPOSPageZh() {
                 <SwiperSlide>
                   <div>
                     <P>舊版：瀏覽顧客清單時，點入明細會開啟全螢幕彈窗；必須先關閉才能回到清單。</P>
-                    <div className='grid grid-cols-1 gap-4 mb-8'>
-                      <img src={old1} alt="old1" className='w-full h-auto mt-8 rounded-xs' />
-                      <img src={old2} alt="old2" className='w-full h-auto rounded-xs' />
+                    <div className='grid grid-cols-1 gap-4 mb-8 mobile:m-0'>
+                      <img src={old1} alt="old1" className='w-full h-auto mt-8 rounded-lg' />
+                      <img src={old2} alt="old2" className='w-full h-auto rounded-lg mobile:hidden' />
                     </div>
                   </div>
                 </SwiperSlide>
                 <SwiperSlide>
                   <div>
                     <P>新版：採用分割視圖，點選清單中的顧客即可在右側即時顯示詳細資訊。</P>
+                 
                     <ImageWithHotspots
                       src={screenshot01}
                       alt="Customers list"
                       hotspots={customersHotspots}
-                      className='mb-8'
+                      className='mb-8 rounded-lg'
                     />
                   </div>
                 </SwiperSlide>
@@ -416,7 +417,7 @@ export default function EHairPOSPageZh() {
                       src={screenshot02}
                       alt="Customer notes"
                       hotspots={customersNotesHotspots}
-                      className='mb-8'
+                      className='mb-8 rounded-lg'
                     />
                   </div>
                 </SwiperSlide>
@@ -427,6 +428,7 @@ export default function EHairPOSPageZh() {
                       src={screenshot03}
                       alt="Customer charts"
                       hotspots={customersChartsHotspots}
+                      className='rounded-lg'
                     />
                   </div>
                 </SwiperSlide>
@@ -440,15 +442,15 @@ export default function EHairPOSPageZh() {
               <P>我們捨棄以彈窗為主的瀏覽方式，改採分割視圖。使用者可同時瀏覽顧客清單與右側完整資料，大幅縮短查找時間並減少點擊次數。</P>
               <P>舊版：瀏覽顧客清單時，點入明細會開啟全螢幕彈窗；必須先關閉才能回到清單。</P>
               <div className='grid grid-cols-1 md:grid-cols-2 gap-16 mb-16'>
-                <img src={old1} alt="old1" className='w-full h-auto mt-16 rounded-xs' />
-                <img src={old2} alt="old1" className='w-full h-auto mt-16 rounded-xs' />
+                <img src={old1} alt="old1" className='w-full h-auto mt-16 rounded-lg' />
+                <img src={old2} alt="old1" className='w-full h-auto mt-16 rounded-lg' />
               </div>
               <P>新版：採用分割視圖，點選清單中的顧客即可在右側即時顯示詳細資訊。</P>
               <ImageWithHotspots
                 src={screenshot01}
                 alt="Customers list"
                 hotspots={customersHotspots}
-                className='mb-8'
+                className='mb-8 rounded-lg'
               />
               <P>不同設計師的備註以時間軸形式呈現，讓團隊共享顧客偏好紀錄。</P>
 
@@ -456,7 +458,7 @@ export default function EHairPOSPageZh() {
                 src={screenshot02}
                 alt="Customer notes"
                 hotspots={customersNotesHotspots}
-                className='mb-8'
+                className='mb-8 rounded-lg'
               />
 
               <P>以圖表摘要來店頻率、消費與服務組合，協助店主快速辨識 VIP 顧客。</P>
@@ -464,6 +466,7 @@ export default function EHairPOSPageZh() {
                 src={screenshot03}
                 alt="Customer charts"
                 hotspots={customersChartsHotspots}
+                className='rounded-lg'
               />
             </div>
           </Container>
@@ -491,7 +494,7 @@ export default function EHairPOSPageZh() {
                 <SwiperSlide>
                   <div>
                     <div className='flex justify-center'>
-                      <img src={draft2} alt="draft2" className='w-full h-auto rounded-xs mix-blend-multiply opacity-50' />
+                      <img src={draft2} alt="draft2" className='w-full h-auto rounded-lg mix-blend-multiply opacity-50' />
                     </div>
                   </div>
                 </SwiperSlide>
@@ -501,7 +504,7 @@ export default function EHairPOSPageZh() {
                       src={screenshot04}
                       alt="行事曆視圖"
                       hotspots={calendarHotspots1}
-                      className='mb-8'
+                      className='mb-8 rounded-lg'
                     />
                   </div>
                 </SwiperSlide>
@@ -512,6 +515,7 @@ export default function EHairPOSPageZh() {
                       src={screenshot05}
                       alt="行事曆視圖"
                       hotspots={calendarHotspots2}
+                      className='rounded-lg'
                     />
                   </div>
                 </SwiperSlide>
@@ -525,20 +529,21 @@ export default function EHairPOSPageZh() {
                 我們借鑑使用者熟悉的互動模式（如 Google Calendar），支援快速拖曳排程、未排定的保留時段，以及日/週期（月）視圖切換。</P>
 
               <div className='flex justify-end'>
-                <img src={draft2} alt="draft2" className='w-[80%] h-auto  rounded-xs mix-blend-multiply opacity-50 ' />
+                <img src={draft2} alt="draft2" className='w-[80%] h-auto  rounded-lg mix-blend-multiply opacity-50 ' />
               </div>
 
               <ImageWithHotspots
                 src={screenshot04}
                 alt="Calendar view"
                 hotspots={calendarHotspots1}
-                className='mb-8'
+                className='mb-8 rounded-lg'
               />
               <P>行事曆可切換為月視圖，方便一眼檢視並調整整體排程。</P>
               <ImageWithHotspots
                 src={screenshot05}
                 alt="Calendar view"
                 hotspots={calendarHotspots2}
+                className='rounded-lg'
               />
             </div>
           </Container>
@@ -567,7 +572,7 @@ export default function EHairPOSPageZh() {
                 <SwiperSlide>
                   <div>
                     <ProjectNote className='mb-4 text-gray-800'>舊版：留白過多，資訊層級不清，辨識度低。</ProjectNote>
-                    <img src={old3} alt="old3" className='w-full h-auto rounded-xs mb-8' />
+                    <img src={old3} alt="old3" className='w-full h-auto rounded-lg mb-8' />
                   </div>
                 </SwiperSlide>
                 <SwiperSlide>
@@ -577,7 +582,7 @@ export default function EHairPOSPageZh() {
                       src={screenshot06}
                       alt="shopping list"
                       hotspots={shoppingHistoryHotspots}
-                      className='mb-8'
+                      className='mb-8 rounded-lg'
                     />
                   </div>
                 </SwiperSlide>
@@ -588,6 +593,7 @@ export default function EHairPOSPageZh() {
                       src={screenshot07}
                       alt="shopping list"
                       hotspots={checkoutHotspots}
+                      className='rounded-lg'
                     />
                   </div>
                 </SwiperSlide>
@@ -603,7 +609,7 @@ export default function EHairPOSPageZh() {
 
               <div className="relative">
                 <ProjectNote className='absolute top-[30%] right-1/2 w-60 translate-y-1/2 translate-x-1/2 text-gray-800'>舊版：留白過多，資訊層級不清，辨識度低。</ProjectNote>
-                <img src={old3} alt="old3" className='w-full h-auto rounded-xs mb-8' />
+                <img src={old3} alt="old3" className='w-full h-auto rounded-lg mb-8' />
               </div>
               <div>
 
@@ -613,13 +619,14 @@ export default function EHairPOSPageZh() {
                   src={screenshot06}
                   alt="shopping list"
                   hotspots={shoppingHistoryHotspots}
-                  className='mb-8'
+                  className='mb-8 rounded-lg'
                 />
                 <P>結帳時，側欄會顯示購買金額，方便店員檢視與確認。</P>
                 <ImageWithHotspots
                   src={screenshot07}
                   alt="shopping list"
                   hotspots={checkoutHotspots}
+                  className='rounded-lg'
                 />
               </div>
             </div>
@@ -654,7 +661,7 @@ export default function EHairPOSPageZh() {
                       src={screenshot09}
                       alt="會員錢包"
                       hotspots={memberCardHotspots}
-                      className='mb-8'
+                      className='mb-8 rounded-lg'
                     />
                   </div>
                 </SwiperSlide>
@@ -664,7 +671,7 @@ export default function EHairPOSPageZh() {
                       src={screenshot10}
                       alt="會員錢包"
                       hotspots={discountHotspots}
-                      className='mb-8'
+                      className='mb-8 rounded-lg'
                     />
                   </div>
                 </SwiperSlide>
@@ -683,13 +690,13 @@ export default function EHairPOSPageZh() {
                 src={screenshot09}
                 alt="會員錢包"
                 hotspots={memberCardHotspots}
-                className='mb-8'
+                className='mb-8 rounded-lg'
               />
               <ImageWithHotspots
                 src={screenshot10}
                 alt="會員錢包"
                 hotspots={discountHotspots}
-                className='mb-8'
+                className='mb-8 rounded-lg'
               />
             </div>
           </Container>
@@ -718,13 +725,13 @@ export default function EHairPOSPageZh() {
                 </SwiperSlide>
                 <SwiperSlide>
                   <div>
-                    <LazyImage src={screenshot11} alt="screenshot11" className='w-full h-auto rounded-sm' />
+                    <LazyImage src={screenshot11} alt="screenshot11" className='w-full h-auto rounded-tr-lg rounded-br-lg' />
                     <p className='text-caption text-gray-500 font-light mt-4'>店鋪儀表板：整合營收、來客數、客單價與成長指標，搭配時間篩選，清楚掌握經營表現。</p>
                   </div>
                 </SwiperSlide>
                 <SwiperSlide>
                   <div>
-                    <LazyImage src={screenshot12} alt="screenshot12" className='w-full h-auto rounded-sm' />
+                    <LazyImage src={screenshot12} alt="screenshot12" className='w-full h-auto rounded-tl-lg rounded-bl-lg' />
                     <p className='text-caption text-gray-500 font-light mt-4'>設計師儀表板：每位設計師可查看個人績效趨勢、顧客數與成長軌跡。</p>
                   </div>
                 </SwiperSlide>
@@ -746,11 +753,11 @@ export default function EHairPOSPageZh() {
               </UL>
               <div className='grid grid-cols-1 md:grid-cols-2 gap-10 mt-16'>
                 <div>
-                  <LazyImage src={screenshot11} alt="screenshot11" className='w-full h-auto rounded-sm' />
+                  <LazyImage src={screenshot11} alt="screenshot11" className='w-full h-auto rounded-tr-lg rounded-br-lg' />
                   <p className='text-caption text-gray-500 font-light mt-4'>店鋪儀表板：整合營收、來客數、客單價與成長指標，搭配時間篩選，清楚掌握經營表現。</p>
                 </div>
                 <div>
-                  <LazyImage src={screenshot12} alt="screenshot12" className='w-full h-auto rounded-sm' />
+                  <LazyImage src={screenshot12} alt="screenshot12" className='w-full h-auto rounded-tl-lg rounded-bl-lg' />
                   <p className='text-caption text-gray-500 font-light mt-4'>設計師儀表板：每位設計師可查看個人績效趨勢、顧客數與成長軌跡。</p>
                 </div>
               </div>
@@ -784,12 +791,12 @@ export default function EHairPOSPageZh() {
                 </SwiperSlide>
                 <SwiperSlide>
                   <div>
-                    <img src={logo} alt="logo" className='w-full h-auto rounded-xs' />
+                    <img src={logo} alt="logo" className='w-full h-auto rounded-lg' />
                   </div>
                 </SwiperSlide>
                 <SwiperSlide>
                   <div>
-                    <img src={logo2} alt="logo2" className='w-full h-auto rounded-xs' />
+                    <img src={logo2} alt="logo2" className='w-full h-auto rounded-lg' />
                   </div>
                 </SwiperSlide>
               </Swiper>
@@ -808,8 +815,8 @@ export default function EHairPOSPageZh() {
                 </div>
               </div>
 
-              <img src={logo} alt="logo" className='w-full h-auto rounded-xs' />
-              <img src={logo2} alt="logo2" className='w-full h-auto rounded-xs' />
+              <img src={logo} alt="logo" className='w-full h-auto rounded-lg' />
+              <img src={logo2} alt="logo2" className='w-full h-auto rounded-lg' />
             </div>
 
           </Container>
@@ -836,7 +843,7 @@ export default function EHairPOSPageZh() {
                 <SwiperSlide>
                   <div>
                     <div className="bg-white/10 backdrop-blur rounded-sm shadow p-5 mb-8">
-                      <img src={quote} alt="quote" className='mb-8' />
+                      <img src={quote} alt="quote" className='mb-8 rounded-lg' />
                       <P className=''>「eHairPOS 解決了我們多店管理的痛點，營收與庫存一目了然；顧客也很喜歡線上預約。非常推薦！」</P>
                     </div>
                     <P>這段回饋驗證了我們的核心目標：讓 POS 從被動紀錄工具，轉變成協助決策的助手。</P>
@@ -862,7 +869,7 @@ export default function EHairPOSPageZh() {
                   <H2 id="心得回顧">心得回顧</H2>
                   <P>上線後，系統被多家中大型連鎖沙龍採用。一位店主分享：</P>
                   <div className="bg-white/10 backdrop-blur rounded-sm shadow p-5 mb-8">
-                    <img src={quote} alt="quote" className='mb-8' />
+                    <img src={quote} alt="quote" className='mb-8 rounded-lg' />
                     <P className=''>「eHairPOS 解決了我們多店管理的痛點，營收與庫存一目了然；顧客也很喜歡線上預約。非常推薦！」</P>
                   </div>
                   <P>這段回饋驗證了我們的核心目標：讓 POS 從被動紀錄工具，轉變成協助決策的助手。</P>
@@ -899,7 +906,7 @@ export default function EHairPOSPageZh() {
 
 
               <div className="bg-white/10 backdrop-blur rounded-sm shadow p-5 mb-8">
-                <img src={quote} alt="quote" className='mb-8' />
+                <img src={quote} alt="quote" className='mb-8 rounded-lg' />
                 <P className=''>它提醒我：好的設計不只關乎這一版。<br />更重要的是建立一個讓後人能延續的基礎。</P>
               </div>
               <div className="grid grid-cols-1 ">
@@ -908,7 +915,7 @@ export default function EHairPOSPageZh() {
               </div>
             </div>
             <div className="flex flex-col items-center justify-center mt-16">
-              <img src={iconEhairpos} alt="ehairpos" className='w-24 h-24' />
+              <img src={iconEhairpos} alt="ehairpos" className='w-24 h-24 rounded-lg' />
               <p className='text-h3 font-light'>eHairPOS</p>
               <p className='text-caption text-gray-300'>2020 – 2021</p>
             </div>

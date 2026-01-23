@@ -1,13 +1,13 @@
 {
   "nav": {
-    "home": "首頁",
-    "projects": "作品",
-    "about": "關於",
-    "blog": "部落格"
+    "home": "home",
+    "projects": "projects",
+    "about": "about",
+    "blog": "blog"
   },
   "home": {
-    "greeting": "你好，我是 ENN！",
-    "description": "我是一位以使用者為優先的 UI 設計師。我創造直覺、以使用者為中心的介面，提升可用性，同時確保設計與開發團隊之間順暢的協作。",
+    "greeting": "Hello, I'm ENN!",
+    "description": "我創造直覺、以使用者為中心的介面，提升可用性，同時確保設計與開發團隊之間順暢的協作。",
     "moreAboutMe": "了解更多",
     "discoverMore": "探索更多",
     "carousel": {
@@ -18,17 +18,69 @@
     }
   },
   "about": {
-    "title": "讓數位產品對使用者來說清晰、吸引人且有意義。",
+    "title": "致力於打造易用且有魅力的數位產品。",
     "readCV": "查看履歷",
     "profile": {
-      "intro": "你好，我是 Enn。過去十年來，我在出版、教育、遊戲和政府等領域設計數位產品。我喜歡創造能讓使用者的生活更清晰、更容易或更愉快的作品。",
-      "career": "我職業生涯中很大一部分是在教育領域，我領導小型設計團隊，從早期概念到發布，塑造端到端的體驗。我也是一位插畫家，經常將視覺敘事與介面設計結合，打造既直覺又視覺吸引人的產品。"
+      "intro": "我是 Enn，過去十年來在出版、教育、遊戲等領域設計數位產品。我喜歡創造能讓使用者的生活更清晰、更容易或更愉快的作品。",
+      "career": "我職業生涯中很大一部分是在教育領域，我領導小型設計團隊，從早期概念到上線，在完整的產品流程上具有豐富經驗。我也是一位插畫家，經常將視覺敘事與介面設計結合，打造既直覺又視覺吸引人的產品。"
     },
     "whatIDo": "我的專長",
     "watchMore": "查看更多",
     "experience": "工作經驗",
+    "experienceItems": {
+      "somebest": {
+        "role": "設計主管",
+        "period": "2023 年 3 月 - 2024 年 5 月",
+        "company": "Somebest Co., Ltd",
+        "items": [
+          "管理設計品質並推動跨部門協作。",
+          "從 1 人團隊建立部門制度，負責招募、培訓與 1-on-1 指導，達成零離職率。",
+          "帶領團隊進行既有產品改版與新產品上線等專案，在使用者調查中獲得高滿意度。"
+        ]
+      },
+      "tutorabc": {
+        "role": "UI/UX 設計師",
+        "period": "2021 年 1 月 - 2023 年 3 月",
+        "company": "TutorABC",
+        "items": [
+          "負責品牌官網與 App 產品的介面設計。",
+          "建立產品設計規範並主導 Figma 培訓，成功導入研發部門工作流程。"
+        ]
+      },
+      "acubedt": {
+        "role": "UI/UX 設計師",
+        "period": "2018 年 6 月 - 2020 年 12 月",
+        "company": "ACubeDT",
+        "items": [
+          "主導多項 RWD 網站設計與 POS 系統專案，負責需求訪談與 UI 介面設計。",
+          "客戶包含政府機關與教育機構。"
+        ]
+      },
+      "nani": {
+        "role": "平面設計師",
+        "period": "2016 年 1 月 - 2018 年 2 月",
+        "company": "Nan I Book Enterprise",
+        "items": [
+          "於知名教育出版公司擔任平面設計師，負責封面與版面設計。"
+        ]
+      }
+    },
     "education": "教育背景",
-    "archivedWorks": "已歸檔作品",
+    "educationItems": {
+      "ntust": {
+        "role": "國立臺灣科技大學\n（碩士）",
+        "period": "2023 年 9 月 - 2025 年 6 月",
+        "company": "設計系",
+        "items": []
+      },
+      "ntue": {
+        "title": "國立臺北教育大學",
+        "period": "2010 年 9 月 - 2013 年 6 月",
+        "subtitle": "藝術與造形設計學系",
+        "items": []
+      }
+    },
+    "archivedWorks": "封存作品",
     "mobileTabs": {
       "profile": "個人簡介",
       "whatIDo": "我的專長",
@@ -37,7 +89,7 @@
     }
   },
   "projects": {
-    "title": "作品集",
+    "title": "Projects",
     "description": "我從 2016 年開始設計，結合清晰的結構與視覺敘事，創造既直覺又富有表現力的作品。合作夥伴形容我的方法專業、深思熟慮且細緻。",
     "caseStudy": "個案研究",
     "comingSoon": "即將推出"
@@ -52,7 +104,7 @@
     "spotlight": "精選"
   },
   "common": {
-    "contactMe": "聯絡我",
-    "copyright": "版權所有 © Enn Tang"
+     "contactMe": "CONTACT ME",
+    "copyright": "Copyright © Enn Tang"
   }
 }

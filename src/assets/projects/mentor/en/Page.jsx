@@ -219,7 +219,7 @@ export default function MentorPage() {
             <img src={shineImage} alt="shine" className='absolute top-0 right-0' />
             <img src={glintImage} alt="glint" className='absolute bottom-0 left-0' />
             <Container className='flex flex-col items-center justify-center text-center'>
-              <img ref={mentorImgRef} src={mentor} alt="Mentor" className="h-48 w-48 md:h-64 md:w-64" />
+              <img ref={mentorImgRef} src={mentor} alt="Mentor" className="h-48 w-48 md:h-64 md:w-64 rounded-lg" />
               <h1 className='text-large mobile:text-large-mobile'>Mentor</h1>
               <H3 className='mb-24'>AI-integrated learning platform</H3>
               <P className='w-full md:w-2/3'>Designing Mentor was more than just shaping screens—it was about shaping a team, a story, and a shared belief in learning.</P>
@@ -234,7 +234,7 @@ export default function MentorPage() {
             <div className="text-center mb-10">
               <H2>Project Brief</H2>
             </div>
-            <img src={tabletMockup} alt="Mentor design preview" />
+            <img src={tabletMockup} alt="Mentor design preview" className='rounded-lg' />
             <div className="grid grid-cols-1 md:grid-cols-3 gap-16 mt-16">
               <div className="md:col-span-2">
                 <P>
@@ -366,7 +366,7 @@ export default function MentorPage() {
               </UL>
             </div>
           </Container>
-          <img src={phases} alt="workflow phases" />
+          <img src={phases} alt="workflow phases" className='rounded-lg' />
         </SectionBlock>
 
         {/* Background + Insights alternating backgrounds */}
@@ -483,7 +483,7 @@ export default function MentorPage() {
         <SectionBlock backgrounds={mentorBackgrounds}>
           <Container>
             <div className="text-center mb-10 flex flex-col items-center justify-center">
-              <img src={quoteIcon} alt="quote icon" className='mb-8' />
+              <img src={quoteIcon} alt="quote icon" className='mb-8 rounded-lg' />
               <H2 className="text-gray-900">How Might We...</H2>
               <P className="mx-auto text-gray-900">How might we help students and parents who struggle with unclear learning progress and lack of feedback gain clarity, motivation, and personalized next-step suggestions?</P>
             </div>
@@ -558,14 +558,14 @@ export default function MentorPage() {
         {/* core philosophy */}
         <SectionBlock bgVariant="dark" backgrounds={mentorBackgrounds}>
           <Container>
-            <img src={chartImg} alt="chart" className='mt-[-200px] shadow-xl rounded-sm' />
+            <img src={chartImg} alt="chart" className='mt-[-200px] shadow-xl rounded-lg' />
             <div className='bg-[#3E3AFF] rounded-sm p-8 mt-16'>
               <div className='flex flex-col md:flex-row gap-4 items-center text-center md:text-left'>
                 <div className='order-2 md:order-1 text-left'>
                   <H2>Core Philosophy</H2>
                   <P>Mentor was ultimately shaped into a personalized learning coach, a clear and memorable concept that unified our design principles, addressed users' emotional and functional needs, and made the product more relatable for both students and parents.</P>
                 </div>
-                <img src={mentor} alt="mentor" className='w-32 h-32 md:w-48 md:h-48 order-1 md:order-2' />
+                <img src={mentor} alt="mentor" className='w-32 h-32 md:w-48 md:h-48 order-1 md:order-2 rounded-lg' />
               </div>
             </div>
           </Container>
@@ -595,17 +595,17 @@ export default function MentorPage() {
                     <ProjectNote>
                       From wireframes to a mid-fidelity POC to the final themed UI, each iteration helped us refine layout logic and shape the product's narrative identity.
                     </ProjectNote>
-                    <img src={deliverablesDraft} alt="deliverables draft" className='my-16' />
+                    <img src={deliverablesDraft} alt="deliverables draft" className='my-16 rounded-lg' />
                   </div>
                 </SwiperSlide>
                 <SwiperSlide>
                   <div>
-                    <img src={deliverablesLayout1} alt="deliverables layout 1" className='w-full' />
+                    <img src={deliverablesLayout1} alt="deliverables layout 1" className='w-full rounded-lg' />
                   </div>
                 </SwiperSlide>
                 <SwiperSlide>
                   <div>
-                    <img src={deliverablesLayout2} alt="deliverables layout 2" className='w-full' />
+                    <img src={deliverablesLayout2} alt="deliverables layout 2" className='w-full rounded-lg' />
                   </div>
                 </SwiperSlide>
                 <SwiperSlide>
@@ -624,17 +624,17 @@ export default function MentorPage() {
               <ProjectNote className='absolute top-[40%] right-1/2 transform translate-x-1/2 translate-y-32'>
                 From wireframes to a mid-fidelity POC to the final themed UI, each iteration helped us refine layout logic and shape the product's narrative identity.
               </ProjectNote>
-              <img src={deliverablesDraft} alt="deliverables draft" className='my-16' />
+              <img src={deliverablesDraft} alt="deliverables draft" className='my-16 rounded-lg' />
               <div className='grid grid-cols-1 md:grid-cols-2 gap-4'>
-                <img src={deliverablesLayout1} alt="deliverables layout 1" className='md:h-full md:object-cover' />
-                <img src={deliverablesLayout2} alt="deliverables layout 2" className='md:h-full md:object-cover' />
+                <img src={deliverablesLayout1} alt="deliverables layout 1" className='md:h-full md:object-cover rounded-lg' />
+                <img src={deliverablesLayout2} alt="deliverables layout 2" className='md:h-full md:object-cover rounded-lg' />
               </div>
               <div className='my-16'>
                 <P>As the design lead, I defined the product's style and worked with the team to build a clear, consistent design system. Since our main users were junior and senior high school students, we needed to match their visual preferences and language habits. This made UX design more challenging. Together, we collected style references, explored different directions, and shaped a system that fits the product tone.</P>
               </div>
             </div>
           </Container>
-          <img src={guidelineImg} alt="guideline" />
+          <img src={guidelineImg} alt="guideline" className='rounded-lg' />
         </SectionBlock>
 
         {/* story of mentor */}
@@ -692,11 +692,11 @@ export default function MentorPage() {
         <SectionBlock backgrounds={mentorBackgrounds}>
           <div className='grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-12'>
             <div>
-              <img src={mentorDraft} alt="mentor draft" className=' md:object-cover' />
+              <img src={mentorDraft} alt="mentor draft" className=' md:object-cover rounded-tr-lg rounded-br-lg' />
               <P className='text-caption p-8 md:ml-24 mt-4 md:mt-8'>Early sketches exploring Mentor’s symbolic role as a cosmic guide, along with abstract representations of learning, rhythm, dialogue, and growth.</P>
             </div>
             <div>
-              <img src={mentorVariants} alt="mentor variants" className=' md:object-cover' />
+              <img src={mentorVariants} alt="mentor variants" className=' md:object-cover rounded-tl-lg rounded-bl-lg' />
               <P className='text-caption p-8 md:mr-24 mt-4 md:mt-8'>To reflect each learner’s unique journey, Mentor evolves over time—its appearance adapting to students’ behaviors, learning pace, and engagement style.</P>
             </div>
           </div>
@@ -724,19 +724,19 @@ export default function MentorPage() {
                 </SwiperSlide>
                 <SwiperSlide>
                   <div>
-                    <img src={pyramid} alt="pyramid chart" />
+                    <img src={pyramid} alt="pyramid chart" className='rounded-lg' />
                     <P>Grounded in educational agent theory, Mentor becomes a narrative-driven interface agent: shaping emotional engagement and making the learning flow feel more meaningful and motivating.</P>
                   </div>
                 </SwiperSlide>
                 <SwiperSlide>
                   <div>
-                    <img src={screenShot1} alt="updates screen" className="rounded-sm" />
+                    <img src={screenShot1} alt="updates screen" className="rounded-tr-lg rounded-br-lg" />
                     <p className='text-caption p-8'>Mentor transforms routine updates into encouraging interactions.</p>
                   </div>
                 </SwiperSlide>
                 <SwiperSlide>
                   <div>
-                    <img src={screenShot2} alt="first-time onboarding screen" className="rounded-sm" />
+                    <img src={screenShot2} alt="first-time onboarding screen" className="rounded-tl-lg rounded-bl-lg" />
                     <p className='text-caption p-8'>During first-time onboarding, students are asked to rank subjects from strongest to weakest based on their confidence.</p>
                   </div>
                 </SwiperSlide>
@@ -749,17 +749,17 @@ export default function MentorPage() {
               <P>Mentor sits at the bottom-right corner as a real-time learning agent—offering feedback, reminders, and encouragement based on each student's actions.
               </P>
               <P>Its glowing, sci-fi cube avatar blends intelligence with a sense of myth, creating a two-layer interaction model:</P>
-              <img src={pyramid} alt="pyramid chart" />
+              <img src={pyramid} alt="pyramid chart" className='rounded-lg' />
               <P>Grounded in educational agent theory, Mentor becomes a narrative-driven interface agent: shaping emotional engagement and making the learning flow feel more meaningful and motivating.</P>
             </div>
           </Container>
           <div className='grid grid-cols-1 md:grid-cols-2 gap-4 mt-24'>
             <div>
-              <img src={screenShot1} alt="updates screen" className="rounded-sm" />
+              <img src={screenShot1} alt="updates screen" className="rounded-tr-lg rounded-br-lg" />
               <p className='text-caption p-8'>Mentor transforms routine updates into encouraging interactions.</p>
             </div>
             <div>
-              <img src={screenShot2} alt="first-time onboarding screen" className="rounded-sm" />
+              <img src={screenShot2} alt="first-time onboarding screen" className="rounded-tl-lg rounded-bl-lg" />
               <p className='text-caption p-8'>During first-time onboarding, students are asked to rank subjects from strongest to weakest based on their confidence. </p>
             </div>
           </div>
@@ -774,7 +774,7 @@ export default function MentorPage() {
               src={screenShot3}
               alt="learning persona classification"
               hotspots={learningPersonaHotspots}
-
+              className="rounded-lg"
             />
 
             {/* Mobile Swiper */}
@@ -791,7 +791,7 @@ export default function MentorPage() {
                   <div>
                     <H3>Learning Persona Classification</H3>
                     <P>To make learning more relatable and personalized, Mentor uses students' weekly study duration to automatically assign one of four learning personas:</P>
-                    <img src={typesImg} alt="types" />
+                    <img src={typesImg} alt="types" className='rounded-lg' />
                     <UL>
                       <LI>佛系學生 (Laid-back Learner): Prefers a light, low-pressure pace.</LI>
                       <LI>勤奮學子 (Consistent Striver): Studies regularly with determination.</LI>
@@ -813,6 +813,7 @@ export default function MentorPage() {
                       src={screenShot4}
                       alt="learning goal setting"
                       hotspots={learningGoalHotspots}
+                      className="rounded-lg"
                     />
                   </div>
                 </SwiperSlide>
@@ -832,6 +833,7 @@ export default function MentorPage() {
                       src={screenShot5}
                       alt="learning goal setting"
                       hotspots={learningReportHotspots}
+                      className="rounded-lg"
                     />
                   </div>
                 </SwiperSlide>
@@ -862,6 +864,7 @@ export default function MentorPage() {
                       src={screenShot6}
                       alt="badge collection"
                       hotspots={badgeCollectionHotspots}
+                      className="rounded-lg"
                     />
                   </div>
                 </SwiperSlide>
@@ -869,8 +872,8 @@ export default function MentorPage() {
                   <div>
                     <P className='mt-6'>Progress tracking and lock/unlock feedback satisfy users' collection desire and reinforce habit formation.</P>
                     <div className='grid grid-cols-1 gap-4 mt-6'>
-                      <img src={screenShot7} alt="badge 1" className="rounded-sm" />
-                      <img src={screenShot8} alt="badge 2" className="rounded-sm" />
+                      <img src={screenShot7} alt="badge 1" className="rounded-lg" />
+                      <img src={screenShot8} alt="badge 2" className="rounded-lg" />
                     </div>
                   </div>
                 </SwiperSlide>
@@ -892,7 +895,7 @@ export default function MentorPage() {
 
                 <H3>Learning Persona Classification</H3>
                 <P>To make learning more relatable and personalized, Mentor uses students' weekly study duration to automatically assign one of four learning personas:</P>
-                <img src={typesImg} alt="types" />
+                <img src={typesImg} alt="types" className='rounded-lg' />
                 <UL>
                   <LI>佛系學生 (Laid-back Learner): Prefers a light, low-pressure pace.</LI>
                   <LI>勤奮學子 (Consistent Striver): Studies regularly with determination.</LI>
@@ -911,6 +914,7 @@ export default function MentorPage() {
                   src={screenShot4}
                   alt="learning goal setting"
                   hotspots={learningGoalHotspots}
+                  className="rounded-lg"
                 />
               </div>
               <div className='px-4 pb-3 pt-6 bg-gray-100 rounded-sm'>
@@ -924,6 +928,7 @@ export default function MentorPage() {
                   src={screenShot5}
                   alt="learning goal setting"
                   hotspots={learningReportHotspots}
+                  className="rounded-lg"
                 />
                 <P className='mt-6'>Reports are available across three time dimensions:</P>
                 <UL>
@@ -944,11 +949,12 @@ export default function MentorPage() {
                     src={screenShot6}
                     alt="badge collection"
                     hotspots={badgeCollectionHotspots}
+                    className="rounded-lg"
                   />
                   <P className='mt-6'>Progress tracking and lock/unlock feedback satisfy users' collection desire and reinforce habit formation.</P>
                   <div className='grid grid-cols-1 md:grid-cols-2 gap-4 mt-6'>
-                    <img src={screenShot7} alt="badge 1" className="rounded-sm" />
-                    <img src={screenShot8} alt="badge 2" className="rounded-sm" />
+                    <img src={screenShot7} alt="badge 1" className="rounded-lg" />
+                    <img src={screenShot8} alt="badge 2" className="rounded-lg" />
                   </div>
 
                 </div>
@@ -1041,7 +1047,7 @@ export default function MentorPage() {
           <Container className='w-full md:w-2/3 mx-auto flex flex-col items-center justify-center mb-24'>
             <P>Designing Mentor was more than just shaping screens—it was about shaping a team, a story, and a shared belief in learning. Early on, I was still a maker: focused on pixels, flows, and UI polish. But as the product scaled, I learned to lead—aligning cross-functional efforts, empowering teammates, and holding the bigger picture.</P>
             <P>These lessons helped me grow from an individual contributor to a design lead. I learned to communicate clearly, translate ideas across roles, and recognize delivery as a collective rhythm. More than anything, this project taught me that good design is not just about clarity and craft, but about aligning vision, people, and outcomes.</P>
-            <img src={mentor} alt="mentor" className='w-24 h-24' />
+            <img src={mentor} alt="mentor" className='w-24 h-24 rounded-lg' />
             <p className='text-h3 font-light'>Mentor</p>
             <p className='text-caption text-gray-300'>May 2019 - June 2024</p>
           </Container>

@@ -260,7 +260,7 @@ export default function EHairPOSPage() {
               className='pointer-events-none select-none absolute inset-x-0 bottom-0 w-full h-auto'
             />
             <Container className='flex flex-col items-center justify-center text-center relative z-10'>
-              <img src={iconEhairpos} ref={iconEhairposRef} alt="eHairPOS" className='w-48 h-48 md:w-60 md:h-60 mb-8 z-10' />
+              <img src={iconEhairpos} ref={iconEhairposRef} alt="eHairPOS" className='w-48 h-48 md:w-60 md:h-60 mb-8 z-10 rounded-lg' />
               <h1 className='text-large mobile:text-large-mobile text-[#994FDE]'>eHairPOS</h1>
               <H3 className='mb-24 text-gray-900'>Salon Management Tool</H3>
               <P className='w-full md:w-2/3 text-gray-900'>A comprehensive POS system designed specifically for hair salons, streamlining workflows from appointment booking to payment processing.</P>
@@ -279,7 +279,7 @@ export default function EHairPOSPage() {
           <Container className='flex flex-col items-center justify-center'>
 
             <H2>Project Brief</H2>
-            <LazyImage src={tablet} alt="tablet" className='w-full md:w-2/3 h-auto' />
+            <LazyImage src={tablet} alt="tablet" className='w-full md:w-2/3 h-auto rounded-lg' />
             <div className="grid grid-cols-1 md:grid-cols-3 gap-16 mt-16">
               <div className="md:col-span-2">
                 <P>
@@ -364,7 +364,7 @@ export default function EHairPOSPage() {
                 </UL>
               </div>
             </div>
-            <img src={draft1} alt="draft1" className='w-full h-auto mt-16 rounded-xs' />
+            <img src={draft1} alt="draft1" className='w-full h-auto mt-16 rounded-lg' />
             <p className='text-caption text-gray-500 font-light mt-4'>Avoided piecemeal UI; drafted and compared layouts as a whole.</p>
           </Container>
         </SectionBlock>
@@ -392,9 +392,9 @@ export default function EHairPOSPage() {
                 <SwiperSlide>
                   <div>
                     <P>Old version: When browsing the customer list, viewing details opened a full-screen modal. Closing it was required to return to the list.</P>
-                    <div className='grid grid-cols-1 gap-4 mb-8'>
-                      <img src={old1} alt="old1" className='w-full h-auto mt-8 rounded-xs' />
-                      <img src={old2} alt="old2" className='w-full h-auto rounded-xs' />
+                    <div className='grid grid-cols-1 gap-4 mb-8 mobile:m-0'>
+                      <img src={old1} alt="old1" className='w-full h-auto mt-8 rounded-lg' />
+                      <img src={old2} alt="old2" className='w-full h-auto rounded-lg mobile:hidden' />
                     </div>
                   </div>
                 </SwiperSlide>
@@ -405,7 +405,7 @@ export default function EHairPOSPage() {
                       src={screenshot01}
                       alt="Customers list"
                       hotspots={customersHotspots}
-                      className='mb-8'
+                      className='mb-8 rounded-lg'
                     />
                   </div>
                 </SwiperSlide>
@@ -416,7 +416,7 @@ export default function EHairPOSPage() {
                       src={screenshot02}
                       alt="Customer notes"
                       hotspots={customersNotesHotspots}
-                      className='mb-8'
+                      className='mb-8 rounded-lg'
                     />
                   </div>
                 </SwiperSlide>
@@ -427,6 +427,7 @@ export default function EHairPOSPage() {
                       src={screenshot03}
                       alt="Customer charts"
                       hotspots={customersChartsHotspots}
+                      className='rounded-lg'
                     />
                   </div>
                 </SwiperSlide>
@@ -440,15 +441,15 @@ export default function EHairPOSPage() {
               <P>We moved away from modal-based browsing and adopted a split-view layout. Users can now browse the customer list and view full details side-by-side—cutting down on lookup time and reducing clicks.</P>
               <P>Old version: When browsing the customer list, viewing details opened a full-screen modal. Closing it was required to return to the list.</P>
               <div className='grid grid-cols-1 md:grid-cols-2 gap-16 mb-16'>
-                <img src={old1} alt="old1" className='w-full h-auto mt-16 rounded-xs' />
-                <img src={old2} alt="old1" className='w-full h-auto mt-16 rounded-xs' />
+                <img src={old1} alt="old1" className='w-full h-auto mt-16 rounded-lg' />
+                <img src={old2} alt="old1" className='w-full h-auto mt-16 rounded-lg' />
               </div>
               <P>The new version adopts a split-view layout: clicking a customer in the list will instantly show their details on the right side.</P>
               <ImageWithHotspots
                 src={screenshot01}
                 alt="Customers list"
                 hotspots={customersHotspots}
-                className='mb-8'
+                className='mb-8 rounded-lg'
               />
               <P>Notes from different stylists are shown in a timeline view, giving teams a shared record of client preferences.</P>
 
@@ -456,7 +457,7 @@ export default function EHairPOSPage() {
                 src={screenshot02}
                 alt="Customer notes"
                 hotspots={customersNotesHotspots}
-                className='mb-8'
+                className='mb-8 rounded-lg'
               />
 
               <P>Visual charts summarize visit frequency, spending, and service mix, helping owners spot VIPs.</P>
@@ -464,6 +465,7 @@ export default function EHairPOSPage() {
                 src={screenshot03}
                 alt="Customer charts"
                 hotspots={customersChartsHotspots}
+                className='rounded-lg'
               />
             </div>
           </Container>
@@ -491,7 +493,7 @@ export default function EHairPOSPage() {
                 <SwiperSlide>
                   <div>
                     <div className='flex justify-center'>
-                      <img src={draft2} alt="draft2" className='w-full h-auto rounded-xs mix-blend-multiply opacity-50' />
+                      <img src={draft2} alt="draft2" className='w-full h-auto rounded-lg mix-blend-multiply opacity-50' />
                     </div>
                   </div>
                 </SwiperSlide>
@@ -501,7 +503,7 @@ export default function EHairPOSPage() {
                       src={screenshot04}
                       alt="Calendar view"
                       hotspots={calendarHotspots1}
-                      className='mb-8'
+                      className='mb-8 rounded-lg'
                     />
                   </div>
                 </SwiperSlide>
@@ -512,6 +514,7 @@ export default function EHairPOSPage() {
                       src={screenshot05}
                       alt="Calendar view"
                       hotspots={calendarHotspots2}
+                      className='rounded-lg'
                     />
                   </div>
                 </SwiperSlide>
@@ -525,20 +528,21 @@ export default function EHairPOSPage() {
                 We adopted interaction patterns from tools users already know—like Google Calendar—to allow for quick drag-and-drop booking, unscheduled holds, and both daily/monthly views.</P>
 
               <div className='flex justify-end'>
-                <img src={draft2} alt="draft2" className='w-[80%] h-auto  rounded-xs mix-blend-multiply opacity-50 ' />
+                <img src={draft2} alt="draft2" className='w-[80%] h-auto  rounded-lg mix-blend-multiply opacity-50 ' />
               </div>
 
               <ImageWithHotspots
                 src={screenshot04}
                 alt="Calendar view"
                 hotspots={calendarHotspots1}
-                className='mb-8'
+                className='mb-8 rounded-lg'
               />
               <P>The calendar can be switched to a monthly view, making it easier to review and adjust the entire schedule at a glance.</P>
               <ImageWithHotspots
                 src={screenshot05}
                 alt="Calendar view"
                 hotspots={calendarHotspots2}
+                className='rounded-lg'
               />
             </div>
           </Container>
@@ -567,7 +571,7 @@ export default function EHairPOSPage() {
                 <SwiperSlide>
                   <div>
                     <ProjectNote className='mb-4 text-gray-800'>Old version: Lots of unused space. Information lacked hierarchy and was hard to distinguish.</ProjectNote>
-                    <img src={old3} alt="old3" className='w-full h-auto rounded-xs mb-8' />
+                    <img src={old3} alt="old3" className='w-full h-auto rounded-lg mb-8' />
                   </div>
                 </SwiperSlide>
                 <SwiperSlide>
@@ -577,7 +581,7 @@ export default function EHairPOSPage() {
                       src={screenshot06}
                       alt="shopping list"
                       hotspots={shoppingHistoryHotspots}
-                      className='mb-8'
+                      className='mb-8 rounded-lg'
                     />
                   </div>
                 </SwiperSlide>
@@ -588,6 +592,7 @@ export default function EHairPOSPage() {
                       src={screenshot07}
                       alt="shopping list"
                       hotspots={checkoutHotspots}
+                      className='rounded-lg'
                     />
                   </div>
                 </SwiperSlide>
@@ -603,7 +608,7 @@ export default function EHairPOSPage() {
 
               <div className="relative">
                 <ProjectNote className='absolute top-[30%] right-1/2 w-60 translate-y-1/2 translate-x-1/2 text-gray-800'>Old version: Lots of unused space. Information lacked hierarchy and was hard to distinguish.</ProjectNote>
-                <img src={old3} alt="old3" className='w-full h-auto rounded-xs mb-8' />
+                <img src={old3} alt="old3" className='w-full h-auto rounded-lg mb-8' />
               </div>
               <div>
 
@@ -613,13 +618,14 @@ export default function EHairPOSPage() {
                   src={screenshot06}
                   alt="shopping list"
                   hotspots={shoppingHistoryHotspots}
-                  className='mb-8'
+                  className='mb-8 rounded-lg'
                 />
                 <P>During checkout, the sidebar displays the purchase amount for staff to review and confirm.</P>
                 <ImageWithHotspots
                   src={screenshot07}
                   alt="shopping list"
                   hotspots={checkoutHotspots}
+                  className='rounded-lg'
                 />
               </div>
             </div>
@@ -654,7 +660,7 @@ export default function EHairPOSPage() {
                       src={screenshot09}
                       alt="membership wallet"
                       hotspots={memberCardHotspots}
-                      className='mb-8'
+                      className='mb-8 rounded-lg'
                     />
                   </div>
                 </SwiperSlide>
@@ -664,7 +670,7 @@ export default function EHairPOSPage() {
                       src={screenshot10}
                       alt="membership wallet"
                       hotspots={discountHotspots}
-                      className='mb-8'
+                      className='mb-8 rounded-lg'
                     />
                   </div>
                 </SwiperSlide>
@@ -683,13 +689,13 @@ export default function EHairPOSPage() {
                 src={screenshot09}
                 alt="membership wallet"
                 hotspots={memberCardHotspots}
-                className='mb-8'
+                className='mb-8 rounded-lg'
               />
               <ImageWithHotspots
                 src={screenshot10}
                 alt="membership wallet"
                 hotspots={discountHotspots}
-                className='mb-8'
+                className='mb-8 rounded-lg'
               />
             </div>
           </Container>
@@ -718,13 +724,13 @@ export default function EHairPOSPage() {
                 </SwiperSlide>
                 <SwiperSlide>
                   <div>
-                    <LazyImage src={screenshot11} alt="screenshot11" className='w-full h-auto rounded-sm' />
+                    <LazyImage src={screenshot11} alt="screenshot11" className='w-full h-auto rounded-tr-lg rounded-br-lg' />
                     <p className='text-caption text-gray-500 font-light mt-4'>Salon Dashboard: Combines revenue, visits, ticket size, and growth metrics with time filters for a clear view of business performance.</p>
                   </div>
                 </SwiperSlide>
                 <SwiperSlide>
                   <div>
-                    <LazyImage src={screenshot12} alt="screenshot12" className='w-full h-auto rounded-sm' />
+                    <LazyImage src={screenshot12} alt="screenshot12" className='w-full h-auto rounded-tl-lg rounded-bl-lg' />
                     <p className='text-caption text-gray-500 font-light mt-4'>Stylist Dashboard: Each stylist can view their performance trends, client count, and personal growth over time.</p>
                   </div>
                 </SwiperSlide>
@@ -746,11 +752,11 @@ export default function EHairPOSPage() {
               </UL>
               <div className='grid grid-cols-1 md:grid-cols-2 gap-10 mt-16'>
                 <div>
-                  <LazyImage src={screenshot11} alt="screenshot11" className='w-full h-auto rounded-sm' />
+                  <LazyImage src={screenshot11} alt="screenshot11" className='w-full h-auto rounded-tr-lg rounded-br-lg' />
                   <p className='text-caption text-gray-500 font-light mt-4'>Salon Dashboard: Combines revenue, visits, ticket size, and growth metrics with time filters for a clear view of business performance.</p>
                 </div>
                 <div>
-                  <LazyImage src={screenshot12} alt="screenshot12" className='w-full h-auto rounded-sm' />
+                  <LazyImage src={screenshot12} alt="screenshot12" className='w-full h-auto rounded-tl-lg rounded-bl-lg' />
                   <p className='text-caption text-gray-500 font-light mt-4'>Stylist Dashboard: Each stylist can view their performance trends, client count, and personal growth over time.</p>
                 </div>
               </div>
@@ -784,12 +790,12 @@ export default function EHairPOSPage() {
                 </SwiperSlide>
                 <SwiperSlide>
                   <div>
-                    <img src={logo} alt="logo" className='w-full h-auto rounded-xs' />
+                    <img src={logo} alt="logo" className='w-full h-auto rounded-lg' />
                   </div>
                 </SwiperSlide>
                 <SwiperSlide>
                   <div>
-                    <img src={logo2} alt="logo2" className='w-full h-auto rounded-xs' />
+                    <img src={logo2} alt="logo2" className='w-full h-auto rounded-lg' />
                   </div>
                 </SwiperSlide>
               </Swiper>
@@ -808,8 +814,8 @@ export default function EHairPOSPage() {
                 </div>
               </div>
 
-              <img src={logo} alt="logo" className='w-full h-auto rounded-xs' />
-              <img src={logo2} alt="logo2" className='w-full h-auto rounded-xs' />
+              <img src={logo} alt="logo" className='w-full h-auto rounded-lg' />
+              <img src={logo2} alt="logo2" className='w-full h-auto rounded-lg' />
             </div>
 
           </Container>
@@ -836,7 +842,7 @@ export default function EHairPOSPage() {
                 <SwiperSlide>
                   <div>
                     <div className="bg-white/10 backdrop-blur rounded-sm shadow p-5 mb-8">
-                      <img src={quote} alt="quote" className='mb-8' />
+                      <img src={quote} alt="quote" className='mb-8 rounded-lg' />
                       <P className=''>"eHairPOS solved our multi-branch management pain points. Revenue and inventory are now clear at a glance. Our customers love the online booking, too. Highly recommended!"</P>
                     </div>
                     <P>That feedback validated our core goal—turning POS from a passive system into a decision-making assistant.</P>
@@ -862,7 +868,7 @@ export default function EHairPOSPage() {
                   <H2 id="reflections">Reflections</H2>
                   <P>After launch, the system was adopted by several mid-to-large salon chains. One owner shared:</P>
                   <div className="bg-white/10 backdrop-blur rounded-sm shadow p-5 mb-8">
-                    <img src={quote} alt="quote" className='mb-8' />
+                    <img src={quote} alt="quote" className='mb-8 rounded-lg' />
                     <P className=''>"eHairPOS solved our multi-branch management pain points. Revenue and inventory are now clear at a glance. Our customers love the online booking, too. Highly recommended!"</P>
                   </div>
                   <P>That feedback validated our core goal—turning POS from a passive system into a decision-making assistant.</P>
@@ -899,7 +905,7 @@ export default function EHairPOSPage() {
 
 
               <div className="bg-white/10 backdrop-blur rounded-sm shadow p-5 mb-8">
-                <img src={quote} alt="quote" className='mb-8' />
+                <img src={quote} alt="quote" className='mb-8 rounded-lg' />
                 <P className=''>It reminded me that good design isn’t just about this version.<br /> It’s about creating a foundation others can build on.</P>
               </div>
               <div className="grid grid-cols-1 ">
@@ -908,7 +914,7 @@ export default function EHairPOSPage() {
               </div>
             </div>
             <div className="flex flex-col items-center justify-center mt-16">
-              <img src={iconEhairpos} alt="ehairpos" className='w-24 h-24' />
+              <img src={iconEhairpos} alt="ehairpos" className='w-24 h-24 rounded-lg' />
               <p className='text-h3 font-light'>eHairPOS</p>
               <p className='text-caption text-gray-300'>2020 – 2021</p>
             </div>

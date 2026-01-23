@@ -81,12 +81,15 @@ function LazyImage({
     }
   }, [isInView, src, preload])
 
+  // Ensure className is properly formatted
+  const finalClassName = `${className} ${isLoaded ? 'opacity-100' : 'opacity-0'} transition-opacity duration-300`.trim()
+  
   return (
     <img
       ref={imgRef}
       src={imageSrc}
       alt={alt}
-      className={`${className} ${isLoaded ? 'opacity-100' : 'opacity-0'} transition-opacity duration-300`}
+      className={finalClassName}
       {...props}
     />
   )

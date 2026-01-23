@@ -21,13 +21,65 @@
     "title": "Making digital products clear, engaging, and meaningful for users.",
     "readCV": "Read CV",
     "profile": {
-      "intro": "Hey, I'm Enn. I've spent the past decade designing digital products across publishing, education, gaming, and government. I enjoy creating work that makes life a little clearer, easier, or more enjoyable for the people who use it.",
+      "intro": "Hey, I'm Enn. I've spent the past decade designing digital products across publishing, education,and gaming. I enjoy creating work that makes life a little clearer, easier, or more enjoyable for the people who use it.",
       "career": "A big part of my career has been in the education space, where I've led small design teams and shaped end-to-end experiences from early concepts to launch. I'm also an illustrator at heart, often blending visual storytelling with interface design to build products that feel both intuitive and visually engaging."
     },
     "whatIDo": "What I Do",
     "watchMore": "watch more",
     "experience": "Experience",
+    "experienceItems": {
+      "somebest": {
+        "role": "Design Lead",
+        "period": "Mar 2023 - May 2024",
+        "company": "Somebest Co., Ltd",
+        "items": [
+          "Managed design quality and cross-departmental collaboration.",
+          "Built the department from a one-person team, responsible for talent recruitment, training, and 1-on-1 mentoring, achieving a zero-turnover rate.",
+          "Led design team members in projects such as revamping existing products and launching new products, resulting in high satisfaction ratings in user surveys."
+        ]
+      },
+      "tutorabc": {
+        "role": "UI/UX Designer",
+        "period": "Jan 2021 - Mar 2023",
+        "company": "TutorABC",
+        "items": [
+          "Responsible for interface design of brand websites and app products.",
+          "Established product design guidelines and led Figma training sessions, successfully integrating it into the R&D department’s workflows."
+        ]
+      },
+      "acubedt": {
+        "role": "UI/UX Designer",
+        "period": "Jun 2018 - Dec 2020",
+        "company": "ACubeDT",
+        "items": [
+          "Led multiple RWD web design and POS system projects, responsible for requirements interviews and UI interface design.",
+          "Clients included government agencies and educational institutions."
+        ]
+      },
+      "nani": {
+        "role": "Graphic Designer",
+        "period": "Jan 2016 - Feb 2018",
+        "company": "Nan I Book Enterprise",
+        "items": [
+          "Worked as a graphic designer at a well-known educational publishing company, responsible for cover and layout design."
+        ]
+      }
+    },
     "education": "Education",
+    "educationItems": {
+      "ntust": {
+        "role": "National Taiwan University of Science and Technology\n(Master’s Degree)",
+        "period": "Sep 2023 - Jun 2025",
+        "company": "Department of Design",
+        "items": []
+      },
+      "ntue": {
+        "title": "National Taipei University of Education",
+        "period": "Sep 2010 - Jun 2013",
+        "subtitle": "Department of Arts and Design",
+        "items": []
+      }
+    },
     "archivedWorks": "Archived Works",
     "mobileTabs": {
       "profile": "Profile",

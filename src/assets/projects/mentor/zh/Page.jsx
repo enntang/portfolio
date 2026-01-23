@@ -222,7 +222,7 @@ export default function MentorPageZh() {
             <img src={shineImage} alt="shine" className="absolute top-0 right-0" />
             <img src={glintImage} alt="glint" className="absolute bottom-0 left-0" />
             <Container className="flex flex-col items-center justify-center text-center">
-              <img ref={mentorImgRef} src={mentor} alt="Mentor" className="h-48 w-48 md:h-64 md:w-64" />
+              <img ref={mentorImgRef} src={mentor} alt="Mentor" className="h-48 w-48 md:h-64 md:w-64 rounded-lg" />
               <h1 className="text-large mobile:text-large-mobile">Mentor</h1>
               <H3 className="mb-24">AI 整合學習平台</H3>
               <P className="w-full md:w-2/3">
@@ -239,7 +239,7 @@ export default function MentorPageZh() {
             <div className="text-center mb-10">
               <H2>專案簡介</H2>
             </div>
-            <img src={tabletMockup} alt="Mentor 設計預覽" />
+            <img src={tabletMockup} alt="Mentor 設計預覽" className='rounded-lg' />
             <div className="grid grid-cols-1 md:grid-cols-3 gap-16 mt-16">
               <div className="md:col-span-2">
                 <P>
@@ -342,7 +342,7 @@ export default function MentorPageZh() {
               </UL>
             </div>
           </Container>
-          <img src={phases} alt="工作流程階段" />
+          <img src={phases} alt="工作流程階段" className='rounded-lg' />
         </SectionBlock>
 
         {/* Background + Insights alternating backgrounds */}
@@ -468,7 +468,7 @@ export default function MentorPageZh() {
         <SectionBlock backgrounds={mentorBackgrounds}>
           <Container>
             <div className="text-center mb-10 flex flex-col items-center justify-center">
-              <img src={quoteIcon} alt="quote icon" className="mb-8" />
+              <img src={quoteIcon} alt="quote icon" className="mb-8 rounded-lg" />
               <H2 className="text-gray-900">我們如何能夠…</H2>
               <P className="mx-auto text-gray-900">
                 我們如何協助學習進度不清、缺乏回饋而感到挫折的學生與家長，建立清晰感、動機，以及更個人化的下一步建議？
@@ -560,7 +560,7 @@ export default function MentorPageZh() {
         {/* core philosophy */}
         <SectionBlock bgVariant="dark" backgrounds={mentorBackgrounds}>
           <Container>
-            <img src={chartImg} alt="chart" className="mt-[-200px] shadow-xl rounded-sm" />
+            <img src={chartImg} alt="chart" className="mt-[-200px] shadow-xl rounded-lg" />
             <div className="bg-[#3E3AFF] rounded-sm p-8 mt-16">
               <div className="flex flex-col md:flex-row gap-4 items-center text-center md:text-left">
                 <div className="order-2 md:order-1 text-left">
@@ -569,7 +569,7 @@ export default function MentorPageZh() {
                     Mentor 最終被定義為一位個人化學習教練：這個清楚且好記的概念，統一了設計原則，同時回應使用者的情感與功能需求，讓產品對家長與學生都更具親和力。
                   </P>
                 </div>
-                <img src={mentor} alt="mentor" className="w-32 h-32 md:w-48 md:h-48 order-1 md:order-2" />
+                <img src={mentor} alt="mentor" className="w-32 h-32 md:w-48 md:h-48 order-1 md:order-2 rounded-lg" />
               </div>
             </div>
           </Container>
@@ -601,17 +601,17 @@ export default function MentorPageZh() {
                     <ProjectNote>
                       從線框到中保真 POC，再到最終主題化 UI，每一次迭代都幫助我們釐清版面邏輯，並逐步形塑產品的敘事識別。
                     </ProjectNote>
-                    <img src={deliverablesDraft} alt="設計草稿" className="my-16" />
+                    <img src={deliverablesDraft} alt="設計草稿" className="my-16 rounded-lg" />
                   </div>
                 </SwiperSlide>
                 <SwiperSlide>
                   <div>
-                    <img src={deliverablesLayout1} alt="版面設計 1" className="w-full" />
+                    <img src={deliverablesLayout1} alt="版面設計 1" className="w-full rounded-lg" />
                   </div>
                 </SwiperSlide>
                 <SwiperSlide>
                   <div>
-                    <img src={deliverablesLayout2} alt="版面設計 2" className="w-full" />
+                    <img src={deliverablesLayout2} alt="版面設計 2" className="w-full rounded-lg" />
                   </div>
                 </SwiperSlide>
                 <SwiperSlide>
@@ -634,10 +634,10 @@ export default function MentorPageZh() {
               <ProjectNote className="absolute top-[40%] right-1/2 transform translate-x-1/2 translate-y-32">
                 從線框到中保真 POC，再到最終主題化 UI，每一次迭代都幫助我們釐清版面邏輯，並逐步形塑產品的敘事識別。
               </ProjectNote>
-              <img src={deliverablesDraft} alt="設計草稿" className="my-16" />
+              <img src={deliverablesDraft} alt="設計草稿" className="my-16 rounded-lg" />
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <img src={deliverablesLayout1} alt="版面設計 1" className="md:h-full md:object-cover" />
-                <img src={deliverablesLayout2} alt="版面設計 2" className="md:h-full md:object-cover" />
+                <img src={deliverablesLayout1} alt="版面設計 1" className="md:h-full md:object-cover rounded-lg" />
+                <img src={deliverablesLayout2} alt="版面設計 2" className="md:h-full md:object-cover rounded-lg" />
               </div>
               <div className="my-16">
                 <P>
@@ -646,7 +646,7 @@ export default function MentorPageZh() {
               </div>
             </div>
           </Container>
-          <img src={guidelineImg} alt="guideline" />
+          <img src={guidelineImg} alt="guideline" className='rounded-lg' />
         </SectionBlock>
 
         {/* story of mentor */}
@@ -717,13 +717,13 @@ export default function MentorPageZh() {
         <SectionBlock backgrounds={mentorBackgrounds}>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-12">
             <div>
-              <img src={mentorDraft} alt="mentor draft" className=" md:object-cover" />
+              <img src={mentorDraft} alt="mentor draft" className=" md:object-cover rounded-tr-lg rounded-br-lg" />
               <P className="text-caption p-8 md:ml-24 mt-4 md:mt-8">
                 早期草圖：探索 Mentor 作為宇宙引導者的象徵角色，以及學習、節奏、對話與成長的抽象表現。
               </P>
             </div>
             <div>
-              <img src={mentorVariants} alt="mentor variants" className=" md:object-cover" />
+              <img src={mentorVariants} alt="mentor variants" className=" md:object-cover rounded-tl-lg rounded-bl-lg" />
               <P className="text-caption p-8 md:mr-24 mt-4 md:mt-8">
                 為反映每位學習者的獨特旅程，Mentor 會隨時間進化—外觀會依學生行為、步調與投入方式而改變。
               </P>
@@ -757,7 +757,7 @@ export default function MentorPageZh() {
                 </SwiperSlide>
                 <SwiperSlide>
                   <div>
-                    <img src={pyramid} alt="pyramid chart" />
+                    <img src={pyramid} alt="pyramid chart" className='rounded-lg' />
                     <P>
                       以教育代理理論為基礎，Mentor 成為敘事驅動的介面代理：強化情緒投入，讓學習流程更有意義、更有動力。
                     </P>
@@ -765,13 +765,13 @@ export default function MentorPageZh() {
                 </SwiperSlide>
                 <SwiperSlide>
                   <div>
-                    <img src={screenShot1} alt="updates screen" className="rounded-sm" />
+                    <img src={screenShot1} alt="updates screen" className="rounded-tr-lg rounded-br-lg" />
                     <p className="text-caption p-8">Mentor 讓例行更新變成鼓勵式互動。</p>
                   </div>
                 </SwiperSlide>
                 <SwiperSlide>
                   <div>
-                    <img src={screenShot2} alt="first-time onboarding screen" className="rounded-sm" />
+                    <img src={screenShot2} alt="first-time onboarding screen" className="rounded-tl-lg rounded-bl-lg" />
                     <p className="text-caption p-8">
                       首次引導中，學生需要依自信程度把科目從強到弱排序。
                     </p>
@@ -787,7 +787,7 @@ export default function MentorPageZh() {
                 Mentor 會停留在右下角，作為即時的學習代理：依學生操作提供回饋、提醒與鼓勵。
               </P>
               <P>發光的科幻方塊化身結合「智慧」與「神話感」，形成雙層互動模型：</P>
-              <img src={pyramid} alt="pyramid chart" />
+              <img src={pyramid} alt="pyramid chart" className='rounded-lg' />
               <P>
                 以教育代理理論為基礎，Mentor 成為敘事驅動的介面代理：強化情緒投入，讓學習流程更有意義、更有動力。
               </P>
@@ -795,11 +795,11 @@ export default function MentorPageZh() {
           </Container>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-24">
             <div>
-              <img src={screenShot1} alt="updates screen" className="rounded-sm" />
+              <img src={screenShot1} alt="updates screen" className="rounded-tr-lg rounded-br-lg" />
               <p className="text-caption p-8">Mentor 讓例行更新變成鼓勵式互動。</p>
             </div>
             <div>
-              <img src={screenShot2} alt="first-time onboarding screen" className="rounded-sm" />
+              <img src={screenShot2} alt="first-time onboarding screen" className="rounded-tl-lg rounded-bl-lg" />
               <p className="text-caption p-8">
                 首次引導中，學生需要依自信程度把科目從強到弱排序。
               </p>
@@ -818,6 +818,7 @@ export default function MentorPageZh() {
               src={screenShot3}
               alt="learning persona classification"
               hotspots={learningPersonaHotspots}
+              className="rounded-lg"
             />
 
             {/* Mobile Swiper */}
@@ -836,7 +837,7 @@ export default function MentorPageZh() {
                     <P>
                       為了讓學習更貼近個人，Mentor 會依學生每週學習時間自動分配四種學習人格之一：
                     </P>
-                    <img src={typesImg} alt="types" />
+                    <img src={typesImg} alt="types" className='rounded-lg' />
                     <UL>
                       <LI>佛系學生（Laid-back Learner）：喜歡輕鬆、低壓的節奏。</LI>
                       <LI>勤奮學子（Consistent Striver）：規律投入、穩定前進。</LI>
@@ -864,6 +865,7 @@ export default function MentorPageZh() {
                       src={screenShot4}
                       alt="learning goal setting"
                       hotspots={learningGoalHotspots}
+                      className="rounded-lg"
                     />
                   </div>
                 </SwiperSlide>
@@ -889,6 +891,7 @@ export default function MentorPageZh() {
                       src={screenShot5}
                       alt="learning goal setting"
                       hotspots={learningReportHotspots}
+                      className="rounded-lg"
                     />
                   </div>
                 </SwiperSlide>
@@ -933,6 +936,7 @@ export default function MentorPageZh() {
                       src={screenShot6}
                       alt="badge collection"
                       hotspots={badgeCollectionHotspots}
+                      className="rounded-lg"
                     />
                   </div>
                 </SwiperSlide>
@@ -942,8 +946,8 @@ export default function MentorPageZh() {
                       進度追蹤與解鎖回饋滿足「收集欲」，並強化習慣養成。
                     </P>
                     <div className="grid grid-cols-1 gap-4 mt-6">
-                      <img src={screenShot7} alt="badge 1" className="rounded-sm" />
-                      <img src={screenShot8} alt="badge 2" className="rounded-sm" />
+                      <img src={screenShot7} alt="badge 1" className="rounded-lg" />
+                      <img src={screenShot8} alt="badge 2" className="rounded-lg" />
                     </div>
                   </div>
                 </SwiperSlide>
@@ -969,7 +973,7 @@ export default function MentorPageZh() {
                 <P>
                   為了讓學習更貼近個人，Mentor 會依學生每週學習時間自動分配四種學習人格之一：
                 </P>
-                <img src={typesImg} alt="types" />
+                <img src={typesImg} alt="types" className='rounded-lg' />
                 <UL>
                   <LI>佛系學生（Laid-back Learner）：喜歡輕鬆、低壓的節奏。</LI>
                   <LI>勤奮學子（Consistent Striver）：規律投入、穩定前進。</LI>
@@ -994,6 +998,7 @@ export default function MentorPageZh() {
                   src={screenShot4}
                   alt="learning goal setting"
                   hotspots={learningGoalHotspots}
+                  className="rounded-lg"
                 />
               </div>
               <div className="px-4 pb-3 pt-6 bg-gray-100 rounded-sm">
@@ -1013,6 +1018,7 @@ export default function MentorPageZh() {
                   src={screenShot5}
                   alt="learning goal setting"
                   hotspots={learningReportHotspots}
+                  className="rounded-lg"
                 />
                 <P className="mt-6">報表涵蓋三種時間維度：</P>
                 <UL>
@@ -1047,11 +1053,12 @@ export default function MentorPageZh() {
                     src={screenShot6}
                     alt="badge collection"
                     hotspots={badgeCollectionHotspots}
+                    className="rounded-lg"
                   />
                   <P className="mt-6">進度追蹤與解鎖回饋滿足「收集欲」，並強化習慣養成。</P>
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-6">
-                    <img src={screenShot7} alt="badge 1" className="rounded-sm" />
-                    <img src={screenShot8} alt="badge 2" className="rounded-sm" />
+                    <img src={screenShot7} alt="badge 1" className="rounded-lg" />
+                    <img src={screenShot8} alt="badge 2" className="rounded-lg" />
                   </div>
                 </div>
                 <div className="px-4 pb-3 pt-6 bg-gray-100 rounded-sm">
@@ -1159,7 +1166,7 @@ export default function MentorPageZh() {
             <P>
               這些經驗讓我從獨立貢獻者成長為設計主管：更清楚地溝通、在不同角色之間翻譯想法，也更理解交付是一種團隊共同的節奏。最重要的是，我學到好的設計不只是清晰與工藝，更是讓願景、人才與結果對齊。
             </P>
-            <img src={mentor} alt="mentor" className="w-24 h-24" />
+            <img src={mentor} alt="mentor" className="w-24 h-24 rounded-lg" />
             <p className="text-h3 font-light">Mentor</p>
             <p className="text-caption text-gray-300">2019/05 - 2024/06</p>
           </Container>

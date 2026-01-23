@@ -222,7 +222,7 @@ export default function MentorPageJa() {
             <img src={shineImage} alt="shine" className="absolute top-0 right-0" />
             <img src={glintImage} alt="glint" className="absolute bottom-0 left-0" />
             <Container className="flex flex-col items-center justify-center text-center">
-              <img ref={mentorImgRef} src={mentor} alt="Mentor" className="h-48 w-48 md:h-64 md:w-64" />
+              <img ref={mentorImgRef} src={mentor} alt="Mentor" className="h-48 w-48 md:h-64 md:w-64 rounded-lg" />
               <h1 className="text-large mobile:text-large-mobile">Mentor</h1>
               <H3 className="mb-24">AI統合学習プラットフォーム</H3>
               <P className="w-full md:w-2/3">
@@ -239,7 +239,7 @@ export default function MentorPageJa() {
             <div className="text-center mb-10">
               <H2>プロジェクト概要</H2>
             </div>
-            <img src={tabletMockup} alt="Mentor デザインプレビュー" />
+            <img src={tabletMockup} alt="Mentor デザインプレビュー" className='rounded-lg' />
             <div className="grid grid-cols-1 md:grid-cols-3 gap-16 mt-16">
               <div className="md:col-span-2">
                 <P>
@@ -342,7 +342,7 @@ export default function MentorPageJa() {
               </UL>
             </div>
           </Container>
-          <img src={phases} alt="ワークフローのフェーズ" />
+          <img src={phases} alt="ワークフローのフェーズ" className='rounded-lg' />
         </SectionBlock>
 
         {/* Background + Insights alternating backgrounds */}
@@ -468,7 +468,7 @@ export default function MentorPageJa() {
         <SectionBlock backgrounds={mentorBackgrounds}>
           <Container>
             <div className="text-center mb-10 flex flex-col items-center justify-center">
-              <img src={quoteIcon} alt="quote icon" className="mb-8" />
+              <img src={quoteIcon} alt="quote icon" className="mb-8 rounded-lg" />
               <H2 className="text-gray-900">How Might We…</H2>
               <P className="mx-auto text-gray-900">
                 学習の進捗が見えず、フィードバック不足で挫折している学生と保護者に対して、どうすれば「理解の明確さ」「継続の動機」「個別最適な次の一手」を提供できるだろうか？
@@ -560,7 +560,7 @@ export default function MentorPageJa() {
         {/* core philosophy */}
         <SectionBlock bgVariant="dark" backgrounds={mentorBackgrounds}>
           <Container>
-            <img src={chartImg} alt="chart" className="mt-[-200px] shadow-xl rounded-sm" />
+            <img src={chartImg} alt="chart" className="mt-[-200px] shadow-xl rounded-lg" />
             <div className="bg-[#3E3AFF] rounded-sm p-8 mt-16">
               <div className="flex flex-col md:flex-row gap-4 items-center text-center md:text-left">
                 <div className="order-2 md:order-1 text-left">
@@ -569,7 +569,7 @@ export default function MentorPageJa() {
                     Mentor は最終的に「パーソナライズされた学習コーチ」として再定義されました。明快で覚えやすいこのコンセプトにより、デザイン原則が統一され、感情面・機能面のニーズの両方に応えられるようになり、保護者と学生双方にとって親しみやすいプロダクトになりました。
                   </P>
                 </div>
-                <img src={mentor} alt="mentor" className="w-32 h-32 md:w-48 md:h-48 order-1 md:order-2" />
+                <img src={mentor} alt="mentor" className="w-32 h-32 md:w-48 md:h-48 order-1 md:order-2 rounded-lg" />
               </div>
             </div>
           </Container>
@@ -601,17 +601,17 @@ export default function MentorPageJa() {
                     <ProjectNote>
                       ワイヤーから中間精度のPOC、そして最終のテーマUIへ。各イテレーションを通じてレイアウトのロジックを明確にし、プロダクトのナラティブなアイデンティティを形作りました。
                     </ProjectNote>
-                    <img src={deliverablesDraft} alt="デザイン草案" className="my-16" />
+                    <img src={deliverablesDraft} alt="デザイン草案" className="my-16 rounded-lg" />
                   </div>
                 </SwiperSlide>
                 <SwiperSlide>
                   <div>
-                    <img src={deliverablesLayout1} alt="レイアウト案 1" className="w-full" />
+                    <img src={deliverablesLayout1} alt="レイアウト案 1" className="w-full rounded-lg" />
                   </div>
                 </SwiperSlide>
                 <SwiperSlide>
                   <div>
-                    <img src={deliverablesLayout2} alt="レイアウト案 2" className="w-full" />
+                    <img src={deliverablesLayout2} alt="レイアウト案 2" className="w-full rounded-lg" />
                   </div>
                 </SwiperSlide>
                 <SwiperSlide>
@@ -634,10 +634,10 @@ export default function MentorPageJa() {
               <ProjectNote className="absolute top-[40%] right-1/2 transform translate-x-1/2 translate-y-32">
                 ワイヤーから中間精度のPOC、そして最終のテーマUIへ。各イテレーションを通じてレイアウトのロジックを明確にし、プロダクトのナラティブなアイデンティティを形作りました。
               </ProjectNote>
-              <img src={deliverablesDraft} alt="デザイン草案" className="my-16" />
+              <img src={deliverablesDraft} alt="デザイン草案" className="my-16 rounded-lg" />
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <img src={deliverablesLayout1} alt="レイアウト案 1" className="md:h-full md:object-cover" />
-                <img src={deliverablesLayout2} alt="レイアウト案 2" className="md:h-full md:object-cover" />
+                <img src={deliverablesLayout1} alt="レイアウト案 1" className="md:h-full md:object-cover rounded-lg" />
+                <img src={deliverablesLayout2} alt="レイアウト案 2" className="md:h-full md:object-cover rounded-lg" />
               </div>
               <div className="my-16">
                 <P>
@@ -646,7 +646,7 @@ export default function MentorPageJa() {
               </div>
             </div>
           </Container>
-          <img src={guidelineImg} alt="guideline" />
+          <img src={guidelineImg} alt="guideline" className='rounded-lg' />
         </SectionBlock>
 
         {/* story of mentor */}
@@ -717,13 +717,13 @@ export default function MentorPageJa() {
         <SectionBlock backgrounds={mentorBackgrounds}>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-12">
             <div>
-              <img src={mentorDraft} alt="mentor draft" className=" md:object-cover" />
+              <img src={mentorDraft} alt="mentor draft" className=" md:object-cover rounded-tr-lg rounded-br-lg" />
               <P className="text-caption p-8 md:ml-24 mt-4 md:mt-8">
                 初期スケッチ：宇宙の案内役としての Mentor の象徴性と、学び・リズム・対話・成長を抽象的に表現する試行。
               </P>
             </div>
             <div>
-              <img src={mentorVariants} alt="mentor variants" className=" md:object-cover" />
+              <img src={mentorVariants} alt="mentor variants" className=" md:object-cover rounded-tl-lg rounded-bl-lg" />
               <P className="text-caption p-8 md:mr-24 mt-4 md:mt-8">
                 学習者それぞれのユニークな旅を反映するため、Mentor は時間とともに進化します。外観は学生の行動、学習ペース、関与の仕方に応じて変化します。
               </P>
@@ -757,7 +757,7 @@ export default function MentorPageJa() {
                 </SwiperSlide>
                 <SwiperSlide>
                   <div>
-                    <img src={pyramid} alt="pyramid chart" />
+                    <img src={pyramid} alt="pyramid chart" className='rounded-lg' />
                     <P>
                       教育エージェント理論に基づき、Mentor はナラティブ駆動のUIエージェントとなります。情緒的な関与を高め、学習フローをより意味のある、前向きな体験にします。
                     </P>
@@ -765,13 +765,13 @@ export default function MentorPageJa() {
                 </SwiperSlide>
                 <SwiperSlide>
                   <div>
-                    <img src={screenShot1} alt="updates screen" className="rounded-sm" />
+                    <img src={screenShot1} alt="updates screen" className="rounded-tr-lg rounded-br-lg" />
                     <p className="text-caption p-8">Mentor は日々の更新を、励ましのあるインタラクションへ変えます。</p>
                   </div>
                 </SwiperSlide>
                 <SwiperSlide>
                   <div>
-                    <img src={screenShot2} alt="first-time onboarding screen" className="rounded-sm" />
+                    <img src={screenShot2} alt="first-time onboarding screen" className="rounded-tl-lg rounded-bl-lg" />
                     <p className="text-caption p-8">
                       初回オンボーディングでは、得意度（自信）に沿って科目を強い順に並べ替えます。
                     </p>
@@ -787,7 +787,7 @@ export default function MentorPageJa() {
                 Mentor は画面右下に常駐し、リアルタイムの学習エージェントとして、操作に応じたフィードバック、リマインド、励ましを提供します。
               </P>
               <P>発光するSF的キューブのアバターは「知性」と「神話性」を融合し、二層のインタラクションモデルを形作ります：</P>
-              <img src={pyramid} alt="pyramid chart" />
+              <img src={pyramid} alt="pyramid chart" className='rounded-lg' />
               <P>
                 教育エージェント理論に基づき、Mentor はナラティブ駆動のUIエージェントとなります。情緒的な関与を高め、学習フローをより意味のある、前向きな体験にします。
               </P>
@@ -795,11 +795,11 @@ export default function MentorPageJa() {
           </Container>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-24">
             <div>
-              <img src={screenShot1} alt="updates screen" className="rounded-sm" />
+              <img src={screenShot1} alt="updates screen" className="rounded-tr-lg rounded-br-lg" />
               <p className="text-caption p-8">Mentor は日々の更新を、励ましのあるインタラクションへ変えます。</p>
             </div>
             <div>
-              <img src={screenShot2} alt="first-time onboarding screen" className="rounded-sm" />
+              <img src={screenShot2} alt="first-time onboarding screen" className="rounded-tl-lg rounded-bl-lg" />
               <p className="text-caption p-8">
                 初回オンボーディングでは、得意度（自信）に沿って科目を強い順に並べ替えます。
               </p>
@@ -818,6 +818,7 @@ export default function MentorPageJa() {
               src={screenShot3}
               alt="learning persona classification"
               hotspots={learningPersonaHotspots}
+              className="rounded-lg"
             />
 
             {/* Mobile Swiper */}
@@ -836,7 +837,7 @@ export default function MentorPageJa() {
                     <P>
                       学習をより身近でパーソナルなものにするため、Mentor は週あたりの学習時間に基づいて、4つの学習ペルソナのいずれかを自動で割り当てます：
                     </P>
-                    <img src={typesImg} alt="types" />
+                    <img src={typesImg} alt="types" className='rounded-lg' />
                     <UL>
                       <LI>ゆるふわ学習者（Laid-back Learner）：気負わず、低ストレスなペースを好む。</LI>
                       <LI>コツコツ努力家（Consistent Striver）：規則的に取り組み、着実に前進する。</LI>
@@ -864,6 +865,7 @@ export default function MentorPageJa() {
                       src={screenShot4}
                       alt="learning goal setting"
                       hotspots={learningGoalHotspots}
+                      className="rounded-lg"
                     />
                   </div>
                 </SwiperSlide>
@@ -889,6 +891,7 @@ export default function MentorPageJa() {
                       src={screenShot5}
                       alt="learning goal setting"
                       hotspots={learningReportHotspots}
+                      className="rounded-lg"
                     />
                   </div>
                 </SwiperSlide>
@@ -933,6 +936,7 @@ export default function MentorPageJa() {
                       src={screenShot6}
                       alt="badge collection"
                       hotspots={badgeCollectionHotspots}
+                      className="rounded-lg"
                     />
                   </div>
                 </SwiperSlide>
@@ -942,8 +946,8 @@ export default function MentorPageJa() {
                       進捗の可視化と解放フィードバックが「集めたい」気持ちを満たし、習慣化を後押しします。
                     </P>
                     <div className="grid grid-cols-1 gap-4 mt-6">
-                      <img src={screenShot7} alt="badge 1" className="rounded-sm" />
-                      <img src={screenShot8} alt="badge 2" className="rounded-sm" />
+                      <img src={screenShot7} alt="badge 1" className="rounded-lg" />
+                      <img src={screenShot8} alt="badge 2" className="rounded-lg" />
                     </div>
                   </div>
                 </SwiperSlide>
@@ -969,7 +973,7 @@ export default function MentorPageJa() {
                 <P>
                   学習をより身近でパーソナルなものにするため、Mentor は週あたりの学習時間に基づいて、4つの学習ペルソナのいずれかを自動で割り当てます：
                 </P>
-                <img src={typesImg} alt="types" />
+                <img src={typesImg} alt="types" className='rounded-lg' />
                 <UL>
                   <LI>ゆるふわ学習者（Laid-back Learner）：気負わず、低ストレスなペースを好む。</LI>
                   <LI>コツコツ努力家（Consistent Striver）：規則的に取り組み、着実に前進する。</LI>
@@ -994,6 +998,7 @@ export default function MentorPageJa() {
                   src={screenShot4}
                   alt="learning goal setting"
                   hotspots={learningGoalHotspots}
+                  className="rounded-lg"
                 />
               </div>
               <div className="px-4 pb-3 pt-6 bg-gray-100 rounded-sm">
@@ -1013,6 +1018,7 @@ export default function MentorPageJa() {
                   src={screenShot5}
                   alt="learning goal setting"
                   hotspots={learningReportHotspots}
+                  className="rounded-lg"
                 />
                 <P className="mt-6">レポートは 3 つの時間軸で構成されます：</P>
                 <UL>
@@ -1047,11 +1053,12 @@ export default function MentorPageJa() {
                     src={screenShot6}
                     alt="badge collection"
                     hotspots={badgeCollectionHotspots}
+                    className="rounded-lg"
                   />
                   <P className="mt-6">進捗の可視化と解放フィードバックが「集めたい」気持ちを満たし、習慣化を後押しします。</P>
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-6">
-                    <img src={screenShot7} alt="badge 1" className="rounded-sm" />
-                    <img src={screenShot8} alt="badge 2" className="rounded-sm" />
+                    <img src={screenShot7} alt="badge 1" className="rounded-lg" />
+                    <img src={screenShot8} alt="badge 2" className="rounded-lg" />
                   </div>
                 </div>
                 <div className="px-4 pb-3 pt-6 bg-gray-100 rounded-sm">
@@ -1159,7 +1166,7 @@ export default function MentorPageJa() {
             <P>
               これらの経験を通じて、私は個人貢献者からデザインリードへと成長しました。より明確にコミュニケーションし、役割間で意図を翻訳し、デリバリーはチーム全体のリズムだと理解できるようになりました。何より、良いデザインとは「分かりやすさ」や「クラフト」だけでなく、ビジョン・人・成果を揃えることだと学びました。
             </P>
-            <img src={mentor} alt="mentor" className="w-24 h-24" />
+            <img src={mentor} alt="mentor" className="w-24 h-24 rounded-lg" />
             <p className="text-h3 font-light">Mentor</p>
             <p className="text-caption text-gray-300">2019/05 - 2024/06</p>
           </Container>

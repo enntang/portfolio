@@ -59,7 +59,7 @@ const penguinBackgrounds = {
   penguinBg2: bg2,
 }
 
-export default function PenguinTerritoryPageZh() {
+export default function PenguinTerritoryPageJa() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const arrowDownRef = useFloatingAnimation({ y: -15, duration: 1.8, delay: 0.2 })
   const penguin1Ref = useRef(null)
@@ -72,7 +72,7 @@ export default function PenguinTerritoryPageZh() {
       id: 'point1',
       x: 60,
       y: 20,
-      content: '用雪堆與冰塊的意象製作面板。',
+      content: 'パネルは雪の塊と氷のイメージでデザインされています。',
       arrowPosition: 'bottom',
     },
   ]
@@ -82,21 +82,21 @@ export default function PenguinTerritoryPageZh() {
       id: 'point1',
       x: 90,
       y: 8,
-      content: '將登出按鈕安排在大眾已習慣的右上角。',
+      content: 'ログアウトボタンは、一般的なユーザーの習慣に従って右上に配置されています。',
       arrowPosition: 'bottom',
     },
     {
       id: 'point2',
       x: 90,
       y: 90,
-      content: '右下角可開關背景音樂。',
+      content: '右下でBGMのオン/オフを切り替えられます。',
       arrowPosition: 'top',
     },
     {
       id: 'point3',
       x: 50,
       y: 50,
-      content: '房間列表縱向捲動，不同狀態區別化顯示：開放中的房間可隨時加入；滿員的房間會顯示「即將開始」並且禁止進入。',
+      content: 'ルームリストは縦にスクロールし、状態を区別して表示：開放中のルームはいつでも参加可能；満員のルームは「開始予定」と表示され、ロックされます。',
       arrowPosition: 'top',
     },
   ]
@@ -105,7 +105,7 @@ export default function PenguinTerritoryPageZh() {
       id: 'point1',
       x: 12,
       y: 12,
-      content: '側邊欄顯示輪到哪位玩家，顏色與六角形冰塊一致，方便對應查看戰況。',
+      content: 'サイドバーには現在のターンを示し、六角形の氷ブロックと色が一致しており、戦況を確認しやすくなっています。',
       arrowPosition: 'bottom',
     },
   ]
@@ -114,7 +114,7 @@ export default function PenguinTerritoryPageZh() {
       id: 'point1',
       x: 42,
       y: 82,
-      content: '當玩家確認放置的行動後，出現按鈕提醒下一步行動。',
+      content: 'プレイヤーが行動を確認した後、次のステップを促すボタンが表示されます。',
       arrowPosition: 'bottom',
     },
   ]
@@ -124,7 +124,7 @@ export default function PenguinTerritoryPageZh() {
       id: 'point1',
       x: 40,
       y: 30,
-      content: '左右滑動選擇喜歡的代表企鵝，UI 利用大小和透明度營造遠近感。',
+      content: '左右にスワイプして好きなペンギンを選択。UIはサイズと透明度で遠近感を演出しています。',
       arrowPosition: 'bottom',
     },
     
@@ -135,7 +135,7 @@ export default function PenguinTerritoryPageZh() {
       id: 'point1',
       x: 20,
       y: 20,
-      content: '最高分的勝利者會在最大的欄位閃耀光芒。',
+      content: '最高得点の勝利者が最大のパネルで輝きます。',
       arrowPosition: 'bottom',
     },
    
@@ -228,13 +228,13 @@ export default function PenguinTerritoryPageZh() {
             <TableOfContents />
             <Container className="flex flex-col items-center justify-center text-center">
 
-              <h1 className="mt-10  text-large mobile:text-large-mobile">企鵝搶地</h1>
-              <H3 className="mb-16">回合制策略網頁遊戲｜UI/UX、插畫、視覺設計</H3>
+              <h1 className="mt-10  text-large mobile:text-large-mobile">ペンギン<br/>テリトリー</h1>
+              <H3 className="mb-16">ターン制ストラテジーWebゲーム｜UI/UX、イラスト、ビジュアルデザイン</H3>
 
               <img
                 ref={arrowDownRef}
                 src={arrowDown}
-                alt="往下捲動"
+                alt="下にスクロール"
                 className="w-6 h-6 rounded-lg"
               />
             </Container>
@@ -244,18 +244,18 @@ export default function PenguinTerritoryPageZh() {
         {/* Project Brief */}
         <SectionBlock>
           <Container>
-            <H2>專案簡介</H2>
+            <H2>プロジェクト概要</H2>
 
             <TwoColumn>
               <div>
                 <P>
-                  這是一個 side project，我與一位前端工程師、一位後端工程師協作完成。
+                  これは、フロントエンドエンジニアとバックエンドエンジニアと協力して完成したサイドプロジェクトです。
                 </P>
                 <P>
-                  由於遊戲進行中有相當多資訊（地圖上的企鵝數量、玩家動作順序、最新戰況顯示等），如何妥善引導與清楚呈現，是 UI 設計的核心挑戰。
+                  ゲーム中には多くの情報（マップ上のペンギン数、プレイヤーの行動順序、最新の戦況表示など）があるため、適切に導き、明確に提示することがUIデザインの核心的な課題でした。
                 </P>
                 <P className="text-caption text-gray-500 font-light">
-                  目標使用者：網頁桌遊玩家（習慣在桌機/筆電操作遊戲，且有連線對戰需求）
+                  ターゲットユーザー：Webボードゲームプレイヤー（デスクトップ/ノートPCでゲームを操作する習慣があり、オンライン対戦のニーズがある）
                 </P>
                 <div ref={penguin1Ref} className="w-48 h-auto self-end mb-4 absolute bottom-20 right-0">
                   <LazyImage src={penguin1} alt="" className="w-full h-auto -scale-x-100 rounded-lg" />
@@ -263,13 +263,13 @@ export default function PenguinTerritoryPageZh() {
               </div>
               <div className="flex flex-col gap-2">
 
-                <p className="text-h3">角色</p>
-                <P>UI/UX Designer</P>
-                <p className="text-h3">時程</p>
-                <P>Aug 2024 - Dec 2024</P>
-                <p className="text-h3">工具</p>
+                <p className="text-h3">役割</p>
+                <P>UI/UXデザイナー</P>
+                <p className="text-h3">期間</p>
+                <P>2024年8月 - 2024年12月</P>
+                <p className="text-h3">ツール</p>
                 <P>
-                  Gouache / Watercolor
+                  ガッシュ / 水彩
                   <br />
                   Figma
                   <br />
@@ -284,22 +284,22 @@ export default function PenguinTerritoryPageZh() {
         <SectionBlock bgVariant="penguinBg2" backgrounds={penguinBackgrounds} textDarkOnBg>
           <Container>
 
-            <H2>設計目標</H2>
+            <H2>デザイン目標</H2>
             <div ref={penguin3Ref} className="w-48 h-auto self-end mb-4 absolute top-[-60px] left-0">
               <LazyImage src={penguin3} alt="" className="w-full h-auto -scale-x-100 rounded-lg" />
             </div>
             <div className="bg-white/60 backdrop-blur rounded-sm shadow p-6 md:p-8">
             <img src={quote} alt="quote" className='mb-2 rounded-lg' />
               <p>
-                我們的目標很單純：創造具有視覺吸引力、且易於遊玩的線上桌遊。
+                私たちの目標はシンプルです：視覚的に魅力的で、遊びやすいオンラインボードゲームを作ること。
               </p>
 
             </div>
 
-            <P className="mt-8">開發者團隊最初已有可遊玩的雛形，但在 UI 介面上仍有優化空間：</P>
+            <P className="mt-8">開発チームは最初に遊べるプロトタイプを持っていましたが、UIにはまだ改善の余地がありました：</P>
             <UL>
-              <LI>整體美術風格不明，字體與按鈕層級需要梳理</LI>
-              <LI>缺乏從登入到遊戲房間的 Onboarding 流程設計</LI>
+              <LI>全体的なアートスタイルが不明確で、タイポグラフィとボタンの階層を整理する必要があった</LI>
+              <LI>ログインからゲームルームまでのオンボーディングフローのデザインが不足していた</LI>
             </UL>
             <div className="mt-8">
               <div className="relative flex flex-row mt-10 items-start">
@@ -310,15 +310,15 @@ export default function PenguinTerritoryPageZh() {
                   <div className="relative overflow-hidden rounded-lg shadow aspect-[17/10]">
                     {/* Old version image */}
                     <div className="relative transition-opacity duration-300 group-hover:opacity-0 w-full h-full">
-                      <LazyImage src={designGoal2} alt="早期介面截圖 2" className="w-full h-full object-cover block rounded-lg" />
+                      <LazyImage src={designGoal2} alt="初期インターフェーススクリーンショット 2" className="w-full h-full object-cover block rounded-lg" />
                     </div>
                     {/* New version image (shown on hover) */}
                     <div className="absolute inset-0 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
-                      <LazyImage src={turn02} alt="新版介面截圖 2" className="w-full h-full object-cover block rounded-lg" />
+                      <LazyImage src={turn02} alt="新インターフェーススクリーンショット 2" className="w-full h-full object-cover block rounded-lg" />
                     </div>
                     {/* OLD watermark overlay */}
                     <div className="absolute inset-0 bg-black/40 flex items-center justify-center pointer-events-none transition-opacity duration-300 group-hover:opacity-0">
-                      <span className=" text-white/60 select-none">新舊對照：遊戲進行中畫面</span>
+                      <span className=" text-white/60 select-none">新旧対照：ゲーム中の画面</span>
                     </div>
                   </div>
                 </div>
@@ -328,15 +328,15 @@ export default function PenguinTerritoryPageZh() {
                   <div className="relative overflow-hidden rounded-lg shadow aspect-[16:10]">
                     {/* Old version image */}
                     <div className="relative transition-opacity duration-300 group-hover:opacity-0 w-full h-full">
-                      <LazyImage src={designGoal3} alt="早期介面截圖 3" className="w-full h-full object-cover block rounded-lg" />
+                      <LazyImage src={designGoal3} alt="初期インターフェーススクリーンショット 3" className="w-full h-full object-cover block rounded-lg" />
                     </div>
                     {/* New version image (shown on hover) */}
                     <div className="absolute inset-0 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
-                      <LazyImage src={resultImg} alt="新版介面截圖 3" className="w-full h-full object-cover block rounded-lg" />
+                      <LazyImage src={resultImg} alt="新インターフェーススクリーンショット 3" className="w-full h-full object-cover block rounded-lg" />
                     </div>
                     {/* OLD watermark overlay */}
                     <div className="absolute inset-0 bg-black/40 flex items-center justify-center pointer-events-none transition-opacity duration-300 group-hover:opacity-0">
-                      <span className="text-white/60 select-none">新舊對照：分數結算</span>
+                      <span className="text-white/60 select-none">新旧対照：スコア集計</span>
                     </div>
                   </div>
                 </div>
@@ -347,15 +347,15 @@ export default function PenguinTerritoryPageZh() {
         {/* Collaboration artifacts */}
         <SectionBlock>
           <Container>
-            <H2>流程與協作</H2>
+            <H2>プロセスと協力</H2>
             <P>
-              我透過 wireframe 進行整體 layout 佈局調整，詳列所有遊戲進行中的狀態變化，並在 Miro 線上白板交換想法。
+              ワイヤーフレームで全体的なレイアウトを調整し、ゲーム中のすべての状態変化を詳しく列挙し、Miroのオンラインホワイトボードでアイデアを交換しました。
             </P>
-            <LazyImage src={miro} alt="Miro 線上白板" className="w-full h-auto rounded-lg shadow mb-4" />
-              <LazyImage src={wireframe} alt="Wireframe" className="w-full h-auto rounded-lg shadow" />
+            <LazyImage src={miro} alt="Miroオンラインホワイトボード" className="w-full h-auto rounded-lg shadow mb-4" />
+              <LazyImage src={wireframe} alt="ワイヤーフレーム" className="w-full h-auto rounded-lg shadow" />
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
-              <LazyImage src={wireframeNoText1} alt="Wireframe（無文字）1" className="w-full h-auto rounded-lg shadow" />
-              <LazyImage src={wireframeNoText2} alt="Wireframe（無文字）2" className="w-full h-auto rounded-lg shadow" />
+              <LazyImage src={wireframeNoText1} alt="ワイヤーフレーム（テキストなし）1" className="w-full h-auto rounded-lg shadow" />
+              <LazyImage src={wireframeNoText2} alt="ワイヤーフレーム（テキストなし）2" className="w-full h-auto rounded-lg shadow" />
             </div>
           </Container>
         </SectionBlock>
@@ -363,59 +363,59 @@ export default function PenguinTerritoryPageZh() {
         {/* Design Deliverables */}
         <SectionBlock bgVariant="penguinBg2" backgrounds={penguinBackgrounds} textDarkOnBg>
           <Container>
-            <H2>設計產出</H2>
+            <H2>デザイン成果物</H2>
 
-            <H3>清楚的 onboarding 流程</H3>
-            <P>可選擇登入玩家帳號，或是以訪客身份進行遊玩。</P>
-            <P>登入遊戲後的流程相當單純：使玩家進入等待序列 → 選企鵝 → 房間等待。</P>
+            <H3>明確なオンボーディングフロー</H3>
+            <P>プレイヤーはアカウントでログインするか、ゲストとしてプレイできます。</P>
+            <P>ログイン後のフローは非常にシンプル：プレイヤーを待機キューに入れる → ペンギンを選択 → ルームで待機。</P>
             <div className="grid grid-cols-1 gap-4 mt-8">
-              <ImageWithHotspots src={loginImg} alt="登入畫面" hotspots={loginHotspots} className="w-full h-auto rounded-lg shadow" />
-              <ImageWithHotspots src={roomListImg} alt="房間列表" hotspots={roomListHotspots} className="w-full h-auto rounded-lg shadow" />
-              <ImageWithHotspots src={roomWaitingImg} hotspots={waitingHotspots} alt="房間等待：玩家本人尚未準備好" className="w-full h-auto rounded-lg shadow" />
+              <ImageWithHotspots src={loginImg} alt="ログイン画面" hotspots={loginHotspots} className="w-full h-auto rounded-lg shadow" />
+              <ImageWithHotspots src={roomListImg} alt="ルームリスト" hotspots={roomListHotspots} className="w-full h-auto rounded-lg shadow" />
+              <ImageWithHotspots src={roomWaitingImg} hotspots={waitingHotspots} alt="ルーム待機：プレイヤー本人がまだ準備できていない" className="w-full h-auto rounded-lg shadow" />
             </div>
             <P className="mt-6">
-              房間列表縱向捲動，不同狀態區別化顯示：開放中的房間可隨時加入；滿員的房間會顯示「即將開始」並且禁止進入。
-              介面採用符合使用習慣的四角佈局：右上方為登出按鈕，右下角可開關背景音樂。
+              ルームリストは縦にスクロールし、状態を区別して表示：開放中のルームはいつでも参加可能；満員のルームは「開始予定」と表示され、ロックされます。
+              インターフェースは使い慣れた四隅レイアウトを採用：右上にログアウトボタン、右下でBGMのオン/オフを切り替え。
             </P>
 
             <div className="mt-16">
-              <H3>核心互動流程：遊戲開始</H3>
-              <P>玩家輪流在地圖外圈放置第一隻企鵝。遊戲以回合制進行，每一輪只有一個玩家的企鵝可以動作。</P>
-              <P>規劃 UI 時，我採用的設計原則是：給玩家清楚的動作提示與反饋。實際方式如下：</P>
+              <H3>コアインタラクションフロー：ゲーム開始</H3>
+              <P>プレイヤーは順番にマップの外側に最初のペンギンを配置します。ゲームはターン制で進行し、各ラウンドでは1人のプレイヤーのペンギンのみが行動できます。</P>
+              <P>UIを計画する際、私が採用したデザイン原則は、プレイヤーに明確な行動のヒントとフィードバックを提供することでした。実際の方法は以下の通りです：</P>
               <UL>
-                <LI>六角格以不同色塊區隔，使目標格易辨識</LI>
-                <LI>光暈＋箭頭提示現在可以放在哪裡</LI>
-                <LI>Hover 顯示預覽位置</LI>
+                <LI>六角形のグリッドを異なる色のブロックで区切り、ターゲットグリッドを識別しやすくする</LI>
+                <LI>グロー＋矢印で現在配置できる場所を示す</LI>
+                <LI>ホバーで配置位置をプレビュー表示</LI>
               </UL>
               <P>
-                玩家確認動作結束後自動輪下一位玩家行動。當輪到該位玩家的時候，出現蓋版訊息，避免玩家忽略狀態、導致整體遊戲時間延宕。
+                プレイヤーが行動を確認した後、自動的に次のプレイヤーのターンに移ります。そのプレイヤーのターンになると、モーダルメッセージが表示され、プレイヤーが状態を見逃してゲーム全体の時間が遅延するのを防ぎます。
               </P>
               <div className="grid grid-cols-1 gap-4 mt-8">
-                <ImageWithHotspots src={turn01} alt="輪到玩家本人 01" className="w-full h-auto rounded-lg shadow" />
-                <ImageWithHotspots src={turn02} alt="輪到玩家本人 02" hotspots={turnHotspots1} className="w-full h-auto rounded-lg shadow" />
-                <ImageWithHotspots src={turn04} alt="輪到玩家本人 04" hotspots={turnHotspots2} className="w-full h-auto rounded-lg shadow" />
+                <ImageWithHotspots src={turn01} alt="プレイヤー本人のターン 01" className="w-full h-auto rounded-lg shadow" />
+                <ImageWithHotspots src={turn02} alt="プレイヤー本人のターン 02" hotspots={turnHotspots1} className="w-full h-auto rounded-lg shadow" />
+                <ImageWithHotspots src={turn04} alt="プレイヤー本人のターン 04" hotspots={turnHotspots2} className="w-full h-auto rounded-lg shadow" />
               </div>
               <P className="mt-6">
-                我在設計上利用側邊欄顯示戰況，畫面左右分別是玩家順序和即時計分。分配時，來源與目的的「數字」是重要資訊，所以以黑色底襯托。
+                デザインでは、サイドバーで戦況を表示し、画面の左右にプレイヤーの順序とリアルタイムのスコアを配置しました。分配時、出発地と目的地の「数字」は重要な情報なので、黒い背景で強調しています。
               </P>
             </div>
 
             <div className="mt-16">
-              <H3>清楚的規則說明</H3>
-              <P>遊戲過程中可隨時查看規則說明，每頁搭配簡化插圖，避免文字過長。</P>
+              <H3>明確なルール説明</H3>
+              <P>ゲーム中はいつでもルール説明を閲覧でき、各ページには簡略化されたイラストが付いており、テキストが長くなるのを避けています。</P>
               <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mt-8">
-                <LazyImage src={tips1} alt="規則說明 1" className=" -rotate-3 w-full h-auto rounded-lg shadow" />
-                <LazyImage src={tips2} alt="規則說明 2" className=" rotate-3 w-full h-auto rounded-lg shadow" />
-                <LazyImage src={tips3} alt="規則說明 3" className=" -rotate-3 w-full h-auto rounded-lg shadow" />
+                <LazyImage src={tips1} alt="ルール説明 1" className=" -rotate-3 w-full h-auto rounded-lg shadow" />
+                <LazyImage src={tips2} alt="ルール説明 2" className=" rotate-3 w-full h-auto rounded-lg shadow" />
+                <LazyImage src={tips3} alt="ルール説明 3" className=" -rotate-3 w-full h-auto rounded-lg shadow" />
               </div>
             </div>
 
             <div className="mt-16">
-              <H3>讓勝利者具有成就感的結算畫面</H3>
+              <H3>勝利者に達成感を与える結果画面</H3>
               <P>
-                當勝利條件達成時，遊戲結束並顯示結算畫面。最高分的勝利者會在最大的欄位閃耀光芒，其餘玩家的分數也會一並顯示在面板上、依序排名。
+                勝利条件が達成されると、ゲームが終了し、結果画面が表示されます。最高得点の勝利者が最大のパネルで輝き、他のプレイヤーのスコアもランク順に表示されます。
               </P>
-              <ImageWithHotspots src={resultImg} alt="結算畫面" hotspots={resultHotspots} className="w-full h-auto rounded-lg shadow mt-8" />
+              <ImageWithHotspots src={resultImg} alt="結果画面" hotspots={resultHotspots} className="w-full h-auto rounded-lg shadow mt-8" />
             </div>
           </Container>
         </SectionBlock>
@@ -423,24 +423,24 @@ export default function PenguinTerritoryPageZh() {
         {/* Visual Design */}
         <SectionBlock>
           <Container>
-            <H2>視覺設計</H2>
+            <H2>ビジュアルデザイン</H2>
             <P>
-              整體使用冰原、海水為主的清爽配色，並且用手繪風格增加親切感。在介面上採用大量圓角、柔和陰影，營造友善輕鬆的遊戲氛圍。
+              全体的に氷原と海水を基調とした爽やかな配色を使用し、手描きスタイルで親しみやすさを加えています。インターフェースには多くの角丸と柔らかな影を採用し、親しみやすくリラックスしたゲームの雰囲気を演出しています。
             </P>
 
-            <LazyImage src={addRoomImg} alt="新增房間" className="w-full h-auto rounded-lg shadow mb-10" />
-            <LazyImage src={logoutPopupImg} alt="確認登出 popup" className="w-full h-auto rounded-lg shadow" />
+            <LazyImage src={addRoomImg} alt="ルーム追加" className="w-full h-auto rounded-lg shadow mb-10" />
+            <LazyImage src={logoutPopupImg} alt="ログアウト確認ポップアップ" className="w-full h-auto rounded-lg shadow" />
 
             <P className="mt-10">
-              企鵝插圖穿插在 UI 狀態與操作提示上，形成一致的風格增加遊玩沈浸感。為了讓視覺更具有故事感，企鵝美術以手繪完成，
-              媒材主要是不透明水彩：紙上作畫後，拍照掃描進電腦後製完成。
+              ペンギンのイラストはUIの状態と操作ヒントに組み込まれ、一貫したスタイルでプレイの没入感を高めています。視覚をよりストーリー性のあるものにするため、ペンギンのアートワークは手描きで完成させました。
+              主にガッシュを使用：紙に描画後、写真を撮り、スキャンしてデジタル仕上げを行いました。
             </P>
             <LazyImage
               src={watercolorOriginal}
-              alt="使用不透明水彩繪製的原稿"
+              alt="ガッシュで描かれた原画"
               className="w-full h-auto rounded-lg shadow mt-8"
             />
-            <p className="text-caption text-gray-500 font-light mt-3">使用不透明水彩繪製的原稿</p>
+            <p className="text-caption text-gray-500 font-light mt-3">ガッシュで描かれた原画</p>
           </Container>
         </SectionBlock>
 
@@ -450,16 +450,16 @@ export default function PenguinTerritoryPageZh() {
             <TwoColumn>
               <div>
                
-                <H2>反思</H2>
+                <H2>振り返り</H2>
                 <P>
-                  在這個專案，我用 UI 元素簡化複雜規則，利用顏色、對比與動畫去做視覺階層，讓玩家在短時間內理解遊戲機制。
-                  遊戲與 App 不同，<strong>動作回饋（Feedback）</strong> 對理解難度影響極大。
+                  このプロジェクトでは、UI要素で複雑なルールを簡素化し、色、コントラスト、アニメーションを使って視覚階層を作り、プレイヤーが短時間でゲームメカニクスを理解できるようにしました。
+                  ゲームはアプリとは異なり、<strong>行動フィードバック</strong>が理解の難しさに大きく影響します。
                 </P>
-                <P>如何在不干擾視覺的條件下給予「下一步提示」，是一個很大的挑戰。</P>
+                <P>視覚を妨げずに「次のステップのヒント」を提供することは、大きな課題でした。</P>
                 <LazyImage src={penguin2} alt="" className="w-60 h-auto -scale-x-100 rounded-lg" />
                 <P>
-                  另外，我發揮了個人的多媒材風格，插畫與 UI 的融合讓產品更具吸引力，獲得了不錯的使用回饋。
-                  在專案告一段落後，也用短影片把過程記錄了下來，歡迎點擊觀看。
+                  また、個人的なマルチメディアスタイルを発揮し、イラストとUIの融合により製品をより魅力的にし、良いユーザーフィードバックを得ました。
+                  プロジェクトが一段落した後、短い動画でプロセスを記録しました。ぜひクリックしてご覧ください。
                 </P>
               </div>
               <div>
@@ -538,7 +538,7 @@ export default function PenguinTerritoryPageZh() {
 
             <div className="flex flex-col items-center justify-center mt-16">
               <img src={projectListIcon} alt="" className="w-14 h-14 mb-3 object-contain rounded-lg" />
-              <p className="text-h3 font-light">企鵝搶地</p>
+              <p className="text-h3 font-light">ペンギンテリトリー</p>
               <p className="text-caption">2024</p>
             </div>
           </Container>
@@ -549,4 +549,3 @@ export default function PenguinTerritoryPageZh() {
     </div>
   )
 }
-

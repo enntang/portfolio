@@ -260,7 +260,7 @@ export default function EHairPOSPageJa() {
               className='pointer-events-none select-none absolute inset-x-0 bottom-0 w-full h-auto'
             />
             <Container className='flex flex-col items-center justify-center text-center relative z-10'>
-              <img src={iconEhairpos} ref={iconEhairposRef} alt="eHairPOS" className='w-48 h-48 md:w-60 md:h-60 mb-8 z-10' />
+              <img src={iconEhairpos} ref={iconEhairposRef} alt="eHairPOS" className='w-48 h-48 md:w-60 md:h-60 mb-8 z-10 rounded-lg' />
               <h1 className='text-large mobile:text-large-mobile text-[#994FDE]'>eHairPOS</h1>
               <H3 className='mb-24 text-gray-900'>サロン管理ツール</H3>
               <P className='w-full md:w-2/3 text-gray-900'>美容サロン向けに設計した総合POSシステム。予約から会計までの流れを一気通貫でつなぎ、現場のオペレーションをスムーズにします。</P>
@@ -279,7 +279,7 @@ export default function EHairPOSPageJa() {
           <Container className='flex flex-col items-center justify-center'>
 
             <H2>プロジェクト概要</H2>
-            <LazyImage src={tablet} alt="tablet" className='w-full md:w-2/3 h-auto' />
+            <LazyImage src={tablet} alt="tablet" className='w-full md:w-2/3 h-auto rounded-lg' />
             <div className="grid grid-cols-1 md:grid-cols-3 gap-16 mt-16">
               <div className="md:col-span-2">
                 <P>
@@ -364,7 +364,7 @@ export default function EHairPOSPageJa() {
                 </UL>
               </div>
             </div>
-            <img src={draft1} alt="draft1" className='w-full h-auto mt-16 rounded-xs' />
+            <img src={draft1} alt="draft1" className='w-full h-auto mt-16 rounded-lg' />
             <p className='text-caption text-gray-500 font-light mt-4'>断片的にUIを足すのではなく、全体としてレイアウトを草案化し比較検討しました。</p>
           </Container>
         </SectionBlock>
@@ -392,9 +392,9 @@ export default function EHairPOSPageJa() {
                 <SwiperSlide>
                   <div>
                     <P>旧版：顧客リスト閲覧中に詳細を開くと全画面モーダルになり、閉じないとリストに戻れませんでした。</P>
-                    <div className='grid grid-cols-1 gap-4 mb-8'>
-                      <img src={old1} alt="old1" className='w-full h-auto mt-8 rounded-xs' />
-                      <img src={old2} alt="old2" className='w-full h-auto rounded-xs' />
+                    <div className='grid grid-cols-1 gap-4 mb-8 mobile:m-0'>
+                      <img src={old1} alt="old1" className='w-full h-auto mt-8 rounded-lg' />
+                      <img src={old2} alt="old2" className='w-full h-auto rounded-lg mobile:hidden' />
                     </div>
                   </div>
                 </SwiperSlide>
@@ -405,7 +405,7 @@ export default function EHairPOSPageJa() {
                       src={screenshot01}
                       alt="Customers list"
                       hotspots={customersHotspots}
-                      className='mb-8'
+                      className='mb-8 rounded-lg'
                     />
                   </div>
                 </SwiperSlide>
@@ -416,7 +416,7 @@ export default function EHairPOSPageJa() {
                       src={screenshot02}
                       alt="Customer notes"
                       hotspots={customersNotesHotspots}
-                      className='mb-8'
+                      className='mb-8 rounded-lg'
                     />
                   </div>
                 </SwiperSlide>
@@ -427,6 +427,7 @@ export default function EHairPOSPageJa() {
                       src={screenshot03}
                       alt="Customer charts"
                       hotspots={customersChartsHotspots}
+                      className='rounded-lg'
                     />
                   </div>
                 </SwiperSlide>
@@ -440,15 +441,15 @@ export default function EHairPOSPageJa() {
               <P>モーダル中心の閲覧から離れ、スプリットビューに変更しました。顧客リストと詳細情報を並べて確認できるため、検索時間を短縮しクリック数も削減できます。</P>
               <P>旧版：顧客リスト閲覧中に詳細を開くと全画面モーダルになり、閉じないとリストに戻れませんでした。</P>
               <div className='grid grid-cols-1 md:grid-cols-2 gap-16 mb-16'>
-                <img src={old1} alt="old1" className='w-full h-auto mt-16 rounded-xs' />
-                <img src={old2} alt="old1" className='w-full h-auto mt-16 rounded-xs' />
+                <img src={old1} alt="old1" className='w-full h-auto mt-16 rounded-lg' />
+                <img src={old2} alt="old1" className='w-full h-auto mt-16 rounded-lg' />
               </div>
               <P>新版：スプリットビューを採用。リストの顧客をクリックすると右側に即座に詳細が表示されます。</P>
               <ImageWithHotspots
                 src={screenshot01}
                 alt="Customers list"
                 hotspots={customersHotspots}
-                className='mb-8'
+                className='mb-8 rounded-lg'
               />
               <P>スタイリストごとのメモはタイムラインで表示され、顧客の好みをチームで共有できます。</P>
 
@@ -456,7 +457,7 @@ export default function EHairPOSPageJa() {
                 src={screenshot02}
                 alt="Customer notes"
                 hotspots={customersNotesHotspots}
-                className='mb-8'
+                className='mb-8 rounded-lg'
               />
 
               <P>来店頻度・支出・施術構成をチャートで要約し、VIP顧客を見つけやすくしました。</P>
@@ -464,6 +465,7 @@ export default function EHairPOSPageJa() {
                 src={screenshot03}
                 alt="Customer charts"
                 hotspots={customersChartsHotspots}
+                className='rounded-lg'
               />
             </div>
           </Container>
@@ -491,7 +493,7 @@ export default function EHairPOSPageJa() {
                 <SwiperSlide>
                   <div>
                     <div className='flex justify-center'>
-                      <img src={draft2} alt="draft2" className='w-full h-auto rounded-xs mix-blend-multiply opacity-50' />
+                      <img src={draft2} alt="draft2" className='w-full h-auto rounded-lg mix-blend-multiply opacity-50' />
                     </div>
                   </div>
                 </SwiperSlide>
@@ -501,7 +503,7 @@ export default function EHairPOSPageJa() {
                       src={screenshot04}
                       alt="カレンダービュー"
                       hotspots={calendarHotspots1}
-                      className='mb-8'
+                      className='mb-8 rounded-lg'
                     />
                   </div>
                 </SwiperSlide>
@@ -512,6 +514,7 @@ export default function EHairPOSPageJa() {
                       src={screenshot05}
                       alt="カレンダービュー"
                       hotspots={calendarHotspots2}
+                      className='rounded-lg'
                     />
                   </div>
                 </SwiperSlide>
@@ -525,20 +528,21 @@ export default function EHairPOSPageJa() {
                 ユーザーが馴染みのある操作（例：Google Calendar）を取り入れ、ドラッグ＆ドロップでの素早い予約登録、未確定枠の保持、日／月表示の切り替えを可能にしました。</P>
 
               <div className='flex justify-end'>
-                <img src={draft2} alt="draft2" className='w-[80%] h-auto  rounded-xs mix-blend-multiply opacity-50 ' />
+                <img src={draft2} alt="draft2" className='w-[80%] h-auto  rounded-lg mix-blend-multiply opacity-50 ' />
               </div>
 
               <ImageWithHotspots
                 src={screenshot04}
                 alt="Calendar view"
                 hotspots={calendarHotspots1}
-                className='mb-8'
+                className='mb-8 rounded-lg'
               />
               <P>カレンダーは月表示に切り替えられ、全体の予定を俯瞰して調整しやすくなります。</P>
               <ImageWithHotspots
                 src={screenshot05}
                 alt="Calendar view"
                 hotspots={calendarHotspots2}
+                className='rounded-lg'
               />
             </div>
           </Container>
@@ -567,7 +571,7 @@ export default function EHairPOSPageJa() {
                 <SwiperSlide>
                   <div>
                     <ProjectNote className='mb-4 text-gray-800'>旧版：余白が多く、情報の階層が不明瞭で判別しづらい。</ProjectNote>
-                    <img src={old3} alt="old3" className='w-full h-auto rounded-xs mb-8' />
+                    <img src={old3} alt="old3" className='w-full h-auto rounded-lg mb-8' />
                   </div>
                 </SwiperSlide>
                 <SwiperSlide>
@@ -577,7 +581,7 @@ export default function EHairPOSPageJa() {
                       src={screenshot06}
                       alt="shopping list"
                       hotspots={shoppingHistoryHotspots}
-                      className='mb-8'
+                      className='mb-8 rounded-lg'
                     />
                   </div>
                 </SwiperSlide>
@@ -588,6 +592,7 @@ export default function EHairPOSPageJa() {
                       src={screenshot07}
                       alt="shopping list"
                       hotspots={checkoutHotspots}
+                      className='rounded-lg'
                     />
                   </div>
                 </SwiperSlide>
@@ -603,7 +608,7 @@ export default function EHairPOSPageJa() {
 
               <div className="relative">
                 <ProjectNote className='absolute top-[30%] right-1/2 w-60 translate-y-1/2 translate-x-1/2 text-gray-800'>旧版：余白が多く、情報の階層が不明瞭で判別しづらい。</ProjectNote>
-                <img src={old3} alt="old3" className='w-full h-auto rounded-xs mb-8' />
+                <img src={old3} alt="old3" className='w-full h-auto rounded-lg mb-8' />
               </div>
               <div>
 
@@ -613,13 +618,14 @@ export default function EHairPOSPageJa() {
                   src={screenshot06}
                   alt="shopping list"
                   hotspots={shoppingHistoryHotspots}
-                  className='mb-8'
+                  className='mb-8 rounded-lg'
                 />
                 <P>会計時にはサイドバーに購入金額が表示され、スタッフが確認しやすくなります。</P>
                 <ImageWithHotspots
                   src={screenshot07}
                   alt="shopping list"
                   hotspots={checkoutHotspots}
+                  className='rounded-lg'
                 />
               </div>
             </div>
@@ -654,7 +660,7 @@ export default function EHairPOSPageJa() {
                       src={screenshot09}
                       alt="會員錢包"
                       hotspots={memberCardHotspots}
-                      className='mb-8'
+                      className='mb-8 rounded-lg'
                     />
                   </div>
                 </SwiperSlide>
@@ -664,7 +670,7 @@ export default function EHairPOSPageJa() {
                       src={screenshot10}
                       alt="會員錢包"
                       hotspots={discountHotspots}
-                      className='mb-8'
+                      className='mb-8 rounded-lg'
                     />
                   </div>
                 </SwiperSlide>
@@ -683,13 +689,13 @@ export default function EHairPOSPageJa() {
                 src={screenshot09}
                 alt="會員錢包"
                 hotspots={memberCardHotspots}
-                className='mb-8'
+                className='mb-8 rounded-lg'
               />
               <ImageWithHotspots
                 src={screenshot10}
                 alt="會員錢包"
                 hotspots={discountHotspots}
-                className='mb-8'
+                className='mb-8 rounded-lg'
               />
             </div>
           </Container>
@@ -718,13 +724,13 @@ export default function EHairPOSPageJa() {
                 </SwiperSlide>
                 <SwiperSlide>
                   <div>
-                    <LazyImage src={screenshot11} alt="screenshot11" className='w-full h-auto rounded-sm' />
+                    <LazyImage src={screenshot11} alt="screenshot11" className='w-full h-auto rounded-tr-lg rounded-br-lg' />
                     <p className='text-caption text-gray-500 font-light mt-4'>店舗ダッシュボード：売上・来店数・客単価・成長指標を統合し、期間フィルターで経営状況を把握。</p>
                   </div>
                 </SwiperSlide>
                 <SwiperSlide>
                   <div>
-                    <LazyImage src={screenshot12} alt="screenshot12" className='w-full h-auto rounded-sm' />
+                    <LazyImage src={screenshot12} alt="screenshot12" className='w-full h-auto rounded-tl-lg rounded-bl-lg' />
                     <p className='text-caption text-gray-500 font-light mt-4'>スタイリストダッシュボード：個人の成果トレンド、顧客数、成長の推移を確認。</p>
                   </div>
                 </SwiperSlide>
@@ -746,11 +752,11 @@ export default function EHairPOSPageJa() {
               </UL>
               <div className='grid grid-cols-1 md:grid-cols-2 gap-10 mt-16'>
                 <div>
-                  <LazyImage src={screenshot11} alt="screenshot11" className='w-full h-auto rounded-sm' />
+                  <LazyImage src={screenshot11} alt="screenshot11" className='w-full h-auto rounded-tr-lg rounded-br-lg' />
                   <p className='text-caption text-gray-500 font-light mt-4'>店舗ダッシュボード：売上・来店数・客単価・成長指標を統合し、期間フィルターで経営状況を把握。</p>
                 </div>
                 <div>
-                  <LazyImage src={screenshot12} alt="screenshot12" className='w-full h-auto rounded-sm' />
+                  <LazyImage src={screenshot12} alt="screenshot12" className='w-full h-auto rounded-tl-lg rounded-bl-lg' />
                   <p className='text-caption text-gray-500 font-light mt-4'>スタイリストダッシュボード：個人の成果トレンド、顧客数、成長の推移を確認。</p>
                 </div>
               </div>
@@ -784,12 +790,12 @@ export default function EHairPOSPageJa() {
                 </SwiperSlide>
                 <SwiperSlide>
                   <div>
-                    <img src={logo} alt="logo" className='w-full h-auto rounded-xs' />
+                    <img src={logo} alt="logo" className='w-full h-auto rounded-lg' />
                   </div>
                 </SwiperSlide>
                 <SwiperSlide>
                   <div>
-                    <img src={logo2} alt="logo2" className='w-full h-auto rounded-xs' />
+                    <img src={logo2} alt="logo2" className='w-full h-auto rounded-lg' />
                   </div>
                 </SwiperSlide>
               </Swiper>
@@ -808,8 +814,8 @@ export default function EHairPOSPageJa() {
                 </div>
               </div>
 
-              <img src={logo} alt="logo" className='w-full h-auto rounded-xs' />
-              <img src={logo2} alt="logo2" className='w-full h-auto rounded-xs' />
+              <img src={logo} alt="logo" className='w-full h-auto rounded-lg' />
+              <img src={logo2} alt="logo2" className='w-full h-auto rounded-lg' />
             </div>
 
           </Container>
@@ -836,7 +842,7 @@ export default function EHairPOSPageJa() {
                 <SwiperSlide>
                   <div>
                     <div className="bg-white/10 backdrop-blur rounded-sm shadow p-5 mb-8">
-                      <img src={quote} alt="quote" className='mb-8' />
+                      <img src={quote} alt="quote" className='mb-8 rounded-lg' />
                       <P className=''>「eHairPOS は複数店舗の管理課題を解決してくれました。売上と在庫がひと目で分かり、オンライン予約もお客様に好評です。とてもおすすめです！」</P>
                     </div>
                     <P>このフィードバックは、POSを“受動的な記録ツール”から“意思決定を支えるアシスタント”へ変えるという私たちの目標を裏付けました。</P>
@@ -862,7 +868,7 @@ export default function EHairPOSPageJa() {
                   <H2 id="振り返り">振り返り</H2>
                   <P>リリース後、本システムは複数の中〜大規模サロンチェーンに採用されました。あるオーナーからは次の声がありました：</P>
                   <div className="bg-white/10 backdrop-blur rounded-sm shadow p-5 mb-8">
-                    <img src={quote} alt="quote" className='mb-8' />
+                    <img src={quote} alt="quote" className='mb-8 rounded-lg' />
                     <P className=''>「eHairPOS は複数店舗の管理課題を解決してくれました。売上と在庫がひと目で分かり、オンライン予約もお客様に好評です。とてもおすすめです！」</P>
                   </div>
                   <P>このフィードバックは、POSを“受動的な記録ツール”から“意思決定を支えるアシスタント”へ変えるという私たちの目標を裏付けました。</P>
@@ -899,7 +905,7 @@ export default function EHairPOSPageJa() {
 
 
               <div className="bg-white/10 backdrop-blur rounded-sm shadow p-5 mb-8">
-                <img src={quote} alt="quote" className='mb-8' />
+                <img src={quote} alt="quote" className='mb-8 rounded-lg' />
                 <P className=''>この経験は私に教えてくれました。良いデザインは「この版」だけの話ではない。<br />次の人が積み上げられる土台を作ることが大切だと。</P>
               </div>
               <div className="grid grid-cols-1 ">
@@ -908,7 +914,7 @@ export default function EHairPOSPageJa() {
               </div>
             </div>
             <div className="flex flex-col items-center justify-center mt-16">
-              <img src={iconEhairpos} alt="ehairpos" className='w-24 h-24' />
+              <img src={iconEhairpos} alt="ehairpos" className='w-24 h-24 rounded-lg' />
               <p className='text-h3 font-light'>eHairPOS</p>
               <p className='text-caption text-gray-300'>2020 – 2021</p>
             </div>

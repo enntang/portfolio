@@ -77,7 +77,7 @@ function Recommendations() {
                             key={index}
                             type="button"
                             onClick={() => openModal(recommendation)}
-                            className="flex flex-col text-left w-full p-4 bg-white rounded-sm  cursor-pointer hover:shadow-sm focus:outline-none focus:ring-2 focus:ring-gray-300 group hover:translate-y-[-2px] transition-all duration-300"
+                            className="flex flex-col text-left w-full p-4 bg-white rounded-lg  cursor-pointer hover:shadow-sm focus:outline-none focus:ring-2 focus:ring-gray-300 group hover:translate-y-[-2px] transition-all duration-300"
                         >
                             <div className="text-h3 text-gray-700 group-hover:text-gray-400 transition-all duration-300">{recommendation.name}</div>
                             <div className="text-caption text-gray-500 group-hover:text-gray-400 transition-all duration-300">{recommendation.title}</div>

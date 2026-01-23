@@ -128,6 +128,14 @@ function Navbar({ isWhite = false, isMenuOpen = false, onToggleMenu, variant = '
   ]
 
   const handleLanguageChange = (newLang) => {
+    // 切換語言後自動關閉 menu（通常只會在 menu 打開時觸發）
+    if (isMenuOpen && typeof onToggleMenu === 'function') {
+      onToggleMenu()
+    }
+
+    // 若點選同一語言，只需關閉 menu
+    if (newLang === language) return
+
     // 獲取當前路徑
     const { path: currentPath } = parsePath(getCurrentLocationPath())
     
@@ -220,13 +228,13 @@ function Navbar({ isWhite = false, isMenuOpen = false, onToggleMenu, variant = '
           }`}
           style={{ animation: isClosing ? 'none' : 'modalSlideIn 0.3s ease-out' }}
         >
-          <div className="flex flex-col md:flex-row w-full h-full">
+          <div className="flex flex-col md:flex-row w-full h-full gap-8">
             {/* Main Menu */}
             <nav className="flex flex-col gap-8 h-full w-full mobile:pt-32">
               {navLinks.map(item => (
                 <div key={item.text} className='flex flex-col'>
                   <div className='text-caption font-semibold tracking-widest text-gray-800'>{item.id}</div>
-                  <a href={buildHref(item.path)} onClick={onToggleMenu} className="pl-8 text-5xl md:text-6xl font-semibold text-gray-400 hover:text-highlight transition-all duration-300">{item.text}</a>
+                  <a href={buildHref(item.path)} onClick={onToggleMenu} className="pl-8 text-2xl md:text-5xl lg:text-6xl font-semibold text-gray-400 hover:text-highlight transition-all duration-300">{item.text}</a>
                 </div>
               ))}
             </nav>
@@ -237,6 +245,7 @@ function Navbar({ isWhite = false, isMenuOpen = false, onToggleMenu, variant = '
                 <div className="text-caption font-semibold tracking-widest text-gray-400 pb-2">CV</div>
                 <BtnWhite name={t('about.readCV')} href="https://www.cake.me/resumes/enn-tang" target="_blank" />
               </div>
+              {/* 語言切換 */}
               <div>
                 <div className="text-caption font-semibold tracking-widest text-gray-400 pb-2">Language</div>
                 <div className="flex items-center gap-2">

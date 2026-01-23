@@ -10,23 +10,33 @@ function RippleButton({ x, y, onClick, isActive, colorVariant = 'blue' }) {
     blue: {
       ripple: 'bg-blue-500',
       rippleActive: 'bg-blue-600',
+      ripple30: 'bg-blue-500/30',
+      ripple20: 'bg-blue-500/20',
+      ripple15: 'bg-blue-500/15',
+      ripple40: 'bg-blue-500/40',
       dot: isActive ? 'bg-blue-600' : 'bg-blue-500',
       dotHover: 'group-hover:bg-blue-600',
-      rippleClass: 'bg-blue-500',
     },
     purple: {
       ripple: 'bg-purple-500',
       rippleActive: 'bg-purple-600',
+      ripple30: 'bg-purple-500/30',
+      ripple20: 'bg-purple-500/20',
+      ripple15: 'bg-purple-500/15',
+      ripple40: 'bg-purple-500/40',
       dot: isActive ? 'bg-purple-600' : 'bg-purple-500',
       dotHover: 'group-hover:bg-purple-600',
-      rippleClass: 'bg-purple-500',
     },
     highlight: {
       ripple: 'bg-highlight',
       rippleActive: 'bg-highlight',
+      // highlight uses inline rgba styles below
+      ripple30: '',
+      ripple20: '',
+      ripple15: '',
+      ripple40: '',
       dot: isActive ? 'bg-highlight' : 'bg-highlight',
       dotHover: 'group-hover:bg-highlight',
-      rippleClass: 'bg-highlight',
     },
   }
 
@@ -50,22 +60,22 @@ function RippleButton({ x, y, onClick, isActive, colorVariant = 'blue' }) {
       <div className="relative w-12 h-12 flex items-center justify-center">
         {/* Outer ripple 1 */}
         <span 
-          className={`absolute inset-0 rounded-full ${useInlineOpacity ? '' : colors.rippleClass + '/30'} animate-ping`}
+          className={`absolute inset-0 rounded-full ${useInlineOpacity ? '' : colors.ripple30} animate-ping`}
           style={{ animationDuration: '2s', ...rippleStyle1 }} 
         />
         {/* Outer ripple 2 */}
         <span 
-          className={`absolute inset-0 rounded-full ${useInlineOpacity ? '' : colors.rippleClass + '/20'} animate-ping`}
+          className={`absolute inset-0 rounded-full ${useInlineOpacity ? '' : colors.ripple20} animate-ping`}
           style={{ animationDuration: '2s', animationDelay: '0.5s', ...rippleStyle2 }} 
         />
         {/* Outer ripple 3 */}
         <span 
-          className={`absolute inset-0 rounded-full ${useInlineOpacity ? '' : colors.rippleClass + '/15'} animate-ping`}
+          className={`absolute inset-0 rounded-full ${useInlineOpacity ? '' : colors.ripple15} animate-ping`}
           style={{ animationDuration: '2s', animationDelay: '1s', ...rippleStyle3 }} 
         />
         {/* Middle circle */}
         <span 
-          className={`absolute inset-0 rounded-full ${useInlineOpacity ? '' : colors.rippleClass + '/40'} scale-[0.6]`}
+          className={`absolute inset-0 rounded-full ${useInlineOpacity ? '' : colors.ripple40} scale-[0.6]`}
           style={rippleStyle4}
         />
         {/* Inner dot */}
@@ -144,16 +154,30 @@ export default function ImageWithHotspots({
 }) {
   const { containerRef, activeHotspot, setActiveHotspot, handleHotspotClick } = useImageHotspots()
 
+  // Keep original API: className is applied to the <img> (often includes spacing like mb-8).
+  const lazyImageClassName = className ? `w-full ${className}` : 'w-full'
+
+  // To make rounded corners visible we must clip the image.
+  // But we must NOT clip the hotspot buttons, so apply overflow-hidden to an image wrapper only.
+  const tokens = className.split(/\s+/).filter(Boolean)
+  const roundedTokens = tokens.filter((t) => t.split(':').pop().startsWith('rounded'))
+  const roundedWrapperClassName = roundedTokens.length > 0 ? `${roundedTokens.join(' ')} overflow-hidden` : ''
   return (
     <div 
       ref={containerRef}
       className={`relative w-full cursor-pointer ${containerClassName}`}
       onClick={() => setActiveHotspot(null)}
     >
-      <LazyImage src={src} alt={alt} className={`w-full rounded-sm ${className}`} />
+      <div className={`w-full ${roundedWrapperClassName}`.trim()}>
+        <LazyImage 
+          src={src} 
+          alt={alt} 
+          className={lazyImageClassName}
+        />
+      </div>
       
       {/* Render hotspot buttons */}
-      {hotspots.map((hotspot) => (
+      {hotspots && hotspots.length > 0 && hotspots.map((hotspot) => (
         <RippleButton
           key={hotspot.id}
           x={hotspot.x}

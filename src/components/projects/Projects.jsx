@@ -30,7 +30,7 @@ function Projects({ projects, title, showMoreButton = true, showSectionTitle = t
           <SectionTitle name={defaultTitle} />}
 
         {/* Projects */}
-        <div className={`space-y-0 grid gap-12 ${direction === 'vertical' ? 'grid-cols-2 mobile:grid-cols-1' : 'grid-cols-1'}`}>
+        <div className={`mt-[-30px] space-y-0 grid gap-12 ${direction === 'vertical' ? 'grid-cols-2 mobile:grid-cols-1' : 'grid-cols-1'}`}>
 
           {data.map((project, index) =>
             direction === 'horizontal' ? (

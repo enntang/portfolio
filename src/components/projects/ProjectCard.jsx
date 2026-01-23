@@ -21,7 +21,7 @@ function ProjectCard({ project, isReversed = false }) {
             <LazyImage 
               src={getPublicPath(imageSrc)}
               alt={imageAlt || title}
-              className="w-full h-full object-cover transition-transform duration-500 ease-out group-hover:scale-110 rounded-sm"
+              className="w-full h-full object-cover transition-transform duration-500 ease-out group-hover:scale-110 rounded-lg"
             />
           ) : (
             <div className="flex items-center justify-center h-full">

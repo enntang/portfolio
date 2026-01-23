@@ -69,7 +69,7 @@ function About() {
       <div className="container max-w-3xl mx-auto">
         <div className='w-full p-8 xl:p-16 flex flex-col gap-8'>
           <div className='pt-16 relative isolate mb-16'>
-            <h1 className='text-large-mobile xl:text-large text-gray-300 leading-tight mix-blend-screen mb-8'>
+            <h1 className='text-large-mobile md:pr-28 text-gray-300 leading-tight mix-blend-screen mb-8'>
               {t('about.title')}
             </h1>
             <LazyImage
@@ -152,41 +152,28 @@ function About() {
               <AboutSectionTitle>{t('about.experience')}</AboutSectionTitle>
               <div className='space-y-6 text-gray-800'>
                 <ExperienceItem
-                  role='Design Lead'
-                  period='Mar 2023 - May 2024'
-                  company='Somebest Co., Ltd'
-                  items={[
-                    'Managed design quality and cross-departmental collaboration.',
-                    'Built the department from a one-person team, responsible for talent recruitment, training, and 1-on-1 mentoring, achieving a zero-turnover rate.',
-                    'Led design team members in projects such as revamping existing products and launching new products, resulting in high satisfaction ratings in user surveys.',
-                  ]}
+                  role={t('about.experienceItems.somebest.role')}
+                  period={t('about.experienceItems.somebest.period')}
+                  company={t('about.experienceItems.somebest.company')}
+                  items={t('about.experienceItems.somebest.items', [])}
                 />
                 <ExperienceItem
-                  role='UI/UX Designer'
-                  period='Jan 2021  - Mar 2023'
-                  company='TutorABC'
-                  items={[
-                    'Responsible for interface design of brand websites and app products.',
-                    'Established product design guidelines and led Figma training sessions, successfully integrating it into the R&D department’s workflows.',
-
-                  ]}
+                  role={t('about.experienceItems.tutorabc.role')}
+                  period={t('about.experienceItems.tutorabc.period')}
+                  company={t('about.experienceItems.tutorabc.company')}
+                  items={t('about.experienceItems.tutorabc.items', [])}
                 />
                 <ExperienceItem
-                  role='UI/UX Designer'
-                  period='Jun 2018 - Dec 2020'
-                  company='ACubeDT'
-                  items={[
-                    'Led multiple RWD web design and POS system projects, responsible for requirements interviews and UI interface design.',
-                    'Clients included government agencies and educational institutions.',
-                  ]}
+                  role={t('about.experienceItems.acubedt.role')}
+                  period={t('about.experienceItems.acubedt.period')}
+                  company={t('about.experienceItems.acubedt.company')}
+                  items={t('about.experienceItems.acubedt.items', [])}
                 />
                 <ExperienceItem
-                  role='Graphic Designer'
-                  period='Jan 2016 - Feb 2018'
-                  company='Nan I Book Enterprise '
-                  items={[
-                    'Worked as a graphic designer at a well-known educational publishing company, responsible for cover and layout design.'
-                  ]}
+                  role={t('about.experienceItems.nani.role')}
+                  period={t('about.experienceItems.nani.period')}
+                  company={t('about.experienceItems.nani.company')}
+                  items={t('about.experienceItems.nani.items', [])}
                 />
               </div>
             </section>
@@ -196,19 +183,16 @@ function About() {
               <AboutSectionTitle>{t('about.education')}</AboutSectionTitle>
               <div className='space-y-6 text-gray-800'>
                 <ExperienceItem
-                  role={`National Taiwan University of Science and Technology\n(Master’s Degree)`}
-                  period={`Sep 2023 - Jun 2025`}
-                  company={`Department of Design`}
-                  items={[
-
-                  ]}
+                  role={t('about.educationItems.ntust.role')}
+                  period={t('about.educationItems.ntust.period')}
+                  company={t('about.educationItems.ntust.company')}
+                  items={t('about.educationItems.ntust.items', [])}
                 />
                 <ExperienceItem
-                  title='National Taipei University of Education'
-                  period='Sep 2010 - Jun 2013'
-                  subtitle='Department of Arts and Design'
-                  items={[
-                  ]}
+                  title={t('about.educationItems.ntue.title')}
+                  period={t('about.educationItems.ntue.period')}
+                  subtitle={t('about.educationItems.ntue.subtitle')}
+                  items={t('about.educationItems.ntue.items', [])}
                 />
               </div>
             </section>
