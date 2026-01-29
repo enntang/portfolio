@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react'
+import ReactMarkdown from 'react-markdown'
 import Navbar from './components/utilities/Navbar'
 import Footer from './components/utilities/Footer'
 import NotFound from './NotFound'
@@ -49,40 +50,44 @@ function BlogPost({ slug }) {
             </div>
           )}
 
-          <article className='prose prose-invert prose-sm md:prose-base max-w-none prose-headings:text-white prose-p:text-gray-200 prose-a:text-highlight'>
-            {post.content?.map((block, index) => {
-              // 純文字：當作一般段落
-              if (typeof block === 'string') {
-                return <p key={index}>{block}</p>
-              }
-
-              // 圖片 block：依照 width 套 Tailwind class
-              if (block?.type === 'image') {
-                const widthClassMap = {
-                  full: 'w-full',
-                  half: 'w-1/2',
-                  third: 'w-1/3',
+          <article className='prose prose-invert prose-sm md:prose-base max-w-none prose-headings:text-white prose-p:text-gray-200 prose-a:text-highlight prose-img:rounded-3xl prose-img:bg-[#101625] prose-blockquote:border-l-highlight prose-blockquote:text-gray-300 prose-code:text-highlight prose-code:bg-[#101625] prose-code:px-1.5 prose-code:py-0.5 prose-code:rounded prose-pre:bg-[#101625] prose-pre:rounded-2xl'>
+            {typeof post.content === 'string' ? (
+              <ReactMarkdown
+                components={{
+                  img: ({ src, alt }) => (
+                    <img
+                      src={getPublicPath(src)}
+                      alt={alt || ''}
+                      className='w-full h-auto object-cover rounded-3xl bg-[#101625]'
+                    />
+                  )
+                }}
+              >
+                {post.content}
+              </ReactMarkdown>
+            ) : (
+              // 向下相容舊格式（陣列）
+              post.content?.map((block, index) => {
+                if (typeof block === 'string') {
+                  return <p key={index}>{block}</p>
                 }
-
-                const widthClass = widthClassMap[block.width] || 'w-full'
-
-                return (
-                  <figure key={index} className='my-8 flex flex-col items-center'>
-                    <div className={`${widthClass} rounded-3xl overflow-hidden bg-[#101625]`}>
-                      <img src={getPublicPath(block.src)} alt={block.alt || ''} className='w-full h-auto object-cover' />
-                    </div>
-                    {block.caption && (
-                      <figcaption className='mt-3 text-[12px] text-center text-gray-500 max-w-xs mx-auto'>
-                        {block.caption}
-                      </figcaption>
-                    )}
-                  </figure>
-                )
-              }
-
-              // 未定義型別：安全忽略
-              return null
-            })}
+                if (block?.type === 'image') {
+                  return (
+                    <figure key={index} className='my-8 flex flex-col items-center'>
+                      <div className='w-full rounded-3xl overflow-hidden bg-[#101625]'>
+                        <img src={getPublicPath(block.src)} alt={block.alt || ''} className='w-full h-auto object-cover' />
+                      </div>
+                      {block.caption && (
+                        <figcaption className='mt-3 text-[12px] text-center text-gray-500 max-w-xs mx-auto'>
+                          {block.caption}
+                        </figcaption>
+                      )}
+                    </figure>
+                  )
+                }
+                return null
+              })
+            )}
           </article>
         </main>
 
