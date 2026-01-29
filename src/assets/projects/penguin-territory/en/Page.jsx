@@ -7,6 +7,7 @@ import { useFloatingAnimation } from '../../../../hooks/useFloatingAnimation'
 import Container from '../../../../components/projects/Container'
 import SectionBlock from '../../../../components/projects/SectionBlock'
 import TwoColumn from '../../../../components/projects/TwoColumn'
+import RelatedProjects from '../../../../components/projects/RelatedProjects'
 import TableOfContents from '../../../../components/utilities/TableOfContents'
 import LazyImage from '../../../../components/utilities/LazyImage'
 import ImageWithHotspots from '../../../../components/utilities/ImageWithHotspots'
@@ -542,6 +543,9 @@ export default function PenguinTerritoryPageEn() {
               <p className="text-caption">2024</p>
             </div>
           </Container>
+
+          <RelatedProjects />
+
           <hr className="w-full my-8 border-white/20" />
           <Footer />
         </SectionBlock>

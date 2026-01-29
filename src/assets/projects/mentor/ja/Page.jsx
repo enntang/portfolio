@@ -14,6 +14,7 @@ import ProjectNote from '../../../../components/projects/ProjectNote'
 import Container from '../../../../components/projects/Container'
 import SectionBlock from '../../../../components/projects/SectionBlock'
 import TwoColumn from '../../../../components/projects/TwoColumn'
+import RelatedProjects from '../../../../components/projects/RelatedProjects'
 import TableOfContents from '../../../../components/utilities/TableOfContents'
 
 gsap.registerPlugin(ScrollTrigger)
@@ -1170,6 +1171,9 @@ export default function MentorPageJa() {
             <p className="text-h3 font-light">Mentor</p>
             <p className="text-caption text-gray-300">2019/05 - 2024/06</p>
           </Container>
+
+          <RelatedProjects />
+
           <hr className="w-full my-8 border-gray-800" />
           <Footer />
         </SectionBlock>

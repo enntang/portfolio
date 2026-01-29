@@ -13,6 +13,7 @@ import ProjectNote from '../../../components/projects/ProjectNote'
 import Container from '../../../components/projects/Container'
 import SectionBlock from '../../../components/projects/SectionBlock'
 import TwoColumn from '../../../components/projects/TwoColumn'
+import RelatedProjects from '../../../components/projects/RelatedProjects'
 import TableOfContents from '../../../components/utilities/TableOfContents'
 import LazyImage from '../../../components/utilities/LazyImage'
 
@@ -919,6 +920,9 @@ export default function EHairPOSPage() {
               <p className='text-caption text-gray-300'>2020 – 2021</p>
             </div>
           </Container>
+
+          <RelatedProjects />
+
           <hr className='w-full my-8 border-white' />
           <Footer />
         </SectionBlock>

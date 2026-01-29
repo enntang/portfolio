@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import Navbar from '../../../components/utilities/Navbar'
 import Footer from '../../../components/utilities/Footer'
+import RelatedProjects from '../../../components/projects/RelatedProjects'
 
 const galleryImages = [
   {
@@ -164,6 +165,8 @@ export default function MasonryGalleryPage() {
             <MasonryGallery images={galleryImages} onImageClick={handleOpen} />
           </div>
         </section>
+
+        <RelatedProjects />
 
         <Footer />
       </main>

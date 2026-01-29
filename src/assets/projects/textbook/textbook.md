@@ -1,0 +1,69 @@
+# ⭐️ 給年輕史家的漫遊指南 — 南一書局高中歷史課本
+
+Type: 主要
+類別: 視覺設計
+title-en: A Traveler’s Guide for Young Historians
+完成度: 呈現待調整
+調整項目: 1. 個別頁面要補充作品說明
+2. 缺英文版
+3. 個人網站切版
+發佈平台: Behance, Cakeresume, Notion
+description-en: A thematic history textbook that breaks away from traditional chronological narratives.
+year: 2018
+歸檔位置: Google Drive
+歸檔資料夾名稱: Portfolio/primary/2017-歷史探究與實作
+發佈語言: ZH
+
+![image.png](%E2%AD%90%EF%B8%8F%20%E7%B5%A6%E5%B9%B4%E8%BC%95%E5%8F%B2%E5%AE%B6%E7%9A%84%E6%BC%AB%E9%81%8A%E6%8C%87%E5%8D%97%20%E2%80%94%20%E5%8D%97%E4%B8%80%E6%9B%B8%E5%B1%80%E9%AB%98%E4%B8%AD%E6%AD%B7%E5%8F%B2%E8%AA%B2%E6%9C%AC/image.png)
+
+# **專案簡介**
+
+## **擔任角色**
+
+Graphic Designer
+
+## Timeline
+
+Dec 2017 – Nov 2018
+
+## Tools
+
+Adobe Photoshop
+
+Adobe Illustrator
+
+Adobe Indesign
+
+這是一本因應新課綱，南一書局高中歷史組和作者群傾盡心血製作的課本，內容在講述語言、翻譯如何影響我們的日常生活，是一個跨越地理位置與時間軸來看歷史的嶄新方法。
+
+我負責全書的美術風格定調、排版設計，並擔綱插畫師，進行重要知識點的圖文整合，讓有趣的漫畫與圖解走入教科書，課本不再生澀無聊。
+
+![image.png](%E2%AD%90%EF%B8%8F%20%E7%B5%A6%E5%B9%B4%E8%BC%95%E5%8F%B2%E5%AE%B6%E7%9A%84%E6%BC%AB%E9%81%8A%E6%8C%87%E5%8D%97%20%E2%80%94%20%E5%8D%97%E4%B8%80%E6%9B%B8%E5%B1%80%E9%AB%98%E4%B8%AD%E6%AD%B7%E5%8F%B2%E8%AA%B2%E6%9C%AC/image%201.png)
+
+# 封面設計
+
+風格與標準字都經過多次的演進過程。
+
+![image.png](%E2%AD%90%EF%B8%8F%20%E7%B5%A6%E5%B9%B4%E8%BC%95%E5%8F%B2%E5%AE%B6%E7%9A%84%E6%BC%AB%E9%81%8A%E6%8C%87%E5%8D%97%20%E2%80%94%20%E5%8D%97%E4%B8%80%E6%9B%B8%E5%B1%80%E9%AB%98%E4%B8%AD%E6%AD%B7%E5%8F%B2%E8%AA%B2%E6%9C%AC/image%202.png)
+
+![image.png](%E2%AD%90%EF%B8%8F%20%E7%B5%A6%E5%B9%B4%E8%BC%95%E5%8F%B2%E5%AE%B6%E7%9A%84%E6%BC%AB%E9%81%8A%E6%8C%87%E5%8D%97%20%E2%80%94%20%E5%8D%97%E4%B8%80%E6%9B%B8%E5%B1%80%E9%AB%98%E4%B8%AD%E6%AD%B7%E5%8F%B2%E8%AA%B2%E6%9C%AC/image%203.png)
+
+# **內頁設計**
+
+在課本內，我們使用大量的插圖以及引導思考的問答，減去生硬感，增加學生投入意願。
+
+![內頁1.jpg](%E2%AD%90%EF%B8%8F%20%E7%B5%A6%E5%B9%B4%E8%BC%95%E5%8F%B2%E5%AE%B6%E7%9A%84%E6%BC%AB%E9%81%8A%E6%8C%87%E5%8D%97%20%E2%80%94%20%E5%8D%97%E4%B8%80%E6%9B%B8%E5%B1%80%E9%AB%98%E4%B8%AD%E6%AD%B7%E5%8F%B2%E8%AA%B2%E6%9C%AC/%E5%85%A7%E9%A0%811.jpg)
+
+![內頁2.jpg](%E2%AD%90%EF%B8%8F%20%E7%B5%A6%E5%B9%B4%E8%BC%95%E5%8F%B2%E5%AE%B6%E7%9A%84%E6%BC%AB%E9%81%8A%E6%8C%87%E5%8D%97%20%E2%80%94%20%E5%8D%97%E4%B8%80%E6%9B%B8%E5%B1%80%E9%AB%98%E4%B8%AD%E6%AD%B7%E5%8F%B2%E8%AA%B2%E6%9C%AC/%E5%85%A7%E9%A0%812.jpg)
+
+![內頁3.jpg](%E2%AD%90%EF%B8%8F%20%E7%B5%A6%E5%B9%B4%E8%BC%95%E5%8F%B2%E5%AE%B6%E7%9A%84%E6%BC%AB%E9%81%8A%E6%8C%87%E5%8D%97%20%E2%80%94%20%E5%8D%97%E4%B8%80%E6%9B%B8%E5%B1%80%E9%AB%98%E4%B8%AD%E6%AD%B7%E5%8F%B2%E8%AA%B2%E6%9C%AC/%E5%85%A7%E9%A0%813.jpg)
+
+![內頁4.jpg](%E2%AD%90%EF%B8%8F%20%E7%B5%A6%E5%B9%B4%E8%BC%95%E5%8F%B2%E5%AE%B6%E7%9A%84%E6%BC%AB%E9%81%8A%E6%8C%87%E5%8D%97%20%E2%80%94%20%E5%8D%97%E4%B8%80%E6%9B%B8%E5%B1%80%E9%AB%98%E4%B8%AD%E6%AD%B7%E5%8F%B2%E8%AA%B2%E6%9C%AC/%E5%85%A7%E9%A0%814.jpg)
+
+![內頁5.jpg](%E2%AD%90%EF%B8%8F%20%E7%B5%A6%E5%B9%B4%E8%BC%95%E5%8F%B2%E5%AE%B6%E7%9A%84%E6%BC%AB%E9%81%8A%E6%8C%87%E5%8D%97%20%E2%80%94%20%E5%8D%97%E4%B8%80%E6%9B%B8%E5%B1%80%E9%AB%98%E4%B8%AD%E6%AD%B7%E5%8F%B2%E8%AA%B2%E6%9C%AC/%E5%85%A7%E9%A0%815.jpg)
+
+![內頁6.jpg](%E2%AD%90%EF%B8%8F%20%E7%B5%A6%E5%B9%B4%E8%BC%95%E5%8F%B2%E5%AE%B6%E7%9A%84%E6%BC%AB%E9%81%8A%E6%8C%87%E5%8D%97%20%E2%80%94%20%E5%8D%97%E4%B8%80%E6%9B%B8%E5%B1%80%E9%AB%98%E4%B8%AD%E6%AD%B7%E5%8F%B2%E8%AA%B2%E6%9C%AC/%E5%85%A7%E9%A0%816.jpg)
+
+![內頁8.jpg](%E2%AD%90%EF%B8%8F%20%E7%B5%A6%E5%B9%B4%E8%BC%95%E5%8F%B2%E5%AE%B6%E7%9A%84%E6%BC%AB%E9%81%8A%E6%8C%87%E5%8D%97%20%E2%80%94%20%E5%8D%97%E4%B8%80%E6%9B%B8%E5%B1%80%E9%AB%98%E4%B8%AD%E6%AD%B7%E5%8F%B2%E8%AA%B2%E6%9C%AC/%E5%85%A7%E9%A0%818.jpg)
+
+![內頁9.jpg](%E2%AD%90%EF%B8%8F%20%E7%B5%A6%E5%B9%B4%E8%BC%95%E5%8F%B2%E5%AE%B6%E7%9A%84%E6%BC%AB%E9%81%8A%E6%8C%87%E5%8D%97%20%E2%80%94%20%E5%8D%97%E4%B8%80%E6%9B%B8%E5%B1%80%E9%AB%98%E4%B8%AD%E6%AD%B7%E5%8F%B2%E8%AA%B2%E6%9C%AC/%E5%85%A7%E9%A0%819.jpg)
