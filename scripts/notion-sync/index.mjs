@@ -45,10 +45,12 @@ async function main() {
 
     // 2. 使用 notion-to-md 轉換頁面內容為 Markdown
     const mdBlocks = await n2m.pageToMarkdown(page.id)
-    let markdownContent = n2m.toMarkdownString(mdBlocks).parent
+    const mdResult = n2m.toMarkdownString(mdBlocks)
+    // toMarkdownString 可能回傳 { parent: string } 或直接回傳 string
+    let markdownContent = typeof mdResult === 'string' ? mdResult : (mdResult?.parent || '')
 
     // 3. 處理 Markdown 中的圖片：下載並替換 URL
-    const { content, imageCount } = await processMarkdownImages(markdownContent, slug)
+    const { content, imageCount } = await processMarkdownImages(markdownContent || '', slug)
 
     // 4. 處理 Hero/Thumbnail 圖片
     const heroUrl = getFileUrl(props.HeroImage) || getUrl(props.HeroImage)
@@ -162,6 +164,11 @@ function cleanupUnpublishedArticles(publishedSlugs, syncedArticles) {
 // ============ Markdown 圖片處理 ============
 
 async function processMarkdownImages(markdown, slug) {
+  // 防護：確保 markdown 是字串
+  if (!markdown || typeof markdown !== 'string') {
+    return { content: '', imageCount: 0 }
+  }
+
   // 匹配 Markdown 圖片語法: ![alt](url)
   const imageRegex = /!\[([^\]]*)\]\(([^)]+)\)/g
   let imageCount = 0
