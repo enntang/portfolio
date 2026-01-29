@@ -12,7 +12,7 @@ const post = {
   "heroImage": "",
   "thumbnailImage": "",
   "author": "Enn Tang",
-  "content": []
+  "content": ""
 }
 
 export default post
