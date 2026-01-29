@@ -53,11 +53,20 @@ function BlogPost({ slug }) {
               <ReactMarkdown
                 components={{
                   img: ({ src, alt }) => (
-                    <img
-                      src={getPublicPath(src)}
-                      alt={alt || ''}
-                      className='w-full h-auto object-cover rounded-3xl bg-[#101625]'
-                    />
+                    <figure className='my-8 flex flex-col items-center'>
+                      <div className='w-full rounded-3xl overflow-hidden bg-[#101625]'>
+                        <img
+                          src={getPublicPath(src)}
+                          alt={alt || ''}
+                          className='w-full h-auto object-cover'
+                        />
+                      </div>
+                      {alt && (
+                        <figcaption className='mt-3 text-[12px] text-center text-gray-500 max-w-md mx-auto'>
+                          {alt}
+                        </figcaption>
+                      )}
+                    </figure>
                   )
                 }}
               >
