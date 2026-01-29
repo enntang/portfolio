@@ -45,14 +45,9 @@ async function main() {
 
     // 2. 使用 notion-to-md 轉換頁面內容為 Markdown
     const mdBlocks = await n2m.pageToMarkdown(page.id)
-    console.log(`   📄 mdBlocks 長度: ${mdBlocks?.length || 0}`)
-
     const mdResult = n2m.toMarkdownString(mdBlocks)
-    console.log(`   📄 mdResult 類型: ${typeof mdResult}, 內容預覽: ${JSON.stringify(mdResult)?.slice(0, 200)}...`)
-
-    // toMarkdownString 可能回傳 { parent: string } 或直接回傳 string
+    // toMarkdownString 回傳 { parent: string }
     let markdownContent = typeof mdResult === 'string' ? mdResult : (mdResult?.parent || '')
-    console.log(`   📄 markdownContent 長度: ${markdownContent?.length || 0}`)
 
     // 3. 下載 Markdown 中的圖片到本地，並替換為本地路徑
     const { content, imageCount } = await processMarkdownImages(markdownContent || '', slug)
