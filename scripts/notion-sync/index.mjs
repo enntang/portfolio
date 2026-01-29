@@ -1,6 +1,6 @@
 import { Client } from '@notionhq/client'
 import { NotionToMarkdown } from 'notion-to-md'
-import { writeFileSync, mkdirSync, existsSync, createWriteStream, readdirSync, rmSync } from 'fs'
+import { writeFileSync, mkdirSync, existsSync, createWriteStream, readdirSync, rmSync, readFileSync } from 'fs'
 import { join, dirname, extname } from 'path'
 import { fileURLToPath } from 'url'
 import https from 'https'
@@ -9,12 +9,16 @@ import http from 'http'
 const __dirname = dirname(fileURLToPath(import.meta.url))
 const BLOG_DIR = join(__dirname, '../../src/assets/blog')
 const IMAGE_DIR = join(__dirname, '../../public/blog-images')
+const MANIFEST_FILE = join(__dirname, '../../.synced-articles.json')
 
 const notion = new Client({ auth: process.env.NOTION_API_KEY })
 const n2m = new NotionToMarkdown({ notionClient: notion })
 
 async function main() {
   console.log('🔍 正在從 Notion 獲取文章...')
+
+  // 載入已同步文章的 manifest
+  const syncedArticles = loadManifest()
 
   // 1. 獲取 Published 文章
   const response = await notion.databases.query({
@@ -80,6 +84,7 @@ async function main() {
 export default post
 `
     writeFileSync(join(postDir, 'content.js'), fileContent)
+    syncedArticles.add(slug)
     console.log(`   ✅ 已寫入: src/assets/blog/${slug}/content.js`)
     if (imageCount > 0) {
       console.log(`   🖼️  下載了 ${imageCount} 張圖片`)
@@ -87,53 +92,73 @@ export default post
     console.log()
   }
 
-  // 7. 清理已取消發布的文章
+  // 7. 清理已取消發布的文章（只刪除之前由 sync 產生的）
   const publishedSlugs = response.results
     .map(page => getText(page.properties.Slug))
     .filter(Boolean)
 
-  const deletedCount = cleanupUnpublishedArticles(publishedSlugs)
+  const { deletedCount, updatedSyncedArticles } = cleanupUnpublishedArticles(publishedSlugs, syncedArticles)
   if (deletedCount > 0) {
     console.log(`🗑️  已刪除 ${deletedCount} 篇取消發布的文章\n`)
   }
 
+  // 8. 儲存 manifest
+  saveManifest(updatedSyncedArticles)
+
   console.log('✨ 同步完成！')
+}
+
+// ============ Manifest 管理 ============
+
+function loadManifest() {
+  try {
+    if (existsSync(MANIFEST_FILE)) {
+      const data = JSON.parse(readFileSync(MANIFEST_FILE, 'utf-8'))
+      return new Set(data.syncedArticles || [])
+    }
+  } catch (e) {
+    console.log('⚠️ 無法讀取 manifest，將建立新的')
+  }
+  return new Set()
+}
+
+function saveManifest(syncedArticles) {
+  const data = {
+    lastSync: new Date().toISOString(),
+    syncedArticles: [...syncedArticles]
+  }
+  writeFileSync(MANIFEST_FILE, JSON.stringify(data, null, 2))
 }
 
 // ============ 清理功能 ============
 
-function cleanupUnpublishedArticles(publishedSlugs) {
+function cleanupUnpublishedArticles(publishedSlugs, syncedArticles) {
   let deletedCount = 0
+  const updatedSyncedArticles = new Set(syncedArticles)
 
-  // 取得本地所有文章 slug
-  if (!existsSync(BLOG_DIR)) return 0
+  // 只檢查之前由 sync 產生的文章
+  for (const slug of syncedArticles) {
+    if (!publishedSlugs.includes(slug)) {
+      console.log(`🗑️  刪除取消發布的文章: ${slug}`)
 
-  const localSlugs = readdirSync(BLOG_DIR, { withFileTypes: true })
-    .filter(dirent => dirent.isDirectory())
-    .map(dirent => dirent.name)
+      // 刪除文章內容
+      const contentDir = join(BLOG_DIR, slug)
+      if (existsSync(contentDir)) {
+        rmSync(contentDir, { recursive: true })
+      }
 
-  // 找出需要刪除的文章
-  const toDelete = localSlugs.filter(slug => !publishedSlugs.includes(slug))
+      // 刪除文章圖片
+      const imageDir = join(IMAGE_DIR, slug)
+      if (existsSync(imageDir)) {
+        rmSync(imageDir, { recursive: true })
+      }
 
-  for (const slug of toDelete) {
-    console.log(`🗑️  刪除取消發布的文章: ${slug}`)
-
-    // 刪除文章內容
-    const contentDir = join(BLOG_DIR, slug)
-    if (existsSync(contentDir)) {
-      rmSync(contentDir, { recursive: true })
+      updatedSyncedArticles.delete(slug)
+      deletedCount++
     }
-
-    // 刪除文章圖片
-    const imageDir = join(IMAGE_DIR, slug)
-    if (existsSync(imageDir)) {
-      rmSync(imageDir, { recursive: true })
-    }
-
-    deletedCount++
   }
 
-  return deletedCount
+  return { deletedCount, updatedSyncedArticles }
 }
 
 // ============ 圖片處理 ============
