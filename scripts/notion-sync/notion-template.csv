@@ -1,4 +1,4 @@
-Title,Slug,Status,Category,CategoryLabel,Subtitle,Date,ReadingTime,Featured,Spotlight,HeroImage,ThumbnailImage,Author
-我的第一篇文章,my-first-article,Published,design,Design,這是副標題,2025-01-29,5 min read,false,false,,,Enn Tang
-草稿文章範例,draft-example,Draft,tooling,Tools & Practice,工具分享,2025-01-28,3 min read,false,false,,,Enn Tang
-精選文章範例,featured-article,Published,self,Self,個人成長,2025-01-27,8 min read,true,false,,,Enn Tang
+Title,Slug,Status,Category,CategoryLabel,Subtitle,Description,Date,Featured,Spotlight,HeroImage,ThumbnailImage,Author
+我的第一篇文章,my-first-article,Published,design,Design,這是副標題,這篇文章的簡短描述,2025-01-29,false,false,,,Enn Tang
+草稿文章範例,draft-example,Draft,tooling,Tools & Practice,工具分享,草稿文章的描述,2025-01-28,false,false,,,Enn Tang
+精選文章範例,featured-article,Published,self,Self,個人成長,精選文章的描述,2025-01-27,true,false,,,Enn Tang

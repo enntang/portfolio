@@ -77,6 +77,105 @@ Vite 提供了極快的 HMR 支援。當你修改代碼時，變更會立即反�
 
 請參考 `PROJECT_CONTENT.md`，了解如何以 JSON 區塊建立作品頁內容，並透過 `#/project/:slug` 自動渲染。
 
+---
+
+## Notion 文章同步
+
+本專案支援從 Notion 資料庫自動同步部落格文章到 GitHub Pages。
+
+### 功能特色
+
+- 自動將 Notion 文章轉換為網站內容
+- 支援圖片自動下載（包含內文圖片、HeroImage、ThumbnailImage）
+- 只刪除由 sync 產生的文章，**不影響手動建立的文章**
+- 同步完成後自動觸發部署
+
+### 同步方式
+
+#### 自動同步
+
+- **排程**：每天 UTC 00:00（台灣時間 08:00）自動執行
+- 只同步 Notion 中 `Status = Published` 的文章
+- 有變更時自動 commit 並觸發部署
+
+#### 手動同步
+
+1. 前往 GitHub repo 的 **Actions** 頁面
+2. 選擇 **Sync Notion Articles** workflow
+3. 點擊 **Run workflow**
+
+### 設定方式
+
+#### 1. Notion 設定
+
+在 Notion 資料庫中，文章需要包含以下屬性：
+
+| 屬性名稱 | 類型 | 說明 |
+|---------|------|------|
+| Title | Title | 文章標題 |
+| Slug | Text | 網址路徑（必填，如 `my-first-article`） |
+| Status | Select | 設為 `Published` 才會同步 |
+| Subtitle | Text | 副標題 |
+| Description | Text | 文章描述 |
+| Category | Select | 分類（design / tooling / self） |
+| CategoryLabel | Text | 分類顯示名稱（選填） |
+| Date | Date | 發布日期 |
+| Featured | Checkbox | 是否為精選文章 |
+| Spotlight | Checkbox | 是否為焦點文章 |
+| HeroImage | Files & media 或 URL | 文章主圖 |
+| ThumbnailImage | Files & media 或 URL | 縮圖 |
+| Author | Text | 作者名稱（預設 Enn Tang） |
+
+#### 2. GitHub Secrets 設定
+
+在 repo 的 **Settings > Secrets and variables > Actions** 中新增：
+
+| Secret 名稱 | 說明 |
+|------------|------|
+| `NOTION_API_KEY` | Notion Integration Token |
+| `NOTION_DATABASE_ID` | Notion 資料庫 ID |
+
+#### 3. Notion Integration 設定
+
+1. 前往 [Notion Integrations](https://www.notion.so/my-integrations) 建立 Integration
+2. 複製 Internal Integration Token
+3. 在 Notion 資料庫頁面，點擊右上角 `...` > **Add connections** > 選擇你的 Integration
+
+### 文章刪除機制
+
+- 當文章在 Notion 中的 Status 改為非 `Published` 時，下次同步會自動刪除該文章
+- **只會刪除由 sync 產生的文章**（記錄在 `.synced-articles.json`）
+- 手動建立在 `src/assets/blog/` 的文章不會被影響
+
+### 本地測試
+
+```bash
+cd scripts/notion-sync
+npm install
+
+# 設定環境變數
+export NOTION_API_KEY="your-api-key"
+export NOTION_DATABASE_ID="your-database-id"
+
+# 執行同步
+node index.mjs
+```
+
+### 檔案結構
+
+```
+portfolio/
+├── src/assets/blog/           # 文章內容（content.js）
+├── public/blog-images/        # 文章圖片
+├── scripts/notion-sync/       # 同步腳本
+├── .synced-articles.json      # 追蹤由 sync 產生的文章
+└── .github/workflows/
+    ├── notion-sync.yml        # 同步 workflow
+    └── deploy-pages.yml       # 部署 workflow
+```
+
+---
+
 ## 授權
 
 MIT

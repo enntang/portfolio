@@ -61,10 +61,10 @@ async function main() {
       slug: slug,
       title: title,
       subtitle: getText(props.Subtitle),
+      description: getText(props.Description),
       category: getSelect(props.Category),
       categoryLabel: getText(props.CategoryLabel) || getCategoryLabel(getSelect(props.Category)),
       date: getDate(props.Date),
-      readingTime: getText(props.ReadingTime) || estimateReadingTime(content),
       featured: getCheckbox(props.Featured),
       spotlight: getCheckbox(props.Spotlight),
       heroImage: heroImage,
@@ -424,15 +424,6 @@ function getCategoryLabel(category) {
     self: 'Self'
   }
   return labels[category] || category
-}
-
-function estimateReadingTime(content) {
-  const text = content
-    .filter(c => typeof c === 'string')
-    .join(' ')
-  const chars = text.length
-  const minutes = Math.max(1, Math.ceil(chars / 500))
-  return `${minutes} min read`
 }
 
 main().catch(console.error)
