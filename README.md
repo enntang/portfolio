@@ -87,6 +87,7 @@ Vite 提供了極快的 HMR 支援。當你修改代碼時，變更會立即反�
 
 - 自動將 Notion 文章轉換為網站內容
 - 支援圖片自動下載（包含內文圖片、HeroImage、ThumbnailImage）
+- **每次同步會重新建立全新內容**，Notion 文章更新後會自動覆蓋
 - 只刪除由 sync 產生的文章，**不影響手動建立的文章**
 - 同步完成後自動觸發部署
 
@@ -122,9 +123,24 @@ Vite 提供了極快的 HMR 支援。當你修改代碼時，變更會立即反�
 | Date | Date | 發布日期 |
 | Featured | Checkbox | 是否為精選文章 |
 | Spotlight | Checkbox | 是否為焦點文章 |
-| HeroImage | Files & media 或 URL | 文章主圖 |
-| ThumbnailImage | Files & media 或 URL | 縮圖 |
+| HeroImage | Files & media | 文章主圖 |
+| ThumbnailImage | Files & media | 縮圖 |
 | Author | Text | 作者名稱（預設 Enn Tang） |
+
+**使用 CSV 模板快速建立資料庫：**
+
+1. 匯入 `scripts/notion-sync/notion-template.csv` 到 Notion
+2. CSV 是純文字格式，匯入後需**手動調整欄位類型**：
+
+| 欄位 | 匯入後類型 | 需改成 |
+|-----|----------|-------|
+| Status | Text | **Select**（選項：Published / Draft / Archived） |
+| Category | Text | **Select**（選項：design / tooling / self） |
+| Date | Text | **Date** |
+| Featured | Text | **Checkbox** |
+| Spotlight | Text | **Checkbox** |
+| HeroImage | Text | **Files & media**|
+| ThumbnailImage | Text | **Files & media**|
 
 #### 2. GitHub Secrets 設定
 
@@ -139,7 +155,6 @@ Vite 提供了極快的 HMR 支援。當你修改代碼時，變更會立即反�
 
 1. 前往 [Notion Integrations](https://www.notion.so/my-integrations) 建立 Integration
 2. 複製 Internal Integration Token
-3. 在 Notion 資料庫頁面，點擊右上角 `...` > **Add connections** > 選擇你的 Integration
 
 ### 文章刪除機制
 
