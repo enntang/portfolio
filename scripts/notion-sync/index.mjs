@@ -1,6 +1,6 @@
 import { Client } from '@notionhq/client'
 import { NotionToMarkdown } from 'notion-to-md'
-import { writeFileSync, mkdirSync, existsSync, createWriteStream } from 'fs'
+import { writeFileSync, mkdirSync, existsSync, createWriteStream, readdirSync, rmSync } from 'fs'
 import { join, dirname, extname } from 'path'
 import { fileURLToPath } from 'url'
 import https from 'https'
@@ -87,7 +87,53 @@ export default post
     console.log()
   }
 
+  // 7. 清理已取消發布的文章
+  const publishedSlugs = response.results
+    .map(page => getText(page.properties.Slug))
+    .filter(Boolean)
+
+  const deletedCount = cleanupUnpublishedArticles(publishedSlugs)
+  if (deletedCount > 0) {
+    console.log(`🗑️  已刪除 ${deletedCount} 篇取消發布的文章\n`)
+  }
+
   console.log('✨ 同步完成！')
+}
+
+// ============ 清理功能 ============
+
+function cleanupUnpublishedArticles(publishedSlugs) {
+  let deletedCount = 0
+
+  // 取得本地所有文章 slug
+  if (!existsSync(BLOG_DIR)) return 0
+
+  const localSlugs = readdirSync(BLOG_DIR, { withFileTypes: true })
+    .filter(dirent => dirent.isDirectory())
+    .map(dirent => dirent.name)
+
+  // 找出需要刪除的文章
+  const toDelete = localSlugs.filter(slug => !publishedSlugs.includes(slug))
+
+  for (const slug of toDelete) {
+    console.log(`🗑️  刪除取消發布的文章: ${slug}`)
+
+    // 刪除文章內容
+    const contentDir = join(BLOG_DIR, slug)
+    if (existsSync(contentDir)) {
+      rmSync(contentDir, { recursive: true })
+    }
+
+    // 刪除文章圖片
+    const imageDir = join(IMAGE_DIR, slug)
+    if (existsSync(imageDir)) {
+      rmSync(imageDir, { recursive: true })
+    }
+
+    deletedCount++
+  }
+
+  return deletedCount
 }
 
 // ============ 圖片處理 ============
