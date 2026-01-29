@@ -50,6 +50,7 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git commit -m "chore: sync articles from Notion"
+          git pull --rebase origin main || (git rebase --abort && exit 1)
           git push
 
       - name: Trigger deploy
