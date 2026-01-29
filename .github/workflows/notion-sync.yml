@@ -23,7 +23,7 @@ jobs:
 
       - name: Install dependencies
         run: |
-          cd portfolio/scripts/notion-sync
+          cd scripts/notion-sync
           npm install
 
       - name: Sync from Notion
@@ -31,7 +31,7 @@ jobs:
           NOTION_API_KEY: ${{ secrets.NOTION_API_KEY }}
           NOTION_DATABASE_ID: ${{ secrets.NOTION_DATABASE_ID }}
         run: |
-          cd portfolio/scripts/notion-sync
+          cd scripts/notion-sync
           node index.mjs
 
       - name: Check for changes
