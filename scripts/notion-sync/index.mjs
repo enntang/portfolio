@@ -45,9 +45,11 @@ async function main() {
     // 3. 處理圖片並轉換內容
     const { content, imageCount } = await processContent(blocks, slug)
 
-    // 4. 處理 Hero/Thumbnail 圖片
-    const heroImage = await processMetaImage(getUrl(props.HeroImage), slug, 'hero')
-    const thumbnailImage = await processMetaImage(getUrl(props.ThumbnailImage), slug, 'thumbnail')
+    // 4. 處理 Hero/Thumbnail 圖片（支援 Files & media 或 URL 類型）
+    const heroUrl = getFileUrl(props.HeroImage) || getUrl(props.HeroImage)
+    const thumbnailUrl = getFileUrl(props.ThumbnailImage) || getUrl(props.ThumbnailImage)
+    const heroImage = await processMetaImage(heroUrl, slug, 'hero')
+    const thumbnailImage = await processMetaImage(thumbnailUrl, slug, 'thumbnail')
 
     // 5. 組裝 post 物件
     const post = {
@@ -326,6 +328,22 @@ function getCheckbox(prop) {
 
 function getUrl(prop) {
   return prop?.url || ''
+}
+
+function getFileUrl(prop) {
+  // 支援 Files & media 類型的屬性
+  const file = prop?.files?.[0]
+  if (!file) return ''
+
+  // Notion 上傳的檔案
+  if (file.type === 'file') {
+    return file.file?.url || ''
+  }
+  // 外部連結
+  if (file.type === 'external') {
+    return file.external?.url || ''
+  }
+  return ''
 }
 
 function getCategoryLabel(category) {
