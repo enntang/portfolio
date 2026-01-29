@@ -1,7 +1,7 @@
 const post = {
   "id": "featured-article",
   "slug": "featured-article",
-  "title": "精選文章範例",
+  "title": "測試文章",
   "subtitle": "個人成長",
   "category": "self",
   "categoryLabel": "Self",
@@ -9,10 +9,14 @@ const post = {
   "readingTime": "8 min read",
   "featured": true,
   "spotlight": false,
-  "heroImage": "",
-  "thumbnailImage": "",
+  "heroImage": "/blog-images/featured-article/hero.jpeg",
+  "thumbnailImage": "/blog-images/featured-article/thumbnail.jpg",
   "author": "Enn Tang",
-  "content": []
+  "content": [
+    "測試文章測試文章測試文章測試文章測試文章",
+    "測試文章測試文章測試文章測試文章測試文章",
+    "測試文章測試文章測試文章"
+  ]
 }
 
 export default post
