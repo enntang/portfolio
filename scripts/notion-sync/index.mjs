@@ -66,7 +66,7 @@ async function main() {
       subtitle: getText(props.Subtitle),
       description: getText(props.Description),
       category: getSelect(props.Category),
-      categoryLabel: getText(props.CategoryLabel) || getCategoryLabel(getSelect(props.Category)),
+      categoryLabel: getCategoryLabel(getSelect(props.Category)),
       date: getDate(props.Date),
       featured: getCheckbox(props.Featured),
       spotlight: getCheckbox(props.Spotlight),

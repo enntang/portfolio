@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react'
+import { useState } from 'react'
 import Navbar from './components/utilities/Navbar'
 import Footer from './components/utilities/Footer'
 import blogPosts from './assets/blogPosts'
@@ -54,8 +54,7 @@ function FeaturedCard({ post, buildHref }) {
           </h2>
           <p className='text-sm text-gray-400 leading-relaxed line-clamp-3'>{post.subtitle}</p>
         </div>
-        <div className='flex items-center justify-between mt-6 text-[11px] text-gray-500'>
-          <span>{post.readingTime}</span>
+        <div className='flex items-center justify-end mt-6 text-[11px] text-gray-500'>
           <span>{post.date}</span>
         </div>
       </div>
@@ -82,8 +81,7 @@ function GridPostCard({ post, buildHref }) {
           {post.title}
         </h3>
         <p className='text-[12px] text-gray-400 leading-relaxed line-clamp-2'>{post.subtitle}</p>
-        <div className='mt-auto flex items-center justify-between text-[11px] text-gray-500 pt-2'>
-          <span>{post.readingTime}</span>
+        <div className='mt-auto flex items-center justify-end text-[11px] text-gray-500 pt-2'>
           <span>{post.date}</span>
         </div>
       </div>

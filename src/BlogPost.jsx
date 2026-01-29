@@ -39,8 +39,6 @@ function BlogPost({ slug }) {
               <span>{post.author}</span>
               <span>•</span>
               <span>{post.date}</span>
-              <span>•</span>
-              <span>{post.readingTime}</span>
             </div>
           </header>
 
