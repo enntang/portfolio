@@ -1,7 +1,7 @@
 const post = {
   "id": "my-first-article",
   "slug": "my-first-article",
-  "title": "我的第一篇文章",
+  "title": "體驗管理課程心得（一）：設計職涯路上的商業思維",
   "subtitle": "",
   "description": "設計師不僅需關注執行面，更應具備商業思維，理解「為什麼」並量化成效，以提升產品價值與職涯發展的可能性。",
   "category": "design",
