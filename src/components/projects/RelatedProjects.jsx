@@ -18,7 +18,7 @@ function RelatedProjects({ currentSlug, count = 3 }) {
   if (relatedProjects.length === 0) return null
 
   return (
-    <div className="w-full">
+    <div className="w-full px-8 xl:px-16">
       <h3 className="text-h3 text-center mb-8 text-gray-700">
         {t('projects.related') || 'More Projects'}
       </h3>

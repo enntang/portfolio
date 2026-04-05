@@ -40,6 +40,7 @@ import roomWaitingImg from '../image/penguin-territory-room-waiting-not-ready.pn
 import turn01 from '../image/penguin-territory-turn-self-01.png'
 import turn02 from '../image/penguin-territory-turn-self-02.png'
 import turn04 from '../image/penguin-territory-turn-self-04.png'
+import videoGif from '../image/video.gif'
 import tips1 from '../image/penguin-territory-tips-1.png'
 import tips2 from '../image/penguin-territory-tips-2.png'
 import tips3 from '../image/penguin-territory-tips-3.png'
@@ -399,6 +400,11 @@ export default function PenguinTerritoryPageZh() {
               <P className="mt-6">
                 我在設計上利用側邊欄顯示戰況，畫面左右分別是玩家順序和即時計分。分配時，來源與目的的「數字」是重要資訊，所以以黑色底襯托。
               </P>
+              <LazyImage
+                src={videoGif}
+                alt="遊戲畫面預覽：側邊欄顯示戰況、玩家順序與即時計分，六角格上強調來源與目的數字"
+                className="w-full h-auto rounded-lg shadow mt-8"
+              />
             </div>
 
             <div className="mt-16">

@@ -40,6 +40,7 @@ import roomWaitingImg from '../image/penguin-territory-room-waiting-not-ready.pn
 import turn01 from '../image/penguin-territory-turn-self-01.png'
 import turn02 from '../image/penguin-territory-turn-self-02.png'
 import turn04 from '../image/penguin-territory-turn-self-04.png'
+import videoGif from '../image/video.gif'
 import tips1 from '../image/penguin-territory-tips-1.png'
 import tips2 from '../image/penguin-territory-tips-2.png'
 import tips3 from '../image/penguin-territory-tips-3.png'
@@ -399,6 +400,11 @@ export default function PenguinTerritoryPageEn() {
               <P className="mt-6">
                 I designed the sidebar to display battle status, with player order on the left and real-time scoring on the right. When distributing, the "numbers" for source and destination are important information, so they're highlighted with a black background.
               </P>
+              <LazyImage
+                src={videoGif}
+                alt="Gameplay preview: sidebar with battle status, player order, scoring, and highlighted move numbers on the hex grid"
+                className="w-full h-auto rounded-lg shadow mt-8"
+              />
             </div>
 
             <div className="mt-16">

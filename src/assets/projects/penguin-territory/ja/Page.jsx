@@ -40,6 +40,7 @@ import roomWaitingImg from '../image/penguin-territory-room-waiting-not-ready.pn
 import turn01 from '../image/penguin-territory-turn-self-01.png'
 import turn02 from '../image/penguin-territory-turn-self-02.png'
 import turn04 from '../image/penguin-territory-turn-self-04.png'
+import videoGif from '../image/video.gif'
 import tips1 from '../image/penguin-territory-tips-1.png'
 import tips2 from '../image/penguin-territory-tips-2.png'
 import tips3 from '../image/penguin-territory-tips-3.png'
@@ -399,6 +400,11 @@ export default function PenguinTerritoryPageJa() {
               <P className="mt-6">
                 デザインでは、サイドバーで戦況を表示し、画面の左右にプレイヤーの順序とリアルタイムのスコアを配置しました。分配時、出発地と目的地の「数字」は重要な情報なので、黒い背景で強調しています。
               </P>
+              <LazyImage
+                src={videoGif}
+                alt="ゲームプレイのプレビュー：サイドバーに戦況、プレイヤー順、スコア。六角グリッド上で出発地と目的地の数字を強調表示"
+                className="w-full h-auto rounded-lg shadow mt-8"
+              />
             </div>
 
             <div className="mt-16">
