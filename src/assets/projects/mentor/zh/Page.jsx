@@ -1,25 +1,13 @@
-import { useState, useEffect, useRef } from 'react'
-import { gsap } from 'gsap'
-import { ScrollTrigger } from 'gsap/ScrollTrigger'
-import { Swiper, SwiperSlide } from 'swiper/react'
-import { Pagination, Navigation } from 'swiper/modules'
-import 'swiper/css'
-import 'swiper/css/pagination'
-import 'swiper/css/navigation'
+import { useState } from 'react'
 import Navbar from '../../../../components/utilities/Navbar'
 import { useFloatingAnimation } from '../../../../hooks/useFloatingAnimation'
-import ImageWithHotspots from '../../../../components/utilities/ImageWithHotspots'
 import Footer from '../../../../components/utilities/Footer'
-import ProjectNote from '../../../../components/projects/ProjectNote'
 import Container from '../../../../components/projects/Container'
 import SectionBlock from '../../../../components/projects/SectionBlock'
 import TwoColumn from '../../../../components/projects/TwoColumn'
 import RelatedProjects from '../../../../components/projects/RelatedProjects'
 import TableOfContents from '../../../../components/utilities/TableOfContents'
 
-gsap.registerPlugin(ScrollTrigger)
-
-// Images (reuse EN assets; put localized images into ../zh/ later if needed)
 import BG1 from '../image/projectInfo-mentor-bg-1.png'
 import BG2 from '../image/projectInfo-mentor-bg-2.png'
 import BG3 from '../image/projectInfo-mentor-bg-3.png'
@@ -34,29 +22,30 @@ const mentorBackgrounds = {
 
 import shineImage from '../image/projectInfo-mentor-shine.svg'
 import glintImage from '../image/projectInfo-mentor-glint.svg'
-
-import tabletMockup from '../image/projectInfo-mentor-tablet-mockup.png'
-import mentor from '../image/projectInfo-mentor-mentor.png'
+import mentorImg from '../image/projectInfo-mentor-mentor.png'
 import arrowDown from '../../../../../public/icon-arrow-down.svg'
-import quoteIcon from '../../../../../public/icon-quote.svg'
-import phases from '../image/projectInfo-mentor-phase.png'
-import chartImg from '../image/projectInfo-mentor-chart.png'
-import deliverablesDraft from '../image/projectInfo-mentor-draft.png'
-import deliverablesLayout1 from '../image/projectInfo-mentor-layout1.png'
-import deliverablesLayout2 from '../image/projectInfo-mentor-layout2.png'
-import guidelineImg from '../image/projectInfo-mentor-guideline.png'
-import mentorDraft from '../image/projectInfo-mentor-draft-2.png'
-import mentorVariants from '../image/projectInfo-mentor-variants.png'
-import pyramid from '../image/projectInfo-mentor-pyramid.png'
-import screenShot1 from '../image/projectInfo-mentor-screenshot1.png'
-import screenShot2 from '../image/projectInfo-mentor-screenshot2.png'
-import screenShot3 from '../image/projectInfo-mentor-screenshot3.png'
-import screenShot4 from '../image/projectInfo-mentor-screenshot4.png'
-import screenShot5 from '../image/projectInfo-mentor-screenshot5.png'
-import screenShot6 from '../image/projectInfo-mentor-screenshot6.png'
-import screenShot7 from '../image/projectInfo-mentor-screenshot7.png'
-import screenShot8 from '../image/projectInfo-mentor-screenshot8.png'
-import typesImg from '../image/projectInfo-mentor-4types.png'
+import teamChart from '../image/projectInfo-mentor-team-chart.png'
+import priorityTable from '../image/projectInfo-mentor-priority-table.png'
+import ipCharacter from '../image/projectInfo-mentor-ip-character.png'
+import conceptDraft from '../image/projectInfo-mentor-concept-draft.png'
+import ipVariants from '../image/projectInfo-mentor-ip-variants.png'
+import uiGuide from '../image/projectInfo-mentor-ui-guide.png'
+import uiGuideFull from '../image/projectInfo-mentor-ui-guide-full.png'
+import iteration1 from '../image/projectInfo-mentor-iteration-1.png'
+import iteration2 from '../image/projectInfo-mentor-iteration-2.png'
+import wireframe1 from '../image/projectInfo-mentor-wireframe-1.png'
+import wireframe2 from '../image/projectInfo-mentor-wireframe-2.png'
+import designSystem from '../image/projectInfo-mentor-design-system.png'
+import personaUi1 from '../image/projectInfo-mentor-persona-ui-1.png'
+import personaUi2 from '../image/projectInfo-mentor-persona-ui-2.png'
+import goalCalendar from '../image/projectInfo-mentor-goal-calendar.png'
+import reportWeekly from '../image/projectInfo-mentor-report-weekly.png'
+import reportMonthly from '../image/projectInfo-mentor-report-monthly.png'
+import badgeOverview from '../image/projectInfo-mentor-badge-overview.png'
+import badgeEarned from '../image/projectInfo-mentor-badge-earned.png'
+import badgeLocked from '../image/projectInfo-mentor-badge-locked.png'
+import lineTree from '../image/projectInfo-mentor-line-tree.png'
+import lineMenu from '../image/projectInfo-mentor-line-menu.jpeg'
 
 import P from '../../../../components/post/P'
 import H2 from '../../../../components/post/H2'
@@ -64,148 +53,10 @@ import H3 from '../../../../components/post/H3'
 import UL from '../../../../components/post/UL'
 import LI from '../../../../components/post/LI'
 
-export default function MentorPageZh() {
+export default function MentorZhPage() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
-  const parentsCircleRef = useRef(null)
-  const studentsCircleRef = useRef(null)
-
-  // Use floating animation hook for mentor image
   const mentorImgRef = useFloatingAnimation({ y: -20, duration: 2 })
-  // Use floating animation for arrow down icon
   const arrowDownRef = useFloatingAnimation({ y: -15, duration: 1.8, delay: 0.2 })
-
-  // Define hotspots
-  const learningPersonaHotspots = [
-    {
-      id: 'point1',
-      x: 20,
-      y: 25,
-      content: '選擇最適合的學習路徑：每週要投入多少時間學習。',
-      arrowPosition: 'bottom',
-    },
-    {
-      id: 'point2',
-      x: 78,
-      y: 55,
-      content: '系統會顯示學生類型。',
-      arrowPosition: 'bottom',
-    },
-    {
-      id: 'point3',
-      x: 12,
-      y: 20,
-      content:
-        '建立學習計畫共有 4 個步驟：1. 選擇學習期間 2. 選擇每週學習日 3. 設定學習目標 4. 確認計畫。',
-      arrowPosition: 'bottom',
-    },
-  ]
-  const learningGoalHotspots = [
-    {
-      id: 'point1',
-      x: 18,
-      y: 14,
-      content:
-        '流程最後，系統會顯示學習計畫；學生可在時間軸與月曆視圖之間切換，以查看規劃內容。',
-      arrowPosition: 'bottom',
-    },
-    {
-      id: 'point2',
-      x: 38,
-      y: 44,
-      content: '不同顏色的圓點代表不同的學習科目。',
-      arrowPosition: 'bottom',
-    },
-    {
-      id: 'point3',
-      x: 78,
-      y: 34,
-      content: '單日學習內容概覽。',
-      arrowPosition: 'bottom',
-    },
-  ]
-  const learningReportHotspots = [
-    {
-      id: 'point1',
-      x: 38,
-      y: 4,
-      content:
-        '報表涵蓋三種時間維度：每日、每週與每月，分別呈現不同深度的學習狀況。',
-      arrowPosition: 'bottom',
-    },
-    {
-      id: 'point2',
-      x: 8,
-      y: 44,
-      content: '家長可以在不同孩子之間切換查看報表。',
-      arrowPosition: 'bottom',
-    },
-    {
-      id: 'point3',
-      x: 78,
-      y: 34,
-      content: '學生的學習表現與進度總覽。',
-      arrowPosition: 'bottom',
-    },
-  ]
-  const badgeCollectionHotspots = [
-    {
-      id: 'point1',
-      x: 28,
-      y: 4,
-      content: '學生可以查看自己的收集進度。',
-      arrowPosition: 'bottom',
-    },
-    {
-      id: 'point2',
-      x: 38,
-      y: 44,
-      content:
-        '每枚徽章都有獨特的視覺識別，並在「成就殿堂」介面中展示。',
-      arrowPosition: 'bottom',
-    },
-  ]
-
-  useEffect(() => {
-    // Animate parents circle from left
-    gsap.fromTo(
-      parentsCircleRef.current,
-      {
-        x: -300,
-        opacity: 0,
-      },
-      {
-        x: 0,
-        opacity: 1,
-        ease: 'none',
-        scrollTrigger: {
-          trigger: parentsCircleRef.current,
-          start: 'top 80%',
-          end: 'top 20%',
-          scrub: 1,
-        },
-      }
-    )
-
-    // Animate students circle from right
-    gsap.fromTo(
-      studentsCircleRef.current,
-      {
-        x: 300,
-        opacity: 0,
-      },
-      {
-        x: 0,
-        opacity: 1,
-        ease: 'none',
-        scrollTrigger: {
-          trigger: studentsCircleRef.current,
-          start: 'top 80%',
-          end: 'top 20%',
-          scrub: 1,
-        },
-      }
-    )
-  }, [])
 
   return (
     <div className="min-h-screen bg-bg">
@@ -216,111 +67,130 @@ export default function MentorPageZh() {
         variant="arrow"
       />
       <main className="bg-bg">
+
         {/* Hero */}
-        <header className=" relative overflow-hidden">
+        <header className="relative overflow-hidden">
           <SectionBlock bgVariant="purple" className="relative" backgrounds={mentorBackgrounds}>
             <TableOfContents />
             <img src={shineImage} alt="shine" className="absolute top-0 right-0" />
             <img src={glintImage} alt="glint" className="absolute bottom-0 left-0" />
             <Container className="flex flex-col items-center justify-center text-center">
-              <img ref={mentorImgRef} src={mentor} alt="Mentor" className="h-48 w-48 md:h-64 md:w-64 rounded-lg" />
+              <img ref={mentorImgRef} src={mentorImg} alt="Mentor" className="h-48 w-48 md:h-64 md:w-64 rounded-lg" />
               <h1 className="text-large mobile:text-large-mobile">Mentor</h1>
               <H3 className="mb-24">AI 整合學習平台</H3>
               <P className="w-full md:w-2/3">
-                設計 Mentor 不只是打造畫面與流程，更是打造一個團隊、一個故事，以及一份對學習的共同信念。
+                設計 Mentor 不只是在設計介面——更是塑造一支團隊、一個故事，以及一份對學習的共同信念。
               </P>
-              <img ref={arrowDownRef} src={arrowDown} alt="Arrow Down" className="mt-16 md:mt-24 w-6 h-6 brightness-0 invert" />
+              <img ref={arrowDownRef} src={arrowDown} alt="往下捲動" className="mt-16 md:mt-24 w-6 h-6 brightness-0 invert" />
             </Container>
           </SectionBlock>
         </header>
 
-        {/* Project Brief */}
+        {/* 專案概覽 */}
         <SectionBlock backgrounds={mentorBackgrounds}>
-          <Container className="flex flex-col items-center justify-center">
-            <div className="text-center mb-10">
-              <H2>專案簡介</H2>
-            </div>
-            <img src={tabletMockup} alt="Mentor 設計預覽" className='rounded-lg' />
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-16 mt-16">
+          <Container>
+            <H2 id="project-brief">專案概覽</H2>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-16 mt-4">
               <div className="md:col-span-2">
                 <P>
-                  在 Samebest，我擔任全新產品「Mentor」的 UI 與平面設計團隊設計主管。這款 App
-                  旨在協助學生更有效率地規劃與完成學習旅程，準備各類校內考試與升學考試（包含高中與大學入學考）。
-                  我帶領團隊完成介面設計，並建立可延展的品牌視覺基礎。
+                  在 Samebest，我擔任 Mentor（AI 智能書包）的 Design Lead，從零開始組建並帶領一支設計團隊，合作對象跨越 PM、研發、行銷、課程五個單位，在持續擴張的需求與不斷變動的方向中，用一年的時間完成整個產品從概念到落地的完整交付。
                 </P>
+                <P>
+                  產品上線後，90% 的學生選擇採用 AI 建立學習路徑，而我培育的第一位設計師 Nomis，在我離開後接任了我的主管職位。
+                </P>
+                <blockquote className="border-l-4 border-current pl-6 mt-8 italic opacity-70">
+                  這個專案讓我確信：Design Lead 的工作，不只是做出好的設計，而是建立一個讓好設計得以發生的團隊。
+                </blockquote>
               </div>
-              <div className="flex flex-col gap-2">
-                <p className="text-h3">角色</p>
-                <P>設計主管（Design Lead）</P>
-                <p className="text-h3">時程</p>
-                <P>2019/05 – 2024/06</P>
+              <div className="flex flex-col gap-4">
+                <p className="text-h3">職稱</p>
+                <P>Design Lead</P>
+                <p className="text-h3">時間</p>
+                <P>2023 – 2024</P>
+                <p className="text-h3">負責範圍</p>
+                <P>團隊組建與調度、需求收斂與設計方向提案、UI 系統建立與品質把關、跨職能協作、視覺美術設定主導</P>
               </div>
+            </div>
+
+            {/* Stats Grid */}
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-8 mt-16 pt-12 border-t border-current/20">
+              {[
+                { stat: '1 年', label: '從 0 到 1 落地上線', sub: '完整產品從概念到交付' },
+                { stat: '15+', label: '跨單位協作人數', sub: '設計、PM、RD、行銷、課程' },
+                { stat: '90%', label: '學生採用 AI 建立路徑', sub: '設計決策被用戶接受' },
+                { stat: '培育接班人', label: '團隊成員晉升主管', sub: '培育的人才接任職位' },
+              ].map(({ stat, label, sub }) => (
+                <div key={stat} className="flex flex-col gap-2">
+                  <p className="text-h2" style={{ fontWeight: '500' }}>{stat}</p>
+                  <p className="text-body font-medium">{label}</p>
+                  <p className="text-caption opacity-60">{sub}</p>
+                </div>
+              ))}
             </div>
           </Container>
         </SectionBlock>
 
-        {/* Responsibilities (dark) */}
+        {/* 團隊規模與協作架構 */}
         <SectionBlock bgVariant="mentor" backgrounds={mentorBackgrounds}>
           <Container>
-            <H2>主要職責</H2>
-
-            {/* Mobile Swiper */}
-            <div className="md:hidden">
-              <Swiper
-                modules={[Pagination, Navigation]}
-                pagination={{ clickable: true }}
-                navigation={true}
-                spaceBetween={24}
-                slidesPerView={1}
-                className="responsibilities-swiper"
-              >
-                <SwiperSlide>
-                  <div>
-                    <H3>1. 團隊領導</H3>
-                    <UL>
-                      <LI>帶領 4 位設計師完成 0–1 產品孵化流程。</LI>
-                      <LI>依據成員優勢分配任務，協助其思考與落地。</LI>
-                      <LI>促進與 PM、R&amp;D 協作，確保設計成果兼顧可用性與可行性。</LI>
-                    </UL>
-                    <P>在領導過程中，我也主持團隊定期討論：</P>
-                    <UL>
-                      <LI>早期概念探索與競品分析，找出產品差異化切入點。</LI>
-                      <LI>設計執行策略，如何與工程端的工作流對齊。</LI>
-                      <LI>在複雜結構與大型需求下，兼顧使用者體驗與整體一致性。</LI>
-                    </UL>
-                  </div>
-                </SwiperSlide>
-                <SwiperSlide>
-                  <div>
-                    <H3>2. 設計系統建立</H3>
-                    <UL>
-                      <LI>制定產品整體視覺風格方向。</LI>
-                      <LI>依國高中主要使用者的審美與語言習慣調整 UX 與視覺表現。</LI>
-                      <LI>與團隊蒐集與整理視覺參考，建立一致的設計語言。</LI>
-                    </UL>
-                  </div>
-                </SwiperSlide>
-              </Swiper>
+            <H2 id="team-structure">團隊規模與協作架構</H2>
+            <img src={teamChart} alt="團隊架構圖" className="rounded-lg mb-12 mt-6" />
+            <P>這個專案涉及多個平行單位的緊密協作，設計並非孤立運作，而是整個產品生態系的一部分：</P>
+            <div className="mt-8 overflow-x-auto">
+              <table className="w-full text-left border-collapse">
+                <thead>
+                  <tr className="border-b border-current/20">
+                    <th className="pb-4 pr-6 text-h3" style={{ fontWeight: '500' }}>單位</th>
+                    <th className="pb-4 pr-6 text-h3" style={{ fontWeight: '500' }}>人數</th>
+                    <th className="pb-4 text-h3" style={{ fontWeight: '500' }}>協作說明</th>
+                  </tr>
+                </thead>
+                <tbody className="divide-y divide-current/10">
+                  {[
+                    { team: '設計團隊', count: '5 人（含我）', desc: '涵蓋 UI 設計、美術設定、前端切版實作。' },
+                    { team: 'PM 團隊', count: '4 人', desc: '負責產品方向與需求定義，設計決策最終由 PM 主管拍板。' },
+                    { team: '研發工程師', count: '4 人', desc: '負責功能開發與技術實作，與設計直接協作確認技術可行性與規格。' },
+                    { team: '行銷團隊', count: '2 人', desc: '設計部同時承接行銷文宣需求，需在產品設計與行銷任務之間彈性調度資源。' },
+                    { team: '課程部門', count: '多人', desc: '專職產出 K12 各科教學內容，學習內容的結構直接影響產品的資訊架構設計。' },
+                  ].map(({ team, count, desc }) => (
+                    <tr key={team}>
+                      <td className="py-4 pr-6 text-p" style={{ fontWeight: '400' }}>{team}</td>
+                      <td className="py-4 pr-6 text-p opacity-70" style={{ fontWeight: '200' }}>{count}</td>
+                      <td className="py-4 text-p opacity-80" style={{ fontWeight: '200' }}>{desc}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
             </div>
+            <P className="mt-8 opacity-70">
+              能在這個跨單位的環境裡讓設計方向保持一致、讓每個功能如期交付，本身就是這個 Lead 角色最核心的挑戰之一。
+            </P>
+          </Container>
+        </SectionBlock>
 
-            {/* Desktop Layout */}
-            <div className="hidden md:block">
+        {/* 主要職責 */}
+        <SectionBlock bgVariant="dark" backgrounds={mentorBackgrounds}>
+          <Container>
+            <H2 id="responsibilities">主要職責</H2>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-12 mt-4">
               <div>
                 <H3>1. 團隊領導</H3>
                 <UL>
                   <LI>帶領跨設計與工程團隊推進產品。</LI>
                   <LI>依據成員優勢分配任務，協助其思考與落地。</LI>
-                  <LI>促進與 PM、R&amp;D 協作，確保設計成果兼顧可用性與可行性。</LI>
+                  <LI>促進與 PM、R&D 協作，確保設計成果兼顧可用性與可行性。</LI>
                 </UL>
-                <P>在領導過程中，我也主持團隊定期討論：</P>
+              </div>
+              <div>
+                <H3>2. 主持定期交流會議</H3>
                 <UL>
                   <LI>早期概念探索與競品分析，找出產品差異化切入點。</LI>
-                  <LI>設計執行策略，如何與工程端的工作流對齊。</LI>
+                  <LI>設計執行策略，與工程端的工作流對齊。</LI>
                   <LI>在複雜結構與大型需求下，兼顧使用者體驗與整體一致性。</LI>
                 </UL>
               </div>
               <div>
-                <H3>2. 設計系統建立</H3>
+                <H3>3. 設計系統建立</H3>
                 <UL>
                   <LI>制定產品整體視覺風格方向。</LI>
                   <LI>依國高中主要使用者的審美與語言習慣調整 UX 與視覺表現。</LI>
@@ -331,854 +201,405 @@ export default function MentorPageZh() {
           </Container>
         </SectionBlock>
 
-        {/* Workflow */}
-        <SectionBlock className="pb-0" backgrounds={mentorBackgrounds}>
-          <Container>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
-              <H2>工作流程</H2>
-              <UL className="md:col-span-2">
-                <LI>每個功能以約兩個月為一個週期，跨職能協作設計與開發。</LI>
-                <LI>在探索與發想階段以小組形式進行，快速產出最有效的解法。</LI>
-                <LI>最終交付前與工程端共同檢視可行性，並持續迭代精修。</LI>
-              </UL>
-            </div>
-          </Container>
-          <img src={phases} alt="工作流程階段" className='rounded-lg' />
-        </SectionBlock>
-
-        {/* Background + Insights alternating backgrounds */}
-        <SectionBlock bgVariant="blue" backgrounds={mentorBackgrounds}>
-          <Container>
-            {/* Mobile Swiper */}
-            <div className="md:hidden">
-              <Swiper
-                modules={[Pagination, Navigation]}
-                pagination={{ clickable: true }}
-                navigation={true}
-                spaceBetween={24}
-                slidesPerView={1}
-                className="background-swiper"
-              >
-                <SwiperSlide>
-                  <div>
-                    <H2>背景</H2>
-                    <P>
-                      Mentor 最初被構想為公司既有桌面端自學軟體（提供錄播課程）的行動端伴侶。
-                    </P>
-                    <P>
-                      團隊在早期<strong>設定了三種不同的學習情境</strong>，對應學生最常使用平台的典型場景。
-                    </P>
-                    <P className="text-xs text-gray-100">
-                      系統一開始被設計為用來控制桌面端影音自學軟體的「遠端介面」。
-                    </P>
-                  </div>
-                </SwiperSlide>
-                <SwiperSlide>
-                  <div className="grid grid-cols-1 gap-4">
-                    <div className="bg-white/10 backdrop-blur rounded-sm shadow p-5">
-                      <div className="text-sm mb-2 opacity-70">在家：坐在書桌前</div>
-                      <p className="pb-0">可使用桌機、平板與課本。</p>
-                    </div>
-                    <div className="bg-white/10 backdrop-blur rounded-sm shadow p-5">
-                      <div className="text-sm mb-2 opacity-70">在學校或圖書館</div>
-                      <p className="pb-0">只有平板與課本，作為課堂延伸學習。</p>
-                    </div>
-                    <div className="bg-white/10 backdrop-blur rounded-sm shadow p-5">
-                      <div className="text-sm mb-2 opacity-70">在外移動中</div>
-                      <p className="pb-0">僅帶著平板，作為主要學習工具。</p>
-                    </div>
-                  </div>
-                </SwiperSlide>
-              </Swiper>
-            </div>
-
-            {/* Desktop Layout */}
-            <div className="hidden md:block">
-              <TwoColumn>
-                <div>
-                  <H2 id="背景">背景</H2>
-                  <P>
-                    Mentor 最初被構想為公司既有桌面端自學軟體（提供錄播課程）的行動端伴侶。
-                  </P>
-                  <P>
-                    團隊在早期<strong>設定了三種不同的學習情境</strong>，對應學生最常使用平台的典型場景。
-                  </P>
-                  <P className="text-xs text-gray-100">
-                    系統一開始被設計為用來控制桌面端影音自學軟體的「遠端介面」。
-                  </P>
-                </div>
-                <div className="grid grid-cols-1 gap-4">
-                  <div className="bg-white/10 backdrop-blur rounded-sm shadow p-5">
-                    <div className="text-sm mb-2 opacity-70">在家：坐在書桌前</div>
-                    <p className="pb-0">可使用桌機、平板與課本。</p>
-                  </div>
-                  <div className="bg-white/10 backdrop-blur rounded-sm shadow p-5">
-                    <div className="text-sm mb-2 opacity-70">在學校或圖書館</div>
-                    <p className="pb-0">只有平板與課本，作為課堂延伸學習。</p>
-                  </div>
-                  <div className="bg-white/10 backdrop-blur rounded-sm shadow p-5">
-                    <div className="text-sm mb-2 opacity-70">在外移動中</div>
-                    <p className="pb-0">僅帶著平板，作為主要學習工具。</p>
-                  </div>
-                </div>
-              </TwoColumn>
-            </div>
-          </Container>
-        </SectionBlock>
-
-        {/* Research Insight */}
-        <SectionBlock bgVariant="dark" backgrounds={mentorBackgrounds}>
-          <Container className=" overflow-hidden">
-            <div className=" mb-10 mx-auto">
-              <H2>研究洞察</H2>
-              <P>
-                在開發初期，我們做了基礎使用者研究，驗證假設並挖掘痛點；研究聚焦兩個核心族群：<strong>家長與學生。</strong>
-              </P>
-              <P>
-                我們發現雙方都有同樣的困擾：<br />
-                對學習進度缺乏清楚認知，導致挫折感—學生覺得沒有變好，家長則覺得無從協助。
-              </P>
-
-              {/* two circles for infographic */}
-              <div className="flex flex-row justify-center items-center my-16 relative isolate">
-                {/* Parents Circle - Blue gradient */}
-                <div ref={parentsCircleRef} className="relative flex items-center justify-center z-10">
-                  <div className="w-64 h-64 md:w-80 md:h-80 rounded-full bg-gradient-to-br from-blue-500 to-blue-700 flex flex-col items-center justify-center text-center p-12 shadow-2xl">
-                    <p className="mb-6 text-h3 md:text-h2">家長</p>
-                    <p className="text-xl leading-relaxed">「我不知道學校在教什麼，也不知道孩子為什麼考不好。」</p>
-                  </div>
-                </div>
-                {/* Students Circle - Purple gradient */}
-                <div ref={studentsCircleRef} className="relative flex items-center justify-center -ml-32 md:-ml-40 z-20 mix-blend-multiply">
-                  <div className="w-64 h-64 md:w-80 md:h-80 rounded-full bg-gradient-to-br from-purple-600 to-purple-800 flex flex-col items-center justify-center text-center p-12 shadow-2xl">
-                    <p className="mb-6 text-h3 md:text-h2">學生</p>
-                    <p className="text-xl leading-relaxed">「我一直做錯，卻不知道錯在哪裡。」</p>
-                  </div>
-                </div>
-              </div>
-              <P>
-                根因其實一致：<strong>基礎不穩、缺乏結構化的複習策略。</strong>
-                <br />
-                這些洞察揭示了努力與成果之間的落差，也成為後續設計目標的基礎。
-              </P>
-            </div>
-          </Container>
-        </SectionBlock>
-
-        {/* how might we */}
+        {/* 背景 */}
         <SectionBlock backgrounds={mentorBackgrounds}>
           <Container>
-            <div className="text-center mb-10 flex flex-col items-center justify-center">
-              <img src={quoteIcon} alt="quote icon" className="mb-8 rounded-lg" />
-              <H2 className="text-gray-900">我們如何能夠…</H2>
-              <P className="mx-auto text-gray-900">
+            <H2 id="background">背景</H2>
+            <H3>從一個教育 App 的雛形，到 K12 學生的 AI 學習夥伴</H3>
+            <P>
+              公司旗下已有一款服務國高中學生的升學輔助平台，但隨著行動裝置的普及，團隊開始思考：能不能讓學生在平板上獲得更完整的學習體驗？最初的構想很單純：一個行動端的延伸產品，讓學生一邊在電腦觀看錄播課程、一邊用平板觀看電子書教材。
+            </P>
+            <P>
+              但在高層的一連串討論後，這個想法被重新定義成更大的目標：結合 AI 的個人化學習教練。於是，這個產品從「平板電子書 App」的最初構想，歷經多次需求擴充與方向調整，最終成長為整合 AI 的完整學習平台。設計團隊在這整個不斷變動的過程中，始終是讓各方決策能夠落地的核心。
+            </P>
+            <H3>我們要解決什麼問題</H3>
+            <P>
+              學生對考試成績的追求是推動補教產品發展的剛性需求，而何種學習方式才會有實質進步，是一個難以解決的大哉問。每一個學生的起點不同、目標不同：課程強度、進步幅度、大考考科的策略選擇，沒有一個放諸四海皆準的答案。
+            </P>
+            <P>
+              「安排自己的學習進度」這件事，對大多數學生來說本就超出能力範圍。過去，這個缺口靠客服與顧問人力填補，產生了巨大的溝通成本與人力損耗。另一方面，家長通常不曉得學生的學習狀況，害怕投注心力卻沒有得到實質收穫，渴望「補習花費有所回饋」，但在現有產品中並沒有良好的解方。
+            </P>
+
+            {/* HMW Callout */}
+            <div className="mt-12 p-8 rounded-xl bg-current/5 border border-current/10">
+              <p className="text-caption opacity-60 mb-3">How Might We</p>
+              <P className="opacity-90">
                 我們如何協助學習進度不清、缺乏回饋而感到挫折的學生與家長，建立清晰感、動機，以及更個人化的下一步建議？
               </P>
             </div>
           </Container>
         </SectionBlock>
 
-        {/* design goals */}
+        {/* 設計目標 */}
         <SectionBlock bgVariant="blue" backgrounds={mentorBackgrounds}>
           <Container>
-            {/* Mobile Swiper */}
-            <div className="md:hidden">
-              <Swiper
-                modules={[Pagination, Navigation]}
-                pagination={{ clickable: true }}
-                navigation={true}
-                spaceBetween={24}
-                slidesPerView={1}
-                className="design-goals-swiper"
-              >
-                <SwiperSlide>
-                  <div>
-                    <H2>設計目標</H2>
-                    <P className="bg-white/10 backdrop-blur rounded-sm shadow p-5">
-                      依據研究洞察，我們整理出三個設計目標，以回應家長與學生的主要疑慮：
-                    </P>
-                  </div>
-                </SwiperSlide>
-                <SwiperSlide>
-                  <div>
-                    <H3>1. 個人化目標設定與學習引導</H3>
-                    <P>
-                      為降低認知負荷並建立方向感，Mentor 會依學生程度、歷史表現與近期錯題來客製化讀書計畫。學生只要跟著 AI 引導逐步完成，就能穩定進步。
-                    </P>
-                  </div>
-                </SwiperSlide>
-                <SwiperSlide>
-                  <div>
-                    <H3>2. 清楚易懂的回饋與下一步</H3>
-                    <P>
-                      不再只給模糊的分數，Mentor 會生成視覺化學習報表：呈現進度、指出弱點並提供下一步建議，讓家長與學生都能在清楚的資訊下持續前進。
-                    </P>
-                  </div>
-                </SwiperSlide>
-                <SwiperSlide>
-                  <div>
-                    <H3>3. 透過成就感強化動機</H3>
-                    <P>
-                      以具體進度指標（錯誤減少、任務完成、連續學習等）建立情緒動能，鼓勵學生持續投入。
-                    </P>
-                  </div>
-                </SwiperSlide>
-              </Swiper>
+            <H2 id="design-goals">設計目標</H2>
+            <P>在確立 HMW 問題之後，我們先梳理了產品功能的優先層次：從使用者的基本期待，到真正讓人驚艷的差異化體驗。</P>
+            <img src={priorityTable} alt="功能優先層次" className="rounded-lg mt-6" />
+
+            <div className="mt-8 overflow-x-auto">
+              <table className="w-full text-left border-collapse">
+                <thead>
+                  <tr className="border-b border-current/20">
+                    <th className="pb-4 pr-6 text-h3" style={{ fontWeight: '500' }}>層次</th>
+                    <th className="pb-4 pr-6 text-h3" style={{ fontWeight: '500' }}>功能</th>
+                    <th className="pb-4 text-h3" style={{ fontWeight: '500' }}>說明</th>
+                  </tr>
+                </thead>
+                <tbody className="divide-y divide-current/10">
+                  <tr>
+                    <td className="py-4 pr-6 text-p" style={{ fontWeight: '400' }}>基本層（必須有）</td>
+                    <td className="py-4 pr-6 text-p" style={{ fontWeight: '200' }}>觀看課程影片、題目練習</td>
+                    <td className="py-4 text-p opacity-70" style={{ fontWeight: '200' }}>使用者的最低期待，缺乏則直接流失</td>
+                  </tr>
+                  <tr>
+                    <td className="py-4 pr-6 text-p" style={{ fontWeight: '400' }}>核心層（應該有）</td>
+                    <td className="py-4 pr-6 text-p" style={{ fontWeight: '200' }}>學習報告、練習表現、筆記複習</td>
+                    <td className="py-4 text-p opacity-70" style={{ fontWeight: '200' }}>滿足學習需求的主要功能</td>
+                  </tr>
+                  <tr>
+                    <td className="py-4 pr-6 text-p" style={{ fontWeight: '400' }}>亮點層（讓人驚艷）</td>
+                    <td className="py-4 pr-6 text-p" style={{ fontWeight: '200' }}>複習提醒、進度追蹤、個人化學習建議</td>
+                    <td className="py-4 text-p opacity-70" style={{ fontWeight: '200' }}>超越期待、強化黏著度的差異化體驗</td>
+                  </tr>
+                </tbody>
+              </table>
             </div>
 
-            {/* Desktop Layout */}
-            <div className="hidden md:block">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-10 mt-16">
               <div>
-                <H2 id="設計目標">設計目標</H2>
-                <P className="bg-white/10 backdrop-blur rounded-sm shadow p-5">
-                  依據研究洞察，我們整理出三個設計目標，以回應家長與學生的主要疑慮：
-                </P>
+                <H3>1. 個人化目標設定與學習引導</H3>
+                <P>為降低認知負荷並建立方向感，產品須依學生程度、適性分析與各科錯題紀錄來客製化讀書計畫。學生只要跟著引導逐步完成，就能穩定進步。</P>
               </div>
               <div>
-                <div className="mb-8">
-                  <H3>1. 個人化目標設定與學習引導</H3>
-                  <P>
-                    為降低認知負荷並建立方向感，Mentor 會依學生程度、歷史表現與近期錯題來客製化讀書計畫。學生只要跟著 AI 引導逐步完成，就能穩定進步。
-                  </P>
-                </div>
-                <div className="mb-8">
-                  <H3>2. 清楚易懂的回饋與下一步</H3>
-                  <P>
-                    不再只給模糊的分數，Mentor 會生成視覺化學習報表：呈現進度、指出弱點並提供下一步建議，讓家長與學生都能在清楚的資訊下持續前進。
-                  </P>
-                </div>
-                <div>
-                  <H3>3. 透過成就感強化動機</H3>
-                  <P>
-                    以具體進度指標（錯誤減少、任務完成、連續學習等）建立情緒動能，鼓勵學生持續投入。
-                  </P>
-                </div>
+                <H3>2. 清楚易懂的回饋與下一步</H3>
+                <P>不再只給模糊的分數，產品將生成視覺化學習報表，呈現進度、指出弱點並提供下一步建議，讓家長與學生都能在清楚的資訊下持續前進。</P>
+              </div>
+              <div>
+                <H3>3. 透過成就感強化動機</H3>
+                <P>以具體進度指標（錯誤減少、任務完成、連續學習等）建立情緒動能，並以成就系統（徽章收集）以遊戲化的方式加強持續努力的動機。</P>
               </div>
             </div>
-          </Container>
-        </SectionBlock>
 
-        {/* core philosophy */}
-        <SectionBlock bgVariant="dark" backgrounds={mentorBackgrounds}>
-          <Container>
-            <img src={chartImg} alt="chart" className="mt-[-200px] shadow-xl rounded-lg" />
-            <div className="bg-[#3E3AFF] rounded-sm p-8 mt-16">
-              <div className="flex flex-col md:flex-row gap-4 items-center text-center md:text-left">
-                <div className="order-2 md:order-1 text-left">
-                  <H2>核心理念</H2>
-                  <P>
-                    Mentor 最終被定義為一位個人化學習教練：這個清楚且好記的概念，統一了設計原則，同時回應使用者的情感與功能需求，讓產品對家長與學生都更具親和力。
-                  </P>
-                </div>
-                <img src={mentor} alt="mentor" className="w-32 h-32 md:w-48 md:h-48 order-1 md:order-2 rounded-lg" />
-              </div>
-            </div>
-          </Container>
-        </SectionBlock>
-
-        {/* Design Deliverables */}
-        <SectionBlock className="pb-0" backgrounds={mentorBackgrounds}>
-          <Container className="relative">
-            {/* Mobile Swiper */}
-            <div className="md:hidden">
-              <Swiper
-                modules={[Pagination, Navigation]}
-                pagination={{ clickable: true }}
-                navigation={true}
-                spaceBetween={24}
-                slidesPerView={1}
-                className="design-deliverables-swiper"
-              >
-                <SwiperSlide>
-                  <div>
-                    <H2>設計產出</H2>
-                    <P>
-                      為了傳達 Mentor 作為個人化學習教練的價值，我們以敘事方式去設計整體體驗：Mentor 不只是一個 App，而是陪伴學生設定可達成目標、保持節奏、並在可見進步中建立自信的智慧夥伴。以此視角，我主導視覺設計與 UI 系統建立，並與三個核心設計目標對齊。
-                    </P>
-                  </div>
-                </SwiperSlide>
-                <SwiperSlide>
-                  <div>
-                    <ProjectNote>
-                      從線框到中保真 POC，再到最終主題化 UI，每一次迭代都幫助我們釐清版面邏輯，並逐步形塑產品的敘事識別。
-                    </ProjectNote>
-                    <img src={deliverablesDraft} alt="設計草稿" className="my-16 rounded-lg" />
-                  </div>
-                </SwiperSlide>
-                <SwiperSlide>
-                  <div>
-                    <img src={deliverablesLayout1} alt="版面設計 1" className="w-full rounded-lg" />
-                  </div>
-                </SwiperSlide>
-                <SwiperSlide>
-                  <div>
-                    <img src={deliverablesLayout2} alt="版面設計 2" className="w-full rounded-lg" />
-                  </div>
-                </SwiperSlide>
-                <SwiperSlide>
-                  <div>
-                    <P>
-                      作為設計主管，我定義產品視覺風格並與團隊共同建立一致的設計系統。由於主要使用者是國高中生，我們必須貼近其審美與語言習慣，使 UX 設計更具挑戰。團隊一起蒐集風格參考、探索不同方向，最終建立符合產品語氣的系統。
-                    </P>
-                  </div>
-                </SwiperSlide>
-              </Swiper>
-            </div>
-
-            {/* Desktop Layout */}
-            <div className="hidden md:block">
-              <H2 id="設計產出">設計產出</H2>
-              <P>
-                為了傳達 Mentor 作為個人化學習教練的價值，我們以敘事方式去設計整體體驗：Mentor 不只是一個 App，而是陪伴學生設定可達成目標、保持節奏、並在可見進步中建立自信的智慧夥伴。以此視角，我主導視覺設計與 UI 系統建立，並與三個核心設計目標對齊。
-              </P>
-
-              <ProjectNote className="absolute top-[40%] right-1/2 transform translate-x-1/2 translate-y-32">
-                從線框到中保真 POC，再到最終主題化 UI，每一次迭代都幫助我們釐清版面邏輯，並逐步形塑產品的敘事識別。
-              </ProjectNote>
-              <img src={deliverablesDraft} alt="設計草稿" className="my-16 rounded-lg" />
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <img src={deliverablesLayout1} alt="版面設計 1" className="md:h-full md:object-cover rounded-lg" />
-                <img src={deliverablesLayout2} alt="版面設計 2" className="md:h-full md:object-cover rounded-lg" />
-              </div>
-              <div className="my-16">
+            <TwoColumn className="mt-16 items-center">
+              <div className="p-8 rounded-xl bg-current/5 border border-current/10">
                 <P>
-                  作為設計主管，我定義產品視覺風格並與團隊共同建立一致的設計系統。由於主要使用者是國高中生，我們必須貼近其審美與語言習慣，使 UX 設計更具挑戰。團隊一起蒐集風格參考、探索不同方向，最終建立符合產品語氣的系統。
+                  最終，我們將產品亮點定義為一位「個人化學習教練」：這個清楚且好記的概念，統一了設計原則，同時回應使用者的情感與功能需求，讓產品對家長與學生都更具親和力。概念的具象化則是以 Mentor 這個形象來擔任。
                 </P>
               </div>
-            </div>
+              <img src={ipCharacter} alt="Mentor IP 角色" className="rounded-lg" />
+            </TwoColumn>
           </Container>
-          <img src={guidelineImg} alt="guideline" className='rounded-lg' />
         </SectionBlock>
 
-        {/* story of mentor */}
+        {/* Mentor 的誕生 */}
         <SectionBlock bgVariant="mentor" backgrounds={mentorBackgrounds}>
           <Container>
-            {/* Mobile Swiper */}
-            <div className="md:hidden">
-              <Swiper
-                modules={[Pagination, Navigation]}
-                pagination={{ clickable: true }}
-                navigation={true}
-                spaceBetween={24}
-                slidesPerView={1}
-                className="story-mentor-swiper"
-              >
-                <SwiperSlide>
-                  <div>
-                    <H2>Mentor 的故事</H2>
-                    <div className="bg-white/10 backdrop-blur rounded-sm shadow p-5">
-                      <P className="">
-                        「Mentor」一詞源自希臘神話：一位睿智的守護者，被託付在奧德修斯遠行時引導他的兒子。
-                      </P>
-                    </div>
-                  </div>
-                </SwiperSlide>
-                <SwiperSlide>
-                  <div>
-                    <P>
-                      在 AI 與資訊超載的時代，Mentor 成為指引之神，卻意外被困在宇宙方塊中。
-                    </P>
-                    <P>
-                      為了取回力量並回到地球，他必須引導學生穿越宇宙展開學習旅程，收集象徵成長的徽章。<strong>每位學生的進步都會推動 Mentor 的進化，讓學習成為共同冒險。</strong>
-                    </P>
-                    <P>
-                      這段寓言式的故事讓 App 體驗不僅是教育工具，更像是一場學生與 Mentor 共同變身的任務。
-                    </P>
-                  </div>
-                </SwiperSlide>
-              </Swiper>
-            </div>
+            <H2 id="mentor-birth">Mentor 的誕生</H2>
+            <P>
+              因應公司賦予的產品願景，設計與 PM 團隊同時肩負將設計目標融合 AI 的任務，在多次討論後，設計出了 Mentor ——「一位個人化學習教練」，以特殊的世界觀加以包裝，同時回應使用者的情感與功能需求，讓產品對家長與學生都更具親和力。
+            </P>
 
-            {/* Desktop Layout */}
-            <div className="hidden md:block">
-              <H2 id="mentor-的故事">Mentor 的故事</H2>
-              <TwoColumn>
-                <div>
-                  <div className="bg-white/10 backdrop-blur rounded-sm shadow p-5 ">
-                    <P className="">
-                      「Mentor」一詞源自希臘神話：一位睿智的守護者，被託付在奧德修斯遠行時引導他的兒子。
-                    </P>
-                  </div>
-                </div>
-                <div>
-                  <P>
-                    在 AI 與資訊超載的時代，Mentor 成為指引之神，卻意外被困在宇宙方塊中。
-                  </P>
-                  <P>
-                    為了取回力量並回到地球，他必須引導學生穿越宇宙展開學習旅程，收集象徵成長的徽章。<strong>每位學生的進步都會推動 Mentor 的進化，讓學習成為共同冒險。</strong>
-                  </P>
-                  <P>
-                    這段寓言式的故事讓 App 體驗不僅是教育工具，更像是一場學生與 Mentor 共同變身的任務。
-                  </P>
-                </div>
-              </TwoColumn>
-            </div>
+            <H3>Mentor 的故事</H3>
+            <blockquote className="border-l-4 border-current pl-6 my-6 italic opacity-80">
+              「Mentor」一詞源自希臘神話：一位睿智的守護者，被託付在奧德修斯遠行時引導他的兒子。
+            </blockquote>
+            <P>
+              在 AI 與資訊超載的時代，Mentor 成為指引之神，卻意外被困在宇宙方塊中。為了取回力量並回到地球，他必須引導學生穿越宇宙展開學習旅程，收集象徵成長的徽章。每位學生的進步都會推動 Mentor 的進化，讓學習成為共同冒險。
+            </P>
+            <P>
+              這段寓言故事讓 App 體驗不僅是教育工具，更像是一場學生與 Mentor 共同成長的挑戰。以此視角，我主導了視覺設計與 UI 系統建立，並與三個核心設計目標對齊。
+            </P>
+
+            <H3>把 IP 的靈魂譯成視覺語言</H3>
+            <P>
+              Mentor 的世界觀與故事主軸是骨架，將其具象化並融入 UI 設計則是賦予血肉的必要工作。我用美術設計背景，負責把 PM 定義的世界觀展開成具體的視覺語言：學習人格的四種角色視覺設計、心理測驗裡的宇宙場景插圖風格、整體 UI 的背景美術設定。這些視覺決策不是裝飾，而是讓「Mentor 作為一個有靈魂的學習夥伴」這個核心理念在每一幀畫面裡都能被感受到。
+            </P>
+
+            <TwoColumn className="mt-8">
+              <div>
+                <img src={conceptDraft} alt="早期概念草圖" className="rounded-lg w-full" />
+                <p className="text-caption p-4 opacity-70">
+                  早期草圖：展開智慧、潛力、學習夥伴等概念，多方嘗試及相互融合，最後與團隊夥伴一起決議使用「方塊中的 M 字」這個視覺符號，避免太過擬人，也便於記憶。
+                </p>
+              </div>
+              <div>
+                <img src={ipVariants} alt="IP 多種變化體" className="rounded-lg w-full" />
+                <p className="text-caption p-4 opacity-70">
+                  為反映每位學習者的獨特旅程，Mentor 會隨時間進化，其外觀會依學生行為、步調與投入方式而改變。因此在美術設計上也需規劃同系列中的多種變化體。
+                </p>
+              </div>
+            </TwoColumn>
           </Container>
-        </SectionBlock>
-        <SectionBlock backgrounds={mentorBackgrounds}>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-12">
-            <div>
-              <img src={mentorDraft} alt="mentor draft" className=" md:object-cover rounded-tr-lg rounded-br-lg" />
-              <P className="text-caption p-8 md:ml-24 mt-4 md:mt-8">
-                早期草圖：探索 Mentor 作為宇宙引導者的象徵角色，以及學習、節奏、對話與成長的抽象表現。
+
+          {/* ui-guide: image left, text right */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-0 mt-16">
+            <img src={uiGuide} alt="Mentor UI Guide" className="md:rounded-tl-lg md:rounded-bl-lg w-full object-cover" />
+            <div className="p-12 flex flex-col justify-center">
+              <P>
+                Mentor 作為學習引導者，基本會待在畫面右下角，讓使用者可以即時對話、互動。他是基於功能訴求上形成產品 IP 靈魂的關鍵。
               </P>
-            </div>
-            <div>
-              <img src={mentorVariants} alt="mentor variants" className=" md:object-cover rounded-tl-lg rounded-bl-lg" />
-              <P className="text-caption p-8 md:mr-24 mt-4 md:mt-8">
-                為反映每位學習者的獨特旅程，Mentor 會隨時間進化—外觀會依學生行為、步調與投入方式而改變。
+              <P>
+                例如，Mentor 會在軟體更新時給予鼓勵；在首次使用 App 時（即 Onboarding），作為新手指引者讓學習者依自信程度把科目從強到弱排序，初步建立學習偏好設定。這樣的呈現方式可以降低功能介面的冰冷感，以夥伴身份的對話過程能讓使用者更有沉浸體驗。
               </P>
             </div>
           </div>
 
-          {/* Mentor as a UI Guide */}
+          <img src={uiGuideFull} alt="Mentor UI Guide 完整展示" className="w-full mt-4" />
         </SectionBlock>
-        <SectionBlock bgVariant="dark" backgrounds={mentorBackgrounds}>
-          <Container className="w-full md:w-2/3 mx-auto">
-            {/* Mobile Swiper */}
-            <div className="md:hidden">
-              <Swiper
-                modules={[Pagination, Navigation]}
-                pagination={{ clickable: true }}
-                navigation={true}
-                spaceBetween={24}
-                slidesPerView={1}
-                className="mentor-ui-guide-swiper"
-              >
-                <SwiperSlide>
-                  <div>
-                    <H2>Mentor 作為介面引導者</H2>
-                    <P>
-                      Mentor 會停留在右下角，作為即時的學習代理：依學生操作提供回饋、提醒與鼓勵。
-                    </P>
-                    <P>
-                      發光的科幻方塊化身結合「智慧」與「神話感」，形成雙層互動模型：
-                    </P>
-                  </div>
-                </SwiperSlide>
-                <SwiperSlide>
-                  <div>
-                    <img src={pyramid} alt="pyramid chart" className='rounded-lg' />
-                    <P>
-                      以教育代理理論為基礎，Mentor 成為敘事驅動的介面代理：強化情緒投入，讓學習流程更有意義、更有動力。
-                    </P>
-                  </div>
-                </SwiperSlide>
-                <SwiperSlide>
-                  <div>
-                    <img src={screenShot1} alt="updates screen" className="rounded-tr-lg rounded-br-lg" />
-                    <p className="text-caption p-8">Mentor 讓例行更新變成鼓勵式互動。</p>
-                  </div>
-                </SwiperSlide>
-                <SwiperSlide>
-                  <div>
-                    <img src={screenShot2} alt="first-time onboarding screen" className="rounded-tl-lg rounded-bl-lg" />
-                    <p className="text-caption p-8">
-                      首次引導中，學生需要依自信程度把科目從強到弱排序。
-                    </p>
-                  </div>
-                </SwiperSlide>
-              </Swiper>
-            </div>
 
-            {/* Desktop Layout */}
-            <div className="hidden md:block">
-              <H2 id="mentor-作為介面引導者">Mentor 作為介面引導者</H2>
-              <P>
-                Mentor 會停留在右下角，作為即時的學習代理：依學生操作提供回饋、提醒與鼓勵。
-              </P>
-              <P>發光的科幻方塊化身結合「智慧」與「神話感」，形成雙層互動模型：</P>
-              <img src={pyramid} alt="pyramid chart" className='rounded-lg' />
-              <P>
-                以教育代理理論為基礎，Mentor 成為敘事驅動的介面代理：強化情緒投入，讓學習流程更有意義、更有動力。
-              </P>
-            </div>
+        {/* 我如何組建並帶領團隊 */}
+        <SectionBlock bgVariant="dark" backgrounds={mentorBackgrounds}>
+          <Container>
+            <H2 id="team-leadership">我如何組建並帶領團隊</H2>
+            <P>
+              這支四人設計團隊的背景相當多元，有人來自美術與平面設計，有人偏向前端工程，每個人都想往 UI 設計發展，但各自的能力起點和限制都不同。我的工作不是直接分派任務，而是先花時間了解每個人：他們想往哪個方向成長、目前最擅長什麼、又在哪裡需要事先接受教育訓練。在這個基礎上，我才開始做細緻的排程調度。
+            </P>
+
+            <H3>賦予能者發揮的舞台</H3>
+            <P>
+              在產品規劃中，我們需要設計以曼特宇宙世界觀包裝的學習風格心理測驗。我在思考整體人力安排後，將這個功能完整交給成員之一 Nomis 主導，自己則負責方向確認與最終 review。因具備同時處理 UX 研究、內容規劃與前端實作的能力，他發揮了比預期還好的能力，成功做出令產品增色的衍伸功能。Nomis 後來以這個功能為主軸，寫出了他作品集裡最強的案例之一，並成功接任主管職。
+            </P>
+
+            <H3>在混亂與分歧中找到設計方向</H3>
+            <P>
+              這個產品橫跨五個單位，每個人帶著不同的優先順序進來：高層有願景、PM 有需求、RD 有技術限制、業務有市場壓力。我的工作，是讓這些聲音不互相抵消，而是收斂成一個大家都能往前走的方向。具體來說：召集會議、凝聚各方意見、把分散的需求濃縮成可執行的步驟，提出具體方案讓 PM 與主管做選擇，並在最終方案確認後負責 UI 視覺呈現的把關與修正。
+            </P>
           </Container>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-24">
+
+          {/* Full-width iterations */}
+          <img src={iteration1} alt="設計迭代第一輪" className="w-full mt-12" />
+          <img src={iteration2} alt="設計迭代第二輪" className="w-full mt-2" />
+
+          <Container>
+            <p className="text-caption opacity-60 mt-4 mb-4" style={{ fontWeight: '200' }}>
+              從粗略概念到 wireframe，再到 UI Mockup，每一次畫面的收斂和迭代都幫助每位成員更加理解產品的概貌，有利於大家凝聚共識、針對重點提出想法。
+            </p>
+          </Container>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
+            <img src={wireframe1} alt="線稿第一版" className="rounded-lg" />
+            <img src={wireframe2} alt="線稿第二版" className="rounded-lg" />
+          </div>
+
+          <Container>
+            <H3>賦予能者舞台，識人用人的 Lead 決策</H3>
+            <P>
+              這個專案裡，我最重要的 Design Lead 決策是把對的任務交給了對的人。產品中的三個重要功能：學習目標設定、學習報告、心理測驗，我都交給了設計團隊成員 Nomis 主導。這三個任務性質不同，卻有一個共同點：它們都需要同時處理複雜的資訊架構、使用者研究與邏輯推導，而這正是我在 Nomis 身上看見的能力。
+            </P>
+            <P>
+              學習目標設定需要在學生授權範圍、AI 推薦邏輯、操作步驟三者之間取得平衡；學習報告則有一個更棘手的起點：前一版被大主管打槍，原因是三份報告本質上只是數據的重複堆疊。Nomis 把學習報告重新設計成三個截然不同的敘事邏輯：<strong>日報說執行細節、週報說行為洞察、月報說成長故事</strong>。這個框架最終成為 AI 智能書包上線後的主打亮點功能。
+            </P>
+            <P>
+              心理測驗功能則融合了行銷需求與產品 IP 的宇宙世界觀。他有心理學背景，研究了 30+ 篇教育心理學文獻，設計出 64 種個人化學習人格結果，在公司內部反應與使用者回饋中都取得了好成績。這些成果後來成為 Nomis 作品集裡最強的案例之一：
+            </P>
+            <UL>
+              <LI>
+                <a href="https://mudi0710.github.io/portfolio/#/projects/ai-smartbag-learning-goal" target="_blank" rel="noopener noreferrer" className="underline opacity-70 hover:opacity-100 transition-opacity">
+                  學習目標設定 ↗ by Nomis
+                </a>
+              </LI>
+              <LI>
+                <a href="https://mudi0710.github.io/portfolio/#/projects/ai-smartbag-learning-report" target="_blank" rel="noopener noreferrer" className="underline opacity-70 hover:opacity-100 transition-opacity">
+                  學習報告 ↗ by Nomis
+                </a>
+              </LI>
+              <LI>
+                <a href="https://mudi0710.github.io/portfolio/#/projects/ai-smartbag-edu-psych-quiz" target="_blank" rel="noopener noreferrer" className="underline opacity-70 hover:opacity-100 transition-opacity">
+                  教育心理測驗 ↗ by Nomis
+                </a>
+              </LI>
+            </UL>
+
+            <H3>傾聽業務團隊，讓設計真正貼近市場</H3>
+            <P>
+              決策的起點不只發生在團隊內部討論，實際接觸用戶的第一線觀察也很重要。在跨部門的溝通中，業務同仁反映了一個我們在設計端容易忽略的現實：台灣的家長習慣用 LINE 掌握資訊，登入瀏覽器對他們來說是一個不小的摩擦。這個洞察讓我們意識到，學習報告規劃得再完善，如果開啟使用的摩擦力太高也是枉然。
+            </P>
+            <P>
+              於是我們把報告的取得流程，追加 LINE 這一個渠道。透過 LINE OA（LINE Official Account）定時推播到家長手機，送到他們最熟悉的地方。LINE OA 中，除了定時推播學習報告以及真人客服之外，還結合了許多功能，透過圖文選單讓使用者可以依照需求點選。視覺呈現方式、推播時機與操作流程，最終由我與 RD 工程師共同制定落地。
+            </P>
+          </Container>
+
+          {/* LINE OA 2-col */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-8">
             <div>
-              <img src={screenShot1} alt="updates screen" className="rounded-tr-lg rounded-br-lg" />
-              <p className="text-caption p-8">Mentor 讓例行更新變成鼓勵式互動。</p>
+              <img src={lineTree} alt="LINE OA 樹狀圖" className="rounded-lg w-full" />
+              <p className="text-caption p-4 opacity-70" style={{ fontWeight: '200' }}>
+                如何安排 LINE OA 及圖文選單提供的服務？背後需要判斷的條件是什麼？為了釐清這些問題，我用樹狀圖的方式整理後讓同仁便於理解其中的關聯，便於跨部門討論。
+              </p>
             </div>
             <div>
-              <img src={screenShot2} alt="first-time onboarding screen" className="rounded-tl-lg rounded-bl-lg" />
-              <p className="text-caption p-8">
-                首次引導中，學生需要依自信程度把科目從強到弱排序。
+              <img src={lineMenu} alt="LINE OA 圖文選單" className="rounded-lg w-full" />
+              <p className="text-caption p-4 opacity-70" style={{ fontWeight: '200' }}>
+                圖文選單需顧及到行銷策略（主打產品的按鈕最顯眼）及操作便利，在視覺設計上花了很多功夫。
               </p>
             </div>
           </div>
         </SectionBlock>
 
-        {/* features */}
+        {/* 具有擴展性的設計系統 */}
         <SectionBlock backgrounds={mentorBackgrounds}>
           <Container>
-            <H2>功能特色</H2>
+            <H2 id="design-system">具有擴展性的設計系統</H2>
             <P>
-              流程從「每週何時、每次多久想學習」開始。使用者可自由選擇每週學習日與時間長度，貼近真實生活節奏。
+              身為 Design Lead，我主導了產品的整體視覺風格，並帶領團隊建立一套清晰一致的設計系統。由於主要用戶是國高中學生，我們需要配合他們的視覺偏好與語言習慣，這讓設計更具挑戰。
             </P>
-            <ImageWithHotspots
-              src={screenShot3}
-              alt="learning persona classification"
-              hotspots={learningPersonaHotspots}
-              className="rounded-lg"
-            />
-
-            {/* Mobile Swiper */}
-            <div className="md:hidden">
-              <Swiper
-                modules={[Pagination, Navigation]}
-                pagination={{ clickable: true }}
-                navigation={true}
-                spaceBetween={24}
-                slidesPerView={1}
-                className="features-swiper mt-8"
-              >
-                <SwiperSlide>
-                  <div>
-                    <H3>學習人格分類</H3>
-                    <P>
-                      為了讓學習更貼近個人，Mentor 會依學生每週學習時間自動分配四種學習人格之一：
-                    </P>
-                    <img src={typesImg} alt="types" className='rounded-lg' />
-                    <UL>
-                      <LI>佛系學生（Laid-back Learner）：喜歡輕鬆、低壓的節奏。</LI>
-                      <LI>勤奮學子（Consistent Striver）：規律投入、穩定前進。</LI>
-                      <LI>資優菁英（Curious Achiever）：主動探索、喜歡挑戰。</LI>
-                      <LI>天才學霸（Elite Performer）：追求頂尖表現、強烈企圖心。</LI>
-                    </UL>
-                    <P>
-                      這套帶點趣味的系統能幫助學生建立自我認知，也能在學習過程中追蹤成長的身份變化。
-                    </P>
-                  </div>
-                </SwiperSlide>
-
-                <SwiperSlide>
-                  <div>
-                    <H3>目標設定：個人化學習路徑</H3>
-                    <UL>
-                      <LI>
-                        計畫同時提供時間軸與月曆視圖；每日任務卡包含科目、知識點與預估時間，學生可隨時調整與重新排序。
-                      </LI>
-                      <LI>
-                        對每個任務，系統會清楚說明學習目標，並提供影片教學。
-                      </LI>
-                    </UL>
-                    <ImageWithHotspots
-                      src={screenShot4}
-                      alt="learning goal setting"
-                      hotspots={learningGoalHotspots}
-                      className="rounded-lg"
-                    />
-                  </div>
-                </SwiperSlide>
-                <SwiperSlide>
-                  <div>
-                    <div className="px-4 pb-3 pt-6 bg-gray-100 rounded-sm">
-                      <P>
-                        <strong>設計重點：</strong>
-                      </P>
-                      <P>
-                        讓學生共同參與計畫制定，並提前視覺化整體結構，可降低摩擦並提升掌控感。資訊清晰與可彈性調度，是維持長期投入的關鍵。
-                      </P>
-                    </div>
-                  </div>
-                </SwiperSlide>
-                <SwiperSlide>
-                  <div>
-                    <H3>學習報表：視覺化回饋與下一步</H3>
-                    <P>
-                      為了回應「回饋模糊/延遲」帶來的焦慮，我們設計了可在桌機與手機上使用的 Web 報表系統，讓家長能即時掌握狀況。
-                    </P>
-                    <ImageWithHotspots
-                      src={screenShot5}
-                      alt="learning goal setting"
-                      hotspots={learningReportHotspots}
-                      className="rounded-lg"
-                    />
-                  </div>
-                </SwiperSlide>
-                <SwiperSlide>
-                  <div>
-                    <P className="mt-6">報表涵蓋三種時間維度：</P>
-                    <UL>
-                      <LI>
-                        <strong>每日報表</strong>：呈現完成任務、知識點與測驗結果。
-                      </LI>
-                      <LI>
-                        <strong>每週報表</strong>：呈現投入程度、人格變化與表現趨勢。
-                      </LI>
-                      <LI>
-                        <strong>每月報表</strong>：提供時間投入、科目表現與診斷洞察的總覽。
-                      </LI>
-                    </UL>
-                    <P>
-                      所有報表都以簡化圖表與進度指標呈現，確保家長與學生都能快速理解。
-                    </P>
-                  </div>
-                </SwiperSlide>
-                <SwiperSlide>
-                  <div>
-                    <div className="px-4 pb-3 pt-6 bg-gray-100 rounded-sm">
-                      <P>
-                        <strong>設計重點：</strong>
-                      </P>
-                      <P>
-                        最大挑戰是把複雜的表現數據轉換為可行動的洞察，同時維持情緒支持。透過與視覺語言一致的報表語氣，我們建立了一套透明且鼓勵式的系統，促進家長與學生溝通。
-                      </P>
-                    </div>
-                  </div>
-                </SwiperSlide>
-                <SwiperSlide>
-                  <div>
-                    <H3>徽章收集：以里程碑建立動機</H3>
-                    <P>
-                      為鼓勵持續投入，我們加入遊戲化的徽章收集系統。學生可透過達成學習里程碑解鎖徽章，例如完成課程、達成每日目標、或調整學習計畫等。
-                    </P>
-                    <ImageWithHotspots
-                      src={screenShot6}
-                      alt="badge collection"
-                      hotspots={badgeCollectionHotspots}
-                      className="rounded-lg"
-                    />
-                  </div>
-                </SwiperSlide>
-                <SwiperSlide>
-                  <div>
-                    <P className="mt-6">
-                      進度追蹤與解鎖回饋滿足「收集欲」，並強化習慣養成。
-                    </P>
-                    <div className="grid grid-cols-1 gap-4 mt-6">
-                      <img src={screenShot7} alt="badge 1" className="rounded-lg" />
-                      <img src={screenShot8} alt="badge 2" className="rounded-lg" />
-                    </div>
-                  </div>
-                </SwiperSlide>
-                <SwiperSlide>
-                  <div>
-                    <div className="px-4 pb-3 pt-6 bg-gray-100 rounded-sm">
-                      <P>
-                        <strong>設計重點：</strong>
-                      </P>
-                      <P>
-                        我們結合可收集物的視覺吸引力與里程碑設計，讓進步變得「可被獎勵」，同時避免過度競爭式的遊戲化。
-                      </P>
-                    </div>
-                  </div>
-                </SwiperSlide>
-              </Swiper>
-            </div>
-
-            {/* Desktop Layout */}
-            <div className="hidden md:block">
-              <div className=" mb-10  mx-auto">
-                <H3>學習人格分類</H3>
-                <P>
-                  為了讓學習更貼近個人，Mentor 會依學生每週學習時間自動分配四種學習人格之一：
-                </P>
-                <img src={typesImg} alt="types" className='rounded-lg' />
-                <UL>
-                  <LI>佛系學生（Laid-back Learner）：喜歡輕鬆、低壓的節奏。</LI>
-                  <LI>勤奮學子（Consistent Striver）：規律投入、穩定前進。</LI>
-                  <LI>資優菁英（Curious Achiever）：主動探索、喜歡挑戰。</LI>
-                  <LI>天才學霸（Elite Performer）：追求頂尖表現、強烈企圖心。</LI>
-                </UL>
-                <P>
-                  這套帶點趣味的系統能幫助學生建立自我認知，也能在學習過程中追蹤成長的身份變化。
-                </P>
-              </div>
-              <div className=" mb-10  mx-auto">
-                <H3>目標設定：個人化學習路徑</H3>
-                <UL>
-                  <LI>
-                    計畫同時提供時間軸與月曆視圖；每日任務卡包含科目、知識點與預估時間，學生可隨時調整與重新排序。
-                  </LI>
-                  <LI>
-                    對每個任務，系統會清楚說明學習目標，並提供影片教學。
-                  </LI>
-                </UL>
-                <ImageWithHotspots
-                  src={screenShot4}
-                  alt="learning goal setting"
-                  hotspots={learningGoalHotspots}
-                  className="rounded-lg"
-                />
-              </div>
-              <div className="px-4 pb-3 pt-6 bg-gray-100 rounded-sm">
-                <P>
-                  <strong>設計重點：</strong>
-                </P>
-                <P>
-                  讓學生共同參與計畫制定，並提前視覺化整體結構，可降低摩擦並提升掌控感。資訊清晰與可彈性調度，是維持長期投入的關鍵。
-                </P>
-              </div>
-              <div className=" mb-10  mx-auto">
-                <H3>學習報表：視覺化回饋與下一步</H3>
-                <P>
-                  為了回應「回饋模糊/延遲」帶來的焦慮，我們設計了可在桌機與手機上使用的 Web 報表系統，讓家長能即時掌握狀況。
-                </P>
-                <ImageWithHotspots
-                  src={screenShot5}
-                  alt="learning goal setting"
-                  hotspots={learningReportHotspots}
-                  className="rounded-lg"
-                />
-                <P className="mt-6">報表涵蓋三種時間維度：</P>
-                <UL>
-                  <LI>
-                    <strong>每日報表</strong>：呈現完成任務、知識點與測驗結果。
-                  </LI>
-                  <LI>
-                    <strong>每週報表</strong>：呈現投入程度、人格變化與表現趨勢。
-                  </LI>
-                  <LI>
-                    <strong>每月報表</strong>：提供時間投入、科目表現與診斷洞察的總覽。
-                  </LI>
-                </UL>
-                <P>
-                  所有報表都以簡化圖表與進度指標呈現，確保家長與學生都能快速理解。
-                </P>
-                <div className="px-4 pb-3 pt-6 bg-gray-100 rounded-sm">
-                  <P>
-                    <strong>設計重點：</strong>
-                  </P>
-                  <P>
-                    最大挑戰是把複雜的表現數據轉換為可行動的洞察，同時維持情緒支持。透過與視覺語言一致的報表語氣，我們建立了一套透明且鼓勵式的系統，促進家長與學生溝通。
-                  </P>
-                </div>
-                <div className=" mb-10  mx-auto">
-                  <H3>徽章收集：以里程碑建立動機</H3>
-                  <P>
-                    為鼓勵持續投入，我們加入遊戲化的徽章收集系統。學生可透過達成學習里程碑解鎖徽章，例如完成課程、達成每日目標、或調整學習計畫等。
-                  </P>
-
-                  <ImageWithHotspots
-                    src={screenShot6}
-                    alt="badge collection"
-                    hotspots={badgeCollectionHotspots}
-                    className="rounded-lg"
-                  />
-                  <P className="mt-6">進度追蹤與解鎖回饋滿足「收集欲」，並強化習慣養成。</P>
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-6">
-                    <img src={screenShot7} alt="badge 1" className="rounded-lg" />
-                    <img src={screenShot8} alt="badge 2" className="rounded-lg" />
-                  </div>
-                </div>
-                <div className="px-4 pb-3 pt-6 bg-gray-100 rounded-sm">
-                  <P>
-                    <strong>設計重點：</strong>
-                  </P>
-                  <P>
-                    我們結合可收集物的視覺吸引力與里程碑設計，讓進步變得「可被獎勵」，同時避免過度競爭式的遊戲化。
-                  </P>
-                </div>
-              </div>
-            </div>
+            <P>
+              我輔導團隊成員進行資料搜集、風格發想，並在設計過程中動手在 Figma 製作 UI System，說明如何規劃色彩與文字層級、建立元件庫，實際培養團隊成員養成 UI 設計師的必備知識與技能。這個設計系統成為後續每一個新功能介面設計時的基準，無論誰接手任一功能時都有所依據；若要加入新元素時也能依循系統架構進行擴展。
+            </P>
+            <img src={designSystem} alt="設計系統" className="rounded-lg mt-8" />
           </Container>
         </SectionBlock>
 
-        {/* Reflection */}
+        {/* 圍繞世界觀與產品訴求展開的介面設計 */}
         <SectionBlock bgVariant="blue" backgrounds={mentorBackgrounds}>
-          <Container className="w-full md:w-2/3 mx-auto">
-            {/* Mobile Swiper */}
-            <div className="md:hidden">
-              <Swiper
-                modules={[Pagination, Navigation]}
-                pagination={{ clickable: true }}
-                navigation={true}
-                spaceBetween={24}
-                slidesPerView={1}
-                className="reflection-swiper"
-              >
-                <SwiperSlide>
-                  <div>
-                    <H2>反思</H2>
-                    <P>
-                      設計 Mentor 不只是視覺或功能挑戰，更是一段高度協作、跨團隊反覆迭代的過程。回顧設計主管的角色，我整理出三個重要反思：
-                    </P>
-                  </div>
-                </SwiperSlide>
-                <SwiperSlide>
-                  <div>
-                    <H3>1. 讓每個人都在同一個資訊節奏上</H3>
-                    <UL>
-                      <LI>面對宏大的產品願景與複雜需求，清楚且即時的溝通是推進的關鍵。</LI>
-                      <LI>
-                        我克服過去「委婉迂迴」的習慣，學會在設計與跨職能討論中更直接清楚地表達，保護團隊並確保進度順暢。
-                      </LI>
-                    </UL>
-                  </div>
-                </SwiperSlide>
-                <SwiperSlide>
-                  <div>
-                    <H3>2. 向市場學習</H3>
-                    <UL>
-                      <LI>除了使用者研究，我也學會重視來自第一線業務的回饋。</LI>
-                      <LI>他們的洞察能讓產品更有競爭力，也避免過度設計師視角的決策。</LI>
-                    </UL>
-                  </div>
-                </SwiperSlide>
-                <SwiperSlide>
-                  <div>
-                    <H3>3. 支持團隊成長</H3>
-                    <UL>
-                      <LI>透過 1-on-1 了解每位夥伴的動機與投入狀態。</LI>
-                      <LI>在分派任務時兼顧挑戰與成長，並鼓勵善用資源精進技能。</LI>
-                    </UL>
-                  </div>
-                </SwiperSlide>
-              </Swiper>
+          <Container>
+            <H2 id="ui-design">圍繞世界觀與產品訴求展開的介面設計</H2>
+            <P>設計系統建立之後，每一個功能介面都在這套視覺語言的基礎上展開。不只要讓功能好用，更要讓使用者在每一個畫面裡都感受到 Mentor 世界觀的存在。</P>
+          </Container>
+
+          {/* 用角色標籤取代冰冷數字 */}
+          <Container className="mt-12">
+            <H3>用角色標籤取代冰冷數字</H3>
+            <P>
+              Mentor 會引導學生自由選擇每週學習日與時間長度，以貼合他的真實需求與生活步調。
+            </P>
+            <img src={personaUi1} alt="角色標籤 UI 設計" className="rounded-lg mt-6" />
+            <img src={personaUi2} alt="角色標籤第二版" className="rounded-lg mt-4" />
+            <div className="mt-8 p-8 rounded-xl bg-current/5 border border-current/10">
+              <p className="text-caption opacity-60 mb-3">設計決策</p>
+              <P>
+                我們不希望 UI 中盡是冰冷的數字。團隊討論之後，我們決定用四種角色標籤（佛系學生、勤奮學子、資優菁英、天才學霸）把它<strong>轉化成一種身份認同</strong>。Mentor 會依學生每週學習時間，顯示他屬於哪一種角色。帶點趣味的自我評估系統，讓數字變成一種自我認同，促進學習動機——學生設定的不只是時間，而是<strong>自己想成為的樣子</strong>。
+              </P>
             </div>
+          </Container>
 
-            {/* Desktop Layout */}
-            <div className="hidden md:block">
-              <H2 id="反思">反思</H2>
+          {/* 資訊層級的設計判斷 */}
+          <Container className="mt-20">
+            <H3>資訊層級的設計判斷</H3>
+            <P>
+              學習目標設定以月曆視圖與周計劃雙模式切換呈現，提供不同使用習慣的學習者做切換；科目色塊作為第一視覺錨點，知識點標題次之，預估時間與完成狀態作為輔助資訊。學生掃視時可以快速定位，不需要逐行閱讀。
+            </P>
+            <img src={goalCalendar} alt="學習目標月曆視圖" className="rounded-lg mt-6" />
+            <P className="mt-6">
+              學習報告則依照不同時間維度規劃視覺化圖表，但採用了同一套視覺系統。例如，日報以列表為主結構，強調每個學習單元的完成細節；週報引入圖表元件，讓數字趨勢一眼可讀；月報則以雷達圖、環形圖為視覺主體。時間跨度越大的報告，越以「趨勢」為主軸，便於家長從整體分佈而非逐條數字來理解學習狀況。
+            </P>
+            <img src={reportWeekly} alt="週報" className="rounded-lg mt-4" />
+            <img src={reportMonthly} alt="月報" className="rounded-lg mt-4" />
+            <div className="mt-8 p-8 rounded-xl bg-current/5 border border-current/10">
+              <p className="text-caption opacity-60 mb-3">設計決策</p>
+              <P>
+                解決痛點：學習紀錄資訊量龐大且乏味、缺乏下一步提示，讓學習進度安排困難重重，且看不見長期的進步軌跡。規劃細緻的資訊層級設計，讓學生與家長看見整體計畫的輪廓外，也能逐一確認細節。回顧過去、展望未來的模式能帶來安心感。
+              </P>
+            </div>
+          </Container>
 
+          {/* 把里程碑轉化為可收藏的視覺語言 */}
+          <Container className="mt-20">
+            <H3>把里程碑轉化為可收藏的視覺語言</H3>
+            <P>
+              每一枚徽章都有獨立的視覺設計，在宇宙風格的美術系統裡，這些徽章不只是獎勵，而是 Mentor 世界觀的延伸。我們採用了遊戲化設計，讓學生的每一個里程碑，都是這段學習冒險留下的印記。成就殿堂的展示介面刻意設計成「可收藏、可檢視」的形式，進度追蹤與解鎖回饋滿足「收集欲」，並強化習慣養成。促進的是成就感，而不是競爭壓力。
+            </P>
+          </Container>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-8">
+            <img src={badgeOverview} alt="徽章總覽" className="rounded-lg w-full object-cover" />
+            <div className="flex flex-col gap-4">
+              <img src={badgeEarned} alt="已獲得的徽章" className="rounded-lg" />
+              <img src={badgeLocked} alt="未獲得的徽章" className="rounded-lg" />
+            </div>
+          </div>
+
+          <Container>
+            <div className="mt-8 p-8 rounded-xl bg-current/5 border border-current/10">
+              <p className="text-caption opacity-60 mb-3">設計決策</p>
+              <P>
+                解決痛點：只追逐成績進步容易有挫折感，學習者沒有持續學習的動力。完成課程和連續學習即可獲得徽章，用即時的回饋維持學習動力，讓學生感受到的不是「還差多少」，而是「我已經走了多遠」。
+              </P>
+            </div>
+          </Container>
+        </SectionBlock>
+
+        {/* 成果 */}
+        <SectionBlock bgVariant="purple" backgrounds={mentorBackgrounds}>
+          <Container>
+            <H2 id="results">成果</H2>
+            <P>
+              產品上線後，90% 的學生選擇採用 AI 建立個人化學習路徑，而非手動設定，這是「個人化下一步建議」這個設計目標被真正接受的直接證明。業務團隊回饋，學習報告讓家長第一次能清楚看見孩子每天、每週、每月的學習狀況，「補習花費有沒有回饋」這個最核心的焦慮有了具體的解方。
+            </P>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-12">
+              {[
+                {
+                  title: 'Mentor 上線後成為公司 AI 主推產品線',
+                  desc: '證明設計團隊有能力在資源有限的環境下，從 0 到 1 建立完整的產品設計體系。',
+                },
+                {
+                  title: '持續運作的設計系統',
+                  desc: '已建立的設計系統與協作流程，在我離開後仍持續支撐產品的功能迭代。',
+                },
+                {
+                  title: '建立主動及互助的團隊文化',
+                  desc: '成員彼此了解各自的需求長處，懂得互助。我建立的團隊文化成為自主運作的基礎。',
+                },
+                {
+                  title: '改變了公司對設計團隊的定位認知',
+                  desc: '設計師不再只是負責視覺呈現，而是具備產品思維與跨職能溝通能力的策略夥伴。',
+                },
+              ].map(({ title, desc }) => (
+                <div key={title} className="p-8 rounded-xl bg-white/5 border border-white/10">
+                  <p className="font-medium mb-3">{title}</p>
+                  <P className="opacity-70">{desc}</P>
+                </div>
+              ))}
+            </div>
+          </Container>
+        </SectionBlock>
+
+        {/* 反思 */}
+        <SectionBlock backgrounds={mentorBackgrounds}>
+          <Container>
+            <H2 id="reflection">反思</H2>
+            <P>
+              這個專案讓我學會把專注點從「做事」，放到「讓對的人做對的事」。我也透過實踐了解到帶領團隊的核心思維：比起完美，更重要的是資源與期待的平衡。以下三點是我認為在執行過程中必不可少的：
+            </P>
+
+            <div className="flex flex-col gap-12 mt-8">
               <div>
+                <H3>確保資訊透明、發聲管道暢通</H3>
                 <P>
-                  設計 Mentor 不只是視覺或功能挑戰，更是一段高度協作、跨團隊反覆迭代的過程。回顧設計主管的角色，我整理出三個重要反思：
+                  產品願景宏大、需求複雜，清晰且及時的溝通變得不可或缺。需求變化得快且劇烈，若不建立有效的溝通管道，很容易追不上。過去，我習慣當個跟隨者。但為了本次專案，我克服了迂迴表達的習慣，學會在設計與跨部門討論中主動發聲，也鼓勵每位團隊成員大膽表達看法，如此讓設計團隊不再是被動的任務執行者，而能提升到具有產品思維的決策者。
                 </P>
-                <H3>1. 讓每個人都在同一個資訊節奏上</H3>
-                <UL>
-                  <LI>面對宏大的產品願景與複雜需求，清楚且即時的溝通是推進的關鍵。</LI>
-                  <LI>
-                    我克服過去「委婉迂迴」的習慣，學會在設計與跨職能討論中更直接清楚地表達，保護團隊並確保進度順暢。
-                  </LI>
-                </UL>
-                <H3>2. 向市場學習</H3>
-                <UL>
-                  <LI>除了使用者研究，我也學會重視來自第一線業務的回饋。</LI>
-                  <LI>他們的洞察能讓產品更有競爭力，也避免過度設計師視角的決策。</LI>
-                </UL>
-                <H3>3. 支持團隊成長</H3>
-                <UL>
-                  <LI>透過 1-on-1 了解每位夥伴的動機與投入狀態。</LI>
-                  <LI>在分派任務時兼顧挑戰與成長，並鼓勵善用資源精進技能。</LI>
-                </UL>
+              </div>
+              <div>
+                <H3>從市場學習</H3>
+                <P>
+                  除了團隊內部討論與研究，我學會了重視業務團隊的回饋。他們直接與潛在客戶接觸，是最靠近真實需求的人。他們的洞察讓產品更有競爭力，也防止了過度以設計師視角為中心的決策。
+                </P>
+              </div>
+              <div>
+                <H3>支持團隊成長</H3>
+                <P>
+                  透過個別訪談了解每位成員的動機與期待，分配能幫助他們成長的任務，鼓勵主動學習與精進。他們分別在執行任務中獲得了新技術的嘗試、獨特想法的展現機會，甚至是號召、主導的實際經驗。
+                </P>
               </div>
             </div>
           </Container>
         </SectionBlock>
 
-        {/* conclusion */}
+        {/* Conclusion */}
         <SectionBlock bgVariant="dark" backgrounds={mentorBackgrounds}>
-          <Container className="w-full md:w-2/3 mx-auto flex flex-col items-center justify-center mb-24">
-            <P>
-              設計 Mentor 不只是塑造介面，更是塑造團隊、故事與對學習的共同信念。一開始我仍偏向「執行者」：專注像素、流程與 UI 精緻度；但隨著產品規模擴大，我逐漸學會用「領導者」視角整合跨職能、賦能夥伴，並守住更大的方向。
+          <Container className="flex flex-col items-center text-center">
+            <img src={mentorImg} alt="Mentor" className="h-32 w-32 md:h-48 md:w-48 rounded-lg mb-8" />
+            <P className="w-full md:w-2/3 opacity-80">
+              因此，設計 Mentor 不只是塑造畫面，而是塑造一支團隊、一個故事，以及一個對學習的共同信念。這也是我對這個專案經驗相當自豪的原因。
             </P>
-            <P>
-              這些經驗讓我從獨立貢獻者成長為設計主管：更清楚地溝通、在不同角色之間翻譯想法，也更理解交付是一種團隊共同的節奏。最重要的是，我學到好的設計不只是清晰與工藝，更是讓願景、人才與結果對齊。
-            </P>
-            <img src={mentor} alt="mentor" className="w-24 h-24 rounded-lg" />
-            <p className="text-h3 font-light">Mentor</p>
-            <p className="text-caption text-gray-300">2019/05 - 2024/06</p>
           </Container>
-
-          <RelatedProjects />
-
-          <hr className="w-full my-8 border-gray-800" />
-          <Footer />
         </SectionBlock>
+
+        <RelatedProjects currentSlug="mentor" />
+        <Footer />
       </main>
     </div>
   )
 }
-
