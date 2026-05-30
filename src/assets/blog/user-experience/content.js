@@ -6,7 +6,7 @@ const post = {
   "description": "",
   "category": "design",
   "categoryLabel": "Design",
-  "date": "2026/05/29",
+  "date": "2026/05/30",
   "featured": false,
   "spotlight": false,
   "heroImage": "",
