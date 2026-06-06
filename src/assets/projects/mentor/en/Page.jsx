@@ -1,23 +1,19 @@
 import { useState, useEffect, useRef } from 'react'
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
-import { Swiper, SwiperSlide } from 'swiper/react'
-import { Pagination, Navigation } from 'swiper/modules'
-import 'swiper/css'
-import 'swiper/css/pagination'
-import 'swiper/css/navigation'
+
+gsap.registerPlugin(ScrollTrigger)
 import Navbar from '../../../../components/utilities/Navbar'
 import { useFloatingAnimation } from '../../../../hooks/useFloatingAnimation'
-import ImageWithHotspots from '../../../../components/utilities/ImageWithHotspots'
 import Footer from '../../../../components/utilities/Footer'
-import ProjectNote from '../../../../components/projects/ProjectNote'
 import Container from '../../../../components/projects/Container'
+import ImageWithHotspots from '../../../../components/utilities/ImageWithHotspots'
 import SectionBlock from '../../../../components/projects/SectionBlock'
+import ProjectNote from '../../../../components/projects/ProjectNote'
 import TwoColumn from '../../../../components/projects/TwoColumn'
 import RelatedProjects from '../../../../components/projects/RelatedProjects'
 import TableOfContents from '../../../../components/utilities/TableOfContents'
 
-gsap.registerPlugin(ScrollTrigger)
 import BG1 from '../image/projectInfo-mentor-bg-1.png'
 import BG2 from '../image/projectInfo-mentor-bg-2.png'
 import BG3 from '../image/projectInfo-mentor-bg-3.png'
@@ -30,33 +26,41 @@ const mentorBackgrounds = {
   mentor: BG4,
 }
 
-
 import shineImage from '../image/projectInfo-mentor-shine.svg'
 import glintImage from '../image/projectInfo-mentor-glint.svg'
-
-import tabletMockup from '../image/projectInfo-mentor-tablet-mockup.png'
-import mentor from '../image/projectInfo-mentor-mentor.png'
+import mentorImg from '../image/projectInfo-mentor-mentor.png'
 import arrowDown from '../../../../../public/icon-arrow-down.svg'
 import quoteIcon from '../../../../../public/icon-quote.svg'
-import phases from '../image/projectInfo-mentor-phase.png'
-import chartImg from '../image/projectInfo-mentor-chart.png'
-import deliverablesDraft from '../image/projectInfo-mentor-draft.png'
-import deliverablesLayout1 from '../image/projectInfo-mentor-layout1.png'
-import deliverablesLayout2 from '../image/projectInfo-mentor-layout2.png'
-import guidelineImg from '../image/projectInfo-mentor-guideline.png'
-import mentorDraft from '../image/projectInfo-mentor-draft-2.png'
-import mentorVariants from '../image/projectInfo-mentor-variants.png'
-import pyramid from '../image/projectInfo-mentor-pyramid.png'
+import teamChart from '../image/projectInfo-mentor-team-chart.png'
+import priorityTable from '../image/projectInfo-mentor-priority-table.png'
+import ipCharacter from '../image/projectInfo-mentor-ip-character.png'
+import conceptDraft from '../image/projectInfo-mentor-concept-draft.png'
+import ipVariants from '../image/projectInfo-mentor-ip-variants.png'
+import uiGuide from '../image/projectInfo-mentor-ui-guide.png'
+import uiGuideFull from '../image/projectInfo-mentor-ui-guide-full.png'
 import screenShot1 from '../image/projectInfo-mentor-screenshot1.png'
+import typesImg from '../image/projectInfo-mentor-4types.png'
 import screenShot2 from '../image/projectInfo-mentor-screenshot2.png'
-import screenShot3 from '../image/projectInfo-mentor-screenshot3.png'
+import iteration1 from '../image/projectInfo-mentor-iteration-1.png'
+import iteration2 from '../image/projectInfo-mentor-iteration-2.png'
+import wireframe1 from '../image/projectInfo-mentor-wireframe-1.png'
+import wireframe2 from '../image/projectInfo-mentor-wireframe-2.png'
+import designSystem from '../image/projectInfo-mentor-design-system.png'
+import personaUi1 from '../image/projectInfo-mentor-persona-ui-1.png'
+import personaUi2 from '../image/projectInfo-mentor-persona-ui-2.png'
+import goalCalendar from '../image/projectInfo-mentor-goal-calendar.png'
 import screenShot4 from '../image/projectInfo-mentor-screenshot4.png'
-import screenShot5 from '../image/projectInfo-mentor-screenshot5.png'
 import screenShot6 from '../image/projectInfo-mentor-screenshot6.png'
 import screenShot7 from '../image/projectInfo-mentor-screenshot7.png'
 import screenShot8 from '../image/projectInfo-mentor-screenshot8.png'
-import typesImg from '../image/projectInfo-mentor-4types.png'
-
+import reportWeekly from '../image/projectInfo-mentor-report-weekly.png'
+import reportMonthly from '../image/projectInfo-mentor-report-monthly.png'
+import badgeOverview from '../image/projectInfo-mentor-badge-overview.png'
+import badgeEarned from '../image/projectInfo-mentor-badge-earned.png'
+import badgeLocked from '../image/projectInfo-mentor-badge-locked.png'
+import lineTree from '../image/projectInfo-mentor-line-tree.png'
+import lineMenu from '../image/projectInfo-mentor-screenshot9.png'
+import tabletMockup from '../image/projectInfo-mentor-tablet-mockup.png'
 
 import P from '../../../../components/post/P'
 import H2 from '../../../../components/post/H2'
@@ -64,116 +68,40 @@ import H3 from '../../../../components/post/H3'
 import UL from '../../../../components/post/UL'
 import LI from '../../../../components/post/LI'
 
-export default function MentorPage() {
+export default function MentorEnPage() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
+
+  const learningPersonaHotspots = [
+    { id: 'point2', x: 78, y: 55, content: 'The system displays the student\'s learning type.', arrowPosition: 'bottom' },
+    { id: 'point3', x: 12, y: 20, content: 'Creating a learning plan involves 4 steps: 1. Choose a study period 2. Select weekly study days 3. Set learning goals 4. Confirm the plan.', arrowPosition: 'bottom' },
+  ]
+  const learningGoalHotspots = [
+    { id: 'point1', x: 18, y: 14, content: 'At the end of the flow, the system displays the study plan; students can switch between timeline and calendar views.', arrowPosition: 'bottom' },
+    { id: 'point2', x: 38, y: 44, content: 'Different colored dots represent different subjects.', arrowPosition: 'bottom' },
+    { id: 'point3', x: 78, y: 34, content: 'A daily overview of scheduled learning content.', arrowPosition: 'bottom' },
+  ]
+  const learningReportHotspots = [
+    { id: 'point1', x: 38, y: 4, content: 'Reports cover three time dimensions: daily, weekly, and monthly, each presenting a different depth of learning activity.', arrowPosition: 'bottom' },
+    { id: 'point2', x: 8, y: 44, content: 'Parents can switch between reports for different children.', arrowPosition: 'bottom' },
+    { id: 'point3', x: 78, y: 34, content: 'An overview of the student\'s performance and learning progress.', arrowPosition: 'bottom' },
+  ]
+  const badgeCollectionHotspots = [
+    { id: 'point1', x: 28, y: 4, content: 'Students can track their collection progress.', arrowPosition: 'bottom' },
+    { id: 'point2', x: 38, y: 44, content: 'Each badge has a unique visual identity, displayed in the "Hall of Achievements" interface.', arrowPosition: 'bottom' },
+  ]
+  const mentorImgRef = useFloatingAnimation({ y: -20, duration: 2 })
+  const arrowDownRef = useFloatingAnimation({ y: -15, duration: 1.8, delay: 0.2 })
   const parentsCircleRef = useRef(null)
   const studentsCircleRef = useRef(null)
 
-  // Use floating animation hook for mentor image
-  const mentorImgRef = useFloatingAnimation({ y: -20, duration: 2 })
-  // Use floating animation for arrow down icon
-  const arrowDownRef = useFloatingAnimation({ y: -15, duration: 1.8, delay: 0.2 })
-
-  // Define hotspots
-  const learningPersonaHotspots = [
-    {
-      id: 'point1',
-      x: 20,
-      y: 25,
-      content: 'choose the most suitable learning path: how much time per week to study.',
-      arrowPosition: 'bottom'
-    },
-    {
-      id: 'point2',
-      x: 78,
-      y: 55,
-      content: 'The system will show the type of student.',
-      arrowPosition: 'bottom'
-    },
-    {
-      id: 'point3',
-      x: 12,
-      y: 20,
-      content: 'There are 4 steps to set up a learning plan: 1. Choose study duration, 2. Select weekdays, 3. Set learning goals, 4. Confirm the plan.',
-      arrowPosition: 'bottom'
-    },
-  ]
-  const learningGoalHotspots = [
-    {
-      id: 'point1',
-      x: 18,
-      y: 14,
-      content: 'At the end of the flow, the system will show the learning plan, students can switch between timeline and calendar view to check the plan.',
-      arrowPosition: 'bottom'
-    },
-    {
-      id: 'point2',
-      x: 38,
-      y: 44,
-      content: 'Every color of dot represents a different learning subject.',
-      arrowPosition: 'bottom'
-    },
-    {
-      id: 'point3',
-      x: 78,
-      y: 34,
-      content: 'Overview of one single day.',
-      arrowPosition: 'bottom'
-    },
-  ]
-  const learningReportHotspots = [
-    {
-      id: 'point1',
-      x: 38,
-      y: 4,
-      content: 'Reports are available across three time dimensions: daily, weekly, and monthly, each showing a different depth of detail.',
-      arrowPosition: 'bottom'
-    },
-    {
-      id: 'point2',
-      x: 8,
-      y: 44,
-      content: 'Parents can switch reports between different children.',
-      arrowPosition: 'bottom'
-    },
-    {
-      id: 'point3',
-      x: 78,
-      y: 34,
-      content: 'An overview of the student’s learning performance and progress.',
-      arrowPosition: 'bottom'
-    },
-  ]
-  const badgeCollectionHotspots = [
-    {
-      id: 'point1',
-      x: 28,
-      y: 4,
-      content: 'Students can view the progress of their collection.',
-      arrowPosition: 'bottom'
-    },
-    {
-      id: 'point2',
-      x: 38,
-      y: 44,
-      content: 'Each badge has its own visual identity and is displayed in a "Hall of Achievement" interface.',
-      arrowPosition: 'bottom'
-    },
-  ]
-
-
   useEffect(() => {
-    // Animate parents circle from left
-    gsap.fromTo(
+    if (!parentsCircleRef.current || !studentsCircleRef.current) return
+
+    const t1 = gsap.fromTo(
       parentsCircleRef.current,
+      { x: -300, opacity: 0 },
       {
-        x: -300,
-        opacity: 0,
-      },
-      {
-        x: 0,
-        opacity: 1,
-        ease: 'none',
+        x: 0, opacity: 1, ease: 'none',
         scrollTrigger: {
           trigger: parentsCircleRef.current,
           start: 'top 80%',
@@ -182,18 +110,11 @@ export default function MentorPage() {
         },
       }
     )
-
-    // Animate students circle from right
-    gsap.fromTo(
+    const t2 = gsap.fromTo(
       studentsCircleRef.current,
+      { x: 300, opacity: 0 },
       {
-        x: 300,
-        opacity: 0,
-      },
-      {
-        x: 0,
-        opacity: 1,
-        ease: 'none',
+        x: 0, opacity: 1, ease: 'none',
         scrollTrigger: {
           trigger: studentsCircleRef.current,
           start: 'top 80%',
@@ -202,6 +123,12 @@ export default function MentorPage() {
         },
       }
     )
+    return () => {
+      t1.scrollTrigger?.kill()
+      t2.scrollTrigger?.kill()
+      t1.kill()
+      t2.kill()
+    }
   }, [])
 
   return (
@@ -213,856 +140,673 @@ export default function MentorPage() {
         variant="arrow"
       />
       <main className="bg-bg">
+
         {/* Hero */}
-        <header className=" relative overflow-hidden">
-          <SectionBlock bgVariant="purple" className='relative' backgrounds={mentorBackgrounds}>
+        <header className="relative overflow-hidden">
+          <SectionBlock bgVariant="purple" className="relative" backgrounds={mentorBackgrounds}>
             <TableOfContents />
-            <img src={shineImage} alt="shine" className='absolute top-0 right-0' />
-            <img src={glintImage} alt="glint" className='absolute bottom-0 left-0' />
-            <Container className='flex flex-col items-center justify-center text-center'>
-              <img ref={mentorImgRef} src={mentor} alt="Mentor" className="h-48 w-48 md:h-64 md:w-64 rounded-lg" />
-              <h1 className='text-large mobile:text-large-mobile'>Mentor</h1>
-              <H3 className='mb-24'>AI-integrated learning platform</H3>
-              <P className='w-full md:w-2/3'>Designing Mentor was more than just shaping screens—it was about shaping a team, a story, and a shared belief in learning.</P>
-              <img ref={arrowDownRef} src={arrowDown} alt="Arrow Down" className="mt-16 md:mt-24 w-6 h-6 brightness-0 invert" />
+            <img src={shineImage} alt="shine" className="absolute top-0 right-0" />
+            <img src={glintImage} alt="glint" className="absolute bottom-0 left-0" />
+            <Container className="flex flex-col items-center justify-center text-center">
+              <img ref={mentorImgRef} src={mentorImg} alt="Mentor" className="h-48 w-48 md:h-64 md:w-64 rounded-lg" />
+              <h1 className="text-large mobile:text-large-mobile">Mentor</h1>
+              <H3 className="mb-4">Not just a product, but a team</H3>
+              <P className="w-full md:w-2/3 mb-24">
+                A 0-to-1 AI-integrated learning platform built in one year
+              </P>
+              <img ref={arrowDownRef} src={arrowDown} alt="Scroll down" className="mt-16 md:mt-24 w-6 h-6 brightness-0 invert" />
             </Container>
           </SectionBlock>
         </header>
 
         {/* Project Brief */}
         <SectionBlock backgrounds={mentorBackgrounds}>
-          <Container className='flex flex-col items-center justify-center'>
-            <div className="text-center mb-10">
-              <H2>Project Brief</H2>
-            </div>
-            <img src={tabletMockup} alt="Mentor design preview" className='rounded-lg' />
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-16 mt-16">
+          <Container>
+            <H2 id="project-brief">Project Brief</H2>
+            <img src={tabletMockup} alt="Mentor design preview" className="rounded-lg mb-12 transition-transform duration-500 ease-out hover:scale-105" />
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-16 mt-4">
               <div className="md:col-span-2">
                 <P>
-                  At Samebest, I served as the Design Lead of the UI and Graphic Design Team for a new product: "Mentor". This app aims to help students navigate their learning journey efficiently and effectively prepare for school exams, including high school and college entrance exams. I led the team in developing the interface and laying the foundation for scalable branding.
+                  Learning planning has never been easy. Every student starts from a different place with different goals, and self-managing academic progress is beyond the capability of most students. In the past, this gap was filled by customer service staff and tutoring consultants — costly and unscalable. Mentor (AI Smart Backpack) was built to solve this fundamental problem.
                 </P>
+                <P>
+                  In this project, I served as Design Lead, building and leading a design team from scratch. I collaborated across five departments — PM, Engineering, Marketing, and Curriculum — and over the course of one year delivered a complete product from concept to launch. <strong>After launch, 90% of students chose to use AI to build their learning paths</strong>, and the first designer I mentored, Nomis, was promoted to my position after I left.
+                </P>
+                <blockquote className="border-l-4 border-current pl-6 mt-8 italic opacity-70">
+                  This project convinced me: the work of a Design Lead is not just making great design — it's building a team where great design can happen.
+                </blockquote>
               </div>
-              <div className='flex flex-col gap-2'>
-                <p className='text-h3'>Role</p>
+              <div className="flex flex-col gap-4">
+                <p className="text-h3">Role</p>
                 <P>Design Lead</P>
-                <p className='text-h3'>Timeline</p>
-                <P>May 2019 – June 2024</P>
+                <p className="text-h3">Timeline</p>
+                <P>2023 – 2024</P>
+                <p className="text-h3">Responsibilities</p>
+                <P>Team building & scheduling, design direction, UI system, cross-functional collaboration, visual art direction</P>
               </div>
+            </div>
+
+            {/* Stats Grid */}
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mt-16 pt-12 border-t border-current/20">
+              {[
+                { stat: '1 Year', label: '0-to-1 product launch', sub: 'Full product from concept to delivery' },
+                { stat: '15+', label: 'Cross-team collaborators', sub: 'Design, PM, RD, Marketing, Curriculum' },
+                { stat: '90%', label: 'Adopted AI-built paths', sub: 'Design decisions accepted by users' },
+                { stat: 'Successor', label: 'Team member promoted to lead', sub: 'Mentored talent took over the role' },
+              ].map(({ stat, label, sub }) => (
+                <div key={stat} className="flex flex-col gap-2">
+                  <p className="text-h2" style={{ fontWeight: '500' }}>{stat}</p>
+                  <p className="text-body font-medium">{label}</p>
+                  <p className="text-caption opacity-60">{sub}</p>
+                </div>
+              ))}
             </div>
           </Container>
         </SectionBlock>
 
-
-        {/* Responsibilities (dark) */}
+        {/* Team Structure */}
         <SectionBlock bgVariant="mentor" backgrounds={mentorBackgrounds}>
           <Container>
-            <H2>Key Responsibilities</H2>
-
-            {/* Mobile Swiper */}
-            <div className="md:hidden">
-              <Swiper
-                modules={[Pagination, Navigation]}
-                pagination={{ clickable: true }}
-                navigation={true}
-                spaceBetween={24}
-                slidesPerView={1}
-                className="responsibilities-swiper"
-              >
-                <SwiperSlide>
-                  <div>
-                    <H3>1. Leadership</H3>
-                    <UL>
-                      <LI>
-                      Led a team of 4 designers through the 0–1 product incubation process.                      </LI>
-                      <LI>
-                        Assigned tasks based on each member's strengths, guiding their thinking and execution.
-                      </LI>
-                      <LI>
-                        Facilitated collaboration with PMs and R&D to ensure user-friendly, feasible design output.
-                      </LI>
-                    </UL>
-                    <P>Under my leadership, I also facilitated regular team discussions on:</P>
-                    <UL>
-                      <LI>
-                        Early concept exploration and competitor analysis to identify ways to highlight the product's unique strengths.
-                      </LI>
-                      <LI>
-                        Design execution strategies, focusing on how to align with developers' workflows.
-                      </LI>
-                      <LI>
-                        Enhancing user experience while managing complex structures and large-scale feature requirements.                </LI>
-                    </UL>
-                  </div>
-                </SwiperSlide>
-                <SwiperSlide>
-                  <div>
-                    <H3>2. Design System Development</H3>
-                    <UL>
-                      <LI>
-                        Directed the overall visual style of the product.                </LI>
-                      <LI>
-                        Adapted the UX and visuals to align with the aesthetics and language preferences of primary and secondary school students.                </LI>
-                      <LI>
-                        Gathered and refined visual references with the team to build a consistent design language.  </LI>
-                    </UL>
-                  </div>
-                </SwiperSlide>
-              </Swiper>
+            <H2 id="team-structure">Team Structure & Collaboration</H2>
+            <img src={teamChart} alt="Team structure diagram" className="rounded-lg mb-12 mt-6" />
+            <P>This project involved close collaboration across multiple parallel units. Design was not an isolated function — it was part of the entire product ecosystem:</P>
+            <div className="mt-8 overflow-x-auto">
+              <table className="w-full text-left border-collapse">
+                <thead>
+                  <tr className="border-b border-current/20">
+                    <th className="pb-4 pr-6 text-h3" style={{ fontWeight: '500' }}>Team</th>
+                    <th className="pb-4 pr-6 text-h3 whitespace-nowrap" style={{ fontWeight: '500' }}>Size</th>
+                    <th className="pb-4 text-h3" style={{ fontWeight: '500' }}>Collaboration Notes</th>
+                  </tr>
+                </thead>
+                <tbody className="divide-y divide-current/10">
+                  {[
+                    { team: 'Design Team', count: '5 (including me)', desc: 'Covered UI design, art direction, and front-end implementation.' },
+                    { team: 'PM Team', count: '4', desc: 'Defined product direction and requirements; final design decisions were approved by the PM lead.' },
+                    { team: 'Engineering', count: '4', desc: 'Handled feature development and technical implementation; collaborated directly with design to validate feasibility and specs.' },
+                    { team: 'Marketing', count: '2', desc: 'The design team also handled marketing material requests, requiring flexible resource allocation between product design and marketing tasks.' },
+                    { team: 'Curriculum', count: 'Multiple', desc: 'Dedicated to producing K12 subject content; the structure of learning content directly influenced the product\'s information architecture.' },
+                  ].map(({ team, count, desc }) => (
+                    <tr key={team}>
+                      <td className="py-4 pr-6 text-p" style={{ fontWeight: '400' }}>{team}</td>
+                      <td className="py-4 pr-6 text-p opacity-70 whitespace-nowrap" style={{ fontWeight: '200' }}>{count}</td>
+                      <td className="py-4 text-p opacity-80" style={{ fontWeight: '200' }}>{desc}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
             </div>
+            <P className="mt-8 opacity-70">
+              Keeping the design direction consistent across all these units — and delivering every feature on time — was itself one of the core challenges of the Lead role.
+            </P>
+          </Container>
+        </SectionBlock>
 
-            {/* Desktop Layout */}
-            <div className="hidden md:block">
+        {/* Responsibilities */}
+        <SectionBlock backgrounds={mentorBackgrounds}>
+          <Container>
+            <H2 id="responsibilities">Key Responsibilities</H2>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-12 mt-4">
               <div>
-                <H3>1. Leadership</H3>
+                <H3>1. Team Leadership</H3>
                 <UL>
-                  <LI>
-                    Lead a team of 10+ designers and developers
-                  </LI>
-                  <LI>
-                    Assigned tasks based on each member's strengths, guiding their thinking and execution.
-                  </LI>
-                  <LI>
-                    Facilitated collaboration with PMs and R&D to ensure user-friendly, feasible design output.
-                  </LI>
-                </UL>
-                <P>Under my leadership, I also facilitated regular team discussions on:</P>
-                <UL>
-                  <LI>
-                    Early concept exploration and competitor analysis to identify ways to highlight the product's unique strengths.
-                  </LI>
-                  <LI>
-                    Design execution strategies, focusing on how to align with developers' workflows.
-                  </LI>
-                  <LI>
-                    Enhancing user experience while managing complex structures and large-scale feature requirements.                </LI>
+                  <LI>Led cross-functional design and engineering teams to advance the product.</LI>
+                  <LI>Assigned tasks based on individual strengths and supported execution.</LI>
+                  <LI>Facilitated collaboration with PM and R&D to ensure design was both usable and technically feasible.</LI>
                 </UL>
               </div>
               <div>
-                <H3>2. Design System Development</H3>
+                <H3>2. Regular Sync Meetings</H3>
                 <UL>
-                  <LI>
-                    Directed the overall visual style of the product.                </LI>
-                  <LI>
-                    Adapted the UX and visuals to align with the aesthetics and language preferences of primary and secondary school students.                </LI>
-                  <LI>
-                    Gathered and refined visual references with the team to build a consistent design language.  </LI>
+                  <LI>Early concept exploration and competitive analysis to identify product differentiation.</LI>
+                  <LI>Defined design execution strategy and aligned with engineering workflows.</LI>
+                  <LI>Maintained UX coherence and consistency across complex structures and large-scale features.</LI>
+                </UL>
+              </div>
+              <div>
+                <H3>3. Design System</H3>
+                <UL>
+                  <LI>Defined the overall visual style direction for the product.</LI>
+                  <LI>Adapted UX and visual expression to match the aesthetic and language habits of high school users.</LI>
+                  <LI>Collected visual references with the team and established a consistent design language.</LI>
                 </UL>
               </div>
             </div>
-
           </Container>
         </SectionBlock>
 
-        {/* Workflow */}
-        <SectionBlock className='pb-0' backgrounds={mentorBackgrounds}>
-          <Container>
-
-            <div className='grid grid-cols-1 md:grid-cols-3 gap-12'>
-              <H2>Workflow</H2>
-              <UL className='md:col-span-2'>
-                <LI>Each feature was designed and developed over a two-month cycle with cross-functional collaboration.</LI>
-                <LI>The Discovery & Ideation phases were carried out in small teams to brainstorm the most effective solutions.</LI>
-                <LI>Final handoff included feasibility checks and iterative refinement with engineers.</LI>
-
-              </UL>
-            </div>
-          </Container>
-          <img src={phases} alt="workflow phases" className='rounded-lg' />
-        </SectionBlock>
-
-        {/* Background + Insights alternating backgrounds */}
-        <SectionBlock bgVariant="blue" backgrounds={mentorBackgrounds}>
-          <Container>
-            {/* Mobile Swiper */}
-            <div className="md:hidden">
-              <Swiper
-                modules={[Pagination, Navigation]}
-                pagination={{ clickable: true }}
-                navigation={true}
-                spaceBetween={24}
-                slidesPerView={1}
-                className="background-swiper"
-              >
-                <SwiperSlide>
-                  <div>
-                    <H2>Background</H2>
-                    <P>
-                      Originally, Mentor was envisioned as a mobile companion to the company's existing desktop-based self-learning software, which featured recorded subject lectures.
-                    </P>
-                    <P>
-                      The team originally <strong>envisioned three distinct learning contexts for the app</strong>, each reflecting a typical scenario in which students would engage with the platform.
-                    </P>
-                    <P className="text-xs text-gray-100">The system was originally designed to control the desktop-based video self-learning software, acting as a remote interface.</P>
-                  </div>
-                </SwiperSlide>
-                <SwiperSlide>
-                  <div className="grid grid-cols-1 gap-4">
-                    <div className="bg-white/10 backdrop-blur rounded-sm shadow p-5">
-                      <div className="text-sm mb-2 opacity-70">At home, seated at a desk</div>
-                      <p className='pb-0'>with access to desktop, tablet, and textbooks. </p>
-                    </div>
-                    <div className="bg-white/10 backdrop-blur rounded-sm shadow p-5">
-                      <div className="text-sm mb-2 opacity-70">At school or in a library</div>
-                      <p className='pb-0'>with only a tablet and textbooks, students used the platform as a lecture extension.</p>
-                    </div>
-                    <div className="bg-white/10 backdrop-blur rounded-sm shadow p-5">
-                      <div className="text-sm mb-2 opacity-70">On the go</div>
-                      <p className='pb-0'>with only a tablet, students relied on it as the main learning tool.</p>
-                    </div>
-                  </div>
-                </SwiperSlide>
-              </Swiper>
-            </div>
-
-            {/* Desktop Layout */}
-            <div className="hidden md:block">
-              <TwoColumn>
-                <div>
-                  <H2 id="background">Background</H2>
-                  <P>
-                    Originally, Mentor was envisioned as a mobile companion to the company's existing desktop-based self-learning software, which featured recorded subject lectures.
-                  </P>
-                  <P>
-                    The team originally <strong>envisioned three distinct learning contexts for the app</strong>, each reflecting a typical scenario in which students would engage with the platform.
-                  </P>
-                  <P className="text-xs text-gray-100">The system was originally designed to control the desktop-based video self-learning software, acting as a remote interface.</P>
-                </div>
-                <div className="grid grid-cols-1 gap-4">
-                  <div className="bg-white/10 backdrop-blur rounded-sm shadow p-5">
-                    <div className="text-sm mb-2 opacity-70">At home, seated at a desk</div>
-                    <p className='pb-0'>with access to desktop, tablet, and textbooks. </p>
-                  </div>
-                  <div className="bg-white/10 backdrop-blur rounded-sm shadow p-5">
-                    <div className="text-sm mb-2 opacity-70">At school or in a library</div>
-                    <p className='pb-0'>with only a tablet and textbooks, students used the platform as a lecture extension.</p>
-                  </div>
-                  <div className="bg-white/10 backdrop-blur rounded-sm shadow p-5">
-                    <div className="text-sm mb-2 opacity-70">On the go</div>
-                    <p className='pb-0'>with only a tablet, students relied on it as the main learning tool.</p>
-                  </div>
-                </div>
-              </TwoColumn>
-            </div>
-
-          </Container>
-        </SectionBlock>
-
-        {/* Research Insight */}
+        {/* Background */}
         <SectionBlock bgVariant="dark" backgrounds={mentorBackgrounds}>
-          <Container className=' overflow-hidden'>
-            <div className=" mb-10 mx-auto">
-              <H2>Research Insights</H2>
-              <P>In the early phase of development, we conducted foundational user research to validate assumptions and uncover unmet needs among our two key groups:<strong> parents and students.</strong></P>
-              <P>We found a shared problem: <br />
-                neither group had clarity on learning progress, which led to frustration—students felt they weren’t improving, while parents felt unable to help.</P>
+          <Container>
+            <H2 id="background">Background</H2>
+            <H3>From an education app prototype to an AI learning companion for K12 students</H3>
+            <P>
+              The company already had a college-prep platform serving high school students, but as mobile devices became ubiquitous, the team began exploring: could students get a more complete learning experience on a tablet? The initial idea was simple — a mobile companion app where students could watch recorded lessons on a computer while using a tablet for e-textbook materials.
+            </P>
+            <P>
+              After a series of executive discussions, this idea was redefined into a much larger vision: a personalized AI-powered learning coach.
+            </P>
+            <P>
+              <strong>What began as a "tablet e-textbook app" went through multiple rounds of scope expansion and directional shifts, eventually evolving into a fully integrated AI learning platform.</strong> Throughout this ever-changing process, the design team remained the core force translating decisions into reality.
+            </P>
+            <P>
+              Mentor (AI Smart Backpack) was born. I served as Design Lead, building and leading a four-person design team from scratch and delivering the complete product from concept to launch within one year.
+            </P>
+            <H3>What problem were we solving</H3>
+            <P>
+              Students' pursuit of better exam scores is the core driver behind tutoring products, but what kind of learning actually leads to real improvement is a notoriously difficult question.
+            </P>
+            <P>
+              Every student starts from a different place with different goals: course intensity, rate of improvement, and subject strategy for major exams all vary. A student in the bottom of their class wanting to improve on the next test needs a completely different approach from a student in an advanced math-science track aiming for a top medical school.
+            </P>
+            <P>
+              "Managing your own learning pace" is already beyond the capability of most students. <strong>In the past, this gap was filled by customer service staff and tutoring consultants — generating enormous communication costs and labor burden.</strong>
+            </P>
+            <P>
+              On the business side, parents typically had no visibility into how their children were actually learning. They feared paying tuition without seeing real results (grade improvement) and desperately wanted to know whether the money spent was paying off — but existing products offered no satisfying answer.
+            </P>
 
-              {/* two circles for infographic */}
-              <div className="flex flex-row justify-center items-center my-16 relative isolate">
-                {/* Parents Circle - Blue gradient */}
-                <div ref={parentsCircleRef} className="relative flex items-center justify-center z-10">
-                  <div className="w-64 h-64 md:w-80 md:h-80 rounded-full bg-gradient-to-br from-blue-500 to-blue-700 flex flex-col items-center justify-center text-center p-12 shadow-2xl">
-                    <p className="mb-6 text-h3 md:text-h2">For Parents</p>
-                    <p className="text-xl leading-relaxed">"I don't know what the school is teaching or why my kid didn't do well."</p>
-                  </div>
-                </div>
-                {/* Students Circle - Purple gradient */}
-                <div ref={studentsCircleRef} className="relative flex items-center justify-center -ml-32 md:-ml-40 z-20 mix-blend-multiply">
-                  <div className="w-64 h-64 md:w-80 md:h-80 rounded-full bg-gradient-to-br from-purple-600 to-purple-800 flex flex-col items-center justify-center text-center p-12 shadow-2xl">
-                    <p className="mb-6 text-h3 md:text-h2">For Student</p>
-                    <p className="text-xl leading-relaxed">"I keep getting things wrong and don't know why."</p>
-                  </div>
+            {/* Parents & Students infographic */}
+            <div className="flex flex-row justify-center items-center my-16 relative isolate">
+              <div ref={parentsCircleRef} className="relative flex items-center justify-center z-10">
+                <div className="w-44 h-44 md:w-80 md:h-80 rounded-full bg-gradient-to-br from-blue-500 to-blue-700 flex flex-col items-center justify-center text-center p-6 md:p-12 shadow-2xl">
+                  <p className="mb-3 md:mb-6 text-h3 md:text-h2">Parents</p>
+                  <p className="text-sm md:text-xl leading-relaxed">"I don't know what's being taught at school, or why my child keeps failing."</p>
                 </div>
               </div>
-              <P>The root causes were consistent: <strong>weak foundational understanding and no structured review strategy.</strong><br />
-                These insights highlighted a clear gap between effort and outcome, forming the basis for our design goals.</P>
+              <div ref={studentsCircleRef} className="relative flex items-center justify-center -ml-12 md:-ml-40 z-20">
+                <div className="w-44 h-44 md:w-80 md:h-80 rounded-full bg-gradient-to-br from-purple-600 to-purple-800 flex flex-col items-center justify-center text-center p-6 md:p-12 shadow-2xl">
+                  <p className="mb-3 md:mb-6 text-h3 md:text-h2">Students</p>
+                  <p className="text-sm md:text-xl leading-relaxed">"I keep making mistakes, but I don't know where I'm going wrong."</p>
+                </div>
+              </div>
             </div>
+            <p className="text-caption opacity-70 text-center mt-4">The core user groups, both sharing the same frustration:<br />a lack of clear visibility into learning progress, leading to frustration — students feel stuck, parents feel helpless.</p>
 
           </Container>
         </SectionBlock>
 
-        {/* how might we */}
+        {/* How Might We */}
         <SectionBlock backgrounds={mentorBackgrounds}>
           <Container>
             <div className="text-center mb-10 flex flex-col items-center justify-center">
-              <img src={quoteIcon} alt="quote icon" className='mb-8 rounded-lg' />
+              <P className="mx-auto text-gray-900 opacity-60">During the Kickoff phase, the PM team and I used a HMW framework to consolidate scattered input from executives and business stakeholders into a single, clear design question:</P>
+              <img src={quoteIcon} alt="quote icon" className="mb-4 rounded-lg" style={{ marginTop: '20px' }} />
               <H2 className="text-gray-900">How Might We...</H2>
-              <P className="mx-auto text-gray-900">How might we help students and parents who struggle with unclear learning progress and lack of feedback gain clarity, motivation, and personalized next-step suggestions?</P>
+              <P className="mx-auto text-gray-900">
+                <strong>How might we help students and parents who feel frustrated by unclear learning progress and a lack of feedback — build a sense of clarity, motivation, and more personalized next-step guidance?</strong>
+              </P>
             </div>
           </Container>
         </SectionBlock>
 
-        {/* design goals */}
+        {/* Design Goals */}
         <SectionBlock bgVariant="blue" backgrounds={mentorBackgrounds}>
           <Container>
-            {/* Mobile Swiper */}
-            <div className="md:hidden">
-              <Swiper
-                modules={[Pagination, Navigation]}
-                pagination={{ clickable: true }}
-                navigation={true}
-                spaceBetween={24}
-                slidesPerView={1}
-                className="design-goals-swiper"
-              >
-                <SwiperSlide>
-                  <div>
-                    <H2>Design Goals</H2>
-                    <P className="bg-white/10 backdrop-blur rounded-sm shadow p-5">Based on the key insights gathered from our research, we distilled the following three design goals to address the specific concerns of both parents and students:</P>
-                  </div>
-                </SwiperSlide>
-                <SwiperSlide>
-                  <div>
-                    <H3>1. Personalized goal-setting and learning guidance</H3>
-                    <P>To reduce cognitive load and give learners a stronger sense of direction, Mentor tailors study plans based on the student's level, performance history, and recent errors. Students can improve simply by following the AI-guided path step by step.</P>
-                  </div>
-                </SwiperSlide>
-                <SwiperSlide>
-                  <div>
-                    <H3>2. Clear, easy-to-read feedback for the next step</H3>
-                    <P>Instead of vague performance scores, Mentor generates visual learning reports that highlight progress, identify weaknesses, and suggest the next learning action. This helps both parents and students stay on track without ambiguity.</P>
-                  </div>
-                </SwiperSlide>
-                <SwiperSlide>
-                  <div>
-                    <H3>3. Reinforcement through a sense of accomplishment</H3>
-                    <P>By surfacing concrete progress markers—such as reduced mistakes, completed exercises, and streaks—we build emotional momentum and encourage students to keep going.</P>
-                  </div>
-                </SwiperSlide>
-              </Swiper>
+            <H2 id="design-goals">Design Goals</H2>
+            <P>After establishing the HMW question, we first mapped out the product's feature priority layers — from users' baseline expectations to the differentiated experiences that would truly delight.</P>
+            <img src={priorityTable} alt="Feature priority layers" className="rounded-lg mt-6" />
+
+            <div className="mt-8 overflow-x-auto">
+              <table className="w-full text-left border-collapse">
+                <thead>
+                  <tr className="border-b border-current/20">
+                    <th className="pb-4 pr-6 text-h3 w-[28%]" style={{ fontWeight: '500' }}>Layer</th>
+                    <th className="pb-4 pr-6 text-h3 w-[30%]" style={{ fontWeight: '500' }}>Features</th>
+                    <th className="pb-4 text-h3 w-[42%]" style={{ fontWeight: '500' }}>Description</th>
+                  </tr>
+                </thead>
+                <tbody className="divide-y divide-current/10">
+                  <tr>
+                    <td className="py-4 pr-6 text-p" style={{ fontWeight: '400' }}>Basic</td>
+                    <td className="py-4 pr-6 text-p" style={{ fontWeight: '200' }}>Video lessons, practice questions</td>
+                    <td className="py-4 text-p opacity-70" style={{ fontWeight: '200' }}>Minimum user expectation; absence leads to immediate churn</td>
+                  </tr>
+                  <tr>
+                    <td className="py-4 pr-6 text-p" style={{ fontWeight: '400' }}>Core</td>
+                    <td className="py-4 pr-6 text-p" style={{ fontWeight: '200' }}>Learning reports, performance tracking, note review</td>
+                    <td className="py-4 text-p opacity-70" style={{ fontWeight: '200' }}>Primary features satisfying learning needs</td>
+                  </tr>
+                  <tr>
+                    <td className="py-4 pr-6 text-p" style={{ fontWeight: '400' }}>Highlight</td>
+                    <td className="py-4 pr-6 text-p" style={{ fontWeight: '200' }}>Review reminders, progress tracking, personalized suggestions</td>
+                    <td className="py-4 text-p opacity-70" style={{ fontWeight: '200' }}>Differentiated experience that exceeds expectations and builds retention</td>
+                  </tr>
+                </tbody>
+              </table>
             </div>
 
-            {/* Desktop Layout */}
-            <div className="hidden md:block">
+            <P className="mt-16">Anchored to these product layers, I simultaneously defined three design goals to guide the team during implementation:</P>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-0 md:gap-10 mt-16">
               <div>
-                <H2 id="design-goals">Design Goals</H2>
-                <P className="bg-white/10 backdrop-blur rounded-sm shadow p-5">Based on the key insights gathered from our research, we distilled the following three design goals to address the specific concerns of both parents and students:</P>
+                <H3>1. Personalized Goal-Setting & Learning Guidance</H3>
+                <P>To reduce cognitive load and build a sense of direction, the product must customize study plans based on each student's level, aptitude analysis, and subject-specific mistake history. Students simply follow the guided flow to make steady progress.</P>
               </div>
               <div>
-                <div className="mb-8">
-                  <H3>1. Personalized goal-setting and learning guidance</H3>
-                  <P>To reduce cognitive load and give learners a stronger sense of direction, Mentor tailors study plans based on the student's level, performance history, and recent errors. Students can improve simply by following the AI-guided path step by step.</P>
-                </div>
-                <div className="mb-8">
-                  <H3>2. Clear, easy-to-read feedback for the next step</H3>
-                  <P>Instead of vague performance scores, Mentor generates visual learning reports that highlight progress, identify weaknesses, and suggest the next learning action. This helps both parents and students stay on track without ambiguity.</P>
-                </div>
-                <div>
-                  <H3>3. Reinforcement through a sense of accomplishment</H3>
-                  <P>By surfacing concrete progress markers—such as reduced mistakes, completed exercises, and streaks—we build emotional momentum and encourage students to keep going.</P>
-                </div>
+                <H3>2. Clear Feedback & Actionable Next Steps</H3>
+                <P>Rather than vague scores, the product generates visual learning reports that show progress, identify weaknesses, and suggest next steps — giving both parents and students the clarity they need to keep moving forward.</P>
+              </div>
+              <div>
+                <H3>3. Sustaining Motivation Through Achievement</H3>
+                <P>Concrete progress indicators (fewer mistakes, completed tasks, learning streaks) build emotional momentum; an achievement system (badge collection) uses gamification to reinforce the motivation to keep going.</P>
               </div>
             </div>
 
-          </Container>
-        </SectionBlock>
-
-        {/* core philosophy */}
-        <SectionBlock bgVariant="dark" backgrounds={mentorBackgrounds}>
-          <Container>
-            <img src={chartImg} alt="chart" className='mt-[-200px] shadow-xl rounded-lg' />
-            <div className='bg-[#3E3AFF] rounded-sm p-8 mt-16'>
-              <div className='flex flex-col md:flex-row gap-4 items-center text-center md:text-left'>
-                <div className='order-2 md:order-1 text-left'>
-                  <H2>Core Philosophy</H2>
-                  <P>Mentor was ultimately shaped into a personalized learning coach, a clear and memorable concept that unified our design principles, addressed users' emotional and functional needs, and made the product more relatable for both students and parents.</P>
+            <div className="bg-[#3E3AFF] rounded-lg p-8 mt-16">
+              <div className="flex flex-col md:flex-row gap-4 items-center text-center md:text-left">
+                <div className="order-2 md:order-1 text-center md:text-left">
+                  <H2>Core Concept</H2>
+                  <P>
+                    Mentor was ultimately defined as a personalized learning coach — a clear, memorable concept that unified design principles while addressing both the emotional and functional needs of users, making the product more approachable for both parents and students.
+                  </P>
                 </div>
-                <img src={mentor} alt="mentor" className='w-32 h-32 md:w-48 md:h-48 order-1 md:order-2 rounded-lg' />
+                <img src={mentorImg} alt="Mentor" className="w-32 h-32 md:w-48 md:h-48 order-1 md:order-2 rounded-lg" />
               </div>
             </div>
           </Container>
         </SectionBlock>
 
-        {/* Design Deliverables */}
-        <SectionBlock className='pb-0' backgrounds={mentorBackgrounds}>
-          <Container className='relative'>
-            {/* Mobile Swiper */}
-            <div className="md:hidden">
-              <Swiper
-                modules={[Pagination, Navigation]}
-                pagination={{ clickable: true }}
-                navigation={true}
-                spaceBetween={24}
-                slidesPerView={1}
-                className="design-deliverables-swiper"
-              >
-                <SwiperSlide>
-                  <div>
-                    <H2>Design Deliverables</H2>
-                    <P>To communicate Mentor's value as a personalized learning coach, we framed the product experience around a narrative: Mentor is not just an app—it's a smart companion that helps students set achievable goals, stay on track, and gain confidence through visible progress. With this perspective, I led the visual design and UI system development in alignment with our three core design goals.</P>
-                  </div>
-                </SwiperSlide>
-                <SwiperSlide>
-                  <div>
-                    <ProjectNote>
-                      From wireframes to a mid-fidelity POC to the final themed UI, each iteration helped us refine layout logic and shape the product's narrative identity.
-                    </ProjectNote>
-                    <img src={deliverablesDraft} alt="deliverables draft" className='my-16 rounded-lg' />
-                  </div>
-                </SwiperSlide>
-                <SwiperSlide>
-                  <div>
-                    <img src={deliverablesLayout1} alt="deliverables layout 1" className='w-full rounded-lg' />
-                  </div>
-                </SwiperSlide>
-                <SwiperSlide>
-                  <div>
-                    <img src={deliverablesLayout2} alt="deliverables layout 2" className='w-full rounded-lg' />
-                  </div>
-                </SwiperSlide>
-                <SwiperSlide>
-                  <div>
-                    <P>As the design lead, I defined the product's style and worked with the team to build a clear, consistent design system. Since our main users were junior and senior high school students, we needed to match their visual preferences and language habits. This made UX design more challenging. Together, we collected style references, explored different directions, and shaped a system that fits the product tone.</P>
-                  </div>
-                </SwiperSlide>
-              </Swiper>
-            </div>
-
-            {/* Desktop Layout */}
-            <div className="hidden md:block">
-              <H2 id="design-deliverables">Design Deliverables</H2>
-              <P>To communicate Mentor's value as a personalized learning coach, we framed the product experience around a narrative: Mentor is not just an app—it's a smart companion that helps students set achievable goals, stay on track, and gain confidence through visible progress. With this perspective, I led the visual design and UI system development in alignment with our three core design goals.</P>
-
-              <ProjectNote className='absolute top-[40%] right-1/2 transform translate-x-1/2 translate-y-32'>
-                From wireframes to a mid-fidelity POC to the final themed UI, each iteration helped us refine layout logic and shape the product's narrative identity.
-              </ProjectNote>
-              <img src={deliverablesDraft} alt="deliverables draft" className='my-16 rounded-lg' />
-              <div className='grid grid-cols-1 md:grid-cols-2 gap-4'>
-                <img src={deliverablesLayout1} alt="deliverables layout 1" className='md:h-full md:object-cover rounded-lg' />
-                <img src={deliverablesLayout2} alt="deliverables layout 2" className='md:h-full md:object-cover rounded-lg' />
-              </div>
-              <div className='my-16'>
-                <P>As the design lead, I defined the product's style and worked with the team to build a clear, consistent design system. Since our main users were junior and senior high school students, we needed to match their visual preferences and language habits. This made UX design more challenging. Together, we collected style references, explored different directions, and shaped a system that fits the product tone.</P>
-              </div>
-            </div>
-          </Container>
-          <img src={guidelineImg} alt="guideline" className='rounded-lg' />
-        </SectionBlock>
-
-        {/* story of mentor */}
+        {/* The Birth of Mentor */}
         <SectionBlock bgVariant="mentor" backgrounds={mentorBackgrounds}>
           <Container>
-            {/* Mobile Swiper */}
-            <div className="md:hidden">
-              <Swiper
-                modules={[Pagination, Navigation]}
-                pagination={{ clickable: true }}
-                navigation={true}
-                spaceBetween={24}
-                slidesPerView={1}
-                className="story-mentor-swiper"
-              >
-                <SwiperSlide>
-                  <div>
-                    <H2>Story of Mentor</H2>
-                    <div className="bg-white/10 backdrop-blur rounded-sm shadow p-5">
-                      <P className=''>The term "Mentor" originates from Greek mythology, where a wise guardian was entrusted with guiding Odysseus's son during his journey.</P>
-                    </div>
-                  </div>
-                </SwiperSlide>
-                <SwiperSlide>
-                  <div>
-                    <P>Mentor becomes a god of guidance who, in the age of AI and information overload, is accidentally trapped in a cosmic cube.</P>
-                    <P>To regain his powers and return to Earth, he must guide students through a learning journey across the universe, collecting badges as symbols of growth.<strong> Each student's progress fuels Mentor's evolution, turning learning into a shared quest.</strong></P>
-                    <P>This allegorical story frames the app experience as more than just education: it's a mission of transformation for both Mentor and the learner.</P>
-                  </div>
-                </SwiperSlide>
-              </Swiper>
-            </div>
+            <H2 id="mentor-birth">The Birth of Mentor</H2>
+            <P>
+              Responding to the product vision set by the company, the design and PM teams were jointly tasked with integrating AI into the design goals. After multiple rounds of discussion, we arrived at Mentor — "a personalized learning coach" — wrapped in a distinctive world-building narrative that addresses both the emotional and functional needs of users, making the product more relatable to both parents and students.
+            </P>
 
-            {/* Desktop Layout */}
-            <div className="hidden md:block">
-              <H2 id="story-of-mentor">Story of Mentor</H2>
-              <TwoColumn>
-                <div>
-                  <div className="bg-white/10 backdrop-blur rounded-sm shadow p-5 ">
-                    <P className=''>The term "Mentor" originates from Greek mythology, where a wise guardian was entrusted with guiding Odysseus's son during his journey.</P>
-                  </div>
-                </div>
-                <div>
+            <H3>Mentor's Story</H3>
+            <blockquote className="border-l-4 border-current pl-6 my-6 italic opacity-80">
+              The name "Mentor" comes from Greek mythology: a wise guardian entrusted to guide Odysseus's son while Odysseus was away.
+            </blockquote>
+            <P>
+              In the age of AI and information overload, Mentor became a guiding deity — but was accidentally trapped inside a cosmic cube. To reclaim his power and return to Earth, he must guide students on a learning journey through the universe, collecting badges that symbolize growth. <strong>Every student's progress drives Mentor's evolution, turning learning into a shared adventure.</strong> This fable transforms the app from a mere educational tool into a challenge where students and Mentor grow together.
+            </P>
+            <P>
+              To communicate Mentor's value as a personalized learning coach, the product design consistently conveyed that Mentor is not just an AI tool — he's a companion who helps students set achievable goals, maintain their rhythm, and build confidence through visible progress. With this lens, I led the visual design and UI system, aligned with the three core design goals.
+            </P>
 
-                  <P>Mentor becomes a god of guidance who, in the age of AI and information overload, is accidentally trapped in a cosmic cube.
-
-                  </P>
-                  <P>To regain his powers and return to Earth, he must guide students through a learning journey across the universe, collecting badges as symbols of growth.<strong> Each student's progress fuels Mentor's evolution, turning learning into a shared quest.</strong></P>
-                  <P>This allegorical story frames the app experience as more than just education: it's a mission of transformation for both Mentor and the learner.</P>
-                </div>
-              </TwoColumn>
-            </div>
           </Container>
         </SectionBlock>
-        <SectionBlock backgrounds={mentorBackgrounds}>
-          <div className='grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-12'>
-            <div>
-              <img src={mentorDraft} alt="mentor draft" className=' md:object-cover rounded-tr-lg rounded-br-lg' />
-              <P className='text-caption p-8 md:ml-24 mt-4 md:mt-8'>Early sketches exploring Mentor’s symbolic role as a cosmic guide, along with abstract representations of learning, rhythm, dialogue, and growth.</P>
-            </div>
-            <div>
-              <img src={mentorVariants} alt="mentor variants" className=' md:object-cover rounded-tl-lg rounded-bl-lg' />
-              <P className='text-caption p-8 md:mr-24 mt-4 md:mt-8'>To reflect each learner’s unique journey, Mentor evolves over time—its appearance adapting to students’ behaviors, learning pace, and engagement style.</P>
-            </div>
-          </div>
 
-          {/* Mentor as a UI Guide */}
-        </SectionBlock>
-        <SectionBlock bgVariant="dark" backgrounds={mentorBackgrounds}>
-          <Container className='w-full md:w-2/3 mx-auto'>
-            {/* Mobile Swiper */}
-            <div className="md:hidden">
-              <Swiper
-                modules={[Pagination, Navigation]}
-                pagination={{ clickable: true }}
-                navigation={true}
-                spaceBetween={24}
-                slidesPerView={1}
-                className="mentor-ui-guide-swiper"
-              >
-                <SwiperSlide>
-                  <div>
-                    <H2>Mentor as a UI Guide</H2>
-                    <P>Mentor sits at the bottom-right corner as a real-time learning agent—offering feedback, reminders, and encouragement based on each student's actions.</P>
-                    <P>Its glowing, sci-fi cube avatar blends intelligence with a sense of myth, creating a two-layer interaction model:</P>
-                  </div>
-                </SwiperSlide>
-                <SwiperSlide>
-                  <div>
-                    <img src={pyramid} alt="pyramid chart" className='rounded-lg' />
-                    <P>Grounded in educational agent theory, Mentor becomes a narrative-driven interface agent: shaping emotional engagement and making the learning flow feel more meaningful and motivating.</P>
-                  </div>
-                </SwiperSlide>
-                <SwiperSlide>
-                  <div>
-                    <img src={screenShot1} alt="updates screen" className="rounded-tr-lg rounded-br-lg" />
-                    <p className='text-caption p-8'>Mentor transforms routine updates into encouraging interactions.</p>
-                  </div>
-                </SwiperSlide>
-                <SwiperSlide>
-                  <div>
-                    <img src={screenShot2} alt="first-time onboarding screen" className="rounded-tl-lg rounded-bl-lg" />
-                    <p className='text-caption p-8'>During first-time onboarding, students are asked to rank subjects from strongest to weakest based on their confidence.</p>
-                  </div>
-                </SwiperSlide>
-              </Swiper>
-            </div>
-
-            {/* Desktop Layout */}
-            <div className="hidden md:block">
-              <H2 id="mentor-as-a-ui-guide">Mentor as a UI Guide</H2>
-              <P>Mentor sits at the bottom-right corner as a real-time learning agent—offering feedback, reminders, and encouragement based on each student's actions.
-              </P>
-              <P>Its glowing, sci-fi cube avatar blends intelligence with a sense of myth, creating a two-layer interaction model:</P>
-              <img src={pyramid} alt="pyramid chart" className='rounded-lg' />
-              <P>Grounded in educational agent theory, Mentor becomes a narrative-driven interface agent: shaping emotional engagement and making the learning flow feel more meaningful and motivating.</P>
-            </div>
-          </Container>
-          <div className='grid grid-cols-1 md:grid-cols-2 gap-4 mt-24'>
-            <div>
-              <img src={screenShot1} alt="updates screen" className="rounded-tr-lg rounded-br-lg" />
-              <p className='text-caption p-8'>Mentor transforms routine updates into encouraging interactions.</p>
-            </div>
-            <div>
-              <img src={screenShot2} alt="first-time onboarding screen" className="rounded-tl-lg rounded-bl-lg" />
-              <p className='text-caption p-8'>During first-time onboarding, students are asked to rank subjects from strongest to weakest based on their confidence. </p>
-            </div>
-          </div>
-        </SectionBlock>
-
-        {/* features */}
+        {/* Translating the IP Soul into Visual Language */}
         <SectionBlock backgrounds={mentorBackgrounds}>
           <Container>
-            <H2>Features</H2>
-            <P>The flow begins by asking students when and how long they prefer to study each week. Users can freely select weekdays and study duration to match their real-life rhythm.</P>
-            <ImageWithHotspots
-              src={screenShot3}
-              alt="learning persona classification"
-              hotspots={learningPersonaHotspots}
-              className="rounded-lg"
-            />
-
-            {/* Mobile Swiper */}
-            <div className="md:hidden">
-              <Swiper
-                modules={[Pagination, Navigation]}
-                pagination={{ clickable: true }}
-                navigation={true}
-                spaceBetween={24}
-                slidesPerView={1}
-                className="features-swiper mt-8"
-              >
-                <SwiperSlide>
-                  <div>
-                    <H3>Learning Persona Classification</H3>
-                    <P>To make learning more relatable and personalized, Mentor uses students' weekly study duration to automatically assign one of four learning personas:</P>
-                    <img src={typesImg} alt="types" className='rounded-lg' />
-                    <UL>
-                      <LI>佛系學生 (Laid-back Learner): Prefers a light, low-pressure pace.</LI>
-                      <LI>勤奮學子 (Consistent Striver): Studies regularly with determination.</LI>
-                      <LI>資優菁英 (Curious Achiever): Actively seeks knowledge and challenges.</LI>
-                      <LI>天才學霸 (Elite Performer): Pursues top performance with a strong academic drive.</LI>
-                    </UL>
-                    <P>This playful system helps learners build self-awareness and track their growth identity over time.</P>
-                  </div>
-                </SwiperSlide>
-                
-                <SwiperSlide>
-                  <div>
-                    <H3>Learning Goal Setting: Personalized Learning Paths</H3>
-                    <UL>
-                      <LI>Plans are presented in both timeline and calendar view, with daily task cards showing subject, knowledge point, and estimated time. Students can adjust or reshuffle plans anytime.</LI>
-                      <LI>For each task, the system clearly states the learning objective and provides video-based instruction.</LI>
-                    </UL>
-                    <ImageWithHotspots
-                      src={screenShot4}
-                      alt="learning goal setting"
-                      hotspots={learningGoalHotspots}
-                      className="rounded-lg"
-                    />
-                  </div>
-                </SwiperSlide>
-                <SwiperSlide>
-                  <div>
-                    <div className='px-4 pb-3 pt-6 bg-gray-100 rounded-sm'>
-                      <P><strong>Design Focus:</strong></P>
-                      <P>By letting students co-author their learning plans and visualize the structure ahead of time, we reduce friction and promote ownership. Visual clarity and flexible rescheduling are key to maintaining long-term engagement.</P>
-                    </div>
-                  </div>
-                </SwiperSlide>
-                <SwiperSlide>
-                  <div>
-                    <H3>Learning Reports: Visual Feedback and Next Steps</H3>
-                    <P>To address user anxiety around vague or delayed feedback, we designed a web-based report system accessible on both desktop and mobile—allowing parents to stay informed in real time.</P>
-                    <ImageWithHotspots
-                      src={screenShot5}
-                      alt="learning goal setting"
-                      hotspots={learningReportHotspots}
-                      className="rounded-lg"
-                    />
-                  </div>
-                </SwiperSlide>
-                <SwiperSlide>
-                  <div>
-                    <P className='mt-6'>Reports are available across three time dimensions:</P>
-                    <UL>
-                      <LI><strong>Daily Reports</strong> highlight completed tasks, key knowledge points, and quiz results.</LI>
-                      <LI><strong>Weekly Reports</strong> show learning effort, persona updates, and performance trends.</LI>
-                      <LI><strong>Monthly Reports</strong> offer an overview of time spent, subject performance, and diagnostic insights.</LI>
-                    </UL>
-                    <P>All reports are visualized using simplified charts and progress indicators, ensuring clarity for both students and parents.</P>
-                  </div>
-                </SwiperSlide>
-                <SwiperSlide>
-                  <div>
-                    <div className='px-4 pb-3 pt-6 bg-gray-100 rounded-sm'>
-                      <P><strong>Design Focus:</strong></P>
-                      <P>The biggest challenge was turning complex performance data into actionable insights while staying emotionally supportive. By aligning the report tone with our visual language, we built a transparent and encouraging system that enhances communication between students and parents.</P>
-                    </div>
-                  </div>
-                </SwiperSlide>
-                <SwiperSlide>
-                  <div>
-                    <H3>Badge Collection: Motivation Through Milestones</H3>
-                    <P>To encourage consistent engagement, we introduced a game-inspired badge collection system. Students unlock badges by reaching learning milestones, such as completing lessons, meeting daily goals, or adjusting their study plans.</P>
-                    <ImageWithHotspots
-                      src={screenShot6}
-                      alt="badge collection"
-                      hotspots={badgeCollectionHotspots}
-                      className="rounded-lg"
-                    />
-                  </div>
-                </SwiperSlide>
-                <SwiperSlide>
-                  <div>
-                    <P className='mt-6'>Progress tracking and lock/unlock feedback satisfy users' collection desire and reinforce habit formation.</P>
-                    <div className='grid grid-cols-1 gap-4 mt-6'>
-                      <img src={screenShot7} alt="badge 1" className="rounded-lg" />
-                      <img src={screenShot8} alt="badge 2" className="rounded-lg" />
-                    </div>
-                  </div>
-                </SwiperSlide>
-                <SwiperSlide>
-                  <div>
-                    <div className='px-4 pb-3 pt-6 bg-gray-100 rounded-sm'>
-                      <P><strong>Design Focus:</strong></P>
-                      <P>We combined the visual appeal of collectible items with milestone-driven design. The goal was to make progress feel rewarding without relying on competitive gamification.</P>
-                    </div>
-                  </div>
-                </SwiperSlide>
-              </Swiper>
+            <H3>Translating the IP Soul into Visual Language</H3>
+            <P>
+              Mentor's world-building narrative is the skeleton; bringing it to life and embedding it into the UI design is what gives it flesh.
+            </P>
+            <P>
+              Drawing on my art design background, I was responsible for expanding the world defined by the PM team into a concrete visual language: the four learning persona character designs, the cosmic scene illustration style for the psych quiz, and the overall UI background art direction — ensuring that "Mentor as a learning companion with a soul" could be felt in every frame.
+            </P>
+          </Container>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-12 mt-12">
+            <div>
+              <div className="bg-white aspect-video md:rounded-tr-lg md:rounded-br-lg overflow-hidden flex items-center justify-center">
+                <img src={conceptDraft} alt="Early concept sketches" className="w-full h-full object-contain p-4" />
+              </div>
+              <p className="text-caption mt-4 opacity-70 p-4 md:px-12">
+                Early sketches: exploring concepts around intelligence, potential, and learning partnership — trying and merging various directions. The team ultimately decided on the "M inside a cube" visual symbol, avoiding something too anthropomorphic while keeping it memorable.
+              </p>
             </div>
-
-            {/* Desktop Layout */}
-            <div className="hidden md:block">
-              <div className=" mb-10  mx-auto">
-
-
-                <H3>Learning Persona Classification</H3>
-                <P>To make learning more relatable and personalized, Mentor uses students' weekly study duration to automatically assign one of four learning personas:</P>
-                <img src={typesImg} alt="types" className='rounded-lg' />
-                <UL>
-                  <LI>佛系學生 (Laid-back Learner): Prefers a light, low-pressure pace.</LI>
-                  <LI>勤奮學子 (Consistent Striver): Studies regularly with determination.</LI>
-                  <LI>資優菁英 (Curious Achiever): Actively seeks knowledge and challenges.</LI>
-                  <LI>天才學霸 (Elite Performer): Pursues top performance with a strong academic drive.</LI>
-                </UL>
-                <P>This playful system helps learners build self-awareness and track their growth identity over time.</P>
+            <div>
+              <div className="bg-white aspect-video md:rounded-tl-lg md:rounded-bl-lg overflow-hidden flex items-center justify-center">
+                <img src={ipVariants} alt="IP variants" className="w-full h-full object-contain p-4" />
               </div>
-              <div className=" mb-10  mx-auto">
-                <H3>Learning Goal Setting: Personalized Learning Paths</H3>
-                <UL>
-                  <LI>Plans are presented in both timeline and calendar view, with daily task cards showing subject, knowledge point, and estimated time. Students can adjust or reshuffle plans anytime.</LI>
-                  <LI>For each task, the system clearly states the learning objective and provides video-based instruction.</LI>
-                </UL>
-                <ImageWithHotspots
-                  src={screenShot4}
-                  alt="learning goal setting"
-                  hotspots={learningGoalHotspots}
-                  className="rounded-lg"
-                />
+              <p className="text-caption mt-4 opacity-70 p-4 md:px-12">
+                To reflect each learner's unique journey, Mentor evolves over time — its appearance changes based on the student's behavior, pace, and engagement. The art direction therefore needed to plan multiple variants within the same visual series.
+              </p>
+            </div>
+          </div>
+        </SectionBlock>
+
+        {/* Mentor as Interface Guide */}
+        <SectionBlock bgVariant="mentor" backgrounds={mentorBackgrounds}>
+          <Container>
+            <H3>Mentor as an Interface Guide</H3>
+            <img src={uiGuide} alt="Mentor UI Guide" className="w-full rounded-lg mt-8" />
+            <P className="mt-8">
+              Mentor typically resides in the bottom-right corner of the screen, allowing users to interact and converse in real time. He is <strong>the key to giving the product its IP soul on a functional level: a learning companion that operates on both the visual and functional layers.</strong>
+            </P>
+            <P>
+              <strong>Visual layer</strong>: Mentor floats as a persistent cube in the bottom-right corner, using ambient motion and cosmic elements to keep the narrative world of the interface coherent — "your learning is a journey through the universe."
+            </P>
+            <P>
+              <strong>Functional layer</strong>: Mentor responds to users based on their current context. He provides encouragement during software updates; during the onboarding flow for first-time users, he acts as a guide, helping learners rank subjects by confidence level to establish initial learning preferences. Once inside the app, Mentor appears across virtually every core feature: reminders and encouragement for study plans, insight feedback on progress tracking, and more.
+            </P>
+            <P>
+              This approach reduces the coldness of a functional interface — the conversational, companion-like interaction creates a more immersive experience for users.
+            </P>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-8">
+              <div>
+                <img src={screenShot1} alt="Software update screen" className="rounded-lg w-full" />
+                <p className="text-caption mt-3 opacity-70">Mentor turns a routine update into an encouraging interaction.</p>
               </div>
-              <div className='px-4 pb-3 pt-6 bg-gray-100 rounded-sm'>
-                <P><strong>Design Focus:</strong></P>
-                <P>By letting students co-author their learning plans and visualize the structure ahead of time, we reduce friction and promote ownership. Visual clarity and flexible rescheduling are key to maintaining long-term engagement.</P>
+              <div>
+                <img src={screenShot2} alt="First-time onboarding screen" className="rounded-lg w-full" />
+                <p className="text-caption mt-3 opacity-70">During onboarding, students rank subjects from strongest to weakest by confidence level.</p>
               </div>
-              <div className=" mb-10  mx-auto">
-                <H3>Learning Reports: Visual Feedback and Next Steps</H3>
-                <P>To address user anxiety around vague or delayed feedback, we designed a web-based report system accessible on both desktop and mobile—allowing parents to stay informed in real time.</P>
-                <ImageWithHotspots
-                  src={screenShot5}
-                  alt="learning goal setting"
-                  hotspots={learningReportHotspots}
-                  className="rounded-lg"
-                />
-                <P className='mt-6'>Reports are available across three time dimensions:</P>
-                <UL>
-                  <LI><strong>Daily Reports</strong> highlight completed tasks, key knowledge points, and quiz results.</LI>
-                  <LI><strong>Weekly Reports</strong> show learning effort, persona updates, and performance trends.</LI>
-                  <LI><strong>Monthly Reports</strong> offer an overview of time spent, subject performance, and diagnostic insights.</LI>
-                </UL>
-                <P>All reports are visualized using simplified charts and progress indicators, ensuring clarity for both students and parents.</P>
-                <div className='px-4 pb-3 pt-6 bg-gray-100 rounded-sm'>
-                  <P><strong>Design Focus:</strong></P>
-                  <P>The biggest challenge was turning complex performance data into actionable insights while staying emotionally supportive. By aligning the report tone with our visual language, we built a transparent and encouraging system that enhances communication between students and parents.</P>
+            </div>
+          </Container>
+        </SectionBlock>
+
+        {/* How I Built and Led the Team */}
+        <SectionBlock backgrounds={mentorBackgrounds}>
+          <Container>
+            <H2 id="team-leadership">How I Built and Led the Team</H2>
+            <P>
+              The four-person design team had quite diverse backgrounds — some came from fine arts and graphic design, others leaned toward front-end engineering. Everyone wanted to grow into UI design, but each person had a different starting point and different limitations.
+            </P>
+            <P>
+              My job wasn't to just assign tasks — it was <strong>to first take the time to understand each person: where they wanted to grow, what they were already good at, and where they needed training before diving in.</strong> On that foundation, I built a detailed schedule, balancing marketing material requests the design team had absorbed, each person's current workload, and who was stuck and needed support.
+            </P>
+
+            <H3>Finding Design Direction in Chaos and Divergence</H3>
+            <P>
+              This product spanned five departments, each bringing a different set of priorities: executives had a vision, PM had requirements, engineering had technical constraints, sales had market pressure — and marketing had promotional campaigns to run. My job was to make sure these voices didn't cancel each other out, but converged into a direction everyone could move forward on.
+            </P>
+            <P>
+              Concretely: convening meetings, gathering diverse input, distilling scattered requirements into executable steps, presenting concrete options for PM and stakeholders to decide on, and then taking ownership of UI quality and revision once the direction was confirmed.
+            </P>
+          </Container>
+
+          <div className="mt-12 md:px-16 md:py-4">
+            <img src={iteration1} alt="Design iteration round 1" className="w-full md:w-4/5 md:mx-auto block" />
+          </div>
+          <Container>
+            <div className="relative mt-2">
+              <ProjectNote className="hidden md:block absolute top-[40%] right-1/2 transform translate-x-1/2 translate-y-32 z-10 max-w-xs text-gray-800">
+                From rough concepts to wireframes to UI mockups, each round of convergence and iteration helped every team member better understand the product — making it easier to align on vision and focus feedback on what mattered most.
+              </ProjectNote>
+              <img src={iteration2} alt="Design iteration round 2" className="w-full rounded-lg" />
+            </div>
+            <p className="md:hidden text-caption opacity-60 mt-4 mb-4" style={{ fontWeight: '200' }}>
+              From rough concepts to wireframes to UI mockups, each round of convergence and iteration helped every team member better understand the product — making it easier to align on vision and focus feedback on what mattered most.
+            </p>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
+              <img src={wireframe1} alt="Wireframe version 1" className="md:h-full md:object-cover rounded-lg" />
+              <img src={wireframe2} alt="Wireframe version 2" className="md:h-full md:object-cover rounded-lg" />
+            </div>
+          </Container>
+
+          <Container>
+            <H3>Putting the Right People on the Right Stage</H3>
+            <P>
+              The most important Design Lead decision I made in this project was assigning the right tasks to the right person.
+            </P>
+            <P>
+              Three key product features — Learning Goal Setting, Learning Reports, and the Psych Quiz — were all handed to team member Nomis to lead. These three tasks were different in nature but shared one common thread: they all required simultaneously handling complex information architecture, user research, and logical reasoning — which is exactly what I saw in Nomis.
+            </P>
+            <P>
+              Learning Goal Setting required balancing student permissions, AI recommendation logic, and step-by-step interaction flow. The Learning Reports had a tougher starting point: the previous version had been rejected by senior management for being essentially the same data repeated three times. Nomis redesigned the reports into three distinctly different narrative frameworks: <strong>daily reports tell execution details, weekly reports reveal behavioral insights, monthly reports narrate growth stories.</strong> This framework became one of the flagship features of the Mentor launch.
+            </P>
+            <P>
+              The Psych Quiz blended marketing needs with the product's cosmic world-building. Nomis had a psychology background, giving him the ability to handle academic research, content planning, and front-end implementation simultaneously. He reviewed 30+ educational psychology papers and designed 64 personalized learning persona outcomes — receiving strong responses both internally and from users.
+            </P>
+            <P>
+              These outcomes became some of the strongest cases in Nomis's portfolio. For more detail, see the records from Nomis's perspective:
+            </P>
+            <UL>
+              <LI>
+                <a href="https://mudi0710.github.io/portfolio/#/projects/ai-smartbag-learning-goal" target="_blank" rel="noopener noreferrer" className="underline opacity-70 hover:opacity-100 transition-opacity">
+                  Learning Goal Setting ↗ by Nomis
+                </a>
+              </LI>
+              <LI>
+                <a href="https://mudi0710.github.io/portfolio/#/projects/ai-smartbag-learning-report" target="_blank" rel="noopener noreferrer" className="underline opacity-70 hover:opacity-100 transition-opacity">
+                  Learning Reports ↗ by Nomis
+                </a>
+              </LI>
+              <LI>
+                <a href="https://mudi0710.github.io/portfolio/#/projects/ai-smartbag-edu-psych-quiz" target="_blank" rel="noopener noreferrer" className="underline opacity-70 hover:opacity-100 transition-opacity">
+                  Educational Psych Quiz ↗ by Nomis
+                </a>
+              </LI>
+            </UL>
+
+            <H3>Learning from the Market</H3>
+            <P>
+              Decision-making doesn't only happen in internal team discussions — front-line observations from people in direct contact with users matter just as much.
+            </P>
+            <P>
+              In cross-departmental communication, the sales team surfaced a reality that we on the design side were prone to overlook: Taiwanese parents habitually consume information through LINE, and logging into a browser represents a significant friction point for them. This insight made us realize that no matter how well-designed the learning reports were, they'd be useless if the barrier to accessing them was too high.
+            </P>
+            <P>
+              So we added LINE as an additional distribution channel. Through LINE OA (LINE Official Account), reports are automatically pushed to parents' phones — delivered to the platform they're most comfortable with. In addition to scheduled report pushes and live customer support, LINE OA integrated multiple functions accessible through a rich menu, letting users tap through based on their needs.
+            </P>
+            <P>
+              The visual presentation, push timing, and interaction flow were ultimately co-designed by me and the engineering team. From sales-side user insights to engineering-side spec definition — this was a complete decision chain completed across three departments.
+            </P>
+          </Container>
+
+          {/* LINE OA */}
+          <Container>
+            <div className="flex flex-col gap-8 mt-8">
+              <div>
+                <img src={lineTree} alt="LINE OA tree diagram" className="rounded-lg w-full" />
+                <p className="text-caption mt-3 opacity-70" style={{ fontWeight: '200' }}>
+                  How should the LINE OA rich menu be structured? What conditions should determine each service path? To clarify these questions, I mapped it as a decision tree — making the logic easy for teammates to understand and discuss across departments.
+                </p>
+              </div>
+              <div>
+                <img src={lineMenu} alt="LINE OA rich menu" className="rounded-lg w-full md:w-1/2 md:mx-auto block" />
+                <p className="text-caption mt-3 opacity-70" style={{ fontWeight: '200' }}>
+                  The rich menu required balancing marketing strategy (most prominent button = primary product) with ease of use — significant effort went into the visual design.
+                </p>
+              </div>
+            </div>
+          </Container>
+        </SectionBlock>
+
+        {/* Design System */}
+        <SectionBlock bgVariant="blue" backgrounds={mentorBackgrounds}>
+          <Container>
+            <H2 id="design-system">A Scalable Design System</H2>
+            <P>
+              As Design Lead, I directed the overall visual style of the product and led the team in building a clear, consistent design system. Since the primary users are middle and high school students, we needed to accommodate their visual preferences and language habits — which made the design more challenging.
+            </P>
+            <P>
+              I coached team members through data collection and style exploration, and hands-on built the UI System in Figma — demonstrating how to plan color and typography hierarchies and build component libraries, actively developing the foundational knowledge and skills every UI designer needs.
+            </P>
+            <P>
+              <strong>This design system became the baseline for every subsequent feature interface</strong>, giving anyone who picked up a feature a clear reference to work from; new elements could also be added by following the system's architecture.
+            </P>
+          </Container>
+        </SectionBlock>
+
+        <SectionBlock className="!py-0" backgrounds={mentorBackgrounds}>
+          <img src={designSystem} alt="Design system" className="w-full" />
+        </SectionBlock>
+
+        {/* UI Design */}
+        <SectionBlock backgrounds={mentorBackgrounds}>
+          <Container>
+            <H2 id="ui-design">Interface Design Built Around the World & Product Vision</H2>
+            <P>With the design system in place, every feature interface was built on top of this visual language. The goal wasn't just usability — it was making sure users felt the presence of Mentor's world in every screen.</P>
+          </Container>
+
+          {/* Role Labels */}
+          <Container className="mt-12">
+            <H3>Role Labels Instead of Cold Numbers</H3>
+            <P>
+              Mentor guides students to freely choose their weekly study days and duration, fitting their real needs and life rhythm.
+            </P>
+            <ImageWithHotspots
+              src={personaUi1}
+              alt="Learning persona UI design"
+              hotspots={learningPersonaHotspots}
+              className="rounded-lg mt-6"
+            />
+            <P className="mt-8">We didn't want the UI to be just cold numbers. After team discussion, we decided to translate weekly study hours into four persona labels (Relaxed Learner, Diligent Student, Academic Achiever, Top Scholar) — turning a number into an identity. Mentor displays which persona the student belongs to based on their weekly study time.</P>
+            <img src={typesImg} alt="Learning persona labels" className="rounded-lg mt-4" />
+            <div className="mt-8 p-8 rounded-xl bg-[#3E3AFF] text-white">
+              <p className="font-medium text-white mb-3">Pain Point</p>
+              <P>Students lack a sense of direction in learning and don't know where to start.</P>
+              <p className="font-medium text-white mb-3 mt-6">Design Decision</p>
+              <P>A playful self-assessment system that turns numbers into an identity, boosting learning motivation. Students aren't just setting a time commitment — they're choosing <strong>who they want to become</strong>, building the first step of their learning journey from intrinsic motivation.</P>
+            </div>
+          </Container>
+
+          {/* Information Hierarchy */}
+          <Container className="mt-20">
+            <H3>Information Hierarchy Design</H3>
+            <P>
+              The learning goal setup is presented in a dual-mode view — calendar and weekly plan — so learners with different habits can switch between them. Subject color blocks serve as the primary visual anchor, followed by topic titles, with estimated time and completion status as supplementary information. Students can scan quickly and locate what they need without reading line by line.
+            </P>
+            <ImageWithHotspots
+              src={screenShot4}
+              alt="Learning goal setting interface"
+              hotspots={[
+                { id: 'point2', x: 38, y: 44, content: 'Each colored dot represents a different subject.', arrowPosition: 'bottom' },
+                { id: 'point3', x: 78, y: 34, content: 'A daily overview of the learning plan.', arrowPosition: 'bottom' },
+              ]}
+              className="rounded-lg mt-6"
+            />
+            <img src={goalCalendar} alt="Learning goal calendar view" className="rounded-lg mt-6" />
+            <p className="text-caption opacity-50 mt-2">Detailed component states and interaction flows mapped out in Figma</p>
+            <P className="mt-6">Learning reports are organized around different time dimensions, each with its own visualization approach — but all using the same visual system.</P>
+            <P>Daily reports use a list-based structure, emphasizing completion details for each learning unit at high information density; weekly reports introduce chart components so numerical trends are readable at a glance; monthly reports center on radar and donut charts as their primary visual.</P>
+            <img src={reportWeekly} alt="Weekly report" className="rounded-lg mt-4" />
+            <P className="mt-6">The longer the time span, the more the report focuses on "trends" — helping parents understand learning progress through overall patterns rather than line-by-line numbers.</P>
+            <img src={reportMonthly} alt="Monthly report" className="rounded-lg mt-4" />
+            <div className="mt-8 p-8 rounded-xl bg-[#3E3AFF] text-white">
+              <p className="font-medium text-white mb-3">Pain Point</p>
+              <P>Learning records are voluminous, dry, and lack any next-step prompts — making it difficult to plan progress and impossible to see long-term growth.</P>
+              <p className="font-medium text-white mb-3 mt-6">Design Decision</p>
+              <P>A carefully layered information hierarchy lets students and parents see the overall shape of the plan while also drilling into the details. The ability to look back at the past and look ahead to the future brings a sense of reassurance.</P>
+            </div>
+          </Container>
+
+          {/* Badges */}
+          <Container className="mt-12">
+            <H3>Turning Milestones into a Collectible Visual Language</H3>
+            <P>
+              Every badge has its own unique visual design. Within the cosmic art system, these badges aren't just rewards — they're extensions of the Mentor world.
+            </P>
+            <P>We applied gamification design so that every student milestone becomes a mark left behind in their learning adventure. The Hall of Achievements display interface is intentionally designed to be collectible and browsable — progress tracking and unlock feedback satisfy the urge to collect and reinforce habit formation.</P>
+          </Container>
+
+          <Container>
+            <ImageWithHotspots
+              src={screenShot6}
+              alt="Hall of Achievements"
+              hotspots={[
+                { id: 'point1', x: 28, y: 8, content: 'Students can track their collection progress.', arrowPosition: 'bottom' },
+                { id: 'point2', x: 52, y: 50, content: 'Each badge has a unique visual design, displayed in the "Hall of Achievements" interface.', arrowPosition: 'bottom' },
+              ]}
+              className="rounded-lg mt-6"
+            />
+            <p className="text-caption opacity-50 mt-2">The Hall of Achievements lets students browse all badges tied to each task. Some are series badges — the more thoroughly a task is completed, the higher the tier earned, from beginner to master. Others are unique special badges, most of which are unlocked through unexpected triggers.</p>
+            <div className="grid grid-cols-2 gap-4 mt-4">
+              <img src={screenShot7} alt="Earned badges" className="rounded-lg" />
+              <img src={screenShot8} alt="Locked badges" className="rounded-lg" />
+            </div>
+          </Container>
+
+          <Container>
+            <div className="mt-8 p-8 rounded-xl bg-[#3E3AFF] text-white">
+              <p className="font-medium text-white mb-3">Pain Point</p>
+              <P>Chasing grade improvements alone is demoralizing — learners have no sustained motivation to keep going.</P>
+              <p className="font-medium text-white mb-3 mt-6">Design Decision</p>
+              <P>Completing courses and maintaining learning streaks earns badges — using immediate feedback to sustain motivation, giving students the drive to tackle their next learning task with the encouragement of achievement badges.</P>
+            </div>
+          </Container>
+        </SectionBlock>
+
+        {/* Results */}
+        <SectionBlock bgVariant="purple" backgrounds={mentorBackgrounds}>
+          <Container>
+            <H2 id="results">Results</H2>
+            <P>
+              After launch, <strong>90% of students chose to use AI to build their personalized learning paths</strong> rather than setting them manually — direct evidence that the "personalized next-step guidance" design goal was genuinely adopted.
+            </P>
+            <P>
+              According to the sales team, the learning reports gave parents clear visibility into their child's daily, weekly, and monthly learning activity for the first time — providing a concrete answer to the core anxiety of "is my investment in tutoring actually paying off?"
+            </P>
+
+            <H3 className="mt-12">Key Impact</H3>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6">
+              {[
+                {
+                  title: 'Mentor became the company\'s flagship AI product line',
+                  desc: 'Proved that the design team can build a complete product design system from 0 to 1 in a resource-constrained environment.',
+                },
+                {
+                  title: 'A design system that keeps running',
+                  desc: 'The design system and collaboration workflows I established continued to support product iteration after I left.',
+                },
+                {
+                  title: 'A proactive, collaborative team culture',
+                  desc: 'Members understood each other\'s strengths and knew how to help one another. The culture I built became the foundation for self-sustaining operations.',
+                },
+                {
+                  title: 'Changed how the company perceives the design team',
+                  desc: 'Designers are no longer seen as solely responsible for visual output — they\'re strategic partners with product thinking and cross-functional communication skills.',
+                },
+              ].map(({ title, desc }) => (
+                <div key={title} className="p-8 rounded-xl bg-white/5 border border-white/10">
+                  <p className="font-medium mb-3">{title}</p>
+                  <P className="opacity-70 !mb-0">{desc}</P>
                 </div>
-                <div className=" mb-10  mx-auto">
-                  <H3>Badge Collection: Motivation Through Milestones</H3>
-                  <P>To encourage consistent engagement, we introduced a game-inspired badge collection system. Students unlock badges by reaching learning milestones, such as completing lessons, meeting daily goals, or adjusting their study plans.</P>
-
-                  <ImageWithHotspots
-                    src={screenShot6}
-                    alt="badge collection"
-                    hotspots={badgeCollectionHotspots}
-                    className="rounded-lg"
-                  />
-                  <P className='mt-6'>Progress tracking and lock/unlock feedback satisfy users' collection desire and reinforce habit formation.</P>
-                  <div className='grid grid-cols-1 md:grid-cols-2 gap-4 mt-6'>
-                    <img src={screenShot7} alt="badge 1" className="rounded-lg" />
-                    <img src={screenShot8} alt="badge 2" className="rounded-lg" />
-                  </div>
-
-                </div>
-                <div className='px-4 pb-3 pt-6 bg-gray-100 rounded-sm'>
-                  <P><strong>Design Focus:</strong></P>
-                  <P>We combined the visual appeal of collectible items with milestone-driven design. The goal was to make progress feel rewarding without relying on competitive gamification.</P>
-                </div>
-              </div>
+              ))}
             </div>
           </Container>
         </SectionBlock>
 
         {/* Reflection */}
-        <SectionBlock bgVariant="blue" backgrounds={mentorBackgrounds}>
-          <Container className='w-full md:w-2/3 mx-auto'>
-            {/* Mobile Swiper */}
-            <div className="md:hidden">
-              <Swiper
-                modules={[Pagination, Navigation]}
-                pagination={{ clickable: true }}
-                navigation={true}
-                spaceBetween={24}
-                slidesPerView={1}
-                className="reflection-swiper"
-              >
-                <SwiperSlide>
-                  <div>
-                    <H2>Reflection</H2>
-                    <P>Designing Mentor was more than a visual or functional challenge—it was a deeply collaborative, iterative process that stretched across teams and disciplines. Looking back, here are three key reflections from my role as the design lead:</P>
-                  </div>
-                </SwiperSlide>
-                <SwiperSlide>
-                  <div>
-                    <H3>1. Keep everyone in the loop</H3>
-                    <UL>
-                      <LI>With a grand product vision and complex requirements, clear and timely communication became essential.</LI>
-                      <LI>I overcame my habit of being indirect and learned to be vocal in design and cross-functional discussions to protect my team and ensure smooth progress.</LI>
-                    </UL>
-                  </div>
-                </SwiperSlide>
-                <SwiperSlide>
-                  <div>
-                    <H3>2. Learning from the Market</H3>
-                    <UL>
-                      <LI>Beyond user research, I learned to value feedback from the sales team who directly interact with potential customers.</LI>
-                      <LI>Their insights helped make the product more competitive and prevented overly designer-centric decisions.</LI>
-                    </UL>
-                  </div>
-                </SwiperSlide>
-                <SwiperSlide>
-                  <div>
-                    <H3>3. Supporting Team Growth</H3>
-                    <UL>
-                      <LI>Held 1-on-1 meetings to understand each teammate's motivations and engagement.</LI>
-                      <LI>Assigned tasks to help them grow, while encouraging them to learn and sharpen their skills using available resources.</LI>
-                    </UL>
-                  </div>
-                </SwiperSlide>
-              </Swiper>
-            </div>
+        <SectionBlock backgrounds={mentorBackgrounds}>
+          <Container>
+            <H2 id="reflection">Reflection</H2>
+            <P>
+              This project taught me to shift my focus from "doing things" to "getting the right people to do the right things." Through practice, I came to understand the core mindset of leading a team: more important than perfection is balancing resources and expectations. Three principles I found indispensable throughout execution:
+            </P>
 
-            {/* Desktop Layout */}
-            <div className="hidden md:block">
-              <H2 id="reflection">Reflection</H2>
-
+            <div className="flex flex-col gap-12 mt-8">
               <div>
-                <P>Designing Mentor was more than a visual or functional challenge—it was a deeply collaborative, iterative process that stretched across teams and disciplines. Looking back, here are three key reflections from my role as the design lead:</P>
-                <H3>1. Keep everyone in the loop</H3>
-                <UL>
-                  <LI>With a grand product vision and complex requirements, clear and timely communication became essential.</LI>
-                  <LI>I overcame my habit of being indirect and learned to be vocal in design and cross-functional discussions to protect my team and ensure smooth progress.</LI>
-                </UL>
-                <H3>2. Learning from the Market</H3>
-                <UL>
-                  <LI>Beyond user research, I learned to value feedback from the sales team who directly interact with potential customers.</LI>
-                  <LI>Their insights helped make the product more competitive and prevented overly designer-centric decisions.</LI>
-                </UL>
-                <H3>3. Supporting Team Growth</H3>
-                <UL>
-                  <LI>Held 1-on-1 meetings to understand each teammate's motivations and engagement.</LI>
-                  <LI>Assigned tasks to help them grow, while encouraging them to learn and sharpen their skills using available resources.</LI>
-                </UL>
+                <H3>Keep Information Transparent & Communication Channels Open</H3>
+                <P>
+                  With an ambitious product vision and complex requirements, clear and timely communication became non-negotiable. Requirements shifted fast and dramatically — without effective communication channels, it's easy to fall behind.
+                </P>
+                <P>
+                  In the past, I defaulted to being a follower. But for this project, I overcame my habit of indirect communication, learning to speak up proactively in design and cross-departmental discussions, and encouraging every team member to voice their opinions boldly — <strong>transforming the design team from passive task executors into decision-makers with genuine product thinking.</strong>
+                </P>
+              </div>
+              <div>
+                <H3>Learn from the Market</H3>
+                <P>
+                  Beyond internal team discussion and research, I learned to value the feedback from the sales team. They're in direct contact with potential customers — the people closest to real needs. Their insights strengthened the product's competitiveness, and I encouraged team members to engage with them regularly during the project, drawing on their perspective to <strong>avoid decisions that were overly centered on a designer's point of view.</strong>
+                </P>
+              </div>
+              <div>
+                <H3>Support Team Growth</H3>
+                <P>
+                  Through individual conversations, I learned each member's motivations and expectations, then assigned tasks that would help them grow and encouraged proactive learning. <strong>Each of them gained something through their work — a chance to try new techniques, to express a distinctive idea, or even to step up and lead</strong> — adding a meaningful achievement to their own career stories.
+                </P>
               </div>
             </div>
           </Container>
         </SectionBlock>
 
-        {/* conclusion */}
+        {/* Conclusion */}
         <SectionBlock bgVariant="dark" backgrounds={mentorBackgrounds}>
-          <Container className='w-full md:w-2/3 mx-auto flex flex-col items-center justify-center mb-24'>
-            <P>Designing Mentor was more than just shaping screens—it was about shaping a team, a story, and a shared belief in learning. Early on, I was still a maker: focused on pixels, flows, and UI polish. But as the product scaled, I learned to lead—aligning cross-functional efforts, empowering teammates, and holding the bigger picture.</P>
-            <P>These lessons helped me grow from an individual contributor to a design lead. I learned to communicate clearly, translate ideas across roles, and recognize delivery as a collective rhythm. More than anything, this project taught me that good design is not just about clarity and craft, but about aligning vision, people, and outcomes.</P>
-            <img src={mentor} alt="mentor" className='w-24 h-24 rounded-lg' />
-            <p className='text-h3 font-light'>Mentor</p>
-            <p className='text-caption text-gray-300'>May 2019 - June 2024</p>
+          <Container className="flex flex-col items-center text-center">
+            <P className="w-full md:w-2/3 opacity-80">
+              Designing Mentor wasn't just about shaping screens — it was about shaping a team, a story, and a shared belief in learning.
+            </P>
+            <P className="w-full md:w-2/3 opacity-80">
+              At first, I leaned toward being an "executor": focused on pixels, flows, and UI polish. But as the product scaled, I gradually learned to integrate across functions, empower teammates, and hold the bigger direction — from the perspective of a leader.
+            </P>
+            <P className="w-full md:w-2/3 opacity-80">
+              These experiences grew me from an individual contributor into a design manager: communicating more clearly, thinking from within different roles. Most importantly, I learned that great design isn't just about delivering a perfect artifact — it's about aligning the team's efforts with the company's expectations. That's what makes something sustainable.
+            </P>
+            <img src={mentorImg} alt="Mentor" className="h-32 w-32 md:h-48 md:w-48 rounded-lg mt-12 mb-4" />
+            <p className="text-p opacity-80">Mentor</p>
+            <p className="text-p opacity-60">2023/08 - 2024/06</p>
           </Container>
-
-          <RelatedProjects />
-
-          <hr className='w-full my-8 border-gray-800' />
-          <Footer />
         </SectionBlock>
 
-
+        <RelatedProjects currentSlug="mentor" />
+        <Footer />
       </main>
     </div>
   )
 }
-
-
