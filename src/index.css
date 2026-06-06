@@ -2,6 +2,12 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Ensure strong inside paragraphs has sufficient contrast against light-weight base text */
+.text-p strong,
+.text-p b {
+  font-weight: 700;
+}
+
 /* Simple marquee helper */
 .marquee {
   position: relative;

@@ -176,7 +176,7 @@ function Navbar({ isWhite = false, isMenuOpen = false, onToggleMenu, variant = '
           <div className="flex items-center justify-center">
             {variant === 'arrow' && (
               <a href={`${buildHref('/')}#home`} aria-label="Go to home" className="inline-block">
-                <h1 className={`text-2xl font-bold text-gray-800`}>ENN&nbsp;TANG</h1>
+                <h1 className={`text-2xl font-bold ${isWhite ? 'text-white' : 'text-gray-800'}`}>ENN&nbsp;TANG</h1>
               </a>
             )}
           </div>
