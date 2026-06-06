@@ -42,7 +42,7 @@ function Home() {
   }
 
   const slides = [
-    { src: getPublicPath('/bg-mentor.png'), title: 'Intuitive and visually appealing UI design', subtitle: t('home.carousel.focusedOn'), projectName: 'Mentor: AI-integrated learning platform', slug: 'mentor' },
+    { src: getPublicPath('/bg-mentor.png'), title: 'Intuitive and visually appealing UI design', subtitle: t('home.carousel.focusedOn'), projectName: 'Mentor: Not just a product, but a team', slug: 'mentor' },
     { src: getPublicPath('/bg-illustration.png'), title: 'Illustrations that tell stories', subtitle: t('home.carousel.create'), projectName: 'Star', href: '#/projects'},
     { src: getPublicPath('/bg-ehairpos.png'), title: 'Intuitive and visually appealing UI design', subtitle: t('home.carousel.focusedOn'), projectName: 'eHairPOS', slug: 'ehairpos' },
     { src: getPublicPath('/bg-textbook.png'), title: 'Graphic Design & Editorial Layout', subtitle: t('home.carousel.specialize'), projectName: "A Traveler's Guide for Young Historians", href: '#/projects' },
