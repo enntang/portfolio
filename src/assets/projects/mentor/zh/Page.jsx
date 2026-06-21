@@ -62,6 +62,7 @@ import lineTree from '../image/projectInfo-mentor-line-tree.png'
 import lineMenu from '../image/projectInfo-mentor-screenshot9.png'
 import tabletMockup from '../image/projectInfo-mentor-tablet-mockup.png'
 
+import FadeIn from '../../../../components/utilities/FadeIn'
 import P from '../../../../components/post/P'
 import H2 from '../../../../components/post/H2'
 import H3 from '../../../../components/post/H3'
@@ -160,6 +161,7 @@ export default function MentorZhPage() {
         </header>
 
         {/* 專案概覽 */}
+        <FadeIn>
         <SectionBlock backgrounds={mentorBackgrounds}>
           <Container>
             <H2 id="project-brief">專案概覽</H2>
@@ -203,8 +205,10 @@ export default function MentorZhPage() {
             </div>
           </Container>
         </SectionBlock>
+        </FadeIn>
 
         {/* 團隊規模與協作架構 */}
+        <FadeIn>
         <SectionBlock bgVariant="mentor" backgrounds={mentorBackgrounds}>
           <Container>
             <H2 id="team-structure">團隊規模與協作架構</H2>
@@ -241,8 +245,10 @@ export default function MentorZhPage() {
             </P>
           </Container>
         </SectionBlock>
+        </FadeIn>
 
         {/* 主要職責 */}
+        <FadeIn>
         <SectionBlock backgrounds={mentorBackgrounds}>
           <Container>
             <H2 id="responsibilities">主要職責</H2>
@@ -274,8 +280,10 @@ export default function MentorZhPage() {
             </div>
           </Container>
         </SectionBlock>
+        </FadeIn>
 
         {/* 背景 */}
+        <FadeIn>
         <SectionBlock bgVariant="dark" backgrounds={mentorBackgrounds}>
           <Container>
             <H2 id="background">背景</H2>
@@ -325,8 +333,10 @@ export default function MentorZhPage() {
 
           </Container>
         </SectionBlock>
+        </FadeIn>
 
         {/* How Might We */}
+        <FadeIn>
         <SectionBlock backgrounds={mentorBackgrounds}>
           <Container>
             <div className="text-center mb-10 flex flex-col items-center justify-center">
@@ -339,8 +349,10 @@ export default function MentorZhPage() {
             </div>
           </Container>
         </SectionBlock>
+        </FadeIn>
 
         {/* 設計目標 */}
+        <FadeIn>
         <SectionBlock bgVariant="blue" backgrounds={mentorBackgrounds}>
           <Container>
             <H2 id="design-goals">設計目標</H2>
@@ -405,8 +417,10 @@ export default function MentorZhPage() {
             </div>
           </Container>
         </SectionBlock>
+        </FadeIn>
 
         {/* Mentor 的誕生 */}
+        <FadeIn>
         <SectionBlock bgVariant="mentor" backgrounds={mentorBackgrounds}>
           <Container>
             <H2 id="mentor-birth">Mentor 的誕生</H2>
@@ -427,8 +441,10 @@ export default function MentorZhPage() {
 
           </Container>
         </SectionBlock>
+        </FadeIn>
 
         {/* 把 IP 的靈魂譯成視覺語言 */}
+        <FadeIn>
         <SectionBlock backgrounds={mentorBackgrounds}>
           <Container>
             <H3>把 IP 的靈魂譯成視覺語言</H3>
@@ -458,8 +474,10 @@ export default function MentorZhPage() {
             </div>
           </div>
         </SectionBlock>
+        </FadeIn>
 
         {/* ui-guide: image left, text right */}
+        <FadeIn>
         <SectionBlock bgVariant="mentor" backgrounds={mentorBackgrounds}>
           <Container>
             <H3>Mentor 作為介面引導者</H3>
@@ -488,8 +506,10 @@ export default function MentorZhPage() {
             </div>
           </Container>
         </SectionBlock>
+        </FadeIn>
 
         {/* 我如何組建並帶領團隊 */}
+        <FadeIn>
         <SectionBlock backgrounds={mentorBackgrounds}>
           <Container>
             <H2 id="team-leadership">我如何組建並帶領團隊</H2>
@@ -596,8 +616,10 @@ export default function MentorZhPage() {
             </div>
           </Container>
         </SectionBlock>
+        </FadeIn>
 
         {/* 具有擴展性的設計系統 */}
+        <FadeIn>
         <SectionBlock bgVariant="blue" backgrounds={mentorBackgrounds}>
           <Container>
             <H2 id="design-system">具有擴展性的設計系統</H2>
@@ -612,12 +634,16 @@ export default function MentorZhPage() {
             </P>
           </Container>
         </SectionBlock>
+        </FadeIn>
 
+        <FadeIn>
         <SectionBlock className="!py-0" backgrounds={mentorBackgrounds}>
           <img src={designSystem} alt="設計系統" className="w-full" />
         </SectionBlock>
+        </FadeIn>
 
         {/* 圍繞世界觀與產品訴求展開的介面設計 */}
+        <FadeIn>
         <SectionBlock backgrounds={mentorBackgrounds}>
           <Container>
             <H2 id="ui-design">圍繞世界觀與產品訴求展開的介面設計</H2>
@@ -711,8 +737,10 @@ export default function MentorZhPage() {
             </div>
           </Container>
         </SectionBlock>
+        </FadeIn>
 
         {/* 成果 */}
+        <FadeIn>
         <SectionBlock bgVariant="purple" backgrounds={mentorBackgrounds}>
           <Container>
             <H2 id="results">成果</H2>
@@ -751,8 +779,10 @@ export default function MentorZhPage() {
             </div>
           </Container>
         </SectionBlock>
+        </FadeIn>
 
         {/* 反思 */}
+        <FadeIn>
         <SectionBlock backgrounds={mentorBackgrounds}>
           <Container>
             <H2 id="reflection">學習反思</H2>
@@ -785,8 +815,10 @@ export default function MentorZhPage() {
             </div>
           </Container>
         </SectionBlock>
+        </FadeIn>
 
         {/* Conclusion */}
+        <FadeIn>
         <SectionBlock bgVariant="dark" backgrounds={mentorBackgrounds}>
           <Container className="flex flex-col items-center text-center">
             <P className="w-full md:w-2/3 opacity-80">
@@ -803,6 +835,7 @@ export default function MentorZhPage() {
             <p className="text-p opacity-60">2023/08 - 2024/06</p>
           </Container>
         </SectionBlock>
+        </FadeIn>
 
         <RelatedProjects currentSlug="mentor" />
         <Footer />

@@ -62,6 +62,7 @@ import lineTree from '../image/projectInfo-mentor-line-tree.png'
 import lineMenu from '../image/projectInfo-mentor-screenshot9.png'
 import tabletMockup from '../image/projectInfo-mentor-tablet-mockup.png'
 
+import FadeIn from '../../../../components/utilities/FadeIn'
 import P from '../../../../components/post/P'
 import H2 from '../../../../components/post/H2'
 import H3 from '../../../../components/post/H3'
@@ -160,6 +161,7 @@ export default function MentorEnPage() {
         </header>
 
         {/* Project Brief */}
+        <FadeIn>
         <SectionBlock backgrounds={mentorBackgrounds}>
           <Container>
             <H2 id="project-brief">Project Brief</H2>
@@ -203,8 +205,10 @@ export default function MentorEnPage() {
             </div>
           </Container>
         </SectionBlock>
+        </FadeIn>
 
         {/* Team Structure */}
+        <FadeIn>
         <SectionBlock bgVariant="mentor" backgrounds={mentorBackgrounds}>
           <Container>
             <H2 id="team-structure">Team Structure & Collaboration</H2>
@@ -241,8 +245,10 @@ export default function MentorEnPage() {
             </P>
           </Container>
         </SectionBlock>
+        </FadeIn>
 
         {/* Responsibilities */}
+        <FadeIn>
         <SectionBlock backgrounds={mentorBackgrounds}>
           <Container>
             <H2 id="responsibilities">Key Responsibilities</H2>
@@ -274,8 +280,10 @@ export default function MentorEnPage() {
             </div>
           </Container>
         </SectionBlock>
+        </FadeIn>
 
         {/* Background */}
+        <FadeIn>
         <SectionBlock bgVariant="dark" backgrounds={mentorBackgrounds}>
           <Container>
             <H2 id="background">Background</H2>
@@ -325,8 +333,10 @@ export default function MentorEnPage() {
 
           </Container>
         </SectionBlock>
+        </FadeIn>
 
         {/* How Might We */}
+        <FadeIn>
         <SectionBlock backgrounds={mentorBackgrounds}>
           <Container>
             <div className="text-center mb-10 flex flex-col items-center justify-center">
@@ -339,8 +349,10 @@ export default function MentorEnPage() {
             </div>
           </Container>
         </SectionBlock>
+        </FadeIn>
 
         {/* Design Goals */}
+        <FadeIn>
         <SectionBlock bgVariant="blue" backgrounds={mentorBackgrounds}>
           <Container>
             <H2 id="design-goals">Design Goals</H2>
@@ -405,8 +417,10 @@ export default function MentorEnPage() {
             </div>
           </Container>
         </SectionBlock>
+        </FadeIn>
 
         {/* The Birth of Mentor */}
+        <FadeIn>
         <SectionBlock bgVariant="mentor" backgrounds={mentorBackgrounds}>
           <Container>
             <H2 id="mentor-birth">The Birth of Mentor</H2>
@@ -427,8 +441,10 @@ export default function MentorEnPage() {
 
           </Container>
         </SectionBlock>
+        </FadeIn>
 
         {/* Translating the IP Soul into Visual Language */}
+        <FadeIn>
         <SectionBlock backgrounds={mentorBackgrounds}>
           <Container>
             <H3>Translating the IP Soul into Visual Language</H3>
@@ -458,8 +474,10 @@ export default function MentorEnPage() {
             </div>
           </div>
         </SectionBlock>
+        </FadeIn>
 
         {/* Mentor as Interface Guide */}
+        <FadeIn>
         <SectionBlock bgVariant="mentor" backgrounds={mentorBackgrounds}>
           <Container>
             <H3>Mentor as an Interface Guide</H3>
@@ -488,8 +506,10 @@ export default function MentorEnPage() {
             </div>
           </Container>
         </SectionBlock>
+        </FadeIn>
 
         {/* How I Built and Led the Team */}
+        <FadeIn>
         <SectionBlock backgrounds={mentorBackgrounds}>
           <Container>
             <H2 id="team-leadership">How I Built and Led the Team</H2>
@@ -596,8 +616,10 @@ export default function MentorEnPage() {
             </div>
           </Container>
         </SectionBlock>
+        </FadeIn>
 
         {/* Design System */}
+        <FadeIn>
         <SectionBlock bgVariant="blue" backgrounds={mentorBackgrounds}>
           <Container>
             <H2 id="design-system">A Scalable Design System</H2>
@@ -612,12 +634,16 @@ export default function MentorEnPage() {
             </P>
           </Container>
         </SectionBlock>
+        </FadeIn>
 
+        <FadeIn>
         <SectionBlock className="!py-0" backgrounds={mentorBackgrounds}>
           <img src={designSystem} alt="Design system" className="w-full" />
         </SectionBlock>
+        </FadeIn>
 
         {/* UI Design */}
+        <FadeIn>
         <SectionBlock backgrounds={mentorBackgrounds}>
           <Container>
             <H2 id="ui-design">Interface Design Built Around the World & Product Vision</H2>
@@ -711,8 +737,10 @@ export default function MentorEnPage() {
             </div>
           </Container>
         </SectionBlock>
+        </FadeIn>
 
         {/* Results */}
+        <FadeIn>
         <SectionBlock bgVariant="purple" backgrounds={mentorBackgrounds}>
           <Container>
             <H2 id="results">Results</H2>
@@ -751,8 +779,10 @@ export default function MentorEnPage() {
             </div>
           </Container>
         </SectionBlock>
+        </FadeIn>
 
         {/* Reflection */}
+        <FadeIn>
         <SectionBlock backgrounds={mentorBackgrounds}>
           <Container>
             <H2 id="reflection">Reflection</H2>
@@ -785,8 +815,10 @@ export default function MentorEnPage() {
             </div>
           </Container>
         </SectionBlock>
+        </FadeIn>
 
         {/* Conclusion */}
+        <FadeIn>
         <SectionBlock bgVariant="dark" backgrounds={mentorBackgrounds}>
           <Container className="flex flex-col items-center text-center">
             <P className="w-full md:w-2/3 opacity-80">
@@ -803,6 +835,7 @@ export default function MentorEnPage() {
             <p className="text-p opacity-60">2023/08 - 2024/06</p>
           </Container>
         </SectionBlock>
+        </FadeIn>
 
         <RelatedProjects currentSlug="mentor" />
         <Footer />

@@ -21,33 +21,11 @@
     "imageAlt": "企鵝遊戲封面"
   },
   {
-    "title": "線上購物網站",
-    "slug": "shopping-site",
-    "description": "響應式電商介面與設計系統基礎",
-    "imageSrc": "/project-cover-shopping.png",
-    "imageAlt": "購物網站封面"
-  },
-  {
-    "title": "巴塞爾公約網站",
-    "slug": "basel-convention",
-    "description": "市政資訊入口網站的簡潔、內容優先版面設計",
-    "imageSrc": "/project-cover-basel.png",
-    "imageAlt": "巴塞爾公約網站封面"
-  },
-  {
     "title": "騎士精神：桌遊",
     "slug": "chivalry",
     "description": "以插畫為主導、中世紀美學的桌遊",
     "imageSrc": "/project-cover-chivalry.png",
     "imageAlt": "騎士精神桌遊封面",
     "link": "#/project/chivalry"
-  },
-  {
-    "title": "瀑布式圖片畫廊",
-    "slug": "masonry-gallery",
-    "description": "瀑布式版面配置的圖片畫廊，具備燈箱檢視體驗",
-    "imageSrc": "/project-cover-mentor.png",
-    "imageAlt": "瀑布式畫廊專案預覽",
-    "link": "#/project/masonry-gallery"
   }
 ]
