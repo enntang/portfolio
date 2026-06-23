@@ -161,8 +161,8 @@ export default function MentorEnPage() {
         </header>
 
         {/* Project Brief */}
-        <FadeIn>
         <SectionBlock backgrounds={mentorBackgrounds}>
+        <FadeIn>
           <Container>
             <H2 id="project-brief">Project Brief</H2>
             <img src={tabletMockup} alt="Mentor design preview" className="rounded-lg mb-12 transition-transform duration-500 ease-out hover:scale-105" />
@@ -204,12 +204,12 @@ export default function MentorEnPage() {
               ))}
             </div>
           </Container>
-        </SectionBlock>
         </FadeIn>
+        </SectionBlock>
 
         {/* Team Structure */}
-        <FadeIn>
         <SectionBlock bgVariant="mentor" backgrounds={mentorBackgrounds}>
+        <FadeIn>
           <Container>
             <H2 id="team-structure">Team Structure & Collaboration</H2>
             <img src={teamChart} alt="Team structure diagram" className="rounded-lg mb-12 mt-6" />
@@ -244,12 +244,12 @@ export default function MentorEnPage() {
               Keeping the design direction consistent across all these units — and delivering every feature on time — was itself one of the core challenges of the Lead role.
             </P>
           </Container>
-        </SectionBlock>
         </FadeIn>
+        </SectionBlock>
 
         {/* Responsibilities */}
-        <FadeIn>
         <SectionBlock backgrounds={mentorBackgrounds}>
+        <FadeIn>
           <Container>
             <H2 id="responsibilities">Key Responsibilities</H2>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-12 mt-4">
@@ -279,12 +279,12 @@ export default function MentorEnPage() {
               </div>
             </div>
           </Container>
-        </SectionBlock>
         </FadeIn>
+        </SectionBlock>
 
         {/* Background */}
-        <FadeIn>
         <SectionBlock bgVariant="dark" backgrounds={mentorBackgrounds}>
+        <FadeIn>
           <Container>
             <H2 id="background">Background</H2>
             <H3>From an education app prototype to an AI learning companion for K12 students</H3>
@@ -332,12 +332,12 @@ export default function MentorEnPage() {
             <p className="text-caption opacity-70 text-center mt-4">The core user groups, both sharing the same frustration:<br />a lack of clear visibility into learning progress, leading to frustration — students feel stuck, parents feel helpless.</p>
 
           </Container>
-        </SectionBlock>
         </FadeIn>
+        </SectionBlock>
 
         {/* How Might We */}
-        <FadeIn>
         <SectionBlock backgrounds={mentorBackgrounds}>
+        <FadeIn>
           <Container>
             <div className="text-center mb-10 flex flex-col items-center justify-center">
               <P className="mx-auto text-gray-900 opacity-60">During the Kickoff phase, the PM team and I used a HMW framework to consolidate scattered input from executives and business stakeholders into a single, clear design question:</P>
@@ -348,12 +348,12 @@ export default function MentorEnPage() {
               </P>
             </div>
           </Container>
-        </SectionBlock>
         </FadeIn>
+        </SectionBlock>
 
         {/* Design Goals */}
-        <FadeIn>
         <SectionBlock bgVariant="blue" backgrounds={mentorBackgrounds}>
+        <FadeIn>
           <Container>
             <H2 id="design-goals">Design Goals</H2>
             <P>After establishing the HMW question, we first mapped out the product's feature priority layers — from users' baseline expectations to the differentiated experiences that would truly delight.</P>
@@ -416,12 +416,12 @@ export default function MentorEnPage() {
               </div>
             </div>
           </Container>
-        </SectionBlock>
         </FadeIn>
+        </SectionBlock>
 
         {/* The Birth of Mentor */}
-        <FadeIn>
         <SectionBlock bgVariant="mentor" backgrounds={mentorBackgrounds}>
+        <FadeIn>
           <Container>
             <H2 id="mentor-birth">The Birth of Mentor</H2>
             <P>
@@ -440,12 +440,12 @@ export default function MentorEnPage() {
             </P>
 
           </Container>
-        </SectionBlock>
         </FadeIn>
+        </SectionBlock>
 
         {/* Translating the IP Soul into Visual Language */}
-        <FadeIn>
         <SectionBlock backgrounds={mentorBackgrounds}>
+        <FadeIn>
           <Container>
             <H3>Translating the IP Soul into Visual Language</H3>
             <P>
@@ -473,12 +473,12 @@ export default function MentorEnPage() {
               </p>
             </div>
           </div>
-        </SectionBlock>
         </FadeIn>
+        </SectionBlock>
 
         {/* Mentor as Interface Guide */}
-        <FadeIn>
         <SectionBlock bgVariant="mentor" backgrounds={mentorBackgrounds}>
+        <FadeIn>
           <Container>
             <H3>Mentor as an Interface Guide</H3>
             <img src={uiGuide} alt="Mentor UI Guide" className="w-full rounded-lg mt-8" />
@@ -505,12 +505,12 @@ export default function MentorEnPage() {
               </div>
             </div>
           </Container>
-        </SectionBlock>
         </FadeIn>
+        </SectionBlock>
 
         {/* How I Built and Led the Team */}
-        <FadeIn>
         <SectionBlock backgrounds={mentorBackgrounds}>
+        <FadeIn>
           <Container>
             <H2 id="team-leadership">How I Built and Led the Team</H2>
             <P>
@@ -615,12 +615,12 @@ export default function MentorEnPage() {
               </div>
             </div>
           </Container>
-        </SectionBlock>
         </FadeIn>
+        </SectionBlock>
 
         {/* Design System */}
-        <FadeIn>
         <SectionBlock bgVariant="blue" backgrounds={mentorBackgrounds}>
+        <FadeIn>
           <Container>
             <H2 id="design-system">A Scalable Design System</H2>
             <P>
@@ -633,18 +633,18 @@ export default function MentorEnPage() {
               <strong>This design system became the baseline for every subsequent feature interface</strong>, giving anyone who picked up a feature a clear reference to work from; new elements could also be added by following the system's architecture.
             </P>
           </Container>
-        </SectionBlock>
         </FadeIn>
+        </SectionBlock>
 
-        <FadeIn>
         <SectionBlock className="!py-0" backgrounds={mentorBackgrounds}>
+        <FadeIn>
           <img src={designSystem} alt="Design system" className="w-full" />
-        </SectionBlock>
         </FadeIn>
+        </SectionBlock>
 
         {/* UI Design */}
-        <FadeIn>
         <SectionBlock backgrounds={mentorBackgrounds}>
+        <FadeIn>
           <Container>
             <H2 id="ui-design">Interface Design Built Around the World & Product Vision</H2>
             <P>With the design system in place, every feature interface was built on top of this visual language. The goal wasn't just usability — it was making sure users felt the presence of Mentor's world in every screen.</P>
@@ -736,12 +736,12 @@ export default function MentorEnPage() {
               <P>Completing courses and maintaining learning streaks earns badges — using immediate feedback to sustain motivation, giving students the drive to tackle their next learning task with the encouragement of achievement badges.</P>
             </div>
           </Container>
-        </SectionBlock>
         </FadeIn>
+        </SectionBlock>
 
         {/* Results */}
-        <FadeIn>
         <SectionBlock bgVariant="purple" backgrounds={mentorBackgrounds}>
+        <FadeIn>
           <Container>
             <H2 id="results">Results</H2>
             <P>
@@ -778,12 +778,12 @@ export default function MentorEnPage() {
               ))}
             </div>
           </Container>
-        </SectionBlock>
         </FadeIn>
+        </SectionBlock>
 
         {/* Reflection */}
-        <FadeIn>
         <SectionBlock backgrounds={mentorBackgrounds}>
+        <FadeIn>
           <Container>
             <H2 id="reflection">Reflection</H2>
             <P>
@@ -814,12 +814,12 @@ export default function MentorEnPage() {
               </div>
             </div>
           </Container>
-        </SectionBlock>
         </FadeIn>
+        </SectionBlock>
 
         {/* Conclusion */}
-        <FadeIn>
         <SectionBlock bgVariant="dark" backgrounds={mentorBackgrounds}>
+        <FadeIn>
           <Container className="flex flex-col items-center text-center">
             <P className="w-full md:w-2/3 opacity-80">
               Designing Mentor wasn't just about shaping screens — it was about shaping a team, a story, and a shared belief in learning.
@@ -834,8 +834,8 @@ export default function MentorEnPage() {
             <p className="text-p opacity-80">Mentor</p>
             <p className="text-p opacity-60">2023/08 - 2024/06</p>
           </Container>
-        </SectionBlock>
         </FadeIn>
+        </SectionBlock>
 
         <RelatedProjects currentSlug="mentor" />
         <Footer />

@@ -161,8 +161,8 @@ export default function MentorZhPage() {
         </header>
 
         {/* 專案概覽 */}
-        <FadeIn>
         <SectionBlock backgrounds={mentorBackgrounds}>
+        <FadeIn>
           <Container>
             <H2 id="project-brief">專案概覽</H2>
             <img src={tabletMockup} alt="Mentor 設計預覽" className="rounded-lg mb-12 transition-transform duration-500 ease-out hover:scale-105" />
@@ -204,12 +204,12 @@ export default function MentorZhPage() {
               ))}
             </div>
           </Container>
-        </SectionBlock>
         </FadeIn>
+        </SectionBlock>
 
         {/* 團隊規模與協作架構 */}
-        <FadeIn>
         <SectionBlock bgVariant="mentor" backgrounds={mentorBackgrounds}>
+        <FadeIn>
           <Container>
             <H2 id="team-structure">團隊規模與協作架構</H2>
             <img src={teamChart} alt="團隊架構圖" className="rounded-lg mb-12 mt-6" />
@@ -244,12 +244,12 @@ export default function MentorZhPage() {
               能在這個跨單位的環境裡讓設計方向保持一致、讓每個功能如期交付，本身就是這個 Lead 角色最核心的挑戰之一。
             </P>
           </Container>
-        </SectionBlock>
         </FadeIn>
+        </SectionBlock>
 
         {/* 主要職責 */}
-        <FadeIn>
         <SectionBlock backgrounds={mentorBackgrounds}>
+        <FadeIn>
           <Container>
             <H2 id="responsibilities">主要職責</H2>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-12 mt-4">
@@ -279,12 +279,12 @@ export default function MentorZhPage() {
               </div>
             </div>
           </Container>
-        </SectionBlock>
         </FadeIn>
+        </SectionBlock>
 
         {/* 背景 */}
-        <FadeIn>
         <SectionBlock bgVariant="dark" backgrounds={mentorBackgrounds}>
+        <FadeIn>
           <Container>
             <H2 id="background">背景</H2>
             <H3>從一個教育 App 的雛形，到 K12 學生的 AI 學習夥伴</H3>
@@ -332,12 +332,12 @@ export default function MentorZhPage() {
             <p className="text-caption opacity-70 text-center mt-4">產品的核心族群，雙方都有同樣的困擾：<br />對學習進度缺乏清楚認知，導致挫折感—學生覺得沒有變好，家長則覺得無從協助。</p>
 
           </Container>
-        </SectionBlock>
         </FadeIn>
+        </SectionBlock>
 
         {/* How Might We */}
-        <FadeIn>
         <SectionBlock backgrounds={mentorBackgrounds}>
+        <FadeIn>
           <Container>
             <div className="text-center mb-10 flex flex-col items-center justify-center">
               <P className="mx-auto text-gray-900 opacity-60">於是，在 Kickoff 階段，我與 PM 透過 HMW 框架，將來自高層與業務的分散需求，收斂成一個清楚的設計問題：</P>
@@ -348,12 +348,12 @@ export default function MentorZhPage() {
               </P>
             </div>
           </Container>
-        </SectionBlock>
         </FadeIn>
+        </SectionBlock>
 
         {/* 設計目標 */}
-        <FadeIn>
         <SectionBlock bgVariant="blue" backgrounds={mentorBackgrounds}>
+        <FadeIn>
           <Container>
             <H2 id="design-goals">設計目標</H2>
             <P>在確立 HMW 問題之後，我們先梳理了產品功能的優先層次：從使用者的基本期待，到真正讓人驚艷的差異化體驗。</P>
@@ -416,12 +416,12 @@ export default function MentorZhPage() {
               </div>
             </div>
           </Container>
-        </SectionBlock>
         </FadeIn>
+        </SectionBlock>
 
         {/* Mentor 的誕生 */}
-        <FadeIn>
         <SectionBlock bgVariant="mentor" backgrounds={mentorBackgrounds}>
+        <FadeIn>
           <Container>
             <H2 id="mentor-birth">Mentor 的誕生</H2>
             <P>
@@ -440,12 +440,12 @@ export default function MentorZhPage() {
             </P>
 
           </Container>
-        </SectionBlock>
         </FadeIn>
+        </SectionBlock>
 
         {/* 把 IP 的靈魂譯成視覺語言 */}
-        <FadeIn>
         <SectionBlock backgrounds={mentorBackgrounds}>
+        <FadeIn>
           <Container>
             <H3>把 IP 的靈魂譯成視覺語言</H3>
             <P>
@@ -473,12 +473,12 @@ export default function MentorZhPage() {
               </p>
             </div>
           </div>
-        </SectionBlock>
         </FadeIn>
+        </SectionBlock>
 
         {/* ui-guide: image left, text right */}
-        <FadeIn>
         <SectionBlock bgVariant="mentor" backgrounds={mentorBackgrounds}>
+        <FadeIn>
           <Container>
             <H3>Mentor 作為介面引導者</H3>
             <img src={uiGuide} alt="Mentor UI Guide" className="w-full rounded-lg mt-8" />
@@ -505,12 +505,12 @@ export default function MentorZhPage() {
               </div>
             </div>
           </Container>
-        </SectionBlock>
         </FadeIn>
+        </SectionBlock>
 
         {/* 我如何組建並帶領團隊 */}
-        <FadeIn>
         <SectionBlock backgrounds={mentorBackgrounds}>
+        <FadeIn>
           <Container>
             <H2 id="team-leadership">我如何組建並帶領團隊</H2>
             <P>
@@ -615,12 +615,12 @@ export default function MentorZhPage() {
               </div>
             </div>
           </Container>
-        </SectionBlock>
         </FadeIn>
+        </SectionBlock>
 
         {/* 具有擴展性的設計系統 */}
-        <FadeIn>
         <SectionBlock bgVariant="blue" backgrounds={mentorBackgrounds}>
+        <FadeIn>
           <Container>
             <H2 id="design-system">具有擴展性的設計系統</H2>
             <P>
@@ -633,18 +633,18 @@ export default function MentorZhPage() {
               <strong>這個設計系統成為後續每一個新功能介面設計時的基準</strong>，無論誰接手任一功能時都有所依據；若要加入新元素時也能依循系統架構進行擴展。
             </P>
           </Container>
-        </SectionBlock>
         </FadeIn>
+        </SectionBlock>
 
-        <FadeIn>
         <SectionBlock className="!py-0" backgrounds={mentorBackgrounds}>
+        <FadeIn>
           <img src={designSystem} alt="設計系統" className="w-full" />
-        </SectionBlock>
         </FadeIn>
+        </SectionBlock>
 
         {/* 圍繞世界觀與產品訴求展開的介面設計 */}
-        <FadeIn>
         <SectionBlock backgrounds={mentorBackgrounds}>
+        <FadeIn>
           <Container>
             <H2 id="ui-design">圍繞世界觀與產品訴求展開的介面設計</H2>
             <P>設計系統建立之後，每一個功能介面都在這套視覺語言的基礎上展開。不只要讓功能好用，更要讓使用者在每一個畫面裡都感受到 Mentor 世界觀的存在。</P>
@@ -736,12 +736,12 @@ export default function MentorZhPage() {
               <P>完成課程和連續學習即可獲得徽章，用即時的回饋維持學習動力，讓學生在成就徽章鼓勵下更有動力進行接下來的學習任務。</P>
             </div>
           </Container>
-        </SectionBlock>
         </FadeIn>
+        </SectionBlock>
 
         {/* 成果 */}
-        <FadeIn>
         <SectionBlock bgVariant="purple" backgrounds={mentorBackgrounds}>
+        <FadeIn>
           <Container>
             <H2 id="results">成果</H2>
             <P>
@@ -778,12 +778,12 @@ export default function MentorZhPage() {
               ))}
             </div>
           </Container>
-        </SectionBlock>
         </FadeIn>
+        </SectionBlock>
 
         {/* 反思 */}
-        <FadeIn>
         <SectionBlock backgrounds={mentorBackgrounds}>
+        <FadeIn>
           <Container>
             <H2 id="reflection">學習反思</H2>
             <P>
@@ -814,12 +814,12 @@ export default function MentorZhPage() {
               </div>
             </div>
           </Container>
-        </SectionBlock>
         </FadeIn>
+        </SectionBlock>
 
         {/* Conclusion */}
-        <FadeIn>
         <SectionBlock bgVariant="dark" backgrounds={mentorBackgrounds}>
+        <FadeIn>
           <Container className="flex flex-col items-center text-center">
             <P className="w-full md:w-2/3 opacity-80">
               設計 Mentor 不只是塑造畫面，而是塑造一支團隊、一個故事，以及一個對學習的共同信念。
@@ -834,8 +834,8 @@ export default function MentorZhPage() {
             <p className="text-p opacity-80">Mentor</p>
             <p className="text-p opacity-60">2023/08 - 2024/06</p>
           </Container>
-        </SectionBlock>
         </FadeIn>
+        </SectionBlock>
 
         <RelatedProjects currentSlug="mentor" />
         <Footer />

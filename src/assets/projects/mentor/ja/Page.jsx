@@ -161,8 +161,8 @@ export default function MentorJaPage() {
         </header>
 
         {/* Project Brief */}
-        <FadeIn>
         <SectionBlock backgrounds={mentorBackgrounds}>
+        <FadeIn>
           <Container>
             <H2 id="project-brief">プロジェクト概要</H2>
             <img src={tabletMockup} alt="Mentor design preview" className="rounded-lg mb-12 transition-transform duration-500 ease-out hover:scale-105" />
@@ -204,12 +204,12 @@ export default function MentorJaPage() {
               ))}
             </div>
           </Container>
-        </SectionBlock>
         </FadeIn>
+        </SectionBlock>
 
         {/* Team Structure */}
-        <FadeIn>
         <SectionBlock bgVariant="mentor" backgrounds={mentorBackgrounds}>
+        <FadeIn>
           <Container>
             <H2 id="team-structure">チーム構造とコラボレーション</H2>
             <img src={teamChart} alt="Team structure diagram" className="rounded-lg mb-12 mt-6" />
@@ -244,12 +244,12 @@ export default function MentorJaPage() {
               すべてのユニット間でデザインの方向性を一貫させ、すべての機能を期限通りに届けること——それ自体がリードの役割の核心的な挑戦でした。
             </P>
           </Container>
-        </SectionBlock>
         </FadeIn>
+        </SectionBlock>
 
         {/* Responsibilities */}
-        <FadeIn>
         <SectionBlock backgrounds={mentorBackgrounds}>
+        <FadeIn>
           <Container>
             <H2 id="responsibilities">主な担当範囲</H2>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-12 mt-4">
@@ -279,12 +279,12 @@ export default function MentorJaPage() {
               </div>
             </div>
           </Container>
-        </SectionBlock>
         </FadeIn>
+        </SectionBlock>
 
         {/* Background */}
-        <FadeIn>
         <SectionBlock bgVariant="dark" backgrounds={mentorBackgrounds}>
+        <FadeIn>
           <Container>
             <H2 id="background">背景</H2>
             <H3>教育アプリのプロトタイプから、K12生徒向けAI学習コンパニオンへ</H3>
@@ -332,12 +332,12 @@ export default function MentorJaPage() {
             <p className="text-caption opacity-70 text-center mt-4">コアユーザーグループ、同じフラストレーションを共有：<br />学習進捗の可視化不足が不満を引き起こす——生徒は行き詰まり、保護者は無力感を覚える。</p>
 
           </Container>
-        </SectionBlock>
         </FadeIn>
+        </SectionBlock>
 
         {/* How Might We */}
-        <FadeIn>
         <SectionBlock backgrounds={mentorBackgrounds}>
+        <FadeIn>
           <Container>
             <div className="text-center mb-10 flex flex-col items-center justify-center">
               <P className="mx-auto text-gray-900 opacity-60">キックオフフェーズで、PMチームと私はHMWフレームワークを使用して、経営陣やビジネスステークホルダーからの散在した意見を1つの明確なデザイン問題に集約しました：</P>
@@ -348,12 +348,12 @@ export default function MentorJaPage() {
               </P>
             </div>
           </Container>
-        </SectionBlock>
         </FadeIn>
+        </SectionBlock>
 
         {/* Design Goals */}
-        <FadeIn>
         <SectionBlock bgVariant="blue" backgrounds={mentorBackgrounds}>
+        <FadeIn>
           <Container>
             <H2 id="design-goals">デザイン目標</H2>
             <P>HMW問題を確立した後、まず製品の機能優先度レイヤーをマッピングしました——ユーザーのベースライン期待値から、本当に喜ばれる差別化体験まで。</P>
@@ -416,12 +416,12 @@ export default function MentorJaPage() {
               </div>
             </div>
           </Container>
-        </SectionBlock>
         </FadeIn>
+        </SectionBlock>
 
         {/* The Birth of Mentor */}
-        <FadeIn>
         <SectionBlock bgVariant="mentor" backgrounds={mentorBackgrounds}>
+        <FadeIn>
           <Container>
             <H2 id="mentor-birth">Mentorの誕生</H2>
             <P>
@@ -440,12 +440,12 @@ export default function MentorJaPage() {
             </P>
 
           </Container>
-        </SectionBlock>
         </FadeIn>
+        </SectionBlock>
 
         {/* Translating the IP Soul into Visual Language */}
-        <FadeIn>
         <SectionBlock backgrounds={mentorBackgrounds}>
+        <FadeIn>
           <Container>
             <H3>IPの魂をビジュアル言語に翻訳する</H3>
             <P>
@@ -473,12 +473,12 @@ export default function MentorJaPage() {
               </p>
             </div>
           </div>
-        </SectionBlock>
         </FadeIn>
+        </SectionBlock>
 
         {/* Mentor as Interface Guide */}
-        <FadeIn>
         <SectionBlock bgVariant="mentor" backgrounds={mentorBackgrounds}>
+        <FadeIn>
           <Container>
             <H3>インターフェースガイドとしてのMentor</H3>
             <img src={uiGuide} alt="Mentor UI Guide" className="w-full rounded-lg mt-8" />
@@ -505,12 +505,12 @@ export default function MentorJaPage() {
               </div>
             </div>
           </Container>
-        </SectionBlock>
         </FadeIn>
+        </SectionBlock>
 
         {/* How I Built and Led the Team */}
-        <FadeIn>
         <SectionBlock backgrounds={mentorBackgrounds}>
+        <FadeIn>
           <Container>
             <H2 id="team-leadership">チームの構築とリード</H2>
             <P>
@@ -615,12 +615,12 @@ export default function MentorJaPage() {
               </div>
             </div>
           </Container>
-        </SectionBlock>
         </FadeIn>
+        </SectionBlock>
 
         {/* Design System */}
-        <FadeIn>
         <SectionBlock bgVariant="blue" backgrounds={mentorBackgrounds}>
+        <FadeIn>
           <Container>
             <H2 id="design-system">スケーラブルなデザインシステム</H2>
             <P>
@@ -633,18 +633,18 @@ export default function MentorJaPage() {
               <strong>このデザインシステムは、その後のすべての機能インターフェースのベースラインとなりました</strong>。機能を担当する誰もが参照できる明確な基準を持ち、新しい要素もシステムのアーキテクチャに従って追加できます。
             </P>
           </Container>
-        </SectionBlock>
         </FadeIn>
+        </SectionBlock>
 
-        <FadeIn>
         <SectionBlock className="!py-0" backgrounds={mentorBackgrounds}>
+        <FadeIn>
           <img src={designSystem} alt="Design system" className="w-full" />
-        </SectionBlock>
         </FadeIn>
+        </SectionBlock>
 
         {/* UI Design */}
-        <FadeIn>
         <SectionBlock backgrounds={mentorBackgrounds}>
+        <FadeIn>
           <Container>
             <H2 id="ui-design">ワールドと製品ビジョンに基づいたインターフェースデザイン</H2>
             <P>デザインシステムが整ったことで、すべての機能インターフェースはこのビジュアル言語の上に構築されました。目標は使いやすさだけでなく、すべての画面でMentorのワールドの存在をユーザーに感じさせることでした。</P>
@@ -736,12 +736,12 @@ export default function MentorJaPage() {
               <P>コースの完了と学習連続記録の達成でバッジを獲得——即時フィードバックで動機を維持し、実績バッジの励ましで生徒が次の学習タスクに取り組む意欲を与えます。</P>
             </div>
           </Container>
-        </SectionBlock>
         </FadeIn>
+        </SectionBlock>
 
         {/* Results */}
-        <FadeIn>
         <SectionBlock bgVariant="purple" backgrounds={mentorBackgrounds}>
+        <FadeIn>
           <Container>
             <H2 id="results">成果</H2>
             <P>
@@ -778,12 +778,12 @@ export default function MentorJaPage() {
               ))}
             </div>
           </Container>
-        </SectionBlock>
         </FadeIn>
+        </SectionBlock>
 
         {/* Reflection */}
-        <FadeIn>
         <SectionBlock backgrounds={mentorBackgrounds}>
+        <FadeIn>
           <Container>
             <H2 id="reflection">学習と振り返り</H2>
             <P>
@@ -814,12 +814,12 @@ export default function MentorJaPage() {
               </div>
             </div>
           </Container>
-        </SectionBlock>
         </FadeIn>
+        </SectionBlock>
 
         {/* Conclusion */}
-        <FadeIn>
         <SectionBlock bgVariant="dark" backgrounds={mentorBackgrounds}>
+        <FadeIn>
           <Container className="flex flex-col items-center text-center">
             <P className="w-full md:w-2/3 opacity-80">
               Mentorをデザインするということは、画面を形作るだけではありませんでした——チームを、ストーリーを、そして学習への共通の信念を形作ることでした。
@@ -834,8 +834,8 @@ export default function MentorJaPage() {
             <p className="text-p opacity-80">Mentor</p>
             <p className="text-p opacity-60">2023/08 - 2024/06</p>
           </Container>
-        </SectionBlock>
         </FadeIn>
+        </SectionBlock>
 
         <RelatedProjects currentSlug="mentor" />
         <Footer />
