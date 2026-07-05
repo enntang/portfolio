@@ -42,7 +42,7 @@ function BlogPost({ slug }) {
         onToggleMenu={() => setIsMenuOpen((prev) => !prev)}
       />
 
-      <TableOfContents selector='h1, h2' container={articleRef} />
+      <TableOfContents key={slug} selector='h1, h2' container={articleRef} />
 
       <div className='w-full min-h-screen flex flex-col'>
         <div className='relative w-full h-[400px] md:h-[560px] bg-gradient-to-br from-[#1B2132] to-[#101625]'>
@@ -71,7 +71,7 @@ function BlogPost({ slug }) {
         <main className='max-w-3xl mx-auto w-full space-y-8'>
           <p className='text-sm text-gray-700 max-w-2xl'>{post.subtitle}</p>
 
-          <article ref={articleRef} className='prose prose-sm md:prose-base max-w-none prose-headings:text-gray-900 prose-headings:font-medium prose-p:text-gray-900 prose-p:font-extralight prose-strong:text-gray-900 prose-li:text-gray-900 prose-li:font-extralight prose-a:text-gray-900 prose-a:underline prose-a:decoration-highlight prose-a:underline-offset-2 prose-img:rounded-3xl prose-img:bg-[#101625] prose-code:text-highlight prose-code:bg-[#101625] prose-code:px-1.5 prose-code:py-0.5 prose-code:rounded prose-pre:bg-[#101625] prose-pre:rounded-2xl prose-h1:mt-16 prose-h2:mt-12 prose-h3:mt-8 [&_h1>strong]:font-medium [&_h2>strong]:font-medium [&_h3>strong]:font-medium'>
+          <article ref={articleRef} className='prose prose-sm md:prose-base max-w-none prose-headings:text-gray-900 prose-headings:font-medium prose-p:text-gray-900 prose-p:font-extralight prose-strong:text-gray-900 prose-li:text-gray-900 prose-li:font-extralight prose-a:text-gray-900 prose-a:underline prose-a:decoration-highlight prose-a:underline-offset-2 prose-img:rounded-lg prose-img:bg-[#101625] prose-code:text-highlight prose-code:bg-[#101625] prose-code:px-1.5 prose-code:py-0.5 prose-code:rounded prose-pre:bg-[#101625] prose-pre:rounded-2xl prose-h1:mt-16 prose-h2:mt-12 prose-h3:mt-8 [&_h1>strong]:font-medium [&_h2>strong]:font-medium [&_h3>strong]:font-medium'>
             {typeof post.content === 'string' ? (
               <ReactMarkdown
                 components={{
@@ -80,7 +80,7 @@ function BlogPost({ slug }) {
                     return (
                       <figure className='my-8 flex flex-col items-center'>
                         <div
-                          className='rounded-3xl overflow-hidden bg-[#101625]'
+                          className='rounded-lg overflow-hidden bg-[#101625]'
                           style={{ width: `${width}%`, margin: 0 }}
                         >
                           <img

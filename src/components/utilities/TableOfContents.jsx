@@ -47,9 +47,13 @@ function TableOfContents({ selector = 'h2', container = null }) {
           return
         }
 
-        // 如果没有 id，自动生成一个
+        // 如果没有 id，自动生成一个（保留中文字元，只清掉標點符號等）
         if (!heading.id) {
-          const idText = text.toLowerCase().replace(/[^\w\s-]/g, '').replace(/\s+/g, '-') || `${selector}-${index}`
+          const idText = text
+            .toLowerCase()
+            .replace(/[^\p{L}\p{N}\s-]/gu, '')
+            .trim()
+            .replace(/\s+/g, '-') || `${heading.tagName.toLowerCase()}-${index}`
           heading.id = idText
         }
 
