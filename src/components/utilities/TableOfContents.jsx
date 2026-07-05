@@ -4,7 +4,7 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger'
 
 gsap.registerPlugin(ScrollTrigger)
 
-function TableOfContents() {
+function TableOfContents({ selector = 'h2', container = null }) {
   const [headings, setHeadings] = useState([])
   const [activeId, setActiveId] = useState('')
   const [isOpen, setIsOpen] = useState(false)
@@ -18,51 +18,53 @@ function TableOfContents() {
   useEffect(() => {
     // 等待 DOM 完全加载后再查找标题
     const findHeadings = () => {
-      // 只查找 H2 元素
-      const h2Elements = Array.from(document.querySelectorAll('h2'))
-      
+      // 查找指定選擇器的標題元素（預設為 H2），可限定在 container 範圍內搜尋
+      const root = container?.current || document
+      const headingElements = Array.from(root.querySelectorAll(selector))
+
       const headingList = []
-      
+
       const seenIds = new Set()
       const seenTexts = new Set()
-      
-      h2Elements.forEach((h2, index) => {
+
+      headingElements.forEach((heading, index) => {
         // 檢查元素是否可見
-        const style = window.getComputedStyle(h2)
-        const rect = h2.getBoundingClientRect()
-        const isVisible = style.display !== 'none' && 
+        const style = window.getComputedStyle(heading)
+        const rect = heading.getBoundingClientRect()
+        const isVisible = style.display !== 'none' &&
                          style.visibility !== 'hidden' &&
-                         rect.width > 0 && 
+                         rect.width > 0 &&
                          rect.height > 0
-        
+
         if (!isVisible) {
           return
         }
-        
-        const text = h2.textContent?.trim() || ''
-        
+
+        const text = heading.textContent?.trim() || ''
+
         // 如果這個文本已經出現過，跳過它（避免重複）
         if (seenTexts.has(text)) {
           return
         }
-        
+
         // 如果没有 id，自动生成一个
-        if (!h2.id) {
-          const idText = text.toLowerCase().replace(/[^\w\s-]/g, '').replace(/\s+/g, '-') || `h2-${index}`
-          h2.id = idText
+        if (!heading.id) {
+          const idText = text.toLowerCase().replace(/[^\w\s-]/g, '').replace(/\s+/g, '-') || `${selector}-${index}`
+          heading.id = idText
         }
-        
+
         // 如果這個 ID 已經出現過，跳過它（避免重複）
-        if (seenIds.has(h2.id)) {
+        if (seenIds.has(heading.id)) {
           return
         }
-        
-        seenIds.add(h2.id)
+
+        seenIds.add(heading.id)
         seenTexts.add(text)
         headingList.push({
-          id: h2.id,
+          id: heading.id,
           text: text,
-          element: h2
+          element: heading,
+          level: Number(heading.tagName.slice(1)) || 1
         })
       })
 
@@ -113,7 +115,7 @@ function TableOfContents() {
         observerRef.current.disconnect()
       }
     }
-  }, [])
+  }, [selector, container])
 
   const scrollToHeading = (id) => {
     const element = document.getElementById(id)
@@ -133,6 +135,8 @@ function TableOfContents() {
   }
 
   if (headings.length === 0) return null
+
+  const minLevel = Math.min(...headings.map((heading) => heading.level))
 
   return (
     <>
@@ -185,21 +189,26 @@ function TableOfContents() {
           >
             <div className="bg-white backdrop-blur-sm shadow-xl rounded-lg p-4 max-h-[70vh] w-fit overflow-y-auto">
               <ul className="space-y-1">
-                {headings.map((heading) => (
-                  <li key={heading.id}>
-                    <button
-                      onClick={() => scrollToHeading(heading.id)}
-                      className={`text-left w-full py-1 px-2 rounded text-sm font-light transition-colors truncate ${
-                        activeId === heading.id
-                          ? 'text-gray-900 font-semibold'
-                          : 'text-gray-400 hover:text-highlight'
-                      }`}
-                      title={heading.text}
-                    >
-                      {heading.text}
-                    </button>
-                  </li>
-                ))}
+                {headings.map((heading) => {
+                  const depth = heading.level - minLevel
+                  return (
+                    <li key={heading.id} style={{ paddingLeft: `${depth * 16}px` }}>
+                      <button
+                        onClick={() => scrollToHeading(heading.id)}
+                        className={`text-left w-full py-1 px-2 rounded font-light transition-colors truncate ${
+                          depth > 0 ? 'text-xs' : 'text-sm'
+                        } ${
+                          activeId === heading.id
+                            ? 'text-gray-900 font-semibold'
+                            : 'text-gray-400 hover:text-highlight'
+                        }`}
+                        title={heading.text}
+                      >
+                        {heading.text}
+                      </button>
+                    </li>
+                  )
+                })}
               </ul>
             </div>
           </nav>

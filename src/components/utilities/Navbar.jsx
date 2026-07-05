@@ -115,13 +115,13 @@ function Navbar({ isWhite = false, isMenuOpen = false, onToggleMenu, variant = '
       path: '/projects',
       text: t('nav.projects'),
     },
-    // {
-    //   id: '03',
-    //   path: '/blog',
-    //   text: t('nav.blog'),
-    // },
     {
       id: '03',
+      path: '/blog',
+      text: t('nav.blog'),
+    },
+    {
+      id: '04',
       path: '/about',
       text: t('nav.about'),
     },
