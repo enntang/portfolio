@@ -52,27 +52,32 @@ async function main() {
     // 3. 下載 Markdown 中的圖片到本地，並替換為本地路徑
     const { content, imageCount } = await processMarkdownImages(markdownContent || '', slug)
 
-    // 4. 處理 Hero/Thumbnail 圖片
-    const heroUrl = getFileUrl(props.HeroImage) || getUrl(props.HeroImage)
-    const thumbnailUrl = getFileUrl(props.ThumbnailImage) || getUrl(props.ThumbnailImage)
-    const heroImage = await processMetaImage(heroUrl, slug, 'hero')
-    const thumbnailImage = await processMetaImage(thumbnailUrl, slug, 'thumbnail')
+    // 4. 處理文章代表圖。Image 是新欄位，HeroImage/ThumbnailImage 保留向下相容。
+    const imageUrl =
+      getFileUrl(props.Image) ||
+      getUrl(props.Image) ||
+      getFileUrl(props.HeroImage) ||
+      getUrl(props.HeroImage) ||
+      getFileUrl(props.ThumbnailImage) ||
+      getUrl(props.ThumbnailImage)
+    const image = await processMetaImage(imageUrl, slug, 'image')
+    const categories = getMultiSelect(props.Category)
+    const primaryCategory = categories[0] || getSelect(props.Category)
+    const description = getText(props.Description) || getText(props.Subtitle)
 
     // 5. 組裝 post 物件
     const post = {
       id: slug,
       slug: slug,
       title: title,
-      subtitle: getText(props.Subtitle),
-      description: getText(props.Description),
-      category: getSelect(props.Category),
-      categoryLabel: getCategoryLabel(getSelect(props.Category)),
+      description: description,
+      categories: categories.length ? categories : (primaryCategory ? [primaryCategory] : []),
+      category: primaryCategory,
+      categoryLabels: (categories.length ? categories : (primaryCategory ? [primaryCategory] : [])).map(getCategoryLabel),
+      categoryLabel: getCategoryLabel(primaryCategory),
       date: getDate(props.Date),
       featured: getCheckbox(props.Featured),
-      spotlight: getCheckbox(props.Spotlight),
-      heroImage: heroImage,
-      thumbnailImage: thumbnailImage,
-      author: getText(props.Author) || 'Enn Tang',
+      image: image,
       content: content  // 現在是 Markdown 字串
     }
 
@@ -277,6 +282,10 @@ function getText(prop) {
 
 function getSelect(prop) {
   return prop?.select?.name || ''
+}
+
+function getMultiSelect(prop) {
+  return prop?.multi_select?.map(option => option.name).filter(Boolean) || []
 }
 
 function getDate(prop) {
