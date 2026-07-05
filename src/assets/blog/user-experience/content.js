@@ -2,7 +2,7 @@ const post = {
   "id": "user-experience",
   "slug": "user-experience",
   "title": "人們會選擇消耗最低能量、獲得最大利益的方式去行動",
-  "description": "",
+  "description": "惰性是物理世界的基本現象，人們會選擇消耗最低能量、獲得最大利益的方式去行動。",
   "categories": [
     "UX 雜談"
   ],
