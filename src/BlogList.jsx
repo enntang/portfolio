@@ -197,7 +197,7 @@ function BlogList() {
   ))
 
   return (
-    <div className='min-h-screen lg:flex flex-row bg-[#F7F7F5]'>
+    <div className='min-h-screen lg:flex flex-row bg-bg'>
       <Navbar
         isWhite={true}
         isMenuOpen={isMenuOpen}

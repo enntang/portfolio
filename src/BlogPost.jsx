@@ -49,7 +49,7 @@ function PostNavCard({ post, direction }) {
       href={`#/blog/post/${post.slug}`}
       className='group block rounded-2xl p-6 hover:bg-gray-100 transition-colors'
     >
-      <div className='w-24 h-24 md:w-28 md:h-28 -mt-14 mb-4 rounded-lg overflow-hidden bg-gradient-to-br from-[#1B2132] to-[#101625]'>
+      <div className='w-32 md:w-40 aspect-video -mt-14 mb-4 rounded-lg overflow-hidden bg-gradient-to-br from-[#1B2132] to-[#101625]'>
         {thumbnail && (
           <img
             src={getPublicPath(thumbnail)}
@@ -144,7 +144,7 @@ function BlogPost({ slug }) {
 
         <div className='px-6 md:px-10 xl:px-16 pb-20 flex flex-col gap-12 pt-10'>
         <main className='max-w-3xl mx-auto w-full space-y-8'>
-          <p className='text-sm text-gray-700 max-w-2xl'>{getPostDescription(post)}</p>
+          <p className='text-sm text-gray-700 w-full border-t border-b border-gray-200 py-6'>{getPostDescription(post)}</p>
 
           <article ref={articleRef} className='prose prose-sm md:prose-base max-w-none prose-headings:text-gray-900 prose-headings:font-medium prose-p:text-gray-900 prose-p:font-extralight prose-strong:text-gray-900 prose-li:text-gray-900 prose-li:font-extralight prose-a:text-gray-900 prose-a:underline prose-a:decoration-highlight prose-a:decoration-[6px] prose-a:underline-offset-2 prose-img:rounded-lg prose-img:bg-[#101625] prose-code:text-highlight prose-code:bg-[#101625] prose-code:px-1.5 prose-code:py-0.5 prose-code:rounded prose-pre:bg-[#101625] prose-pre:rounded-lg prose-h1:mt-16 prose-h2:mt-12 prose-h3:mt-8 [&_h1>strong]:font-medium [&_h2>strong]:font-medium [&_h3>strong]:font-medium'>
             {typeof post.content === 'string' ? (
@@ -174,7 +174,7 @@ function BlogPost({ slug }) {
                     )
                   },
                   blockquote: ({ children }) => (
-                    <blockquote className='not-prose relative my-8 rounded-2xl border border-gray-200 px-8 pt-10 pb-8 md:px-12 md:pt-12 md:pb-10'>
+                    <blockquote className='not-prose relative my-8 rounded-2xl px-8 pt-10 pb-8 md:px-12 md:pt-12 md:pb-10'>
                       <img
                         src={getPublicPath('/icon-quote.svg')}
                         alt=''
@@ -217,9 +217,22 @@ function BlogPost({ slug }) {
         </main>
 
         {(previousPost || nextPost) && (
-          <section className='max-w-3xl mx-auto w-full grid grid-cols-1 md:grid-cols-2 gap-4 mt-8'>
-            {previousPost ? <PostNavCard post={previousPost} direction='previous' /> : <div />}
-            {nextPost && <PostNavCard post={nextPost} direction='next' />}
+          <section className='max-w-3xl mx-auto w-full mt-8'>
+            <h2 className='text-xs font-semibold tracking-[0.25em] uppercase text-gray-500 mb-20'>
+              相關文章
+            </h2>
+            {previousPost && nextPost ? (
+              <div className='grid grid-cols-1 md:grid-cols-2 gap-4'>
+                <PostNavCard post={previousPost} direction='previous' />
+                <PostNavCard post={nextPost} direction='next' />
+              </div>
+            ) : (
+              <div className='flex justify-center'>
+                <div className='w-full md:max-w-sm'>
+                  <PostNavCard post={previousPost || nextPost} direction={previousPost ? 'previous' : 'next'} />
+                </div>
+              </div>
+            )}
           </section>
         )}
 
