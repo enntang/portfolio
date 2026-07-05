@@ -42,7 +42,7 @@ function getPostCategoryLabels(post) {
 
 function PostNavCard({ post, direction }) {
   const isNext = direction === 'next'
-  const thumbnail = post.thumbnailImage || post.heroImage
+  const thumbnail = post.thumbnailImage || getPostImage(post)
 
   return (
     <a
