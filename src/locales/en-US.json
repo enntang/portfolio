@@ -98,7 +98,9 @@
   "blog": {
     "title": "Blog",
     "subtitle": "Recording my observations and thoughts on product design, tool usage, and career growth. Currently, content is primarily in Chinese.",
-    "all": "All",
+    "topTitle": "Popular Articles",
+    "latestTitle": "Latest Articles",
+    "all": "All Articles",
     "design": "Design",
     "tooling": "Tools & Practice",
     "self": "Self Growth",

@@ -8,102 +8,161 @@ import { useLanguage } from './contexts/LanguageContext'
 import { useTranslation } from './hooks/useTranslation'
 import { buildPath } from './utils/routing'
 
-function CategoryTabs({ current, onChange, t }) {
-  const tabs = [
-    { key: 'all', label: t('blog.all') },
-    { key: 'design', label: t('blog.design') },
-    { key: 'tooling', label: t('blog.tooling') },
-    { key: 'self', label: t('blog.self') },
-  ]
-
+function CategoryTabs({ current, onChange, tabs }) {
   return (
-    <div className='flex flex-wrap items-center gap-6 text-sm text-gray-400'>
-      {tabs.map((t) => (
+    <div className='flex flex-wrap items-center gap-3 md:gap-8 text-sm md:text-base font-medium text-gray-800'>
+      {tabs.map((tab) => (
         <button
-          key={t.key}
-          onClick={() => onChange(t.key)}
-          className={`pb-2 border-b-2 transition-colors ${
-            current === t.key ? 'text-white border-white' : 'border-transparent hover:text-white'
+          key={tab.key}
+          onClick={() => onChange(tab.key)}
+          className={`h-11 px-5 rounded-full transition-colors ${
+            current === tab.key ? 'bg-highlight text-gray-800' : 'bg-transparent hover:bg-highlight/50'
           }`}
         >
-          {t.label}
+          {tab.label}
         </button>
       ))}
     </div>
   )
 }
 
-function FeaturedCard({ post, buildHref }) {
+function getPostDescription(post) {
+  return post.description || post.subtitle || ''
+}
+
+function getPostImage(post) {
+  return post.image || post.heroImage || post.thumbnailImage || ''
+}
+
+function getPostCategories(post) {
+  if (Array.isArray(post.categories) && post.categories.length > 0) return post.categories
+  return post.category ? [post.category] : []
+}
+
+function getPostCategoryLabel(post) {
+  if (Array.isArray(post.categoryLabels) && post.categoryLabels.length > 0) {
+    return post.categoryLabels.join(' / ')
+  }
+  return post.categoryLabel || post.category || ''
+}
+
+function parsePostTime(post) {
+  return new Date((post.date || '').replace(/\//g, '-')).getTime() || 0
+}
+
+function sortPosts(posts) {
+  return [...posts].sort((a, b) => {
+    if (Boolean(a.featured) !== Boolean(b.featured)) return b.featured ? 1 : -1
+    return parsePostTime(b) - parsePostTime(a)
+  })
+}
+
+function SectionHeading({ eyebrow, title }) {
+  return (
+    <div className='relative pb-5'>
+      <div className='absolute -top-6 left-0 text-5xl md:text-7xl font-semibold text-gray-100 leading-none select-none'>
+        {eyebrow}
+      </div>
+      <h2 className='relative text-2xl md:text-3xl font-semibold text-gray-800 tracking-normal'>
+        {title}
+      </h2>
+    </div>
+  )
+}
+
+function TagPills({ post, dense = false }) {
+  const categories = getPostCategories(post)
+  const labels = Array.isArray(post.categoryLabels) && post.categoryLabels.length > 0
+    ? post.categoryLabels
+    : categories.map((category) => category || getPostCategoryLabel(post)).filter(Boolean)
+
+  if (labels.length === 0) return null
+
+  return (
+    <div className={`flex flex-wrap ${dense ? 'gap-2' : 'gap-x-8 gap-y-3'}`}>
+      {labels.map((label) => (
+        <span
+          key={label}
+          className={`font-medium text-gray-700 ${dense ? 'rounded-full bg-highlight/50 px-3 py-1 text-xs' : 'text-sm md:text-base'}`}
+        >
+          {dense ? label : <><span className='text-highlight'>#</span> {label}</>}
+        </span>
+      ))}
+    </div>
+  )
+}
+
+function TopFeatureCard({ post, buildHref }) {
   if (!post) return null
 
   return (
     <a
       href={buildHref(`/blog/post/${post.slug}`)}
-      className='grid grid-cols-1 md:grid-cols-[1.1fr_1.3fr] gap-0 bg-white rounded-3xl overflow-hidden shadow-sm group'
+      className='group block'
     >
-      <div className='aspect-[16/9] md:aspect-auto md:h-72 bg-[#E5EEF6] flex items-center justify-center overflow-hidden'>
-        <LazyImage src={getPublicPath(post.heroImage || post.thumbnailImage)} alt={post.title} className='w-full h-full object-cover' />
-      </div>
-      <div className='p-8 md:p-10 bg-[#0B0F1A] flex flex-col justify-between'>
-        <div>
-          <div className='text-xs font-semibold uppercase tracking-[0.2em] text-blue-300 mb-3'>
-            {post.categoryLabel}
-          </div>
-          <h2 className='text-xl md:text-2xl font-semibold text-white leading-snug mb-3 group-hover:text-highlight'>
+      <div className='grid grid-cols-[3.5rem_minmax(0,1fr)] gap-4 md:gap-6 items-start'>
+        <div className='flex h-14 w-14 items-center justify-center rounded-full bg-white text-3xl font-semibold text-gray-800 shadow-sm'>
+          1
+        </div>
+        <div className='min-w-0'>
+          <h3 className='text-xl md:text-2xl font-semibold leading-snug text-gray-800 group-hover:text-highlight transition-colors'>
             {post.title}
-          </h2>
-          <p className='text-sm text-gray-400 leading-relaxed line-clamp-3'>{post.subtitle}</p>
-        </div>
-        <div className='flex items-center justify-end mt-6 text-[11px] text-gray-500'>
-          <span>{post.date}</span>
+          </h3>
+          <div className='mt-3'>
+            <TagPills post={post} dense />
+          </div>
         </div>
       </div>
-    </a>
-  )
-}
 
-function GridPostCard({ post, buildHref }) {
-  return (
-    <a
-      href={buildHref(`/blog/post/${post.slug}`)}
-      className='bg-[#101625] rounded-2xl overflow-hidden hover:-translate-y-1 hover:shadow-lg transition-all group flex flex-col'
-    >
-      <div className='aspect-[4/3] bg-[#1B2132] overflow-hidden'>
+      <div className='mt-5 aspect-[16/10] overflow-hidden rounded-lg bg-gray-100'>
         <LazyImage
-          src={getPublicPath(post.thumbnailImage)}
+          src={getPublicPath(getPostImage(post))}
           alt={post.title}
-          className='w-full h-full object-cover group-hover:scale-[1.02] transition-transform'
+          className='h-full w-full object-cover transition-transform duration-500 group-hover:scale-[1.03]'
         />
       </div>
-      <div className='p-5 flex flex-col gap-2 flex-1'>
-        <div className='text-[11px] uppercase tracking-[0.2em] text-blue-300'>{post.categoryLabel}</div>
-        <h3 className='text-sm font-semibold text-white leading-snug line-clamp-2 group-hover:text-highlight'>
+    </a>
+  )
+}
+
+function TopListItem({ post, rank, buildHref }) {
+  return (
+    <a
+      href={buildHref(`/blog/post/${post.slug}`)}
+      className='group grid grid-cols-[3rem_minmax(0,1fr)] gap-3 md:gap-5 border-b border-gray-300 py-5 first:pt-0'
+    >
+      <div className='text-3xl md:text-4xl font-semibold leading-none text-gray-800'>{rank}</div>
+      <div className='min-w-0'>
+        <h3 className='text-lg md:text-xl font-semibold leading-snug text-gray-800 group-hover:text-highlight transition-colors'>
           {post.title}
         </h3>
-        <p className='text-[12px] text-gray-400 leading-relaxed line-clamp-2'>{post.subtitle}</p>
-        <div className='mt-auto flex items-center justify-end text-[11px] text-gray-500 pt-2'>
-          <span>{post.date}</span>
+        <div className='mt-4'>
+          <TagPills post={post} dense />
         </div>
       </div>
     </a>
   )
 }
 
-function SpotlightItem({ post, buildHref }) {
+function ArticleCard({ post, buildHref }) {
   return (
     <a
       href={buildHref(`/blog/post/${post.slug}`)}
-      className='flex gap-4 items-center py-4 hover:bg-[#151C2A] px-3 rounded-xl transition-colors group'
+      className='group flex flex-col gap-4'
     >
-      <div className='w-14 h-14 rounded-xl overflow-hidden flex-shrink-0 bg-[#1B2132]'>
-        <LazyImage src={getPublicPath(post.thumbnailImage)} alt={post.title} className='w-full h-full object-cover' />
+      <div className='aspect-[16/10] overflow-hidden rounded-lg bg-gray-100'>
+        <LazyImage
+          src={getPublicPath(getPostImage(post))}
+          alt={post.title}
+          className='w-full h-full object-cover transition-transform duration-500 group-hover:scale-[1.03]'
+        />
       </div>
-      <div className='flex-1 min-w-0'>
-        <div className='text-[11px] uppercase tracking-[0.2em] text-blue-300'>{post.categoryLabel}</div>
-        <div className='text-sm font-semibold text-white leading-snug line-clamp-2 group-hover:text-highlight'>
+      <div className='flex flex-col gap-3'>
+        <h3 className='text-lg md:text-xl font-semibold leading-snug text-gray-800 group-hover:text-highlight transition-colors'>
           {post.title}
-        </div>
-        <div className='text-[11px] text-gray-500 mt-1'>{post.date}</div>
+        </h3>
+        <p className='text-sm leading-relaxed text-gray-600 line-clamp-2'>{getPostDescription(post)}</p>
+        <TagPills post={post} />
       </div>
     </a>
   )
@@ -120,57 +179,69 @@ function BlogList() {
     return buildPath(path, language)
   }
 
-  const filtered = blogPosts.filter((post) => (category === 'all' ? true : post.category === category))
-  const featuredPost = filtered.find((p) => p.featured) || filtered[0]
-  const remaining = filtered.filter((p) => p !== featuredPost)
-  const spotlightPosts = filtered.filter((p) => p.spotlight)
+  const categoryTabs = [
+    { key: 'all', label: t('blog.all') },
+    ...Array.from(new Set(blogPosts.flatMap(getPostCategories))).map((key) => ({
+      key,
+      label: t(`blog.${key}`, key),
+    })),
+  ]
+
+  const sortedPosts = sortPosts(blogPosts)
+  const topPosts = sortedPosts.slice(0, 5)
+  const topFeature = topPosts[0]
+  const topList = topPosts.slice(1, 5)
+
+  const filtered = sortedPosts.filter((post) => (
+    category === 'all' ? true : getPostCategories(post).includes(category)
+  ))
 
   return (
-    <div className='min-h-screen lg:flex flex-row bg-bg'>
+    <div className='min-h-screen lg:flex flex-row bg-[#F7F7F5]'>
       <Navbar
-        isWhite={false}
+        isWhite={true}
         isMenuOpen={isMenuOpen}
         onToggleMenu={() => setIsMenuOpen((prev) => !prev)}
       />
 
-      <div className='w-full min-h-screen pt-24 px-6 md:px-10 xl:px-16 pb-20 flex flex-col gap-10'>
-        {/* Header */}
-        <header className='flex flex-col gap-3'>
-          <p className='text-xs tracking-[0.25em] uppercase text-gray-500'>Enn's Notes</p>
-          <h1 className='text-4xl md:text-5xl font-semibold text-[#B4C0DF]'>{t('blog.title')}</h1>
-          <p className='text-xs md:text-sm text-gray-400 max-w-xl'>
+      <div className='w-full min-h-screen pt-24 px-6 md:px-10 xl:px-16 pb-20 flex flex-col gap-16 md:gap-20 overflow-hidden'>
+        <header className='max-w-3xl mx-auto w-full text-center px-2'>
+          <h1 className='text-h1 mobile:text-mobile-h1 mb-6 text-gray-800'>
+            {t('blog.title')}
+          </h1>
+          <p className='text-p text-gray-600'>
             {t('blog.subtitle')}
           </p>
         </header>
 
-        {/* Tabs */}
-        <div className='flex items-center justify-between flex-wrap gap-4'>
-          <CategoryTabs current={category} onChange={setCategory} t={t} />
-        </div>
-
-        {/* Main layout: left column cards + right column spotlight */}
-        <div className='grid grid-cols-1 lg:grid-cols-[minmax(0,2fr)_minmax(0,1.2fr)] gap-8 lg:gap-12 pb-8'>
-          <div className='space-y-8'>
-            <FeaturedCard post={featuredPost} buildHref={buildHref} />
-
-            <div className='grid grid-cols-1 md:grid-cols-2 gap-6'>
-              {remaining.map((post) => (
-                <GridPostCard key={post.id} post={post} buildHref={buildHref} />
+        <section className='flex flex-col gap-8'>
+          <SectionHeading eyebrow='TOP5' title={t('blog.topTitle', '熱門文章')} />
+          <div className='grid grid-cols-1 lg:grid-cols-[minmax(0,0.86fr)_minmax(0,1fr)] gap-8 lg:gap-20 items-start'>
+            <TopFeatureCard post={topFeature} buildHref={buildHref} />
+            <div className='flex flex-col'>
+              {topList.map((post, index) => (
+                <TopListItem
+                  key={post.id}
+                  post={post}
+                  rank={index + 2}
+                  buildHref={buildHref}
+                />
               ))}
             </div>
           </div>
+        </section>
 
-          <aside className='space-y-4'>
-            <div>
-              <div className='text-xs uppercase tracking-[0.25em] text-gray-500 mb-2'>{t('blog.spotlight')}</div>
-            </div>
-            <div className='bg-[#101625] rounded-3xl p-3 md:p-4 flex flex-col divide-y divide-gray-800/60'>
-              {spotlightPosts.map((post) => (
-                <SpotlightItem key={post.id} post={post} buildHref={buildHref} />
-              ))}
-            </div>
-          </aside>
-        </div>
+        <section className='flex flex-col gap-10 border-t border-gray-300 pt-14'>
+          <SectionHeading eyebrow='Latest' title={t('blog.latestTitle', '最新專欄文章')} />
+
+          <CategoryTabs current={category} onChange={setCategory} tabs={categoryTabs} />
+
+          <div className='grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-x-8 gap-y-12'>
+            {filtered.map((post) => (
+              <ArticleCard key={post.id} post={post} buildHref={buildHref} />
+            ))}
+          </div>
+        </section>
 
         <Footer />
       </div>

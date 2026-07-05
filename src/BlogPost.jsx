@@ -18,6 +18,28 @@ function parseImageMeta(alt) {
   return { caption: alt || '', width: 100 }
 }
 
+function getPostDescription(post) {
+  return post.description || post.subtitle || ''
+}
+
+function getPostImage(post) {
+  return post.image || post.heroImage || post.thumbnailImage || ''
+}
+
+function getPostCategoryLabel(post) {
+  if (Array.isArray(post.categoryLabels) && post.categoryLabels.length > 0) {
+    return post.categoryLabels.join(' / ')
+  }
+  return post.categoryLabel || post.category || ''
+}
+
+function getPostCategoryLabels(post) {
+  if (Array.isArray(post.categoryLabels) && post.categoryLabels.length > 0) {
+    return post.categoryLabels
+  }
+  return getPostCategoryLabel(post) ? [getPostCategoryLabel(post)] : []
+}
+
 function PostNavCard({ post, direction }) {
   const isNext = direction === 'next'
   const thumbnail = post.thumbnailImage || post.heroImage
@@ -72,6 +94,8 @@ function BlogPost({ slug }) {
   const currentIndex = sortedPosts.findIndex((p) => p.slug === post.slug)
   const previousPost = currentIndex > 0 ? sortedPosts[currentIndex - 1] : null
   const nextPost = currentIndex >= 0 && currentIndex < sortedPosts.length - 1 ? sortedPosts[currentIndex + 1] : null
+  const postImage = getPostImage(post)
+  const categoryLabels = getPostCategoryLabels(post)
 
   return (
     <div className='min-h-screen lg:flex flex-row bg-bg'>
@@ -86,9 +110,9 @@ function BlogPost({ slug }) {
 
       <div className='w-full min-h-screen flex flex-col'>
         <div className='relative w-full h-[400px] md:h-[560px] bg-gradient-to-br from-[#1B2132] to-[#101625]'>
-          {post.heroImage && (
+          {postImage && (
             <img
-              src={getPublicPath(post.heroImage)}
+              src={getPublicPath(postImage)}
               alt={post.title}
               className='absolute inset-0 w-full h-full object-cover'
             />
@@ -96,7 +120,18 @@ function BlogPost({ slug }) {
           <div className='absolute inset-0 bg-gradient-to-t from-black/85 via-black/30 to-transparent' />
           <div className='absolute inset-x-0 bottom-0 px-6 md:px-10 xl:px-16 pb-10 md:pb-14'>
             <div className='max-w-3xl mx-auto w-full space-y-3'>
-              <div className='text-xs uppercase tracking-[0.25em] text-white/70'>{post.categoryLabel}</div>
+              {categoryLabels.length > 0 && (
+                <div className='flex flex-wrap gap-2'>
+                  {categoryLabels.map((label) => (
+                    <span
+                      key={label}
+                      className='rounded-full bg-highlight/80 px-3 py-1 text-[11px] font-medium uppercase tracking-[0.18em] text-gray-900'
+                    >
+                      {label}
+                    </span>
+                  ))}
+                </div>
+              )}
               <h1 className='text-3xl md:text-4xl font-semibold text-white leading-tight'>{post.title}</h1>
               <div className='flex items-center gap-3 text-xs text-white'>
                 <span>{post.author}</span>
@@ -109,9 +144,9 @@ function BlogPost({ slug }) {
 
         <div className='px-6 md:px-10 xl:px-16 pb-20 flex flex-col gap-12 pt-10'>
         <main className='max-w-3xl mx-auto w-full space-y-8'>
-          <p className='text-sm text-gray-700 max-w-2xl'>{post.subtitle}</p>
+          <p className='text-sm text-gray-700 max-w-2xl'>{getPostDescription(post)}</p>
 
-          <article ref={articleRef} className='prose prose-sm md:prose-base max-w-none prose-headings:text-gray-900 prose-headings:font-medium prose-p:text-gray-900 prose-p:font-extralight prose-strong:text-gray-900 prose-li:text-gray-900 prose-li:font-extralight prose-a:text-gray-900 prose-a:underline prose-a:decoration-highlight prose-a:underline-offset-2 prose-img:rounded-lg prose-img:bg-[#101625] prose-code:text-highlight prose-code:bg-[#101625] prose-code:px-1.5 prose-code:py-0.5 prose-code:rounded prose-pre:bg-[#101625] prose-pre:rounded-2xl prose-h1:mt-16 prose-h2:mt-12 prose-h3:mt-8 [&_h1>strong]:font-medium [&_h2>strong]:font-medium [&_h3>strong]:font-medium'>
+          <article ref={articleRef} className='prose prose-sm md:prose-base max-w-none prose-headings:text-gray-900 prose-headings:font-medium prose-p:text-gray-900 prose-p:font-extralight prose-strong:text-gray-900 prose-li:text-gray-900 prose-li:font-extralight prose-a:text-gray-900 prose-a:underline prose-a:decoration-highlight prose-a:decoration-[6px] prose-a:underline-offset-2 prose-img:rounded-lg prose-img:bg-[#101625] prose-code:text-highlight prose-code:bg-[#101625] prose-code:px-1.5 prose-code:py-0.5 prose-code:rounded prose-pre:bg-[#101625] prose-pre:rounded-lg prose-h1:mt-16 prose-h2:mt-12 prose-h3:mt-8 [&_h1>strong]:font-medium [&_h2>strong]:font-medium [&_h3>strong]:font-medium'>
             {typeof post.content === 'string' ? (
               <ReactMarkdown
                 components={{
@@ -196,5 +231,3 @@ function BlogPost({ slug }) {
 }
 
 export default BlogPost
-
-
