@@ -18,6 +18,41 @@ function parseImageMeta(alt) {
   return { caption: alt || '', width: 100 }
 }
 
+function PostNavCard({ post, direction }) {
+  const isNext = direction === 'next'
+  const thumbnail = post.thumbnailImage || post.heroImage
+
+  return (
+    <a
+      href={`#/blog/post/${post.slug}`}
+      className='group block rounded-2xl p-6 hover:bg-gray-100 transition-colors'
+    >
+      <div className='w-24 h-24 md:w-28 md:h-28 -mt-14 mb-4 rounded-lg overflow-hidden bg-gradient-to-br from-[#1B2132] to-[#101625]'>
+        {thumbnail && (
+          <img
+            src={getPublicPath(thumbnail)}
+            alt={post.title}
+            className='w-full h-full object-cover transition-transform duration-500 ease-out group-hover:scale-110'
+          />
+        )}
+      </div>
+      <div className='text-sm font-semibold text-gray-800 line-clamp-2 group-hover:text-gray-500 transition-colors'>
+        {post.title}
+      </div>
+      <div className='flex items-center gap-2 text-xs text-gray-500 mt-2'>
+        <span>{post.date}</span>
+        <span className='flex items-center gap-1 text-gray-700'>
+          {isNext ? (
+            <>下一篇<span aria-hidden='true'>→</span></>
+          ) : (
+            <><span aria-hidden='true'>←</span>上一篇</>
+          )}
+        </span>
+      </div>
+    </a>
+  )
+}
+
 function BlogPost({ slug }) {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const post = getPostBySlug(slug)
@@ -31,7 +66,12 @@ function BlogPost({ slug }) {
     return <NotFound />
   }
 
-  const related = blogPosts.filter((p) => p.id !== post.id).slice(0, 3)
+  const sortedPosts = [...blogPosts].sort(
+    (a, b) => new Date(a.date.replace(/\//g, '-')) - new Date(b.date.replace(/\//g, '-'))
+  )
+  const currentIndex = sortedPosts.findIndex((p) => p.slug === post.slug)
+  const previousPost = currentIndex > 0 ? sortedPosts[currentIndex - 1] : null
+  const nextPost = currentIndex >= 0 && currentIndex < sortedPosts.length - 1 ? sortedPosts[currentIndex + 1] : null
 
   return (
     <div className='min-h-screen lg:flex flex-row bg-bg'>
@@ -141,28 +181,10 @@ function BlogPost({ slug }) {
           </article>
         </main>
 
-        {related.length > 0 && (
-          <section className='max-w-3xl mx-auto w-full'>
-            <div className='flex items-center justify-between mb-4'>
-              <h2 className='text-sm font-semibold tracking-[0.25em] uppercase text-gray-600'>
-                More from this blog
-              </h2>
-            </div>
-            <div className='grid grid-cols-1 md:grid-cols-3 gap-4'>
-              {related.map((item) => (
-                <a
-                  key={item.id}
-                  href={`#/blog/post/${item.slug}`}
-                  className='bg-[#101625] rounded-2xl p-4 hover:-translate-y-1 hover:shadow-lg transition-all flex flex-col gap-2'
-                >
-                  <div className='text-[11px] uppercase tracking-[0.2em] text-blue-300'>
-                    {item.categoryLabel}
-                  </div>
-                  <div className='text-sm font-semibold text-white line-clamp-2'>{item.title}</div>
-                  <div className='text-[11px] text-gray-500 mt-auto'>{item.date}</div>
-                </a>
-              ))}
-            </div>
+        {(previousPost || nextPost) && (
+          <section className='max-w-3xl mx-auto w-full grid grid-cols-1 md:grid-cols-2 gap-4 mt-8'>
+            {previousPost ? <PostNavCard post={previousPost} direction='previous' /> : <div />}
+            {nextPost && <PostNavCard post={nextPost} direction='next' />}
           </section>
         )}
 
