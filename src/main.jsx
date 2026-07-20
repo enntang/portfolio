@@ -6,6 +6,8 @@ import About from './About.jsx'
 import ProjectsList from './ProjectsListPage.jsx'
 import BlogList from './BlogList.jsx'
 import BlogPost from './BlogPost.jsx'
+import Resume from './Resume.jsx'
+import { resumeDataEdtech } from './assets/resume/resumeDataEdtech.js'
 import NotFound from './NotFound.jsx'
 import ProjectPageRouter from './ProjectPageRouter.jsx'
 import LoadingAnimation from './components/utilities/LoadingAnimation.jsx'
@@ -48,6 +50,13 @@ function Router() {
   if (path === '/') return <Home />
   
   if (path === '/about') return <About />
+  if (path === '/resume') return <Resume />
+  if (path.startsWith('/resume/')) {
+    const slug = decodeURIComponent(path.slice('/resume/'.length).split('/')[0])
+    const resumeVariants = { 'product-designer-edtech': resumeDataEdtech }
+    if (!resumeVariants[slug]) return <NotFound />
+    return <Resume dataset={resumeVariants[slug]} />
+  }
   if (path === '/blog') return <BlogList />
   if (path.startsWith('/blog/post/')) {
     const slugPart = path.slice('/blog/post/'.length)

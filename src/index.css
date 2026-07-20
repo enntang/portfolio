@@ -2,6 +2,35 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Resume print / PDF export
+   Layout + sizing for print is handled directly in Resume.jsx via Tailwind's
+   `print:` variant (which correctly activates regardless of the page's
+   content width, unlike `md:` which is evaluated against it). This block only
+   covers what can't be expressed as a utility class. */
+@media print {
+  @page {
+    size: A4;
+    margin: 10mm;
+  }
+
+  body {
+    background: #fff !important;
+  }
+
+  .no-print {
+    display: none !important;
+  }
+
+  .resume-sidebar {
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  .resume-exp-item {
+    break-inside: avoid;
+  }
+}
+
 /* Ensure strong inside paragraphs has sufficient contrast against light-weight base text */
 .text-p strong,
 .text-p b {
