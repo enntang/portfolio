@@ -8,6 +8,7 @@ import BlogList from './BlogList.jsx'
 import BlogPost from './BlogPost.jsx'
 import Resume from './Resume.jsx'
 import { resumeDataEdtech } from './assets/resume/resumeDataEdtech.js'
+import { resumeDataHahow } from './assets/resume/resumeDataHahow.js'
 import NotFound from './NotFound.jsx'
 import ProjectPageRouter from './ProjectPageRouter.jsx'
 import LoadingAnimation from './components/utilities/LoadingAnimation.jsx'
@@ -53,7 +54,10 @@ function Router() {
   if (path === '/resume') return <Resume />
   if (path.startsWith('/resume/')) {
     const slug = decodeURIComponent(path.slice('/resume/'.length).split('/')[0])
-    const resumeVariants = { 'product-designer-edtech': resumeDataEdtech }
+    const resumeVariants = {
+      'product-designer-edtech': resumeDataEdtech,
+      'hahow-product-designer': resumeDataHahow,
+    }
     if (!resumeVariants[slug]) return <NotFound />
     return <Resume dataset={resumeVariants[slug]} />
   }
