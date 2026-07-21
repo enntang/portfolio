@@ -243,7 +243,7 @@ function Navbar({ isWhite = false, isMenuOpen = false, onToggleMenu, variant = '
             <div className="flex flex-col gap-8 justify-end">
               <div>
                 <div className="text-caption font-semibold tracking-widest text-gray-400 pb-2">CV</div>
-                <BtnWhite name={t('about.readCV')} href="https://www.cake.me/resumes/enn-tang" target="_blank" />
+                <BtnWhite name={t('about.readCV')} href={buildHref('/resume')} target="_blank" />
               </div>
               {/* 語言切換 */}
               <div>

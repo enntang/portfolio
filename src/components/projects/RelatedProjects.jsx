@@ -5,7 +5,7 @@ import { buildPath } from '../../utils/routing'
 import { getPublicPath } from '../../utils/path'
 import LazyImage from '../utilities/LazyImage'
 
-function RelatedProjects({ currentSlug, count = 3 }) {
+function RelatedProjects({ currentSlug, count = 3, invert = false }) {
   const { language } = useLanguage()
   const { t } = useTranslation()
   const allProjects = getProjectsByLanguage(language)
@@ -19,7 +19,7 @@ function RelatedProjects({ currentSlug, count = 3 }) {
 
   return (
     <div className="w-full px-8 xl:px-16 py-16">
-      <h3 className="text-h3 text-center mb-8 text-gray-700">
+      <h3 className={`text-h3 text-center mb-8 ${invert ? 'text-white' : 'text-gray-700'}`}>
         {t('projects.related') || 'More Projects'}
       </h3>
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
@@ -42,7 +42,13 @@ function RelatedProjects({ currentSlug, count = 3 }) {
                 </div>
               )}
             </div>
-            <h4 className="text-caption font-medium text-gray-800 group-hover:text-gray-500 transition-colors">
+            <h4
+              className={`text-caption font-medium transition-colors ${
+                invert
+                  ? 'text-white group-hover:text-gray-300'
+                  : 'text-gray-800 group-hover:text-gray-500'
+              }`}
+            >
               {project.title}
             </h4>
           </a>

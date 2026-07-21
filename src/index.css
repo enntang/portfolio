@@ -10,7 +10,7 @@
 @media print {
   @page {
     size: A4;
-    margin: 10mm;
+    margin: 0;
   }
 
   body {
@@ -21,7 +21,12 @@
     display: none !important;
   }
 
-  .resume-sidebar {
+  /* Without this, Chrome's default "Background graphics" print setting is
+     off, silently dropping every background-color in the resume — the dark
+     sidebar, the timeline dots/lines, the tag pills — regardless of that
+     checkbox's actual state. */
+  #resume-doc,
+  #resume-doc * {
     -webkit-print-color-adjust: exact;
     print-color-adjust: exact;
   }

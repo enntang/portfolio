@@ -78,7 +78,7 @@ function About() {
               className='w-40 h-40 mix-blend-screen absolute right-0 bottom-0'
               preload={true}
             />
-            <BtnWhite name={t('about.readCV')} href="https://www.cake.me/resumes/enn-tang" target="_blank" />
+            <BtnWhite name={t('about.readCV')} href={buildHref('/resume')} target="_blank" />
           </div>
 
           <div ref={profileRef} className='space-y-3 text-gray-800 mb-40'>

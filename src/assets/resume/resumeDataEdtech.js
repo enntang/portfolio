@@ -57,7 +57,10 @@ export const resumeDataEdtech = {
         role: 'Design Lead',
         items: [
           '從零開始建立設計部門，負責人才招募、培訓與一對一指導，在職期間達成團隊零離職率',
-          '主導 AI 整合學習平台（Mentor）從概念發想到上線的完整流程，統籌研發、內容、行銷跨部門需求，建立可擴展 Design System，一年內如期上線',
+          {
+            text: '主導 AI 整合學習平台（Mentor）從概念發想到上線的完整流程，統籌研發、內容、行銷跨部門需求，建立可擴展 Design System，一年內如期上線',
+            link: { href: 'https://enntang.github.io/portfolio/tw/project/mentor', label: '觀看 Mentor 詳細專案介紹' },
+          },
           '帶領設計團隊執行既有產品改版及新產品上線等專案，並透過使用者滿意度調查正向驗證改版成效',
         ],
       },
@@ -77,7 +80,10 @@ export const resumeDataEdtech = {
         role: 'UI/UX 設計師',
         items: [
           '主導多個 RWD 網頁與 POS 系統設計，2 年半內累積八個以上專案，客戶涵蓋政府機關、教育單位與企業客戶',
-          '獨立完成從需求釐清、資訊架構規劃與 UI/UX 介面設計全流程，代表作品 eHairPOS（美髮業管理系統）、巴塞爾公約官方網站皆成功上線',
+          {
+            text: '獨立完成從需求釐清、資訊架構規劃與 UI/UX 介面設計全流程，代表作品 eHairPOS（美髮業管理系統）、巴塞爾公約官方網站皆成功上線',
+            link: { href: 'https://enntang.github.io/portfolio/tw/project/ehairpos', label: '觀看 eHairPOS 詳細專案介紹' },
+          },
         ],
       },
       {
@@ -153,7 +159,10 @@ export const resumeDataEdtech = {
         role: 'Design Lead',
         items: [
           'Built the design department from scratch, responsible for talent recruitment, training, and one-on-one mentoring, achieving zero team turnover during tenure',
-          'Led the AI-integrated learning platform (Mentor) through its full lifecycle from concept to launch, coordinating cross-departmental requirements from R&D, content, and marketing, and building a scalable design system — launched on schedule within a year',
+          {
+            text: 'Led the AI-integrated learning platform (Mentor) through its full lifecycle from concept to launch, coordinating cross-departmental requirements from R&D, content, and marketing, and building a scalable design system — launched on schedule within a year',
+            link: { href: 'https://enntang.github.io/portfolio/project/mentor', label: 'View the Mentor project case study' },
+          },
           "Led the design team through projects such as revamping an existing product and launching a new product, with the redesign's success positively validated through user satisfaction surveys",
         ],
       },
@@ -173,7 +182,10 @@ export const resumeDataEdtech = {
         role: 'UI/UX Designer',
         items: [
           'Led multiple RWD website and POS system design projects, accumulating eight or more projects within two and a half years, serving clients across government agencies, educational institutions, and enterprises',
-          'Independently completed the full process from requirement clarification and information architecture planning to UI/UX interface design; flagship works eHairPOS (a hair salon management system) and the Basel Convention official website both launched successfully',
+          {
+            text: 'Independently completed the full process from requirement clarification and information architecture planning to UI/UX interface design; flagship works eHairPOS (a hair salon management system) and the Basel Convention official website both launched successfully',
+            link: { href: 'https://enntang.github.io/portfolio/project/ehairpos', label: 'View the eHairPOS project case study' },
+          },
         ],
       },
       {

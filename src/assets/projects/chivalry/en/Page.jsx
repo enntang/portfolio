@@ -251,7 +251,7 @@ export default function ChivalryPageEn() {
           </Container>
         </SectionBlock>
 
-        <RelatedProjects />
+        <RelatedProjects invert />
 
         <div className="pt-6 pb-12" style={sectionStyle}>
           <Footer className="text-white/60" />

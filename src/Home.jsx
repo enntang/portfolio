@@ -196,7 +196,7 @@ function Home() {
 
           <section className='flex flex-col py-16 py-8 text-gray-900 md:w-2/3'>
             <h2 className=' text-4xl text-2xl text-gray-300 mb-6 text-large text-large-mobile'>{t('home.greeting')}</h2>
-            <p className='text-p mb-6 mb-4'>{t('home.description')}</p>
+            <p className='text-p mb-6 mb-4 whitespace-pre-line'>{t('home.description')}</p>
             <BtnWhite name={t('home.moreAboutMe')} className='w-fit' href={buildHref('/about')} />
           </section>
 
