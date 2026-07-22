@@ -52,6 +52,16 @@ export const resumeDataHahow = {
     ],
     experience: [
       {
+        period: '2025/11–2026/5',
+        company: '島島阿學 Dao Dao',
+        role: 'User Experience Designer',
+        items: [
+          '主導 MVP 產品設計，於 4 個月內完成上線',
+          '建立 Design System 框架，支援平台後續迭代擴展',
+          '推動 AI-first 設計開發協作流程，透過快速原型製作加速跨職能交接',
+        ],
+      },
+      {
         period: '2023/3–2024/5',
         company: '三貝德',
         role: 'Design Lead',
@@ -153,6 +163,16 @@ export const resumeDataHahow = {
       { label: 'Art Direction & Execution', text: 'Defining brand visual style, with hands-on illustration and graphic design skills to weave visual storytelling into interface design' },
     ],
     experience: [
+      {
+        period: 'Nov 2025 – May 2026',
+        company: 'Dao Dao',
+        role: 'User Experience Designer',
+        items: [
+          'Led MVP product design, launching within 4 months',
+          "Built a Design System framework to support the platform's ongoing iteration and expansion",
+          'Drove an AI-first design and development collaboration workflow, using rapid prototyping to accelerate cross-functional handoff',
+        ],
+      },
       {
         period: 'Mar 2023 – May 2024',
         company: 'Somebest',

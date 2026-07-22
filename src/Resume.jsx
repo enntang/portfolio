@@ -159,7 +159,7 @@ function Resume({ dataset = resumeData }) {
             <h2 className="text-h3 print:text-[15px] font-semibold text-gray-900 pb-2 print:pb-1 border-b border-gray-200 mb-4 print:mb-2">
               {d.labels.about}
             </h2>
-            <div className={`space-y-3 print:space-y-2 text-p text-[14px] print:text-[10.5px] print:leading-[1.45] text-gray-700 ${bodyTracking}`}>
+            <div className={`space-y-3 print:space-y-2 text-p text-[14px] print:text-[10.5px] print:leading-[1.45] print:font-medium text-gray-700 ${bodyTracking}`}>
               {d.about.map((para, i) => (
                 <p key={i}>{para}</p>
               ))}
@@ -172,7 +172,7 @@ function Resume({ dataset = resumeData }) {
             </h2>
             <ul className="resume-focus-grid grid md:grid-cols-2 print:grid-cols-2 gap-x-8 print:gap-x-5 gap-y-3 print:gap-y-2">
               {d.focus.map((item) => (
-                <li key={item.label} className={`text-p text-[14px] print:text-[10.5px] print:leading-[1.45] text-gray-700 flex gap-2 ${bodyTracking}`}>
+                <li key={item.label} className={`text-p text-[14px] print:text-[10.5px] print:leading-[1.45] print:font-medium text-gray-700 flex gap-2 ${bodyTracking}`}>
                   <span className="mt-[9px] print:mt-[6px] w-1 h-1 print:w-[3px] print:h-[3px] rounded-full bg-gray-400 shrink-0" />
                   <span>
                     <strong className="text-gray-900 font-semibold">{item.label}</strong>
@@ -200,7 +200,7 @@ function Resume({ dataset = resumeData }) {
                     {exp.items.map((line, i) => {
                       const isLinked = typeof line === 'object'
                       return (
-                        <li key={i} className={`text-p text-[14px] print:text-[10.5px] print:leading-[1.45] text-gray-700 flex gap-2 ${bodyTracking}`}>
+                        <li key={i} className={`text-p text-[14px] print:text-[10.5px] print:leading-[1.45] print:font-medium text-gray-700 flex gap-2 ${bodyTracking}`}>
                           <span className="mt-[9px] print:mt-[6px] w-1 h-1 print:w-[3px] print:h-[3px] rounded-full bg-gray-400 shrink-0" />
                           <span>
                             {isLinked ? line.text : line}
