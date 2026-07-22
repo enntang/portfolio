@@ -54,7 +54,7 @@ export const resumeData = {
       {
         period: '2025/11–2026/5',
         company: '島島阿學 Dao Dao',
-        role: 'User Experience Designer',
+        role: 'User Experience Designer（遠端兼職）',
         items: [
           '主導 MVP 產品設計，於 4 個月內完成上線',
           '建立 Design System 框架，支援平台後續迭代擴展',
@@ -166,7 +166,7 @@ export const resumeData = {
       {
         period: 'Nov 2025 – May 2026',
         company: 'Dao Dao',
-        role: 'User Experience Designer',
+        role: 'User Experience Designer (Remote, Part-time)',
         items: [
           'Led MVP product design, launching within 4 months',
           "Built a Design System framework to support the platform's ongoing iteration and expansion",
