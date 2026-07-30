@@ -63,7 +63,7 @@ export const resumeDataEdtech = {
       },
       {
         period: '2023/3–2024/5',
-        company: '三貝德',
+        company: '三貝德數位文創股份有限公司',
         role: 'Design Lead',
         items: [
           '從零開始建立設計部門，負責人才招募、培訓與一對一指導，在職期間達成團隊零離職率',
