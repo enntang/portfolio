@@ -76,7 +76,7 @@ export const resumeData = {
       },
       {
         period: '2021/1–2023/3',
-        company: 'TutorABC',
+        company: '麥奇數位股份有限公司 (TutorABC)',
         role: 'UI/UX 設計師',
         items: [
           '教育科技產業經歷：主導 tutorJr 全新官網 UI/UX 設計，並執行 tutorJr x Disney 幼兒英語學習 App 主視覺設計',
@@ -86,7 +86,7 @@ export const resumeData = {
       },
       {
         period: '2018/7–2020/12',
-        company: 'ACubeDT',
+        company: '壹立方數碼股份有限公司 (ACubeDT)',
         role: 'UI/UX 設計師',
         items: [
           '主導多個 RWD 網頁與 POS 系統設計，2 年半內累積八個以上專案，客戶涵蓋政府機關、教育單位與企業客戶',
@@ -98,7 +98,7 @@ export const resumeData = {
       },
       {
         period: '2016/1–2018/2',
-        company: '南一書局',
+        company: '南億興業股份有限公司 (南一書局)',
         role: '美術設計',
         items: [
           '負責教科書、參考書、周邊文宣視覺設計，熟稔印前實務知識與跨部門溝通協作',
@@ -106,7 +106,7 @@ export const resumeData = {
       },
       {
         period: '2014/12–2015/8',
-        company: '寶澤珠寶',
+        company: '寶澤珠寶股份有限公司',
         role: '美術設計',
         items: [
           '負責銀飾精品及金工手作體驗課品牌設計，負責網路商城視覺、活動海報文宣設計、社群媒體經營等行銷實務',
