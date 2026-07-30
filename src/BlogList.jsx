@@ -105,7 +105,7 @@ function TopFeatureCard({ post, buildHref }) {
           1
         </div>
         <div className='min-w-0'>
-          <h3 className='text-xl md:text-2xl font-semibold leading-snug text-gray-800 group-hover:text-highlight transition-colors'>
+          <h3 className='text-xl md:text-2xl font-semibold leading-snug text-gray-800 group-hover:opacity-70 transition-opacity'>
             {post.title}
           </h3>
           <div className='mt-3'>
@@ -133,7 +133,7 @@ function TopListItem({ post, rank, buildHref }) {
     >
       <div className='text-3xl md:text-4xl font-semibold leading-none text-gray-800'>{rank}</div>
       <div className='min-w-0'>
-        <h3 className='text-lg md:text-xl font-semibold leading-snug text-gray-800 group-hover:text-highlight transition-colors'>
+        <h3 className='text-lg md:text-xl font-semibold leading-snug text-gray-800 group-hover:opacity-70 transition-opacity'>
           {post.title}
         </h3>
         <div className='mt-4'>
@@ -158,7 +158,7 @@ function ArticleCard({ post, buildHref }) {
         />
       </div>
       <div className='flex flex-col gap-3'>
-        <h3 className='text-lg md:text-xl font-semibold leading-snug text-gray-800 group-hover:text-highlight transition-colors'>
+        <h3 className='text-lg md:text-xl font-semibold leading-snug text-gray-800 group-hover:opacity-70 transition-opacity'>
           {post.title}
         </h3>
         <p className='text-sm leading-relaxed text-gray-600 line-clamp-2'>{getPostDescription(post)}</p>
@@ -236,7 +236,7 @@ function BlogList() {
 
           <CategoryTabs current={category} onChange={setCategory} tabs={categoryTabs} />
 
-          <div className='grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-x-8 gap-y-12'>
+          <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-12'>
             {filtered.map((post) => (
               <ArticleCard key={post.id} post={post} buildHref={buildHref} />
             ))}
