@@ -24,9 +24,7 @@
       "intro": "Hey, I'm Enn. I've spent the past decade designing digital products across publishing, education,and gaming. I enjoy creating work that makes life a little clearer, easier, or more enjoyable for the people who use it.",
       "career": "A big part of my career has been in the education space, where I've led small design teams and shaped end-to-end experiences from early concepts to launch. I'm also an illustrator at heart, often blending visual storytelling with interface design to build products that feel both intuitive and visually engaging."
     },
-    "whatIDo": "What I Do",
     "watchMore": "watch more",
-    "experience": "Experience",
     "experienceItems": {
       "somebest": {
         "role": "Design Lead",
@@ -65,7 +63,6 @@
         ]
       }
     },
-    "education": "Education",
     "educationItems": {
       "ntust": {
         "role": "National Taiwan University of Science and Technology\n(Master’s Degree)",
@@ -80,7 +77,36 @@
         "items": []
       }
     },
-    "archivedWorks": "Archived Works",
+    "values": {
+      "items": [
+        {
+          "title": "I'm a designer.",
+          "body": "I enjoy turning ideas into reality, and brainstorming with a team to find the best solution — maybe that's why I've stuck with design all these years. Seeing what a group of people can create together is always the part of my job I look forward to most.",
+          "moments": [
+            { "year": "2022", "caption": "Competing in the g0v Hackathon School project competition, prepping a presentation with my teammates" },
+            { "year": "2025", "caption": "Playing an early online demo of \"Penguin Territory\"" }
+          ]
+        },
+        {
+          "title": "I'm a sharer.",
+          "body": "I believe design exists to solve problems. Beyond building things myself, I enjoy gathering my thoughts and sharing them with others, hoping to spark further thinking and open up more paths toward a solution.",
+          "moments": [
+            { "year": "2025", "caption": "Speaking on design thinking at NCCU's Digital Marketing Lab club" },
+            { "year": "2026", "caption": "Joining a co-design workshop in Tokyo — Design Beyond Screens: Let's Co-Design Voice AI Product" }
+          ]
+        },
+        {
+          "title": "I'm a traveler.",
+          "body": "I started out in Tainan and settled in the Taipei area; from Taiwan I've set my sights on Japan, hoping to see an even wider world. I also move between illustration and digital product design without confining myself to one discipline. Not every change was planned, but each one has shaped who I really am.",
+          "moments": [
+            { "year": "2016", "caption": "Met the best partner of my life, and set off on this journey together" },
+            { "year": "2024", "caption": "Painting with watercolor and colored pencils" },
+            { "year": "2026", "caption": "A walk near my new home in Tokyo" }
+          ]
+        }
+      ]
+    },
+    "talkLead": "If any of this resonates",
     "mobileTabs": {
       "profile": "Profile",
       "whatIDo": "What I Do",
