@@ -4,17 +4,27 @@ import Navbar from './components/utilities/Navbar'
 import ExperienceItem from './components/about/ExperienceItem'
 import AboutSectionTitle from './components/about/AboutSectionTitle'
 import ArchivedWorkItem from './components/about/ArchivedWorkItem'
+import AboutValuesTimeline from './components/about/AboutValuesTimeline'
 import { getPublicPath } from './utils/path'
 import BtnWhite from './components/utilities/BtnWhite'
 import LazyImage from './components/utilities/LazyImage'
+import Footer from './components/utilities/Footer'
 import P from './components/post/P'
 import { useLanguage } from './contexts/LanguageContext'
 import { useTranslation } from './hooks/useTranslation'
 import { buildPath } from './utils/routing'
 
+// Order must match each theme's `moments` array in the locale files (about.values.items)
+const aboutMomentImages = [
+  ['/about-moments/designer-1.jpg', '/about-moments/designer-2.jpg'],
+  ['/about-moments/sharer-1.jpg', '/about-moments/sharer-2.jpeg'],
+  ['/about-moments/traveler-1.jpg', '/about-moments/traveler-2.jpg', '/about-moments/traveler-3.jpg'],
+]
 
 function About() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
+  // Set while the full-bleed dark "Who I Am" band sits under the navbar
+  const [isNavOverDark, setIsNavOverDark] = useState(false)
   const { language } = useLanguage()
   const { t } = useTranslation()
 
@@ -23,6 +33,11 @@ function About() {
     return buildPath(path, language)
   }
 
+  // The element that paints the page background; the "Who I Am" section scrubs
+  // it from light to dark as it comes into view.
+  const surfaceRef = useRef(null)
+  // Everything above the "Who I Am" section, dissolved as that section arrives
+  const precedingRef = useRef(null)
   const profileRef = useRef(null)
   const whatIDoRef = useRef(null)
   const experienceRef = useRef(null)
@@ -58,9 +73,13 @@ function About() {
 
 
   return (
-    <div className='bg-bg'>
+    // overflow-x-clip contains the full-bleed 100vw "Who I Am" track on platforms
+    // with classic scrollbars. `clip` (not `hidden`) avoids creating a scroll
+    // container, which would interfere with the section's ScrollTrigger pin.
+    <div ref={surfaceRef} className='bg-bg overflow-x-clip'>
       <Navbar
         isWhite={true}
+        isDark={isNavOverDark}
         isMenuOpen={isMenuOpen}
         onToggleMenu={() => setIsMenuOpen(prev => !prev)}
       />
@@ -68,6 +87,10 @@ function About() {
       {/* Single column layout */}
       <div className="container max-w-3xl mx-auto">
         <div className='w-full p-8 xl:p-16 flex flex-col gap-8'>
+          {/* Everything before "Who I Am". Grouped so that section can dissolve
+              it as the page background goes dark, instead of needing a stretch
+              of empty scroll to transition across. */}
+          <div ref={precedingRef} className='flex flex-col gap-8'>
           <div className='pt-16 relative isolate mb-16'>
             <h1 className='text-large-mobile md:pr-28 text-gray-300 leading-tight mix-blend-screen mb-8'>
               {t('about.title')}
@@ -75,7 +98,7 @@ function About() {
             <LazyImage
               src={getPublicPath('/portrait.png')}
               alt='profile'
-              className='w-40 h-40 mix-blend-screen absolute right-0 bottom-0'
+              className='w-40 h-40 rounded-lg mix-blend-screen absolute right-0 bottom-0'
               preload={true}
             />
             <BtnWhite name={t('about.readCV')} href={buildHref('/resume')} target="_blank" />
@@ -93,7 +116,9 @@ function About() {
           <div className='flex flex-col gap-10'>
             {/* What I Do */}
             <section ref={whatIDoRef} className='space-y-4'>
-              <AboutSectionTitle>{t('about.whatIDo')}</AboutSectionTitle>
+              {/* Section titles stay English in every locale — deliberate, so
+                  they are literals rather than translation keys */}
+              <AboutSectionTitle>What I Do</AboutSectionTitle>
               <div className='flex flex-col divide-y divide-gray-200'>
                 <a
                   href={buildHref('/projects')}
@@ -149,7 +174,7 @@ function About() {
 
             {/* Experience */}
             <section ref={experienceRef} className='space-y-4'>
-              <AboutSectionTitle>{t('about.experience')}</AboutSectionTitle>
+              <AboutSectionTitle>Experience</AboutSectionTitle>
               <div className='space-y-6 text-gray-800'>
                 <ExperienceItem
                   role={t('about.experienceItems.somebest.role')}
@@ -180,7 +205,7 @@ function About() {
 
             {/* Education */}
             <section ref={educationRef} className='space-y-4'>
-              <AboutSectionTitle>{t('about.education')}</AboutSectionTitle>
+              <AboutSectionTitle>Education</AboutSectionTitle>
               <div className='space-y-6 text-gray-800'>
                 <ExperienceItem
                   role={t('about.educationItems.ntust.role')}
@@ -199,7 +224,7 @@ function About() {
 
             {/* Archived Works */}
             <section className='space-y-4 pb-24'>
-              <AboutSectionTitle>{t('about.archivedWorks')}</AboutSectionTitle>
+              <AboutSectionTitle>Archived Works</AboutSectionTitle>
               <div className=''>
                 <ArchivedWorkItem
                   title='tutorJr 2022 New Official Website UI Design'
@@ -224,9 +249,49 @@ function About() {
 
             </section>
           </div>
-        </div>
+          </div>
 
-       
+          {/* Who I Am — full-bleed dark band, owns its own section title so the
+              label stays pinned on screen while the panels slide */}
+          <section>
+            <AboutValuesTimeline
+              title="Who I Am"
+              surfaceRef={surfaceRef}
+              precedingRef={precedingRef}
+              onDarkChange={setIsNavOverDark}
+              items={t('about.values.items', []).map((item, idx) => ({
+                title: item.title,
+                body: item.body,
+                photos: (item.moments || []).map((moment, i) => ({
+                  ...moment,
+                  src: getPublicPath(aboutMomentImages[idx][i]),
+                })),
+              }))}
+            />
+          </section>
+
+          {/* Mirrors the home page's contact block, including the accent rule.
+              Sits on the dark background the page settles into, so the lead-in
+              takes a light grey where home uses gray-800, and the lead-in is a
+              sentence rather than a label — no uppercase or letter-spacing.
+              TODO: point at the Contact page once it exists, instead of mailto */}
+          <section className='pt-16 pb-32 mobile:pt-8 mobile:pb-16'>
+            <div className='flex flex-col items-center text-center'>
+              {/* In flow rather than absolutely positioned like the home page's
+                  copy of this rule: there the gap below it falls out of the
+                  section's responsive padding, which closes to zero under md */}
+              <div className='w-[1px] h-24 bg-highlight'></div>
+              <p className='text-2xl font-bold text-gray-200 mt-16 mb-8'>
+                {t('about.talkLead')}
+              </p>
+              <BtnWhite name="Let's talk" href='mailto:enntang.work@gmail.com' />
+            </div>
+          </section>
+
+          <div className='pt-16'>
+            <Footer className='text-gray-400' />
+          </div>
+        </div>
       </div>
     </div>
   )

@@ -9,7 +9,7 @@ import { useTranslation } from '../../hooks/useTranslation'
 import { buildPath, getCurrentLocationPath, navigate, parsePath } from '../../utils/routing'
  
 
-function Navbar({ isWhite = false, isMenuOpen = false, onToggleMenu, variant = 'default', onBack }) {
+function Navbar({ isWhite = false, isDark = false, isMenuOpen = false, onToggleMenu, variant = 'default', onBack }) {
   const { language, changeLanguage, getLanguagePrefix } = useLanguage()
   const { t } = useTranslation()
   const menuContainerRef = useRef(null)
@@ -166,7 +166,8 @@ function Navbar({ isWhite = false, isMenuOpen = false, onToggleMenu, variant = '
               </button>
             ) : (
               <a href={`${buildHref('/')}#home`} aria-label="Go to home" className="inline-block">
-                <h1 className={`text-2xl font-bold ${isWhite ? 'text-gray-400' : 'text-white'
+                <h1 className={`text-2xl font-bold transition-colors duration-300 ${
+                  isDark ? 'text-white' : isWhite ? 'text-gray-400' : 'text-white'
                   }`}>ENN<br />TANG</h1>
               </a>
             )}
@@ -190,14 +191,14 @@ function Navbar({ isWhite = false, isMenuOpen = false, onToggleMenu, variant = '
             >
               <div className="menu-icon w-6 h-3.5 cursor-pointer relative">
                 <span 
-                  className={`absolute left-0 w-full h-0.5 bg-gray-900 transition-all duration-300 ease-in-out ${
+                  className={`absolute left-0 w-full h-0.5 ${isDark ? 'bg-white' : 'bg-gray-900'} transition-all duration-300 ease-in-out ${
                     isMenuOpen 
                       ? 'top-1.5 rotate-45' 
                       : 'top-0 rotate-0'
                   }`}
                 />
                 <span 
-                  className={`absolute left-0 w-full h-0.5 bg-gray-900 transition-all duration-300 ease-in-out ${
+                  className={`absolute left-0 w-full h-0.5 ${isDark ? 'bg-white' : 'bg-gray-900'} transition-all duration-300 ease-in-out ${
                     isMenuOpen 
                       ? 'opacity-0' 
                       : 'opacity-100'
@@ -205,14 +206,14 @@ function Navbar({ isWhite = false, isMenuOpen = false, onToggleMenu, variant = '
                   style={{ top: '6px' }}
                 />
                 <span 
-                  className={`absolute left-0 w-full h-0.5 bg-gray-900 transition-all duration-300 ease-in-out ${
+                  className={`absolute left-0 w-full h-0.5 ${isDark ? 'bg-white' : 'bg-gray-900'} transition-all duration-300 ease-in-out ${
                     isMenuOpen 
                       ? 'top-1.5 -rotate-45' 
                       : 'top-3 rotate-0'
                   }`}
                 />
               </div>
-              <span className="text-gray-900 text-xs tracking-widest text-bold mt-2">
+              <span className={`${isDark ? 'text-white' : 'text-gray-900'} text-xs tracking-widest text-bold mt-2 transition-colors duration-300`}>
                 MENU
               </span>
             </button>
