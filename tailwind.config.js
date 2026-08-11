@@ -9,6 +9,11 @@ export default {
       screens: {
         'mobile': {'max': '768px'},
       },
+      fontWeight: {
+        // Body copy sits between Light and Regular — Regular reads too heavy in CJK,
+        // Light too thin. Matches the `text-p` token's weight.
+        body: '350',
+      },
       fontFamily: {
         sans: ['Lexend', '"Noto Sans TC"', 'sans-serif'],
         'lexend-exa': ['"Lexend Exa"', 'Lexend', '"Noto Sans TC"', 'sans-serif'],
@@ -35,7 +40,7 @@ export default {
       },
       fontSize: {
         // General styles (no device-specific variants)
-        'p': ['16px', { lineHeight: '160%', fontWeight: '300', letterSpacing: '0.05em' }], // General paragraph - Light weight, 5% letter spacing
+        'p': ['16px', { lineHeight: '160%', fontWeight: '350', letterSpacing: '0.05em' }], // General paragraph - between Light and Regular, 5% letter spacing
         'p-strong': ['18px', { lineHeight: '160%', fontWeight: '500', letterSpacing: '0.05em' }], // Strong paragraph - Medium weight, 5% letter spacing
         'caption': ['14px', { lineHeight: 'auto', fontWeight: '300', letterSpacing: '0' }], // Caption text - Light weight, 0% letter spacing
         

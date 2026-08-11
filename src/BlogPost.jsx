@@ -146,7 +146,7 @@ function BlogPost({ slug }) {
         <main className='max-w-3xl mx-auto w-full space-y-8'>
           <p className='text-sm text-gray-700 w-full border-t border-b border-gray-200 py-6'>{getPostDescription(post)}</p>
 
-          <article ref={articleRef} className='prose prose-sm md:prose-base max-w-none prose-headings:text-gray-900 prose-headings:font-medium prose-p:text-gray-900 prose-p:font-extralight prose-strong:text-gray-900 prose-li:text-gray-900 prose-li:font-extralight prose-a:text-gray-900 prose-a:underline prose-a:decoration-highlight prose-a:decoration-[6px] prose-a:underline-offset-2 prose-img:rounded-lg prose-img:bg-[#101625] prose-code:text-highlight prose-code:bg-[#101625] prose-code:px-1.5 prose-code:py-0.5 prose-code:rounded prose-pre:bg-[#101625] prose-pre:rounded-lg prose-h1:mt-16 prose-h2:mt-12 prose-h3:mt-8 [&_h1>strong]:font-medium [&_h2>strong]:font-medium [&_h3>strong]:font-medium'>
+          <article ref={articleRef} className='prose prose-base max-w-none prose-headings:text-gray-900 prose-headings:font-medium prose-p:text-gray-900 prose-p:font-body prose-strong:text-gray-900 prose-li:text-gray-900 prose-li:font-body prose-a:text-gray-900 prose-a:underline prose-a:decoration-highlight prose-a:decoration-[6px] prose-a:underline-offset-2 prose-img:rounded-lg prose-img:bg-[#101625] prose-code:text-highlight prose-code:bg-[#101625] prose-code:px-1.5 prose-code:py-0.5 prose-code:rounded prose-pre:bg-[#101625] prose-pre:rounded-lg prose-h1:mt-16 prose-h2:mt-12 prose-h3:mt-8 [&_h1>strong]:font-medium [&_h2>strong]:font-medium [&_h3>strong]:font-medium'>
             {typeof post.content === 'string' ? (
               <ReactMarkdown
                 components={{
