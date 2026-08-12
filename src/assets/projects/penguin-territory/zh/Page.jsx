@@ -20,6 +20,7 @@ import H2 from '../../../../components/post/H2'
 import H3 from '../../../../components/post/H3'
 import UL from '../../../../components/post/UL'
 import LI from '../../../../components/post/LI'
+import FadeIn from '../../../../components/utilities/FadeIn'
 
 import arrowDown from '../../../../../public/icon-arrow-down.svg'
 import iconLink from '../../../../../public/icon-link.svg'
@@ -245,6 +246,7 @@ export default function PenguinTerritoryPageZh() {
 
         {/* Project Brief */}
         <SectionBlock>
+        <FadeIn>
           <Container>
             <H2>專案簡介</H2>
 
@@ -280,10 +282,12 @@ export default function PenguinTerritoryPageZh() {
               </div>
             </TwoColumn>
           </Container>
+        </FadeIn>
         </SectionBlock>
 
         {/* Design Goals */}
         <SectionBlock bgVariant="penguinBg2" backgrounds={penguinBackgrounds} textDarkOnBg>
+        <FadeIn>
           <Container>
 
             <H2>設計目標</H2>
@@ -344,10 +348,12 @@ export default function PenguinTerritoryPageZh() {
                 </div>
               </div></div>
           </Container>
+        </FadeIn>
         </SectionBlock>
 
         {/* Collaboration artifacts */}
         <SectionBlock>
+        <FadeIn>
           <Container>
             <H2>流程與協作</H2>
             <P>
@@ -360,10 +366,12 @@ export default function PenguinTerritoryPageZh() {
               <LazyImage src={wireframeNoText2} alt="Wireframe（無文字）2" className="w-full h-auto rounded-lg shadow" />
             </div>
           </Container>
+        </FadeIn>
         </SectionBlock>
 
         {/* Design Deliverables */}
         <SectionBlock bgVariant="penguinBg2" backgrounds={penguinBackgrounds} textDarkOnBg>
+        <FadeIn>
           <Container>
             <H2>設計產出</H2>
 
@@ -410,10 +418,10 @@ export default function PenguinTerritoryPageZh() {
             <div className="mt-16">
               <H3>清楚的規則說明</H3>
               <P>遊戲過程中可隨時查看規則說明，每頁搭配簡化插圖，避免文字過長。</P>
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mt-8">
-                <LazyImage src={tips1} alt="規則說明 1" className=" -rotate-3 w-full h-auto rounded-lg shadow" />
-                <LazyImage src={tips2} alt="規則說明 2" className=" rotate-3 w-full h-auto rounded-lg shadow" />
-                <LazyImage src={tips3} alt="規則說明 3" className=" -rotate-3 w-full h-auto rounded-lg shadow" />
+              <div className="flex flex-col -space-y-12 mobile:-space-y-8 [&>*]:relative mt-8 w-[60%] mobile:w-full mx-auto">
+                <LazyImage src={tips1} alt="規則說明 1" className=" -rotate-3 -left-10 mobile:left-0 w-full h-auto rounded-lg shadow" />
+                <LazyImage src={tips2} alt="規則說明 2" className=" rotate-3 left-10 mobile:left-0 w-full h-auto rounded-lg shadow" />
+                <LazyImage src={tips3} alt="規則說明 3" className=" -rotate-3 -left-10 mobile:left-0 w-full h-auto rounded-lg shadow" />
               </div>
             </div>
 
@@ -425,10 +433,12 @@ export default function PenguinTerritoryPageZh() {
               <ImageWithHotspots src={resultImg} alt="結算畫面" hotspots={resultHotspots} className="w-full h-auto rounded-lg shadow mt-8" />
             </div>
           </Container>
+        </FadeIn>
         </SectionBlock>
 
         {/* Visual Design */}
         <SectionBlock>
+        <FadeIn>
           <Container>
             <H2>視覺設計</H2>
             <P>
@@ -449,10 +459,12 @@ export default function PenguinTerritoryPageZh() {
             />
             <p className="text-caption text-gray-500 font-light mt-3">使用不透明水彩繪製的原稿</p>
           </Container>
+        </FadeIn>
         </SectionBlock>
 
         {/* Reflection */}
         <SectionBlock bgVariant="penguinBg2" backgrounds={penguinBackgrounds} textDarkOnBg>
+        <FadeIn>
           <Container className="w-full">
             <TwoColumn>
               <div>
@@ -549,6 +561,7 @@ export default function PenguinTerritoryPageZh() {
               <p className="text-caption">2024</p>
             </div>
           </Container>
+        </FadeIn>
 
           <RelatedProjects />
 

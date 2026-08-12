@@ -12,6 +12,7 @@ import H2 from '../../../../components/post/H2'
 import H3 from '../../../../components/post/H3'
 import UL from '../../../../components/post/UL'
 import LI from '../../../../components/post/LI'
+import FadeIn from '../../../../components/utilities/FadeIn'
 
 // Images referenced by src/assets/projects/chivalry/chivalry.md
 import coverTransparent from '../image/chivalry-cover-transparent.png'
@@ -20,7 +21,7 @@ import designConceptMockup from '../image/chivalry-design-concept-mockup.jpg'
 import attributeCards from '../image/chivalry-attribute-cards.png'
 import attributeHandMockup from '../image/chivalry-attribute-card-hand.png'
 import backgroundImage from '../image/chivalry-background-rulebook.png'
-import chivalryCards1 from '../image/chivalry-virtue-cards-1.jpg'
+import chivalryCards1 from '../image/chivalry-virtue-cards-1.png'
 import chivalryCards2 from '../image/chivalry-virtue-cards-2.jpg'
 import playerBoards1 from '../image/chivalry-player-boards-1.png'
 import playerBoards2 from '../image/chivalry-player-boards-2.png'
@@ -82,6 +83,7 @@ export default function ChivalryPageEn() {
 
         {/* Project Brief */}
         <SectionBlock className="text-white" style={sectionStyleAlt}>
+        <FadeIn>
           <Container>
             <H2>Project Brief</H2>
 
@@ -113,50 +115,52 @@ export default function ChivalryPageEn() {
               </div>
             </TwoColumn>
           </Container>
+        </FadeIn>
         </SectionBlock>
 
         {/* Design Concept */}
         <SectionBlock className="text-white" style={sectionStyle}>
+        <FadeIn>
           <Container>
             <H2>Design Concept</H2>
 
             <P>
-              To convey a sense of nobility and balance between realism and fantasy, I chose a{' '}
-              <strong>low-saturation brick-red palette</strong> paired with metallic gradients and embossed surfaces.
-            </P>
-            <P>The muted tone carries the warmth of aged parchment while keeping the visual atmosphere grounded.</P>
-            <P>
-              Metallic accents and embossed details add a quiet sense of prestige, echoing the shine of armor and the crafted textures
-              of medieval design.
+              I built the palette around a <strong>low-saturation brick red</strong>, paired with metallic gradients and embossed
+              textures to create a grounded, understated sense of prestige.
             </P>
             <P>
-              This color direction extends across the player board and rulebook: from the scoring panel, where color-coded elements
-              distinguish each family’s identity, to the instruction layout that visually unifies all game components.
+              That visual language extends to the player boards and the rulebook: family colors and a shared layout system keep the
+              cards, icons, and rule pages inside one consistent world.
             </P>
 
-            <div className="mt-10 space-y-6">
+            <div className="mt-10">
               <img
                 src={designConceptBoard}
                 alt="Design concept: layout and color direction"
                 className="w-full h-auto rounded-2xl"
                 loading="lazy"
               />
+            </div>
+
+            <P className="mt-10">
+              The player tokens use a knight silhouette, marking each player’s position as they move.
+            </P>
+
+            <div className="mt-8">
               <img
                 src={designConceptMockup}
-                alt="Design concept: overall visual presentation"
+                alt="Design concept: knight silhouette player tokens"
                 className="w-full h-auto rounded-2xl"
                 loading="lazy"
               />
             </div>
-
-            <P className="mt-10">
-              The result is a consistent world where every surface—cards, icons, and even rules—feels like part of the same knightly order.
-            </P>
           </Container>
+        </FadeIn>
         </SectionBlock>
 
         {/* Visual System */}
         <SectionBlock className="text-white" style={sectionStyleAlt}>
+        <FadeIn>
           <Container>
             <H2>Visual System</H2>
 
@@ -164,52 +168,43 @@ export default function ChivalryPageEn() {
             <div className="mt-8">
               <img src={coverTransparent} alt="Chivalry logotype design" className="w-full h-auto rounded-2xl" loading="lazy" />
             </div>
-            <P className="mt-8">The logotype draws inspiration from Gothic calligraphy—structured yet elegant.</P>
-            <P>
-              By embedding a sword motif through the letterforms and adding embossed highlights, the type becomes both a decorative and
-              narrative element, embodying the “knight’s code.”
+            <P className="mt-8">
+              A Gothic typeface carries the medieval character, with embossed light and shadow evoking the fantasy of an imagined world.<br />
+              The sword running through the letterforms points back to the core image of the knight.
             </P>
 
-            <H3>Attribute Card</H3>
-            <P>
-              Each key ability—<strong>Strength, Wisdom, and Charm</strong>—was represented by its own emblem:
-            </P>
-            <UL>
-              <LI>
-                <strong>Sword</strong> for power and courage
-              </LI>
-              <LI>
-                <strong>Book</strong> for intellect and strategy
-              </LI>
-              <LI>
-                <strong>Rose</strong> for charm and empathy
-              </LI>
-            </UL>
+            <H3>Ability Cards</H3>
             <div className="mt-8 space-y-6">
-              <img src={attributeCards} alt="Attribute cards: Strength / Wisdom / Charm" className="w-full h-auto rounded-2xl" loading="lazy" />
-              <img src={attributeHandMockup} alt="Attribute card mockup in hand" className="w-full h-auto rounded-2xl" loading="lazy" />
+              <img src={attributeCards} alt="Ability cards: Strength / Wisdom / Charm" className="w-full h-auto rounded-2xl" loading="lazy" />
+              <img src={attributeHandMockup} alt="Ability card mockup in hand" className="w-full h-auto rounded-2xl" loading="lazy" />
             </div>
             <P className="mt-8">
-              The shield-like frame unites them under one family crest, creating a sense of order and collectability across the cards.
+              The three key abilities of a great knight—strength, wisdom, and charm—are represented by a sword, a book, and a rose,
+              tied together by the shield motif that frames them all.
             </P>
 
             <H3>Chivalry Cards</H3>
-            <P>Eight virtues define the path to victory.</P>
-            <P>Each virtue was visualized with a unique icon and color theme to make its attribute immediately recognizable in gameplay.</P>
-            <P>The icons follow a shared geometric rhythm, echoing heraldic symbols from medieval banners.</P>
             <div className="mt-8 space-y-6">
               <img src={chivalryCards1} alt="Chivalry cards: icon system" className="w-full h-auto rounded-2xl" loading="lazy" />
               <img src={chivalryCards2} alt="Chivalry cards: card layout" className="w-full h-auto rounded-2xl" loading="lazy" />
             </div>
+            <P className="mt-8">
+              Eight virtues define the path to victory. Each virtue has its own icon and color so players can recognize it at a glance
+              during play.
+            </P>
 
             <H3>Player Boards</H3>
             <P>
-              Each of the five families is represented with its own <strong>crest and color</strong>, forming a distinctive visual identity while maintaining a consistent layout grid for cards and dice placement.
+              Each player board builds on one of the five family crests, using the family color as its base to divide the areas for
+              cards and dice.
             </P>
             <div className="mt-8 space-y-6">
               <img src={playerBoards1} alt="Player boards: family crests and color palette" className="w-full h-auto rounded-2xl" loading="lazy" />
               <img src={playerBoards2} alt="Player boards: layout system" className="w-full h-auto rounded-2xl" loading="lazy" />
             </div>
+            <p className="mt-4 text-caption italic text-white/70">
+              *Family crest illustrations by Tin Hsu
+            </p>
 
             <H3>Scoring Board</H3>
             <TwoColumn className="items-start mt-8">
@@ -217,10 +212,12 @@ export default function ChivalryPageEn() {
                 <img src={scoringBoard} alt="Scoring board" className="w-full h-auto rounded-2xl" loading="lazy" />
               </div>
               <div>
-                <P>The scoring board tracks each knight’s progress throughout the game.</P>
-                <P>Players earn points by fulfilling missions and demonstrating virtues, advancing their markers upward on the ladder.</P>
                 <P>
-                  As points accumulate, the knight ascends in rank—visually and symbolically moving closer to achieving true chivalry.
+                  The scoring board tracks each knight’s progress throughout the game. Players earn points by completing missions and
+                  demonstrating virtues, advancing their markers upward.
+                </P>
+                <P>
+                  The higher the score, the higher the knight’s rank, visually and symbolically moving closer to true chivalry.
                 </P>
               </div>
             </TwoColumn>
@@ -230,25 +227,35 @@ export default function ChivalryPageEn() {
               <img src={packaging} alt="Packaging design" className="w-full h-auto rounded-2xl" loading="lazy" />
             </div>
             <P className="mt-8">
-              The outer box extends the game’s identity through <strong>brick-red tones and embossed shield patterns</strong>, creating tactile continuity from cards to box.
+              The outer box carries the theme’s brick red and the embossed patterns used on the cards, tying the whole set together.
             </P>
-          </Container>
-        </SectionBlock>
+            <p className="mt-4 text-caption italic text-white/70">
+              *Medieval street illustration by Tin Hsu
+            </p>
 
-        {/* Reflection */}
-        <SectionBlock className="text-white" style={sectionStyle}>
-          <Container>
-            <H2>Reflection</H2>
-            <P>
-              To keep the visual style consistent, I mapped out all components at the start to plan color and texture as one system.
-            </P>
-            <P>
-              Recreating a medieval look required careful study. I gathered references from manuscripts and heraldic designs to capture their essence and reinterpret them in a cleaner, modern way.
-            </P>
-            <P>
-              In the end, I learned that the groundwork—researching, organizing, and connecting details—is never the step to skip.
-            </P>
+            {/* Credits */}
+            <dl className="mt-20 mobile:mt-16 border-t border-white/15 pt-8 space-y-3 text-caption text-white/80">
+              <div className="flex gap-6 mobile:gap-4">
+                <dt className="w-[200px] mobile:w-[120px] shrink-0 text-white/50">Client</dt>
+                <dd>TRANSIT工作室</dd>
+              </div>
+              <div className="flex gap-6 mobile:gap-4">
+                <dt className="w-[200px] mobile:w-[120px] shrink-0 text-white/50">Art Direction, Design</dt>
+                <dd>湯靜恬 Enn Tang</dd>
+              </div>
+              <div className="flex gap-6 mobile:gap-4">
+                <dt className="w-[200px] mobile:w-[120px] shrink-0 text-white/50">Illustration</dt>
+                <dd>湯靜恬 Enn Tang, 許庭瑋 Tin Hsu</dd>
+              </div>
+            </dl>
+
+            <div className="flex flex-col items-center justify-center mt-16">
+              <img src={coverTransparent} alt="" className="w-40 h-auto mb-3 object-contain" />
+              <p className="text-h3 font-light">Chivalry</p>
+              <p className="text-caption text-white/60">2017</p>
+            </div>
           </Container>
+        </FadeIn>
         </SectionBlock>
 
         <RelatedProjects invert />

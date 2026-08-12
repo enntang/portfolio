@@ -20,6 +20,7 @@ import H2 from '../../../../components/post/H2'
 import H3 from '../../../../components/post/H3'
 import UL from '../../../../components/post/UL'
 import LI from '../../../../components/post/LI'
+import FadeIn from '../../../../components/utilities/FadeIn'
 
 import arrowDown from '../../../../../public/icon-arrow-down.svg'
 import iconLink from '../../../../../public/icon-link.svg'
@@ -245,6 +246,7 @@ export default function PenguinTerritoryPageJa() {
 
         {/* Project Brief */}
         <SectionBlock>
+        <FadeIn>
           <Container>
             <H2>プロジェクト概要</H2>
 
@@ -280,10 +282,12 @@ export default function PenguinTerritoryPageJa() {
               </div>
             </TwoColumn>
           </Container>
+        </FadeIn>
         </SectionBlock>
 
         {/* Design Goals */}
         <SectionBlock bgVariant="penguinBg2" backgrounds={penguinBackgrounds} textDarkOnBg>
+        <FadeIn>
           <Container>
 
             <H2>デザイン目標</H2>
@@ -344,10 +348,12 @@ export default function PenguinTerritoryPageJa() {
                 </div>
               </div></div>
           </Container>
+        </FadeIn>
         </SectionBlock>
 
         {/* Collaboration artifacts */}
         <SectionBlock>
+        <FadeIn>
           <Container>
             <H2>プロセスと協力</H2>
             <P>
@@ -360,10 +366,12 @@ export default function PenguinTerritoryPageJa() {
               <LazyImage src={wireframeNoText2} alt="ワイヤーフレーム（テキストなし）2" className="w-full h-auto rounded-lg shadow" />
             </div>
           </Container>
+        </FadeIn>
         </SectionBlock>
 
         {/* Design Deliverables */}
         <SectionBlock bgVariant="penguinBg2" backgrounds={penguinBackgrounds} textDarkOnBg>
+        <FadeIn>
           <Container>
             <H2>デザイン成果物</H2>
 
@@ -410,10 +418,10 @@ export default function PenguinTerritoryPageJa() {
             <div className="mt-16">
               <H3>明確なルール説明</H3>
               <P>ゲーム中はいつでもルール説明を閲覧でき、各ページには簡略化されたイラストが付いており、テキストが長くなるのを避けています。</P>
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mt-8">
-                <LazyImage src={tips1} alt="ルール説明 1" className=" -rotate-3 w-full h-auto rounded-lg shadow" />
-                <LazyImage src={tips2} alt="ルール説明 2" className=" rotate-3 w-full h-auto rounded-lg shadow" />
-                <LazyImage src={tips3} alt="ルール説明 3" className=" -rotate-3 w-full h-auto rounded-lg shadow" />
+              <div className="flex flex-col -space-y-12 mobile:-space-y-8 [&>*]:relative mt-8 w-[60%] mobile:w-full mx-auto">
+                <LazyImage src={tips1} alt="ルール説明 1" className=" -rotate-3 -left-10 mobile:left-0 w-full h-auto rounded-lg shadow" />
+                <LazyImage src={tips2} alt="ルール説明 2" className=" rotate-3 left-10 mobile:left-0 w-full h-auto rounded-lg shadow" />
+                <LazyImage src={tips3} alt="ルール説明 3" className=" -rotate-3 -left-10 mobile:left-0 w-full h-auto rounded-lg shadow" />
               </div>
             </div>
 
@@ -425,10 +433,12 @@ export default function PenguinTerritoryPageJa() {
               <ImageWithHotspots src={resultImg} alt="結果画面" hotspots={resultHotspots} className="w-full h-auto rounded-lg shadow mt-8" />
             </div>
           </Container>
+        </FadeIn>
         </SectionBlock>
 
         {/* Visual Design */}
         <SectionBlock>
+        <FadeIn>
           <Container>
             <H2>ビジュアルデザイン</H2>
             <P>
@@ -449,10 +459,12 @@ export default function PenguinTerritoryPageJa() {
             />
             <p className="text-caption text-gray-500 font-light mt-3">ガッシュで描かれた原画</p>
           </Container>
+        </FadeIn>
         </SectionBlock>
 
         {/* Reflection */}
         <SectionBlock bgVariant="penguinBg2" backgrounds={penguinBackgrounds} textDarkOnBg>
+        <FadeIn>
           <Container className="w-full">
             <TwoColumn>
               <div>
@@ -549,6 +561,7 @@ export default function PenguinTerritoryPageJa() {
               <p className="text-caption">2024</p>
             </div>
           </Container>
+        </FadeIn>
 
           <RelatedProjects />
 

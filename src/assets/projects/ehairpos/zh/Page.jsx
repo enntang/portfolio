@@ -66,6 +66,7 @@ import H2 from '../../../../components/post/H2'
 import H3 from '../../../../components/post/H3'
 import UL from '../../../../components/post/UL'
 import LI from '../../../../components/post/LI'
+import FadeIn from '../../../../components/utilities/FadeIn'
 
 export default function EHairPOSPageZh() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
@@ -277,6 +278,7 @@ export default function EHairPOSPageZh() {
 
         {/* Project Brief */}
         <SectionBlock backgrounds={ehairposBackgrounds}>
+        <FadeIn>
           <Container className='flex flex-col items-center justify-center'>
 
             <H2>專案簡介</H2>
@@ -304,10 +306,12 @@ export default function EHairPOSPageZh() {
               </div>
             </div>
           </Container>
+        </FadeIn>
         </SectionBlock>
 
         {/* Responsibilities */}
         <SectionBlock variant="purple" backgrounds={ehairposBackgrounds}>
+        <FadeIn>
           <Container>
             <H2>主要職責</H2>
 
@@ -317,10 +321,12 @@ export default function EHairPOSPageZh() {
               <LI>設計 App 的 Logo / Logotype</LI>
             </UL>
           </Container>
+        </FadeIn>
         </SectionBlock>
 
         {/* target audience */}
         <SectionBlock variant="photo" backgrounds={ehairposBackgrounds}>
+        <FadeIn>
           <Container>
          
               <H2>目標使用者</H2>
@@ -340,10 +346,12 @@ export default function EHairPOSPageZh() {
               </div>
          
           </Container>
+        </FadeIn>
         </SectionBlock>
 
         {/* Background */}
         <SectionBlock variant="white" backgrounds={ehairposBackgrounds}>
+        <FadeIn>
           <Container>
             <H2>背景</H2>
             <div className='grid grid-cols-1 md:grid-cols-2 gap-16'>
@@ -368,10 +376,12 @@ export default function EHairPOSPageZh() {
             <img src={draft1} alt="draft1" className='w-full h-auto mt-16 rounded-lg' />
             <p className='text-caption text-gray-500 font-light mt-4'>避免零碎式拼貼 UI；以整體角度先草擬並比較不同版面。</p>
           </Container>
+        </FadeIn>
         </SectionBlock>
 
         {/* Design Deliverables */}
         <SectionBlock variant="purple" backgrounds={ehairposBackgrounds}>
+        <FadeIn>
           <Container>
           <H2>設計成果</H2>
             {/* Mobile Swiper */}
@@ -471,10 +481,12 @@ export default function EHairPOSPageZh() {
               />
             </div>
           </Container>
+        </FadeIn>
         </SectionBlock>
 
 
         <SectionBlock backgrounds={ehairposBackgrounds}>
+        <FadeIn>
           <Container>
             {/* Mobile Swiper */}
             <div className="md:hidden">
@@ -548,10 +560,12 @@ export default function EHairPOSPageZh() {
               />
             </div>
           </Container>
+        </FadeIn>
         </SectionBlock>
 
 
         <SectionBlock variant="photo" backgrounds={ehairposBackgrounds}>
+        <FadeIn>
           <Container>
             {/* Mobile Swiper */}
             <div className="md:hidden">
@@ -633,9 +647,11 @@ export default function EHairPOSPageZh() {
             </div>
 
           </Container>
+        </FadeIn>
         </SectionBlock>
 
         <SectionBlock backgrounds={ehairposBackgrounds}>
+        <FadeIn>
           <Container>
             {/* Mobile Swiper */}
             <div className="md:hidden">
@@ -701,9 +717,11 @@ export default function EHairPOSPageZh() {
               />
             </div>
           </Container>
+        </FadeIn>
         </SectionBlock>
 
         <SectionBlock variant="purple" backgrounds={ehairposBackgrounds}>
+        <FadeIn>
           <Container>
             {/* Mobile Swiper */}
             <div className="md:hidden">
@@ -765,10 +783,12 @@ export default function EHairPOSPageZh() {
               <P className='mt-16'>這些儀表板讓店主與設計師都能更有掌控感：用數據制定計畫，而不是靠直覺猜測。</P>
             </div>
           </Container>
+        </FadeIn>
         </SectionBlock>
 
         {/* Logotype Design */}
         <SectionBlock variant="white" backgrounds={ehairposBackgrounds}>
+        <FadeIn>
           <Container>
             {/* Mobile Swiper */}
             <div className="md:hidden">
@@ -821,10 +841,12 @@ export default function EHairPOSPageZh() {
             </div>
 
           </Container>
+        </FadeIn>
         </SectionBlock>
 
         {/* Reflections */}
         <SectionBlock variant="purple" backgrounds={ehairposBackgrounds}>
+        <FadeIn>
           <Container>
             {/* Mobile Swiper */}
             <div className="md:hidden">
@@ -888,9 +910,11 @@ export default function EHairPOSPageZh() {
             </div>
 
           </Container>
+        </FadeIn>
         </SectionBlock>
 
         <SectionBlock variant="" backgrounds={ehairposBackgrounds}>
+        <FadeIn>
           <Container>
             <H2>後續發展與影響</H2>
             <P>雖然我在第一版完成後離開公司，但產品仍持續成長：</P>
@@ -921,6 +945,7 @@ export default function EHairPOSPageZh() {
               <p className='text-caption text-gray-300'>2020 – 2021</p>
             </div>
           </Container>
+        </FadeIn>
 
           <RelatedProjects />
 

@@ -66,6 +66,7 @@ import H2 from '../../../components/post/H2'
 import H3 from '../../../components/post/H3'
 import UL from '../../../components/post/UL'
 import LI from '../../../components/post/LI'
+import FadeIn from '../../../components/utilities/FadeIn'
 
 export default function EHairPOSPage() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
@@ -277,6 +278,7 @@ export default function EHairPOSPage() {
 
         {/* Project Brief */}
         <SectionBlock backgrounds={ehairposBackgrounds}>
+        <FadeIn>
           <Container className='flex flex-col items-center justify-center'>
 
             <H2>Project Brief</H2>
@@ -304,10 +306,12 @@ export default function EHairPOSPage() {
               </div>
             </div>
           </Container>
+        </FadeIn>
         </SectionBlock>
 
         {/* Responsibilities */}
         <SectionBlock variant="purple" backgrounds={ehairposBackgrounds}>
+        <FadeIn>
           <Container>
             <H2>Key Responsibilities</H2>
 
@@ -317,10 +321,12 @@ export default function EHairPOSPage() {
               <LI>Created the app’s logotype</LI>
             </UL>
           </Container>
+        </FadeIn>
         </SectionBlock>
 
         {/* target audience */}
         <SectionBlock variant="photo" backgrounds={ehairposBackgrounds}>
+        <FadeIn>
           <Container>
          
               <H2>Target Audience</H2>
@@ -340,10 +346,12 @@ export default function EHairPOSPage() {
               </div>
          
           </Container>
+        </FadeIn>
         </SectionBlock>
 
         {/* Background */}
         <SectionBlock variant="white" backgrounds={ehairposBackgrounds}>
+        <FadeIn>
           <Container>
             <H2>Background</H2>
             <div className='grid grid-cols-1 md:grid-cols-2 gap-16'>
@@ -368,10 +376,12 @@ export default function EHairPOSPage() {
             <img src={draft1} alt="draft1" className='w-full h-auto mt-16 rounded-lg' />
             <p className='text-caption text-gray-500 font-light mt-4'>Avoided piecemeal UI; drafted and compared layouts as a whole.</p>
           </Container>
+        </FadeIn>
         </SectionBlock>
 
         {/* Design Deliverables */}
         <SectionBlock variant="purple" backgrounds={ehairposBackgrounds}>
+        <FadeIn>
           <Container>
           <H2>Design Deliverables</H2>
             {/* Mobile Swiper */}
@@ -470,10 +480,12 @@ export default function EHairPOSPage() {
               />
             </div>
           </Container>
+        </FadeIn>
         </SectionBlock>
 
 
         <SectionBlock backgrounds={ehairposBackgrounds}>
+        <FadeIn>
           <Container>
             {/* Mobile Swiper */}
             <div className="md:hidden">
@@ -547,10 +559,12 @@ export default function EHairPOSPage() {
               />
             </div>
           </Container>
+        </FadeIn>
         </SectionBlock>
 
 
         <SectionBlock variant="photo" backgrounds={ehairposBackgrounds}>
+        <FadeIn>
           <Container>
             {/* Mobile Swiper */}
             <div className="md:hidden">
@@ -632,9 +646,11 @@ export default function EHairPOSPage() {
             </div>
 
           </Container>
+        </FadeIn>
         </SectionBlock>
 
         <SectionBlock backgrounds={ehairposBackgrounds}>
+        <FadeIn>
           <Container>
             {/* Mobile Swiper */}
             <div className="md:hidden">
@@ -700,9 +716,11 @@ export default function EHairPOSPage() {
               />
             </div>
           </Container>
+        </FadeIn>
         </SectionBlock>
 
         <SectionBlock variant="purple" backgrounds={ehairposBackgrounds}>
+        <FadeIn>
           <Container>
             {/* Mobile Swiper */}
             <div className="md:hidden">
@@ -764,10 +782,12 @@ export default function EHairPOSPage() {
               <P className='mt-16'>These dashboards allow both owners and stylists to take ownership of their performance and plan with data, not guesswork.</P>
             </div>
           </Container>
+        </FadeIn>
         </SectionBlock>
 
         {/* Logotype Design */}
         <SectionBlock variant="white" backgrounds={ehairposBackgrounds}>
+        <FadeIn>
           <Container>
             {/* Mobile Swiper */}
             <div className="md:hidden">
@@ -820,10 +840,12 @@ export default function EHairPOSPage() {
             </div>
 
           </Container>
+        </FadeIn>
         </SectionBlock>
 
         {/* Reflections */}
         <SectionBlock variant="purple" backgrounds={ehairposBackgrounds}>
+        <FadeIn>
           <Container>
             {/* Mobile Swiper */}
             <div className="md:hidden">
@@ -887,9 +909,11 @@ export default function EHairPOSPage() {
             </div>
 
           </Container>
+        </FadeIn>
         </SectionBlock>
 
         <SectionBlock variant="" backgrounds={ehairposBackgrounds}>
+        <FadeIn>
           <Container>
             <H2>Future Development and Ongoing Influence</H2>
             <P>Although I left the company after completing the first release, the product continued to grow:</P>
@@ -920,6 +944,7 @@ export default function EHairPOSPage() {
               <p className='text-caption text-gray-300'>2020 – 2021</p>
             </div>
           </Container>
+        </FadeIn>
 
           <RelatedProjects />
 

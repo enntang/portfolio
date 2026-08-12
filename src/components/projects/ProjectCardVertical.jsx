@@ -2,6 +2,7 @@ import { getPublicPath } from '../../utils/path'
 import LazyImage from '../utilities/LazyImage'
 import { useLanguage } from '../../contexts/LanguageContext'
 import { buildPath } from '../../utils/routing'
+import { splitProjectTitle } from '../../utils/projectTitle'
  
 function ProjectCardVertical({ project }) {
   const { title, description, imageSrc, imageAlt } = project;
@@ -26,8 +27,8 @@ function ProjectCardVertical({ project }) {
           ) : (
             <div className="flex items-center justify-center h-full">
               <div className="text-center text-white">
-                <div className="text-h2 text-gray-900 mb-2">{title.split(':')[0]}</div>
-                <div className="text-sm mobile:text-xs opacity-90">{title.split(':')[1]}</div>
+                <div className="text-h2 text-gray-900 mb-2">{splitProjectTitle(title).mainTitle}</div>
+                <div className="text-sm mobile:text-xs opacity-90">{splitProjectTitle(title).subtitle}</div>
               </div>
             </div>
           )}

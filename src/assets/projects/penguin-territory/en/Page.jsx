@@ -20,6 +20,7 @@ import H2 from '../../../../components/post/H2'
 import H3 from '../../../../components/post/H3'
 import UL from '../../../../components/post/UL'
 import LI from '../../../../components/post/LI'
+import FadeIn from '../../../../components/utilities/FadeIn'
 
 import arrowDown from '../../../../../public/icon-arrow-down.svg'
 import iconLink from '../../../../../public/icon-link.svg'
@@ -245,6 +246,7 @@ export default function PenguinTerritoryPageEn() {
 
         {/* Project Brief */}
         <SectionBlock>
+        <FadeIn>
           <Container>
             <H2>Project Overview</H2>
 
@@ -280,10 +282,12 @@ export default function PenguinTerritoryPageEn() {
               </div>
             </TwoColumn>
           </Container>
+        </FadeIn>
         </SectionBlock>
 
         {/* Design Goals */}
         <SectionBlock bgVariant="penguinBg2" backgrounds={penguinBackgrounds} textDarkOnBg>
+        <FadeIn>
           <Container>
 
             <H2>Design Goals</H2>
@@ -344,10 +348,12 @@ export default function PenguinTerritoryPageEn() {
                 </div>
               </div></div>
           </Container>
+        </FadeIn>
         </SectionBlock>
 
         {/* Collaboration artifacts */}
         <SectionBlock>
+        <FadeIn>
           <Container>
             <H2>Process & Collaboration</H2>
             <P>
@@ -360,10 +366,12 @@ export default function PenguinTerritoryPageEn() {
               <LazyImage src={wireframeNoText2} alt="Wireframe (no text) 2" className="w-full h-auto rounded-lg shadow" />
             </div>
           </Container>
+        </FadeIn>
         </SectionBlock>
 
         {/* Design Deliverables */}
         <SectionBlock bgVariant="penguinBg2" backgrounds={penguinBackgrounds} textDarkOnBg>
+        <FadeIn>
           <Container>
             <H2>Design Deliverables</H2>
 
@@ -410,10 +418,10 @@ export default function PenguinTerritoryPageEn() {
             <div className="mt-16">
               <H3>Clear Rule Instructions</H3>
               <P>Players can view rule instructions at any time during the game. Each page includes simplified illustrations to avoid lengthy text.</P>
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mt-8">
-                <LazyImage src={tips1} alt="Rule instructions 1" className=" -rotate-3 w-full h-auto rounded-lg shadow" />
-                <LazyImage src={tips2} alt="Rule instructions 2" className=" rotate-3 w-full h-auto rounded-lg shadow" />
-                <LazyImage src={tips3} alt="Rule instructions 3" className=" -rotate-3 w-full h-auto rounded-lg shadow" />
+              <div className="flex flex-col -space-y-12 mobile:-space-y-8 [&>*]:relative mt-8 w-[60%] mobile:w-full mx-auto">
+                <LazyImage src={tips1} alt="Rule instructions 1" className=" -rotate-3 -left-10 mobile:left-0 w-full h-auto rounded-lg shadow" />
+                <LazyImage src={tips2} alt="Rule instructions 2" className=" rotate-3 left-10 mobile:left-0 w-full h-auto rounded-lg shadow" />
+                <LazyImage src={tips3} alt="Rule instructions 3" className=" -rotate-3 -left-10 mobile:left-0 w-full h-auto rounded-lg shadow" />
               </div>
             </div>
 
@@ -425,10 +433,12 @@ export default function PenguinTerritoryPageEn() {
               <ImageWithHotspots src={resultImg} alt="Results screen" hotspots={resultHotspots} className="w-full h-auto rounded-lg shadow mt-8" />
             </div>
           </Container>
+        </FadeIn>
         </SectionBlock>
 
         {/* Visual Design */}
         <SectionBlock>
+        <FadeIn>
           <Container>
             <H2>Visual Design</H2>
             <P>
@@ -449,10 +459,12 @@ export default function PenguinTerritoryPageEn() {
             />
             <p className="text-caption text-gray-500 font-light mt-3">Original artwork painted with gouache</p>
           </Container>
+        </FadeIn>
         </SectionBlock>
 
         {/* Reflection */}
         <SectionBlock bgVariant="penguinBg2" backgrounds={penguinBackgrounds} textDarkOnBg>
+        <FadeIn>
           <Container className="w-full">
             <TwoColumn>
               <div>
@@ -549,6 +561,7 @@ export default function PenguinTerritoryPageEn() {
               <p className="text-caption">2024</p>
             </div>
           </Container>
+        </FadeIn>
 
           <RelatedProjects />
 
