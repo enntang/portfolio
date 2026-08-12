@@ -25,7 +25,7 @@ export const resumeData = {
     languages: [
       { name: '中文', level: '母語／精通' },
       { name: '日文', level: 'JLPT N2' },
-      { name: '英文', level: 'TOEIC 700' },
+      { name: '英文', level: 'TOEIC 750' },
     ],
     education: [
       {
@@ -137,7 +137,7 @@ export const resumeData = {
     languages: [
       { name: 'Chinese', level: 'Native / Fluent' },
       { name: 'Japanese', level: 'JLPT N2' },
-      { name: 'English', level: 'TOEIC 700' },
+      { name: 'English', level: 'TOEIC 750' },
     ],
     education: [
       {
