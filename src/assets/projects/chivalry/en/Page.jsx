@@ -31,8 +31,22 @@ import packaging from '../image/chivalry-packaging.jpg'
 const PAGE_BG = '#420C22'
 const PAGE_BG_ALT = '#2E0817'
 
-const sectionStyle = { backgroundColor: PAGE_BG }
-const sectionStyleAlt = { backgroundColor: PAGE_BG_ALT }
+const PAGE_TEXT = '#DFD6BC'
+
+const sectionStyle = { backgroundColor: PAGE_BG, color: PAGE_TEXT }
+const sectionStyleAlt = { backgroundColor: PAGE_BG_ALT, color: PAGE_TEXT }
+
+// Full-bleed bands: SectionBlock renders these as fixed-attachment backgrounds
+// (and falls back to a scrolling tile on iOS, which does not support fixed).
+const chivalryBackgrounds = {
+  rulebook: designConceptBoard,
+  virtueCards: chivalryCards2,
+  packaging: packaging,
+}
+
+const BAND = '!py-0 h-[70vh] mobile:h-[50vh]'
+// Bands that carry content keep their padding and grow with it.
+const BAND_TEXT = 'min-h-[70vh] mobile:min-h-[50vh] flex items-end !pb-12 mobile:!pb-16'
 
 export default function ChivalryPageEn() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
@@ -49,7 +63,7 @@ export default function ChivalryPageEn() {
       <main style={{ backgroundColor: PAGE_BG }}>
         {/* Hero */}
         <header className="relative overflow-hidden">
-          <SectionBlock className="relative text-white" style={sectionStyle}>
+          <SectionBlock className="relative" style={sectionStyle}>
             <TableOfContents />
             {/* Background image overlay */}
             <img
@@ -76,13 +90,13 @@ export default function ChivalryPageEn() {
                   loading="lazy"
                 />
               </div>
-              <H3 className="text-white/90">Board Game Design｜Illustration, Visual Design｜2017</H3>
+              <H3 className="text-[#DFD6BC]/90">Board Game Design｜Illustration, Visual Design｜2017</H3>
             </Container>
           </SectionBlock>
         </header>
 
         {/* Project Brief */}
-        <SectionBlock className="text-white" style={sectionStyleAlt}>
+        <SectionBlock  style={sectionStyleAlt}>
         <FadeIn>
           <Container>
             <H2>Project Brief</H2>
@@ -102,10 +116,10 @@ export default function ChivalryPageEn() {
 
               <div className="bg-white/10 backdrop-blur rounded-sm shadow p-5">
                 <p className="text-h3 mb-2">Role</p>
-                <P className="text-white/90 mb-6">Graphic Designer</P>
+                <P className="text-[#DFD6BC]/90 mb-6">Graphic Designer</P>
 
                 <p className="text-h3 mb-2">Timeline</p>
-                <P className="text-white/90 mb-6">2017</P>
+                <P className="text-[#DFD6BC]/90 mb-6">2017</P>
 
                 <p className="text-h3 mb-2">Tools</p>
                 <UL>
@@ -119,7 +133,7 @@ export default function ChivalryPageEn() {
         </SectionBlock>
 
         {/* Design Concept */}
-        <SectionBlock className="text-white" style={sectionStyle}>
+        <SectionBlock  style={sectionStyle}>
         <FadeIn>
           <Container>
             <H2>Design Concept</H2>
@@ -133,16 +147,23 @@ export default function ChivalryPageEn() {
               cards, icons, and rule pages inside one consistent world.
             </P>
 
-            <div className="mt-10">
-              <img
-                src={designConceptBoard}
-                alt="Design concept: layout and color direction"
-                className="w-full h-auto rounded-2xl"
-                loading="lazy"
-              />
-            </div>
+          </Container>
+        </FadeIn>
+        </SectionBlock>
 
-            <P className="mt-10">
+        {/* Rulebook spread, full-bleed with a fixed background */}
+        <SectionBlock
+          className={BAND}
+          bgVariant="rulebook"
+          backgrounds={chivalryBackgrounds}
+          role="img"
+          aria-label="Design concept: layout and color direction"
+        />
+
+        <SectionBlock  style={sectionStyle}>
+        <FadeIn>
+          <Container>
+            <P>
               The player tokens use a knight silhouette, marking each player’s position as they move.
             </P>
 
@@ -159,7 +180,7 @@ export default function ChivalryPageEn() {
         </SectionBlock>
 
         {/* Visual System */}
-        <SectionBlock className="text-white" style={sectionStyleAlt}>
+        <SectionBlock  style={sectionStyleAlt}>
         <FadeIn>
           <Container>
             <H2>Visual System</H2>
@@ -183,28 +204,61 @@ export default function ChivalryPageEn() {
               tied together by the shield motif that frames them all.
             </P>
 
-            <H3>Chivalry Cards</H3>
-            <div className="mt-8 space-y-6">
-              <img src={chivalryCards1} alt="Chivalry cards: icon system" className="w-full h-auto rounded-2xl" loading="lazy" />
-              <img src={chivalryCards2} alt="Chivalry cards: card layout" className="w-full h-auto rounded-2xl" loading="lazy" />
-            </div>
-            <P className="mt-8">
-              Eight virtues define the path to victory. Each virtue has its own icon and color so players can recognize it at a glance
-              during play.
-            </P>
+          </Container>
+        </FadeIn>
+        </SectionBlock>
 
+        {/* Card layout, full-bleed with a fixed background and the Chivalry Cards block laid over it */}
+        <SectionBlock
+          className={BAND_TEXT}
+          bgVariant="virtueCards"
+          backgrounds={chivalryBackgrounds}
+        >
+          {/* Sits against the band's left edge, not the centred content column */}
+          <div className="w-full px-16 mobile:px-8">
+            <FadeIn>
+              <div className="w-full max-w-[320px] mobile:max-w-full rounded-sm text-[#DFD6BC] bg-[#2E0817]/80 backdrop-blur-sm shadow p-8 mobile:p-6">
+                <H3 className="!mt-0">Chivalry Cards</H3>
+                <div className="mt-6">
+                  <img src={chivalryCards1} alt="Chivalry cards: icon system" className="w-full h-auto" loading="lazy" />
+                </div>
+                <P className="mt-6 !mb-0">
+                  Eight virtues define the path to victory. Each virtue has its own icon and color so players can recognize it at a
+                  glance during play.
+                </P>
+              </div>
+            </FadeIn>
+          </div>
+        </SectionBlock>
+
+        <SectionBlock className="!pb-12" style={sectionStyleAlt}>
+        <FadeIn>
+          <Container>
             <H3>Player Boards</H3>
             <P>
-              Each player board builds on one of the five family crests, using the family color as its base to divide the areas for
+              Each player board builds on a different family crest, using the family color as its base to divide the areas for
               cards and dice.
             </P>
-            <div className="mt-8 space-y-6">
-              <img src={playerBoards1} alt="Player boards: family crests and color palette" className="w-full h-auto rounded-2xl" loading="lazy" />
-              <img src={playerBoards2} alt="Player boards: layout system" className="w-full h-auto rounded-2xl" loading="lazy" />
-            </div>
-            <p className="mt-4 text-caption italic text-white/70">
+            <p className="mt-4 text-caption italic text-[#DFD6BC]/70">
               *Family crest illustrations by Tin Hsu
             </p>
+          </Container>
+        </FadeIn>
+        </SectionBlock>
+
+        {/* Player boards: side by side, breaking out of the Container for a full-bleed pair */}
+        <SectionBlock className="!py-0" style={sectionStyleAlt}>
+        <FadeIn>
+          <div className="grid grid-cols-2 mobile:grid-cols-1">
+            <img src={playerBoards1} alt="Player boards: family crests and color palette" className="w-full h-auto" loading="lazy" />
+            <img src={playerBoards2} alt="Player boards: layout system" className="w-full h-auto" loading="lazy" />
+          </div>
+        </FadeIn>
+        </SectionBlock>
+
+        <SectionBlock  style={sectionStyleAlt}>
+        <FadeIn>
+          <Container>
 
             <H3>Scoring Board</H3>
             <TwoColumn className="items-start mt-8">
@@ -222,38 +276,57 @@ export default function ChivalryPageEn() {
               </div>
             </TwoColumn>
 
-            <H3>Packaging Design</H3>
-            <div className="mt-8">
-              <img src={packaging} alt="Packaging design" className="w-full h-auto rounded-2xl" loading="lazy" />
+          </Container>
+        </FadeIn>
+        </SectionBlock>
+
+        {/* Packaging, full-bleed with a fixed background and the block laid over it */}
+        <SectionBlock
+          className={BAND_TEXT}
+          bgVariant="packaging"
+          backgrounds={chivalryBackgrounds}
+        >
+          {/* Sits against the band's left edge, not the centred content column */}
+          <div className="w-full px-16 mobile:px-8">
+            <FadeIn>
+              <div className="w-full max-w-[320px] mobile:max-w-full rounded-sm text-[#DFD6BC] bg-[#2E0817]/80 backdrop-blur-sm shadow p-8 mobile:p-6">
+                <H3 className="!mt-0">Packaging Design</H3>
+                <P className="!mb-0">
+                  The outer box carries the theme’s brick red and the embossed patterns used on the cards, tying the whole set
+                  together.
+                </P>
+                <p className="mt-4 text-caption italic text-[#DFD6BC]/70">
+                  *Medieval street illustration by Tin Hsu
+                </p>
+              </div>
+            </FadeIn>
+          </div>
+        </SectionBlock>
+
+        <SectionBlock  style={sectionStyleAlt}>
+        <FadeIn>
+          <Container>
+            <div className="flex flex-col items-center justify-center">
+              <img src={coverTransparent} alt="" className="w-40 h-auto mb-3 object-contain" />
+              <p className="text-h3 font-light">Chivalry</p>
+              <p className="text-caption text-[#DFD6BC]/60">2017</p>
             </div>
-            <P className="mt-8">
-              The outer box carries the theme’s brick red and the embossed patterns used on the cards, tying the whole set together.
-            </P>
-            <p className="mt-4 text-caption italic text-white/70">
-              *Medieval street illustration by Tin Hsu
-            </p>
 
             {/* Credits */}
-            <dl className="mt-20 mobile:mt-16 border-t border-white/15 pt-8 space-y-3 text-caption text-white/80">
+            <dl className="mt-16 border-t border-white/15 pt-8 space-y-3 text-caption text-[#DFD6BC]/80">
               <div className="flex gap-6 mobile:gap-4">
-                <dt className="w-[200px] mobile:w-[120px] shrink-0 text-white/50">Client</dt>
+                <dt className="w-[200px] mobile:w-[120px] shrink-0 text-[#DFD6BC]/50">Client</dt>
                 <dd>TRANSIT工作室</dd>
               </div>
               <div className="flex gap-6 mobile:gap-4">
-                <dt className="w-[200px] mobile:w-[120px] shrink-0 text-white/50">Art Direction, Design</dt>
+                <dt className="w-[200px] mobile:w-[120px] shrink-0 text-[#DFD6BC]/50">Art Direction, Design</dt>
                 <dd>湯靜恬 Enn Tang</dd>
               </div>
               <div className="flex gap-6 mobile:gap-4">
-                <dt className="w-[200px] mobile:w-[120px] shrink-0 text-white/50">Illustration</dt>
+                <dt className="w-[200px] mobile:w-[120px] shrink-0 text-[#DFD6BC]/50">Illustration</dt>
                 <dd>湯靜恬 Enn Tang, 許庭瑋 Tin Hsu</dd>
               </div>
             </dl>
-
-            <div className="flex flex-col items-center justify-center mt-16">
-              <img src={coverTransparent} alt="" className="w-40 h-auto mb-3 object-contain" />
-              <p className="text-h3 font-light">Chivalry</p>
-              <p className="text-caption text-white/60">2017</p>
-            </div>
           </Container>
         </FadeIn>
         </SectionBlock>

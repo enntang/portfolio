@@ -31,8 +31,22 @@ import packaging from '../image/chivalry-packaging.jpg'
 const PAGE_BG = '#420C22'
 const PAGE_BG_ALT = '#2E0817'
 
-const sectionStyle = { backgroundColor: PAGE_BG }
-const sectionStyleAlt = { backgroundColor: PAGE_BG_ALT }
+const PAGE_TEXT = '#DFD6BC'
+
+const sectionStyle = { backgroundColor: PAGE_BG, color: PAGE_TEXT }
+const sectionStyleAlt = { backgroundColor: PAGE_BG_ALT, color: PAGE_TEXT }
+
+// Full-bleed bands: SectionBlock renders these as fixed-attachment backgrounds
+// (and falls back to a scrolling tile on iOS, which does not support fixed).
+const chivalryBackgrounds = {
+  rulebook: designConceptBoard,
+  virtueCards: chivalryCards2,
+  packaging: packaging,
+}
+
+const BAND = '!py-0 h-[70vh] mobile:h-[50vh]'
+// Bands that carry content keep their padding and grow with it.
+const BAND_TEXT = 'min-h-[70vh] mobile:min-h-[50vh] flex items-end !pb-12 mobile:!pb-16'
 
 export default function ChivalryPageJa() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
@@ -49,7 +63,7 @@ export default function ChivalryPageJa() {
       <main style={{ backgroundColor: PAGE_BG }}>
         {/* Hero */}
         <header className="relative overflow-hidden">
-          <SectionBlock className="relative text-white" style={sectionStyle}>
+          <SectionBlock className="relative" style={sectionStyle}>
             <TableOfContents />
             {/* Background image overlay */}
             <img
@@ -76,13 +90,13 @@ export default function ChivalryPageJa() {
                   loading="lazy"
                 />
               </div>
-              <H3 className="text-white/90">ボードゲームデザイン｜イラスト、ビジュアルデザイン｜2017</H3>
+              <H3 className="text-[#DFD6BC]/90">ボードゲームデザイン｜イラスト、ビジュアルデザイン｜2017</H3>
             </Container>
           </SectionBlock>
         </header>
 
         {/* Project Brief */}
-        <SectionBlock className="text-white" style={sectionStyleAlt}>
+        <SectionBlock  style={sectionStyleAlt}>
         <FadeIn>
           <Container>
             <H2>プロジェクト概要</H2>
@@ -99,10 +113,10 @@ export default function ChivalryPageJa() {
 
               <div className="bg-white/10 backdrop-blur rounded-sm shadow p-5">
                 <p className="text-h3 mb-2">役割</p>
-                <P className="text-white/90 mb-6">グラフィックデザイナー</P>
+                <P className="text-[#DFD6BC]/90 mb-6">グラフィックデザイナー</P>
 
                 <p className="text-h3 mb-2">期間</p>
-                <P className="text-white/90 mb-6">2017</P>
+                <P className="text-[#DFD6BC]/90 mb-6">2017</P>
 
                 <p className="text-h3 mb-2">ツール</p>
                 <UL>
@@ -116,7 +130,7 @@ export default function ChivalryPageJa() {
         </SectionBlock>
 
         {/* Design Concept */}
-        <SectionBlock className="text-white" style={sectionStyle}>
+        <SectionBlock  style={sectionStyle}>
         <FadeIn>
           <Container>
             <H2>デザインコンセプト</H2>
@@ -128,16 +142,23 @@ export default function ChivalryPageJa() {
               このビジュアル言語はプレイヤーボードとルールブックにも展開し、家門ごとの配色と統一したレイアウトによって、カード・アイコン・ルールページが同じ世界観を保つようにしています。
             </P>
 
-            <div className="mt-10">
-              <img
-                src={designConceptBoard}
-                alt="デザインコンセプト：レイアウトと配色の方向性"
-                className="w-full h-auto rounded-2xl"
-                loading="lazy"
-              />
-            </div>
+          </Container>
+        </FadeIn>
+        </SectionBlock>
 
-            <P className="mt-10">
+        {/* ルールブック見開き：全幅（fixed 背景） */}
+        <SectionBlock
+          className={BAND}
+          bgVariant="rulebook"
+          backgrounds={chivalryBackgrounds}
+          role="img"
+          aria-label="デザインコンセプト：レイアウトと配色の方向性"
+        />
+
+        <SectionBlock  style={sectionStyle}>
+        <FadeIn>
+          <Container>
+            <P>
               プレイヤーコマ（トークン）は騎士のシルエットを用い、移動した位置を示します。
             </P>
 
@@ -154,7 +175,7 @@ export default function ChivalryPageJa() {
         </SectionBlock>
 
         {/* Visual System */}
-        <SectionBlock className="text-white" style={sectionStyleAlt}>
+        <SectionBlock  style={sectionStyleAlt}>
         <FadeIn>
           <Container>
             <H2>ビジュアルシステム</H2>
@@ -192,46 +213,74 @@ export default function ChivalryPageJa() {
               優れた騎士に必要な3つの能力——力・知恵・魅力——を、それぞれ剣・書物・薔薇で表し、盾の紋様で全体をひとつにまとめました。
             </P>
 
-            <H3>騎士道カード</H3>
-            <div className="mt-8 space-y-6">
-              <img
-                src={chivalryCards1}
-                alt="騎士道カード：アイコンシステム"
-                className="w-full h-auto rounded-2xl"
-                loading="lazy"
-              />
-              <img
-                src={chivalryCards2}
-                alt="騎士道カード：カード面のレイアウト"
-                className="w-full h-auto rounded-2xl"
-                loading="lazy"
-              />
-            </div>
-            <P className="mt-8">
-              勝利への道は8つの美徳で構成されます。各美徳に固有のアイコンと配色を与え、プレイ中でもひと目で見分けられるようにしました。
-            </P>
+          </Container>
+        </FadeIn>
+        </SectionBlock>
 
+        {/* カード面のレイアウト：全幅（fixed 背景）、騎士道カードのブロックを重ねる */}
+        <SectionBlock
+          className={BAND_TEXT}
+          bgVariant="virtueCards"
+          backgrounds={chivalryBackgrounds}
+        >
+          {/* Sits against the band's left edge, not the centred content column */}
+          <div className="w-full px-16 mobile:px-8">
+            <FadeIn>
+              <div className="w-full max-w-[320px] mobile:max-w-full rounded-sm text-[#DFD6BC] bg-[#2E0817]/80 backdrop-blur-sm shadow p-8 mobile:p-6">
+                <H3 className="!mt-0">騎士道カード</H3>
+                <div className="mt-6">
+                  <img
+                    src={chivalryCards1}
+                    alt="騎士道カード：アイコンシステム"
+                    className="w-full h-auto"
+                    loading="lazy"
+                  />
+                </div>
+                <P className="mt-6 !mb-0">
+                  勝利への道は8つの美徳で構成されます。各美徳に固有のアイコンと配色を与え、プレイ中でもひと目で見分けられるようにしました。
+                </P>
+              </div>
+            </FadeIn>
+          </div>
+        </SectionBlock>
+
+        <SectionBlock className="!pb-12" style={sectionStyleAlt}>
+        <FadeIn>
+          <Container>
             <H3>プレイヤーボード</H3>
             <P>
-              5つの家門の紋章を取り入れた個人ボード。家門のカラーをベースに、カードとダイスを置く欄を区切っています。
+              それぞれ異なる家門の紋章を取り入れた個人ボード。家門のカラーをベースに、カードとダイスを置く欄を区切っています。
             </P>
-            <div className="mt-8 space-y-6">
-              <img
-                src={playerBoards1}
-                alt="Player boards：家門の紋章と配色"
-                className="w-full h-auto rounded-2xl"
-                loading="lazy"
-              />
-              <img
-                src={playerBoards2}
-                alt="Player boards：レイアウト構成"
-                className="w-full h-auto rounded-2xl"
-                loading="lazy"
-              />
-            </div>
-            <p className="mt-4 text-caption italic text-white/70">
+            <p className="mt-4 text-caption italic text-[#DFD6BC]/70">
               ＊家紋デザイン｜許庭瑋 Tin Hsu
             </p>
+          </Container>
+        </FadeIn>
+        </SectionBlock>
+
+        {/* プレイヤーボード：2枚を並べ、Container を外して全幅に */}
+        <SectionBlock className="!py-0" style={sectionStyleAlt}>
+        <FadeIn>
+          <div className="grid grid-cols-2 mobile:grid-cols-1">
+            <img
+              src={playerBoards1}
+              alt="Player boards：家門の紋章と配色"
+              className="w-full h-auto"
+              loading="lazy"
+            />
+            <img
+              src={playerBoards2}
+              alt="Player boards：レイアウト構成"
+              className="w-full h-auto"
+              loading="lazy"
+            />
+          </div>
+        </FadeIn>
+        </SectionBlock>
+
+        <SectionBlock  style={sectionStyleAlt}>
+        <FadeIn>
+          <Container>
 
             <H3>スコアボード</H3>
             <TwoColumn className="items-start mt-8">
@@ -253,43 +302,56 @@ export default function ChivalryPageJa() {
               </div>
             </TwoColumn>
 
-            <H3>パッケージデザイン</H3>
-            <div className="mt-8">
-              <img
-                src={packaging}
-                alt="パッケージデザイン：外箱のデザイン"
-                className="w-full h-auto rounded-2xl"
-                loading="lazy"
-              />
+          </Container>
+        </FadeIn>
+        </SectionBlock>
+
+        {/* パッケージ：全幅（fixed 背景）、ブロックを重ねる */}
+        <SectionBlock
+          className={BAND_TEXT}
+          bgVariant="packaging"
+          backgrounds={chivalryBackgrounds}
+        >
+          {/* Sits against the band's left edge, not the centred content column */}
+          <div className="w-full px-16 mobile:px-8">
+            <FadeIn>
+              <div className="w-full max-w-[320px] mobile:max-w-full rounded-sm text-[#DFD6BC] bg-[#2E0817]/80 backdrop-blur-sm shadow p-8 mobile:p-6">
+                <H3 className="!mt-0">パッケージデザイン</H3>
+                <P className="!mb-0">
+                  外箱はテーマカラーのブリックレッドと、カードで用いた立体的な紋様を引き継ぎ、全体の統一感をつくっています。
+                </P>
+                <p className="mt-4 text-caption italic text-[#DFD6BC]/70">
+                  ＊中世の街並みイラスト｜許庭瑋 Tin Hsu
+                </p>
+              </div>
+            </FadeIn>
+          </div>
+        </SectionBlock>
+
+        <SectionBlock  style={sectionStyleAlt}>
+        <FadeIn>
+          <Container>
+            <div className="flex flex-col items-center justify-center">
+              <img src={coverTransparent} alt="" className="w-40 h-auto mb-3 object-contain" />
+              <p className="text-h3 font-light">騎士道</p>
+              <p className="text-caption text-[#DFD6BC]/60">2017</p>
             </div>
-            <P className="mt-8">
-              外箱はテーマカラーのブリックレッドと、カードで用いた立体的な紋様を引き継ぎ、全体の統一感をつくっています。
-            </P>
-            <p className="mt-4 text-caption italic text-white/70">
-              ＊中世の街並みイラスト｜許庭瑋 Tin Hsu
-            </p>
 
             {/* Credits */}
-            <dl className="mt-20 mobile:mt-16 border-t border-white/15 pt-8 space-y-3 text-caption text-white/80">
+            <dl className="mt-16 border-t border-white/15 pt-8 space-y-3 text-caption text-[#DFD6BC]/80">
               <div className="flex gap-6 mobile:gap-4">
-                <dt className="w-[200px] mobile:w-[120px] shrink-0 text-white/50">Client</dt>
+                <dt className="w-[200px] mobile:w-[120px] shrink-0 text-[#DFD6BC]/50">Client</dt>
                 <dd>TRANSIT工作室</dd>
               </div>
               <div className="flex gap-6 mobile:gap-4">
-                <dt className="w-[200px] mobile:w-[120px] shrink-0 text-white/50">Art Direction, Design</dt>
+                <dt className="w-[200px] mobile:w-[120px] shrink-0 text-[#DFD6BC]/50">Art Direction, Design</dt>
                 <dd>湯靜恬 Enn Tang</dd>
               </div>
               <div className="flex gap-6 mobile:gap-4">
-                <dt className="w-[200px] mobile:w-[120px] shrink-0 text-white/50">Illustration</dt>
+                <dt className="w-[200px] mobile:w-[120px] shrink-0 text-[#DFD6BC]/50">Illustration</dt>
                 <dd>湯靜恬 Enn Tang、許庭瑋 Tin Hsu</dd>
               </div>
             </dl>
-
-            <div className="flex flex-col items-center justify-center mt-16">
-              <img src={coverTransparent} alt="" className="w-40 h-auto mb-3 object-contain" />
-              <p className="text-h3 font-light">騎士道</p>
-              <p className="text-caption text-white/60">2017</p>
-            </div>
           </Container>
         </FadeIn>
         </SectionBlock>

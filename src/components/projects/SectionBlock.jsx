@@ -1,11 +1,15 @@
-function SectionBlock({ 
-  bgVariant, 
-  variant, 
-  children, 
-  className = '', 
+function SectionBlock({
+  bgVariant,
+  variant,
+  children,
+  className = '',
   style = {},
   backgrounds = {},
-  textDarkOnBg = false 
+  textDarkOnBg = false,
+  // Forwarded so a section used purely as a full-bleed image (no children)
+  // can still carry the accessible name its <img alt> would have provided.
+  role,
+  'aria-label': ariaLabel,
 }) {
   // 支持 bgVariant 和 variant 两种命名方式（为了兼容不同项目）
   const variantKey = bgVariant || variant
@@ -44,6 +48,8 @@ function SectionBlock({
     <div
       className={`py-32 mx-auto relative ${backgroundColor} ${textColor} ${className}`}
       style={combinedStyle}
+      role={role}
+      aria-label={ariaLabel}
     >
       {children}
     </div>
