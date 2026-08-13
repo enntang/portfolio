@@ -217,7 +217,7 @@ export default function ChivalryPageEn() {
           {/* Sits against the band's left edge, not the centred content column */}
           <div className="w-full px-16 mobile:px-8">
             <FadeIn>
-              <div className="w-full max-w-[320px] mobile:max-w-full rounded-sm text-[#DFD6BC] bg-[#2E0817]/80 backdrop-blur-sm shadow p-8 mobile:p-6">
+              <div className="w-1/2 mobile:w-full rounded-sm text-[#DFD6BC] bg-[#2E0817]/80 backdrop-blur-sm shadow p-8 mobile:p-6">
                 <H3 className="!mt-0">Chivalry Cards</H3>
                 <div className="mt-6">
                   <img src={chivalryCards1} alt="Chivalry cards: icon system" className="w-full h-auto" loading="lazy" />
@@ -289,7 +289,7 @@ export default function ChivalryPageEn() {
           {/* Sits against the band's left edge, not the centred content column */}
           <div className="w-full px-16 mobile:px-8">
             <FadeIn>
-              <div className="w-full max-w-[320px] mobile:max-w-full rounded-sm text-[#DFD6BC] bg-[#2E0817]/80 backdrop-blur-sm shadow p-8 mobile:p-6">
+              <div className="w-1/2 mobile:w-full rounded-sm text-[#DFD6BC] bg-[#2E0817]/80 backdrop-blur-sm shadow p-8 mobile:p-6">
                 <H3 className="!mt-0">Packaging Design</H3>
                 <P className="!mb-0">
                   The outer box carries the theme’s brick red and the embossed patterns used on the cards, tying the whole set

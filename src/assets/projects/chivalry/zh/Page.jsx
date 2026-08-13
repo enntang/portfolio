@@ -227,7 +227,7 @@ export default function ChivalryPageZh() {
           {/* Sits against the band's left edge, not the centred content column */}
           <div className="w-full px-16 mobile:px-8">
             <FadeIn>
-              <div className="w-full max-w-[320px] mobile:max-w-full rounded-sm text-[#DFD6BC] bg-[#2E0817]/80 backdrop-blur-sm shadow p-8 mobile:p-6">
+              <div className="w-1/2 mobile:w-full rounded-sm text-[#DFD6BC] bg-[#2E0817]/80 backdrop-blur-sm shadow p-8 mobile:p-6">
                 <H3 className="!mt-0">騎士精神卡</H3>
                 <div className="mt-6">
                   <img
@@ -316,7 +316,7 @@ export default function ChivalryPageZh() {
           {/* Sits against the band's left edge, not the centred content column */}
           <div className="w-full px-16 mobile:px-8">
             <FadeIn>
-              <div className="w-full max-w-[320px] mobile:max-w-full rounded-sm text-[#DFD6BC] bg-[#2E0817]/80 backdrop-blur-sm shadow p-8 mobile:p-6">
+              <div className="w-1/2 mobile:w-full rounded-sm text-[#DFD6BC] bg-[#2E0817]/80 backdrop-blur-sm shadow p-8 mobile:p-6">
                 <H3 className="!mt-0">包裝設計</H3>
                 <P className="!mb-0">
                   外盒包裝延續主題的磚紅色及卡牌使用的立體紋飾，營造整體感。

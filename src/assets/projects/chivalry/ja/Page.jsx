@@ -226,7 +226,7 @@ export default function ChivalryPageJa() {
           {/* Sits against the band's left edge, not the centred content column */}
           <div className="w-full px-16 mobile:px-8">
             <FadeIn>
-              <div className="w-full max-w-[320px] mobile:max-w-full rounded-sm text-[#DFD6BC] bg-[#2E0817]/80 backdrop-blur-sm shadow p-8 mobile:p-6">
+              <div className="w-1/2 mobile:w-full rounded-sm text-[#DFD6BC] bg-[#2E0817]/80 backdrop-blur-sm shadow p-8 mobile:p-6">
                 <H3 className="!mt-0">騎士道カード</H3>
                 <div className="mt-6">
                   <img
@@ -315,7 +315,7 @@ export default function ChivalryPageJa() {
           {/* Sits against the band's left edge, not the centred content column */}
           <div className="w-full px-16 mobile:px-8">
             <FadeIn>
-              <div className="w-full max-w-[320px] mobile:max-w-full rounded-sm text-[#DFD6BC] bg-[#2E0817]/80 backdrop-blur-sm shadow p-8 mobile:p-6">
+              <div className="w-1/2 mobile:w-full rounded-sm text-[#DFD6BC] bg-[#2E0817]/80 backdrop-blur-sm shadow p-8 mobile:p-6">
                 <H3 className="!mt-0">パッケージデザイン</H3>
                 <P className="!mb-0">
                   外箱はテーマカラーのブリックレッドと、カードで用いた立体的な紋様を引き継ぎ、全体の統一感をつくっています。
