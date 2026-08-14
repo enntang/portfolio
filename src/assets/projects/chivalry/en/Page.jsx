@@ -13,6 +13,7 @@ import H3 from '../../../../components/post/H3'
 import UL from '../../../../components/post/UL'
 import LI from '../../../../components/post/LI'
 import FadeIn from '../../../../components/utilities/FadeIn'
+import { useHeroIntro } from '../useHeroIntro'
 
 // Images referenced by src/assets/projects/chivalry/chivalry.md
 import coverTransparent from '../image/chivalry-cover-transparent.png'
@@ -50,6 +51,7 @@ const BAND_TEXT = 'min-h-[70vh] mobile:min-h-[50vh] flex items-end !pb-12 mobile
 
 export default function ChivalryPageEn() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
+  const { backgroundStyle, tintStyle, contentStyle, toggle, revealed } = useHeroIntro(PAGE_BG)
 
   return (
     <div className="min-h-screen" style={{ backgroundColor: PAGE_BG }}>
@@ -70,33 +72,44 @@ export default function ChivalryPageEn() {
               src={backgroundImage}
               alt=""
               aria-hidden="true"
-              className="pointer-events-none select-none absolute inset-0 w-full h-full object-cover opacity-10"
-              loading="lazy"
+              className="pointer-events-none select-none absolute inset-0 w-full h-full object-cover"
+              style={backgroundStyle}
+              loading="eager"
             />
             {/* Dark tint to keep background subtle */}
             <div
               aria-hidden="true"
               className="pointer-events-none select-none absolute inset-0"
-              style={{ backgroundColor: PAGE_BG, opacity: 0.72 }}
+              style={tintStyle}
             />
-            <Container className="relative z-10 flex flex-col items-center justify-center text-center">
-              <h1 className="mt-10 text-large mobile:text-large-mobile hidden">Chivalry</h1>
+            {/* 點擊切換遮罩與主視覺；用 button 才有鍵盤與螢幕閱讀器支援 */}
+            <button
+              type="button"
+              onClick={toggle}
+              aria-pressed={revealed}
+              aria-label="Show or hide the overlay and cover art"
+              className="absolute inset-0 z-20 cursor-pointer"
+            />
+            <div className="relative z-10" style={contentStyle}>
+              <Container className="flex flex-col items-center justify-center text-center">
+                <h1 className="mt-10 text-large mobile:text-large-mobile hidden">Chivalry</h1>
 
-              <div className="w-full max-w-[720px]">
-                <img
-                  src={coverTransparent}
-                  alt="Chivalry project cover"
-                  className="w-full h-auto rounded-2xl shadow-sm"
-                  loading="lazy"
-                />
-              </div>
-              <H3 className="text-[#DFD6BC]/90">Board Game Design｜Illustration, Visual Design｜2017</H3>
-            </Container>
+                <div className="w-full max-w-[720px]">
+                  <img
+                    src={coverTransparent}
+                    alt="Chivalry project cover"
+                    className="w-full h-auto rounded-2xl shadow-sm"
+                    loading="lazy"
+                  />
+                </div>
+                <H3 className="text-[#DFD6BC]/90">Board Game Design｜Illustration, Visual Design｜2017</H3>
+              </Container>
+            </div>
           </SectionBlock>
         </header>
 
         {/* Project Brief */}
-        <SectionBlock  style={sectionStyleAlt}>
+        <SectionBlock style={sectionStyleAlt}>
         <FadeIn>
           <Container>
             <H2>Project Brief</H2>
@@ -133,7 +146,7 @@ export default function ChivalryPageEn() {
         </SectionBlock>
 
         {/* Design Concept */}
-        <SectionBlock  style={sectionStyle}>
+        <SectionBlock style={sectionStyle}>
         <FadeIn>
           <Container>
             <H2>Design Concept</H2>
@@ -160,7 +173,7 @@ export default function ChivalryPageEn() {
           aria-label="Design concept: layout and color direction"
         />
 
-        <SectionBlock  style={sectionStyle}>
+        <SectionBlock style={sectionStyle}>
         <FadeIn>
           <Container>
             <P>
@@ -180,7 +193,7 @@ export default function ChivalryPageEn() {
         </SectionBlock>
 
         {/* Visual System */}
-        <SectionBlock  style={sectionStyleAlt}>
+        <SectionBlock style={sectionStyleAlt}>
         <FadeIn>
           <Container>
             <H2>Visual System</H2>
@@ -256,7 +269,7 @@ export default function ChivalryPageEn() {
         </FadeIn>
         </SectionBlock>
 
-        <SectionBlock  style={sectionStyleAlt}>
+        <SectionBlock style={sectionStyleAlt}>
         <FadeIn>
           <Container>
 
@@ -303,7 +316,7 @@ export default function ChivalryPageEn() {
           </div>
         </SectionBlock>
 
-        <SectionBlock  style={sectionStyleAlt}>
+        <SectionBlock style={sectionStyleAlt}>
         <FadeIn>
           <Container>
             <div className="flex flex-col items-center justify-center">
