@@ -51,8 +51,12 @@ export default {
         'h3': ['18px', { lineHeight: '150%', fontWeight: '500', fontFamily: '"Lexend Exa", Lexend, "Noto Sans TC", sans-serif' }], // Desktop h3
         
         // Mobile styles (will be overridden by responsive utilities)
+        // NOTE: the h1 token is named `mobile-h1` rather than `h1-mobile` because
+        // that is the spelling already in use across the site.
         'large-mobile': ['60px', { lineHeight: '120%', fontWeight: '500', fontFamily: '"Lexend", Lexend, "Noto Sans TC", sans-serif' }], // Mobile large text
+        'mobile-h1': ['26px', { lineHeight: '150%', fontWeight: '700', fontFamily: '"Lexend Exa", Lexend, "Noto Sans TC", sans-serif' }], // Mobile h1
         'h2-mobile': ['22px', { lineHeight: '150%', fontWeight: '700', fontFamily: '"Lexend Exa", Lexend, "Noto Sans TC", sans-serif' }], // Mobile h2 (same as desktop)
+        'h3-mobile': ['16px', { lineHeight: '150%', fontWeight: '500', fontFamily: '"Lexend Exa", Lexend, "Noto Sans TC", sans-serif' }], // Mobile h3
       },
     },
   },

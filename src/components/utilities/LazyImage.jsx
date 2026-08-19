@@ -1,12 +1,28 @@
 import { useState, useEffect, useRef } from 'react'
 
-function LazyImage({ 
-  src, 
-  alt = '', 
-  className = '', 
-  placeholder = 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1 1"%3E%3C/svg%3E',
-  preload = false, // 新增 preload prop，設為 true 時立即載入
-  ...props 
+// A 1x1 transparent SVG. It carries no intrinsic ratio of its own worth trusting,
+// so callers should pass width/height (or aspectRatio) to reserve layout space.
+const BLANK =
+  'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1 1"%3E%3C/svg%3E'
+
+function LazyImage({
+  src,
+  // Responsive candidates. Held back until the real image is committed, otherwise
+  // the browser would resolve them immediately and defeat the lazy load.
+  srcSet,
+  sizes,
+  alt = '',
+  className = '',
+  // Intrinsic pixel size of `src`. Passing these reserves the right box before the
+  // image arrives, which is what keeps the page from jumping as it loads.
+  width,
+  height,
+  // Escape hatch when the intrinsic size is unknown but the ratio is fixed, e.g. '16 / 9'.
+  aspectRatio,
+  placeholder = BLANK,
+  preload = false, // 設為 true 時立即載入
+  style,
+  ...props
 }) {
   const [imageSrc, setImageSrc] = useState(placeholder)
   const [isLoaded, setIsLoaded] = useState(false)
@@ -15,20 +31,22 @@ function LazyImage({
 
   // 如果 preload 為 true，立即開始載入圖片
   useEffect(() => {
-    if (preload && src) {
-      const img = new Image()
-      img.src = src
+    if (!preload || !src) return
 
-      img.onload = () => {
-        setImageSrc(src)
-        setIsLoaded(true)
-      }
+    const img = new Image()
+    if (sizes) img.sizes = sizes
+    if (srcSet) img.srcset = srcSet
+    img.src = src
 
-      img.onerror = () => {
-        console.error(`Failed to preload image: ${src}`)
-      }
+    img.onload = () => {
+      setImageSrc(src)
+      setIsLoaded(true)
     }
-  }, [preload, src])
+
+    img.onerror = () => {
+      console.error(`Failed to preload image: ${src}`)
+    }
+  }, [preload, src, srcSet, sizes])
 
   // Intersection Observer - 只在非 preload 模式下使用
   useEffect(() => {
@@ -68,6 +86,8 @@ function LazyImage({
     if (preload || !isInView) return
 
     const img = new Image()
+    if (sizes) img.sizes = sizes
+    if (srcSet) img.srcset = srcSet
     img.src = src
 
     img.onload = () => {
@@ -79,21 +99,31 @@ function LazyImage({
       // 如果載入失敗，可以設置一個錯誤圖片或保持placeholder
       console.error(`Failed to load image: ${src}`)
     }
-  }, [isInView, src, preload])
+  }, [isInView, src, srcSet, sizes, preload])
 
   // Ensure className is properly formatted
   const finalClassName = `${className} ${isLoaded ? 'opacity-100' : 'opacity-0'} transition-opacity duration-300`.trim()
-  
+
+  // Reserve the box up front. width/height attributes alone only work while the
+  // element keeps its natural ratio, and the placeholder is 1:1 — so pin the ratio
+  // explicitly whenever we know it.
+  const ratio = aspectRatio || (width && height ? `${width} / ${height}` : undefined)
+  const finalStyle = ratio ? { aspectRatio: ratio, ...style } : style
+
   return (
     <img
       ref={imgRef}
       src={imageSrc}
+      srcSet={isLoaded ? srcSet : undefined}
+      sizes={isLoaded ? sizes : undefined}
       alt={alt}
+      width={width}
+      height={height}
       className={finalClassName}
+      style={finalStyle}
       {...props}
     />
   )
 }
 
 export default LazyImage
-
