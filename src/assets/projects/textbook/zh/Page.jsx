@@ -23,49 +23,49 @@ import UL from "../../../../components/post/UL";
 import LI from "../../../../components/post/LI";
 
 // Images live in src/assets/projects/textbook/image
-import bgHero from "../image/bg-1@2x.jpg";
-import bgGreen from "../image/bg-2@2x.png";
-import bgCover from "../image/bg-3@2x.png";
-import bgClosing from "../image/bg-4@2x.png";
+import bgHero from "../image/bg-1@2x.webp";
+import bgGreen from "../image/bg-2@2x.webp";
+import bgCover from "../image/bg-3@2x.webp";
+import bgClosing from "../image/bg-4@2x.webp";
 import keyVision from "../image/key-vision.svg";
 import text1 from "../image/text-1.svg";
 import text2 from "../image/text-2.svg";
 import text3 from "../image/text-3.svg";
 
-import cover1 from "../image/cover-1.png";
-import cover2 from "../image/cover-2.png";
-import cover3 from "../image/cover-3.png";
+import cover1 from "../image/cover-1.webp";
+import cover2 from "../image/cover-2.webp";
+import cover3 from "../image/cover-3.webp";
 
-import review1 from "../image/review-1.png";
-import review2 from "../image/review-2.png";
-import review3 from "../image/review-3.png";
-import review4 from "../image/review-4.png";
+import review1 from "../image/review-1.webp";
+import review2 from "../image/review-2.webp";
+import review3 from "../image/review-3.webp";
+import review4 from "../image/review-4.webp";
 
-import spread1 from "../image/spread-1.png";
-import spread2 from "../image/spread-2.png";
-import spread3 from "../image/spread-3.png";
-import spread4 from "../image/spread-4.png";
-import spread5 from "../image/spread-5.png";
-import spread8 from "../image/spread-8.png";
-import spread9 from "../image/spread-9.png";
+import spread1 from "../image/spread-1.webp";
+import spread2 from "../image/spread-2.webp";
+import spread3 from "../image/spread-3.webp";
+import spread4 from "../image/spread-4.webp";
+import spread5 from "../image/spread-5.webp";
+import spread8 from "../image/spread-8.webp";
+import spread9 from "../image/spread-9.webp";
 
-import illust1 from "../image/illust-1.png";
-import illust2 from "../image/illust-2.png";
-import illust3 from "../image/illust-3.png";
-import illust4 from "../image/illust-4.png";
-import illust5 from "../image/illust-5.png";
-import illust6 from "../image/illust-6.png";
-import illust7 from "../image/illust-7.png";
-import illust8 from "../image/illust-8.png";
-import illust9 from "../image/illust-9.png";
-import illust10 from "../image/illust-10.png";
-import illust11 from "../image/illust-11.png";
+import illust1 from "../image/illust-1.webp";
+import illust2 from "../image/illust-2.webp";
+import illust3 from "../image/illust-3.webp";
+import illust4 from "../image/illust-4.webp";
+import illust5 from "../image/illust-5.webp";
+import illust6 from "../image/illust-6.webp";
+import illust7 from "../image/illust-7.webp";
+import illust8 from "../image/illust-8.webp";
+import illust9 from "../image/illust-9.webp";
+import illust10 from "../image/illust-10.webp";
+import illust11 from "../image/illust-11.webp";
 
-import decoChalk from "../image/deco-1@2x.png";
-import decoStudents from "../image/deco-2@2x.png";
-import decoLamp from "../image/deco-3@2x.png";
-import decoLeaf from "../image/deco-4@2x.png";
-import decoClosing from "../image/deco-9@2x.png";
+import decoChalk from "../image/deco-1@2x.webp";
+import decoStudents from "../image/deco-2@2x.webp";
+import decoLamp from "../image/deco-3@2x.webp";
+import decoLeaf from "../image/deco-4@2x.webp";
+import decoClosing from "../image/deco-9@2x.webp";
 
 // 滿版自動輪播的內頁截圖。傾斜與高低差由 TILTS 依索引循環套用，
 // 所以要加第五張以上，在這裡多一行就好。
@@ -306,7 +306,7 @@ const zoomAt = (items, index) => ({ items, index });
 const HOVER_PUSH_COVERS =
   "[&>*]:transition-transform [&>*]:duration-300 [&>*]:ease-out " +
   "[&>*:hover]:scale-[1.08] [&>*:hover]:z-40 " +
-  "[&>*:hover+*]:translate-x-7 [&>*:has(+*:hover)]:-translate-x-7"
+  "[&>*:hover+*]:translate-x-7 [&>*:has(+*:hover)]:-translate-x-7";
 
 // transform 要加 !：Swiper 的 .swiper-backface-hidden .swiper-slide 也宣告了
 // transform: translateZ(0)，不標 important 的話位移和縮放會被它蓋掉。
@@ -314,7 +314,7 @@ const HOVER_PUSH_SLIDES =
   "[&_.swiper-slide]:transition-transform [&_.swiper-slide]:duration-300 [&_.swiper-slide]:ease-out " +
   "[&_.swiper-slide:hover]:!scale-[1.08] [&_.swiper-slide:hover]:z-40 " +
   "[&_.swiper-slide:hover+.swiper-slide]:!translate-x-7 " +
-  "[&_.swiper-slide:has(+.swiper-slide:hover)]:!-translate-x-7"
+  "[&_.swiper-slide:has(+.swiper-slide:hover)]:!-translate-x-7";
 
 // 比內文欄（640px）寬、但沒有到滿版的容器。設計稿上多數圖組都落在這個寬度。
 function Wide({ children, className = "" }) {
@@ -411,7 +411,10 @@ export default function YoungHistoriansGuidePageZh() {
   const logotypes = useLogotypeReveal(LOGOTYPES.length, WINNER_LOGOTYPE);
 
   return (
-    <div className="min-h-screen overflow-x-hidden" style={{ backgroundColor: LIGHT }}>
+    <div
+      className="min-h-screen overflow-x-hidden"
+      style={{ backgroundColor: LIGHT }}
+    >
       <Navbar
         isWhite={true}
         isMenuOpen={isMenuOpen}
@@ -478,7 +481,8 @@ export default function YoungHistoriansGuidePageZh() {
           style={greenStyle}
           className="overflow-hidden"
         >
-          {/* 裝飾層。純裝飾所以整層 aria-hidden，也不吃點擊。 */}
+          {/* 裝飾層。純裝飾所以整層 aria-hidden，也不吃點擊。
+              每張都帶 width/height，載入前才有版位，不會擠動版面。 */}
           <div
             aria-hidden="true"
             data-parallax-scope
@@ -488,7 +492,9 @@ export default function YoungHistoriansGuidePageZh() {
             <img
               src={decoLamp}
               alt=""
-              className="absolute top-0 right-[9%] w-[134px] mobile:w-[76px]"
+              className="absolute top-0 right-[9%] w-[134px] mobile:w-[76px] h-auto"
+              width={268}
+              height={298}
               loading="lazy"
             />
             {/* 粉筆軌跡：這條線是右下角兩個學生畫出來的，所以高度要對齊他們舉筆的
@@ -496,7 +502,9 @@ export default function YoungHistoriansGuidePageZh() {
             <img
               src={decoChalk}
               alt=""
-              className="absolute left-0 bottom-[40px] mobile:bottom-[24px] w-full min-w-[900px]"
+              className="absolute left-0 bottom-[40px] mobile:bottom-[24px] w-full min-w-[900px] h-auto"
+              width={2682}
+              height={420}
               loading="lazy"
             />
             {/* 左下角葉子：讓它一部分溢出到版面外，並帶視差 */}
@@ -504,13 +512,22 @@ export default function YoungHistoriansGuidePageZh() {
               strength={70}
               className="absolute left-0 bottom-[4%] w-[281px] mobile:w-[130px] -translate-x-[28%]"
             >
-              <img src={decoLeaf} alt="" className="w-full" loading="lazy" />
+              <img
+                src={decoLeaf}
+                alt=""
+                className="w-full h-auto"
+                width={562}
+                height={692}
+                loading="lazy"
+              />
             </Parallax>
             {/* 右下角兩個學生 */}
             <img
               src={decoStudents}
               alt=""
-              className="absolute right-[3%] bottom-0 w-[380px] mobile:w-[190px]"
+              className="absolute right-[3%] bottom-0 w-[380px] mobile:w-[190px] h-auto"
+              width={1174}
+              height={646}
               loading="lazy"
             />
           </div>
@@ -859,6 +876,8 @@ export default function YoungHistoriansGuidePageZh() {
                 alt=""
                 aria-hidden="true"
                 className="mx-auto w-[176px] h-auto mt-10"
+                width={352}
+                height={388}
                 loading="lazy"
               />
               <p className="text-h3 font-light mt-10">給年輕史家的漫遊指南</p>
