@@ -12,6 +12,7 @@ import TableOfContents from "../../../../components/utilities/TableOfContents";
 import LazyImage from "../../../../components/utilities/LazyImage";
 import Lightbox from "../../../../components/utilities/Lightbox";
 import Parallax from "../../../../components/utilities/Parallax";
+import PageFlipBook from "../../../../components/utilities/PageFlipBook";
 import FadeIn from "../../../../components/utilities/FadeIn";
 import { useHeroIntro } from "../useHeroIntro";
 import { useLogotypeReveal } from "../useLogotypeReveal";
@@ -213,6 +214,19 @@ const ILLUSTRATIONS = [
   },
 ];
 
+// 翻頁書用的單頁清單。turned=k 時攤開的是 pages[2k-1] | pages[2k]，
+// 所以把內封放在最前面，之後每個跨頁貢獻「左頁、右頁」兩張，
+// turned 就剛好等於目前的跨頁編號。真圖到齊後把 label 換成 src/alt 即可。
+const BOOK_PAGES = [
+  { label: "內封" },
+  ...SPREADS.flatMap((s) => [
+    { label: `${s.title}｜左頁` },
+    { label: `${s.title}｜右頁` },
+  ]),
+  // 補一張讓總數成偶數，否則最後一張紙的背面會是空白
+  { label: "封底內頁" },
+];
+
 const COVERS = [
   {
     src: cover1,
@@ -407,7 +421,10 @@ export default function YoungHistoriansGuidePageZh() {
   const { glowStyle, contentStyle, toggle, revealed } = useHeroIntro();
   // index 為 null 就是燈箱關閉
   const [zoom, setZoom] = useState(EMPTY_ZOOM);
-  const [spreadIndex, setSpreadIndex] = useState(0);
+  // turned = 翻過去的紙數，也就是目前攤開的跨頁編號。最後一張是封底，
+  // 沒有對應的跨頁文案，所以圖說要另外夾住範圍。
+  const [turned, setTurned] = useState(1);
+  const spreadIndex = Math.min(SPREADS.length - 1, Math.max(0, turned - 1));
   const logotypes = useLogotypeReveal(LOGOTYPES.length, WINNER_LOGOTYPE);
 
   return (
@@ -750,23 +767,12 @@ export default function YoungHistoriansGuidePageZh() {
 
             <Container className="mt-12">
               <figure>
-                <button
-                  type="button"
-                  onClick={() => setZoom(zoomAt(SPREADS, spreadIndex))}
-                  aria-label={`放大檢視：${SPREADS[spreadIndex].alt}`}
-                  className="block w-full cursor-zoom-in"
-                >
-                  <LazyImage
-                    key={SPREADS[spreadIndex].src}
-                    src={SPREADS[spreadIndex].src}
-                    width={SPREADS[spreadIndex].width}
-                    height={SPREADS[spreadIndex].height}
-                    alt={SPREADS[spreadIndex].alt}
-                    sizes="(max-width: 768px) 100vw, 1100px"
-                    className="w-full h-auto"
-                    preload
-                  />
-                </button>
+                {/* 真的可以翻的書。頁面內容目前是佔位頁，等單頁圖上傳後換掉 BOOK_PAGES。 */}
+                <PageFlipBook
+                  pages={BOOK_PAGES}
+                  turned={turned}
+                  onTurnedChange={setTurned}
+                />
                 <figcaption className="mt-6 text-center max-w-[640px] mx-auto">
                   <p className="text-p-strong">{SPREADS[spreadIndex].title}</p>
                   <p className="text-caption mt-2 opacity-80">
@@ -780,7 +786,7 @@ export default function YoungHistoriansGuidePageZh() {
                   <button
                     key={src}
                     type="button"
-                    onClick={() => setSpreadIndex(i)}
+                    onClick={() => setTurned(i + 1)}
                     aria-label={`切換到：${alt}`}
                     aria-current={i === spreadIndex}
                     className={`block rounded-sm overflow-hidden transition-opacity duration-300 ${
