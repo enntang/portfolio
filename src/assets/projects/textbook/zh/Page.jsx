@@ -14,6 +14,7 @@ import Lightbox from "../../../../components/utilities/Lightbox";
 import Parallax from "../../../../components/utilities/Parallax";
 import PageFlipBook from "../../../../components/utilities/PageFlipBook";
 import FadeIn from "../../../../components/utilities/FadeIn";
+import Typewriter from "../../../../components/utilities/Typewriter";
 import { useHeroIntro } from "../useHeroIntro";
 import { useLogotypeReveal } from "../useLogotypeReveal";
 
@@ -679,11 +680,19 @@ export default function YoungHistoriansGuidePageZh() {
 
           <FadeIn>
             <Container>
-              <H2 id="cover">封面設計</H2>
-              <P>風格與標準字都經過多次的演進過程。</P>
-              <P>
-                最初以金色配色與真實物件堆疊營造歷史感，但因應行銷方向調整，與編輯討論後逐步簡化風格。最終版本改以插畫感的地圖與書頁元素，展示影響詞彙的關鍵書籍，呼應「漫遊」的核心意象。
-              </P>
+              {/* 標題走 Typewriter 而不是 H2，樣式沿用 H2 的 text-h2 / 500 字重 */}
+              <div className="grid grid-cols-1 sm:grid-cols-[5fr_7fr] gap-12 items-start">
+                <Typewriter
+                  as="h2"
+                  id="cover"
+                  className="text-h2"
+                  style={{ fontWeight: 500 }}
+                  text="封面風格與標準字經過多次的演進過程"
+                />
+                <P className="!mb-0">
+                  最初以金色配色與真實物件堆疊營造歷史感，但因應行銷方向調整，與編輯討論後逐步簡化風格。最終版本改以插畫感的地圖與書頁元素，展示影響詞彙的關鍵書籍，呼應「漫遊」的核心意象。
+                </P>
+              </div>
             </Container>
 
             {/* 三本封面階梯式下降，後面的疊在前面之上 */}
@@ -773,11 +782,19 @@ export default function YoungHistoriansGuidePageZh() {
           style={greenStyle}
         >
           <FadeIn>
-            <Container className="text-center">
-              <H2 id="interior">內頁設計</H2>
-              <P>
-                在課本內，我們使用大量的插圖以及引導思考的問答，減去生硬感，增加學生投入意願。
-              </P>
+            <Container>
+              <div className="grid grid-cols-1 sm:grid-cols-[5fr_7fr] gap-12 items-start">
+                <Typewriter
+                  as="h2"
+                  id="interior"
+                  className="text-h2"
+                  style={{ fontWeight: 500 }}
+                  text="內頁設計"
+                />
+                <P className="!mb-0">
+                  使用大量的插圖以及引導思考的問答，減去生硬感，增加學生投入意願。
+                </P>
+              </div>
             </Container>
 
             <Wide className="mt-12">
