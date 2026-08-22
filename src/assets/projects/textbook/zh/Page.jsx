@@ -103,59 +103,16 @@ const REVIEWS = [
 ];
 
 // 跨頁都是去背的書冊造型（2000x1450，四邊透明），直接鋪在深綠底上，
-// 不需要白框或陰影。編號沿用原書頁次，所以中間跳號是正常的。
+// 不需要白框或陰影。
 const SPREADS = [
-  {
-    title: "1. 猜一猜！「Boba」是什麼？",
-    left: pageBoba1,
-    right: pageBoba2,
-    caption:
-      "巨幅手繪珍珠奶茶插畫貫穿版心，搭配溫潤的奶茶色調與圓點裝飾，讓語言學議題有了具體且貼近生活的視覺入口。",
-  },
-  {
-    title: "2. 讓專業的來！嚴復與翻譯的中西對話",
-    left: pageTranslate1,
-    right: pageTranslate2,
-    caption:
-      "版面以筆記本格線為底，搭配書封掃描直接上版，營造出可以「翻閱」的檔案感。",
-  },
-  {
-    title: "3. 教室裡的筆戰",
-    left: pageComic1,
-    right: pageComic2,
-    caption:
-      "採漫畫分鏡與對話框呈現論辯場景，色彩對比鮮明，讓史料辯論多了一層戲劇張力。",
-  },
-  {
-    title: "4. 啟蒙時代的《百科全書》",
-    left: pageIntro1,
-    right: pageIntro2,
-    caption:
-      "左頁以古典油畫風插畫開場，營造啟蒙沙龍的莊重感；右頁轉為俐落的資訊卡片編排，形成古典與現代的對照。",
-  },
-  {
-    title: "5. 觸怒教會的狄德羅",
-    left: pageDiderot1,
-    right: pageDiderot2,
-    caption:
-      "以詞條卡片相互參照的手法，搭配步驟化圖解，把百科全書背後的商業與盜版邏輯拆解得清楚易懂。",
-  },
-  {
-    title: "6. 班級搶先報",
-    left: pageSchool1,
-    right: pageSchool2,
-    caption:
-      "插畫以教室黑板與海報製作的情境為主視覺，呼應「動一動」實作任務的動手做調性。",
-  },
-  {
-    title: "7. 校園記憶中的口述史",
-    left: pageSchool3,
-    right: pageSchool4,
-    caption:
-      "跨頁以滿版的校園植栽插畫營造開闊、生活化的氛圍，緩和歷史學方法論本身的嚴肅感。",
-  },
-  // 燈箱的 alt 直接沿用標題，不用另外維護一份描述
-].map((item) => ({ ...item, alt: item.title.replace(/^\d+\.\s*/, "") }));
+  { left: pageBoba1, right: pageBoba2 },
+  { left: pageTranslate1, right: pageTranslate2 },
+  { left: pageComic1, right: pageComic2 },
+  { left: pageIntro1, right: pageIntro2 },
+  { left: pageDiderot1, right: pageDiderot2 },
+  { left: pageSchool1, right: pageSchool2 },
+  { left: pageSchool3, right: pageSchool4 },
+];
 
 // 輪播卡片的傾斜與高低差，依索引循環套用，所以 REVIEWS 加到第五張以上
 // 也會自動有錯落感，不用另外設定。
@@ -228,13 +185,13 @@ const ILLUSTRATIONS = [
 const BOOK_PAGES = [
   { src: cover3, alt: "封面：給年輕史家的漫遊指南" },
   // 還沒有平面單頁的跨頁先用佔位頁；圖補齊後在上面加 left/right 就會自動接上
-  ...SPREADS.flatMap((s) => [
+  ...SPREADS.flatMap((s, i) => [
     s.left
-      ? { src: s.left, alt: `${s.title}｜左頁` }
-      : { label: `${s.title}｜左頁` },
+      ? { src: s.left, alt: `內頁跨頁 ${i + 1}｜左頁` }
+      : { label: `內頁跨頁 ${i + 1}｜左頁` },
     s.right
-      ? { src: s.right, alt: `${s.title}｜右頁` }
-      : { label: `${s.title}｜右頁` },
+      ? { src: s.right, alt: `內頁跨頁 ${i + 1}｜右頁` }
+      : { label: `內頁跨頁 ${i + 1}｜右頁` },
   ]),
   // 補一張讓總數成偶數，否則最後一張紙的背面會是空白
   { src: cover3Back, alt: "封底" },
@@ -434,13 +391,8 @@ export default function YoungHistoriansGuidePageZh() {
   const { glowStyle, contentStyle, toggle, revealed } = useHeroIntro();
   // index 為 null 就是燈箱關閉
   const [zoom, setZoom] = useState(EMPTY_ZOOM);
-  // turned = 翻過去的紙數，也就是目前攤開的跨頁編號。最後一張是封底，
-  // 沒有對應的跨頁文案，所以圖說要另外夾住範圍。
+  // turned = 翻過去的紙數，也就是目前攤開的跨頁編號。
   const [turned, setTurned] = useState(1);
-  const spreadIndex = Math.min(SPREADS.length - 1, Math.max(0, turned - 1));
-  // 翻到封面（turned 0）或封底（超出跨頁數）時沒有對應的圖說。用 opacity 藏起來
-  // 而不是拿掉節點，版位才會留著，不然區塊高度會忽高忽低。
-  const onCover = turned === 0 || turned > SPREADS.length;
   const logotypes = useLogotypeReveal(LOGOTYPES.length, WINNER_LOGOTYPE);
 
   return (
@@ -601,7 +553,7 @@ export default function YoungHistoriansGuidePageZh() {
               </TwoColumn>
             </Container>
             {/* 滿版自動輪播。刻意不放進 Wide，讓卡片一路溢出到螢幕外。 */}
-            <div className="mt-16">
+            <div className="mt-8 -mt-4">
               <Swiper
                 modules={[Autoplay, FreeMode]}
                 slidesPerView="auto"
@@ -621,12 +573,12 @@ export default function YoungHistoriansGuidePageZh() {
                 onSwiper={(swiper) => {
                   swiper.wrapperEl.style.transitionTimingFunction = "linear";
                 }}
-                className={`!py-12 ${HOVER_PUSH_SLIDES}`}
+                className={`!py-8 ${HOVER_PUSH_SLIDES}`}
               >
                 {REVIEWS.map(({ src, width, height, alt }, i) => (
                   <SwiperSlide
                     key={alt}
-                    className={`!w-[420px] mobile:!w-[260px] relative ${i % 2 ? "z-20" : "z-10"}`}
+                    className={`!w-[360px] mobile:!w-[240px] relative ${i % 2 ? "z-20" : "z-10"}`}
                   >
                     <button
                       type="button"
@@ -639,7 +591,7 @@ export default function YoungHistoriansGuidePageZh() {
                         width={width}
                         height={height}
                         alt={alt}
-                        sizes="(max-width: 768px) 260px, 420px"
+                        sizes="(max-width: 768px) 240px, 360px"
                         className="w-full h-auto rounded-lg"
                       />
                     </button>
@@ -687,7 +639,7 @@ export default function YoungHistoriansGuidePageZh() {
                   id="cover"
                   className="text-h2"
                   style={{ fontWeight: 500 }}
-                  text="封面風格與標準字經過多次的演進過程"
+                  text="封面與標準字設計"
                 />
                 <P className="!mb-0">
                   最初以金色配色與真實物件堆疊營造歷史感，但因應行銷方向調整，與編輯討論後逐步簡化風格。最終版本改以插畫感的地圖與書頁元素，展示影響詞彙的關鍵書籍，呼應「漫遊」的核心意象。
@@ -806,17 +758,6 @@ export default function YoungHistoriansGuidePageZh() {
                   turned={turned}
                   onTurnedChange={setTurned}
                 />
-                <figcaption
-                  aria-hidden={onCover}
-                  className={`mt-6 text-center max-w-[640px] mx-auto transition-opacity duration-300 ${
-                    onCover ? "opacity-0" : "opacity-100"
-                  }`}
-                >
-                  <p className="text-p-strong">{SPREADS[spreadIndex].title}</p>
-                  <p className="text-caption mt-2 opacity-80">
-                    {SPREADS[spreadIndex].caption}
-                  </p>
-                </figcaption>
               </figure>
             </Wide>
           </FadeIn>
@@ -828,7 +769,13 @@ export default function YoungHistoriansGuidePageZh() {
         <SectionBlock style={lightStyle}>
           <FadeIn>
             <Container className="text-center">
-              <H2 id="illustration">插畫設計</H2>
+              <Typewriter
+                as="h2"
+                id="illustration"
+                className="text-h2 mb-8"
+                style={{ fontWeight: 500 }}
+                text="插畫設計"
+              />
             </Container>
 
             {/* 兩排反向跑的插畫帶，說明面板半透明疊在上面。

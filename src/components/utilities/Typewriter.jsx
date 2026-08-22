@@ -1,4 +1,5 @@
-import { Fragment, useEffect, useRef, useState } from 'react'
+import { Fragment, useContext, useEffect, useRef, useState } from 'react'
+import { FadeInVisibleContext } from './FadeInVisibleContext'
 
 const SPEED_MS = 90
 
@@ -22,9 +23,16 @@ function Typewriter({ as = 'span', text, speed = SPEED_MS, className = '', ...re
     typeof window.matchMedia === 'function' &&
     window.matchMedia('(prefers-reduced-motion: reduce)').matches
 
+  const fadeInVisible = useContext(FadeInVisibleContext)
   const [shown, setShown] = useState(prefersReducedMotion ? chars.length : 0)
+  const [intersecting, setIntersecting] = useState(false)
   const ref = useRef(null)
   const timer = useRef(null)
+
+  useEffect(() => {
+    setIntersecting(false)
+    setShown(prefersReducedMotion ? chars.length : 0)
+  }, [text, prefersReducedMotion, chars.length])
 
   useEffect(() => {
     if (prefersReducedMotion) return
@@ -34,23 +42,28 @@ function Typewriter({ as = 'span', text, speed = SPEED_MS, className = '', ...re
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (!entry.isIntersecting) return
+        setIntersecting(true)
         observer.disconnect()
-        let i = 0
-        timer.current = setInterval(() => {
-          i += 1
-          setShown(i)
-          if (i >= chars.length) clearInterval(timer.current)
-        }, speed)
       },
       { threshold: 0.4 }
     )
     observer.observe(el)
 
-    return () => {
-      observer.disconnect()
-      clearInterval(timer.current)
-    }
-  }, [text, speed, chars.length, prefersReducedMotion])
+    return () => observer.disconnect()
+  }, [text, prefersReducedMotion])
+
+  useEffect(() => {
+    if (prefersReducedMotion || !intersecting || !fadeInVisible) return
+
+    let i = 0
+    timer.current = setInterval(() => {
+      i += 1
+      setShown(i)
+      if (i >= chars.length) clearInterval(timer.current)
+    }, speed)
+
+    return () => clearInterval(timer.current)
+  }, [intersecting, fadeInVisible, speed, chars.length, prefersReducedMotion])
 
   const done = shown >= chars.length
 
