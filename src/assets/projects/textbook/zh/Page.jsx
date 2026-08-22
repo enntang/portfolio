@@ -36,6 +36,7 @@ import text3 from "../image/text-3.svg";
 import cover1 from "../image/cover-1.webp";
 import cover2 from "../image/cover-2.webp";
 import cover3 from "../image/cover-3.webp";
+import cover3Back from "../image/cover-3-back.webp";
 
 import review1 from "../image/review-1.webp";
 import review2 from "../image/review-2.webp";
@@ -219,7 +220,7 @@ const ILLUSTRATIONS = [
 // 所以把內封放在最前面，之後每個跨頁貢獻「左頁、右頁」兩張，
 // turned 就剛好等於目前的跨頁編號。真圖到齊後把 label 換成 src/alt 即可。
 const BOOK_PAGES = [
-  { label: "內封" },
+  { src: cover3, alt: "封面：給年輕史家的漫遊指南" },
   // 還沒有平面單頁的跨頁先用佔位頁；圖補齊後在上面加 left/right 就會自動接上
   ...SPREADS.flatMap((s) => [
     s.left
@@ -230,28 +231,28 @@ const BOOK_PAGES = [
       : { label: `${s.title}｜右頁` },
   ]),
   // 補一張讓總數成偶數，否則最後一張紙的背面會是空白
-  { label: "封底內頁" },
+  { src: cover3Back, alt: "封底" },
 ];
 
 const COVERS = [
   {
     src: cover1,
-    width: 746,
-    height: 1001,
+    width: 1492,
+    height: 2002,
     alt: "封面第一版：古書、放大鏡與懷錶的寫實風格",
     caption: "第一版",
   },
   {
     src: cover2,
-    width: 746,
-    height: 1001,
+    width: 1492,
+    height: 2002,
     alt: "封面第二版：藍底、標準字置中的圖像風格",
     caption: "第二版",
   },
   {
     src: cover3,
-    width: 745,
-    height: 1001,
+    width: 1490,
+    height: 2002,
     alt: "封面最終版：淺色留白、標準字置頂",
     caption: "最終版",
   },
