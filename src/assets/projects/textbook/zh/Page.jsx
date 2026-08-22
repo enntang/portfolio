@@ -50,6 +50,14 @@ import spread5 from "../image/spread-5.webp";
 import spread8 from "../image/spread-8.webp";
 import spread9 from "../image/spread-9.webp";
 
+// 翻頁書用的平面單頁（-1 左頁、-2 右頁），目前只有前三個跨頁有
+import pageBoba1 from "../image/pages-boba-1.webp";
+import pageBoba2 from "../image/pages-boba-2.webp";
+import pageTranslate1 from "../image/pages-translate-1.webp";
+import pageTranslate2 from "../image/pages-translate-2.webp";
+import pageComic1 from "../image/pages-comic-1.webp";
+import pageComic2 from "../image/pages-comic-2.webp";
+
 import illust1 from "../image/illust-1.webp";
 import illust2 from "../image/illust-2.webp";
 import illust3 from "../image/illust-3.webp";
@@ -95,6 +103,8 @@ const SPREADS = [
     width: 2000,
     height: 1450,
     title: "1. 猜一猜！「Boba」是什麼？",
+    left: pageBoba1,
+    right: pageBoba2,
     caption:
       "巨幅手繪珍珠奶茶插畫貫穿版心，搭配溫潤的奶茶色調與圓點裝飾，讓語言學議題有了具體且貼近生活的視覺入口。",
   },
@@ -103,6 +113,8 @@ const SPREADS = [
     width: 2000,
     height: 1450,
     title: "2. 讓專業的來！嚴復與翻譯的中西對話",
+    left: pageTranslate1,
+    right: pageTranslate2,
     caption:
       "版面以筆記本格線為底，搭配書封掃描直接上版，營造出可以「翻閱」的檔案感。",
   },
@@ -111,6 +123,8 @@ const SPREADS = [
     width: 2000,
     height: 1450,
     title: "3. 教室裡的筆戰",
+    left: pageComic1,
+    right: pageComic2,
     caption:
       "採漫畫分鏡與對話框呈現論辯場景，色彩對比鮮明，讓史料辯論多了一層戲劇張力。",
   },
@@ -219,9 +233,14 @@ const ILLUSTRATIONS = [
 // turned 就剛好等於目前的跨頁編號。真圖到齊後把 label 換成 src/alt 即可。
 const BOOK_PAGES = [
   { label: "內封" },
+  // 還沒有平面單頁的跨頁先用佔位頁；圖補齊後在上面加 left/right 就會自動接上
   ...SPREADS.flatMap((s) => [
-    { label: `${s.title}｜左頁` },
-    { label: `${s.title}｜右頁` },
+    s.left
+      ? { src: s.left, alt: `${s.title}｜左頁` }
+      : { label: `${s.title}｜左頁` },
+    s.right
+      ? { src: s.right, alt: `${s.title}｜右頁` }
+      : { label: `${s.title}｜右頁` },
   ]),
   // 補一張讓總數成偶數，否則最後一張紙的背面會是空白
   { label: "封底內頁" },
@@ -770,6 +789,7 @@ export default function YoungHistoriansGuidePageZh() {
                 {/* 真的可以翻的書。頁面內容目前是佔位頁，等單頁圖上傳後換掉 BOOK_PAGES。 */}
                 <PageFlipBook
                   pages={BOOK_PAGES}
+                  pageRatio={0.745}
                   turned={turned}
                   onTurnedChange={setTurned}
                 />
