@@ -42,21 +42,21 @@ import review2 from "../image/review-2.webp";
 import review3 from "../image/review-3.webp";
 import review4 from "../image/review-4.webp";
 
-import spread1 from "../image/spread-1.webp";
-import spread2 from "../image/spread-2.webp";
-import spread3 from "../image/spread-3.webp";
-import spread4 from "../image/spread-4.webp";
-import spread5 from "../image/spread-5.webp";
-import spread8 from "../image/spread-8.webp";
-import spread9 from "../image/spread-9.webp";
-
-// 翻頁書用的平面單頁（-1 左頁、-2 右頁），目前只有前三個跨頁有
+// 翻頁書的平面單頁（-1 左頁、-2 右頁）。七個跨頁各一組，school 有兩組。
 import pageBoba1 from "../image/pages-boba-1.webp";
 import pageBoba2 from "../image/pages-boba-2.webp";
 import pageTranslate1 from "../image/pages-translate-1.webp";
 import pageTranslate2 from "../image/pages-translate-2.webp";
 import pageComic1 from "../image/pages-comic-1.webp";
 import pageComic2 from "../image/pages-comic-2.webp";
+import pageIntro1 from "../image/pages-intro-1.webp";
+import pageIntro2 from "../image/pages-intro-2.webp";
+import pageDiderot1 from "../image/pages-diderot-1.webp";
+import pageDiderot2 from "../image/pages-diderot-2.webp";
+import pageSchool1 from "../image/pages-school-1.webp";
+import pageSchool2 from "../image/pages-school-2.webp";
+import pageSchool3 from "../image/pages-school-3.webp";
+import pageSchool4 from "../image/pages-school-4.webp";
 
 import illust1 from "../image/illust-1.webp";
 import illust2 from "../image/illust-2.webp";
@@ -99,9 +99,6 @@ const REVIEWS = [
 // 不需要白框或陰影。編號沿用原書頁次，所以中間跳號是正常的。
 const SPREADS = [
   {
-    src: spread1,
-    width: 2000,
-    height: 1450,
     title: "1. 猜一猜！「Boba」是什麼？",
     left: pageBoba1,
     right: pageBoba2,
@@ -109,9 +106,6 @@ const SPREADS = [
       "巨幅手繪珍珠奶茶插畫貫穿版心，搭配溫潤的奶茶色調與圓點裝飾，讓語言學議題有了具體且貼近生活的視覺入口。",
   },
   {
-    src: spread2,
-    width: 2000,
-    height: 1450,
     title: "2. 讓專業的來！嚴復與翻譯的中西對話",
     left: pageTranslate1,
     right: pageTranslate2,
@@ -119,9 +113,6 @@ const SPREADS = [
       "版面以筆記本格線為底，搭配書封掃描直接上版，營造出可以「翻閱」的檔案感。",
   },
   {
-    src: spread3,
-    width: 2000,
-    height: 1450,
     title: "3. 教室裡的筆戰",
     left: pageComic1,
     right: pageComic2,
@@ -129,34 +120,30 @@ const SPREADS = [
       "採漫畫分鏡與對話框呈現論辯場景，色彩對比鮮明，讓史料辯論多了一層戲劇張力。",
   },
   {
-    src: spread4,
-    width: 2000,
-    height: 1450,
     title: "4. 啟蒙時代的《百科全書》",
+    left: pageIntro1,
+    right: pageIntro2,
     caption:
       "左頁以古典油畫風插畫開場，營造啟蒙沙龍的莊重感；右頁轉為俐落的資訊卡片編排，形成古典與現代的對照。",
   },
   {
-    src: spread5,
-    width: 2000,
-    height: 1450,
     title: "5. 觸怒教會的狄德羅",
+    left: pageDiderot1,
+    right: pageDiderot2,
     caption:
       "以詞條卡片相互參照的手法，搭配步驟化圖解，把百科全書背後的商業與盜版邏輯拆解得清楚易懂。",
   },
   {
-    src: spread8,
-    width: 2000,
-    height: 1450,
     title: "6. 班級搶先報",
+    left: pageSchool1,
+    right: pageSchool2,
     caption:
       "插畫以教室黑板與海報製作的情境為主視覺，呼應「動一動」實作任務的動手做調性。",
   },
   {
-    src: spread9,
-    width: 2000,
-    height: 1450,
     title: "7. 校園記憶中的口述史",
+    left: pageSchool3,
+    right: pageSchool4,
     caption:
       "跨頁以滿版的校園植栽插畫營造開闊、生活化的氛圍，緩和歷史學方法論本身的嚴肅感。",
   },
