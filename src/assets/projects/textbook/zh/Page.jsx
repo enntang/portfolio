@@ -780,32 +780,6 @@ export default function YoungHistoriansGuidePageZh() {
                   </p>
                 </figcaption>
               </figure>
-
-              <div className="grid grid-cols-7 mobile:grid-cols-4 gap-3 mt-10">
-                {SPREADS.map(({ src, width, height, alt }, i) => (
-                  <button
-                    key={src}
-                    type="button"
-                    onClick={() => setTurned(i + 1)}
-                    aria-label={`切換到：${alt}`}
-                    aria-current={i === spreadIndex}
-                    className={`block rounded-sm overflow-hidden transition-opacity duration-300 ${
-                      i === spreadIndex
-                        ? "opacity-100 ring-2 ring-white/70"
-                        : "opacity-50 hover:opacity-80"
-                    }`}
-                  >
-                    <LazyImage
-                      src={src}
-                      width={width}
-                      height={height}
-                      alt=""
-                      sizes="140px"
-                      className="w-full h-auto"
-                    />
-                  </button>
-                ))}
-              </div>
             </Container>
           </FadeIn>
         </SectionBlock>

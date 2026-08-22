@@ -33,6 +33,9 @@ function PageFlipBook({
 
   // 正在翻的那張要壓在所有紙上面，否則旋轉到一半會被鄰紙切掉
   const [flipping, setFlipping] = useState(null)
+  // 拖曳中的狀態：{ leaf, forward, angle }
+  const [drag, setDrag] = useState(null)
+  const bookRef = useRef(null)
   const timer = useRef(null)
   const previous = useRef(turned)
 
@@ -62,28 +65,92 @@ function PageFlipBook({
 
   useEffect(() => () => clearTimeout(timer.current), [])
 
-  const canPrev = turned > 0
-  const canNext = turned < leaves.length
+  // 把指標的水平位置換算成紙張角度。紙的自由邊在旋轉時的水平位置是
+  // pageW * cos(angle)，所以反過來用 acos 就能讓那條邊剛好跟著手指走，
+  // 拖起來才是 1:1 而不是憑經驗湊的比例。
+  const angleAt = useCallback((clientX) => {
+    const rect = bookRef.current.getBoundingClientRect()
+    const pageW = rect.width / 2
+    const rel = Math.min(1, Math.max(-1, (clientX - (rect.left + pageW)) / pageW))
+    return -(Math.acos(rel) * 180) / Math.PI
+  }, [])
+
+  const onPointerDown = useCallback(
+    (event) => {
+      if (prefersReducedMotion || event.button > 0) return
+      const rect = bookRef.current.getBoundingClientRect()
+      // 從右半邊拉是往前翻，從左半邊拉是翻回去
+      const forward = event.clientX >= rect.left + rect.width / 2
+      const leaf = forward ? turned : turned - 1
+      if (leaf < 0 || leaf >= leaves.length) return
+      bookRef.current.setPointerCapture(event.pointerId)
+      setDrag({ leaf, forward, angle: forward ? 0 : -180 })
+    },
+    [prefersReducedMotion, turned, leaves.length]
+  )
+
+  const onPointerMove = useCallback(
+    (event) => {
+      if (!drag) return
+      const angle = angleAt(event.clientX)
+      setDrag((current) => (current ? { ...current, angle } : current))
+    },
+    [drag, angleAt]
+  )
+
+  const onPointerUp = useCallback(() => {
+    if (!drag) return
+    // 過了一半就讓它翻完，沒過就彈回原位
+    const pastHalf = drag.angle < -90
+    setDrag(null)
+    if (drag.forward && pastHalf) onTurnedChange?.(turned + 1)
+    else if (!drag.forward && !pastHalf) onTurnedChange?.(turned - 1)
+  }, [drag, turned, onTurnedChange])
 
   return (
     <div className={className}>
       <div
-        className="relative mx-auto w-full [perspective:2400px]"
+        ref={bookRef}
+        onPointerDown={onPointerDown}
+        onPointerMove={onPointerMove}
+        onPointerUp={onPointerUp}
+        onPointerCancel={onPointerUp}
+        onKeyDown={(event) => {
+          if (event.key === 'ArrowRight') go(1)
+          else if (event.key === 'ArrowLeft') go(-1)
+          else return
+          event.preventDefault()
+        }}
+        tabIndex={0}
+        role="group"
+        aria-label={`翻頁書，共 ${leaves.length} 頁，目前第 ${turned} 頁。用左右方向鍵翻頁，或直接拖曳頁面。`}
+        // pan-y 讓手機上的直向捲動照常，只攔截水平拖曳
+        className={`relative mx-auto w-full select-none touch-pan-y [perspective:2400px] ${
+          drag ? 'cursor-grabbing' : 'cursor-grab'
+        }`}
         style={{ aspectRatio: `${pageRatio * 2} / 1` }}
       >
         {leaves.map((leaf, k) => {
           const isTurned = k < turned
+          const dragging = drag?.leaf === k
           return (
             <div
               key={k}
               className="absolute top-0 left-1/2 h-full w-1/2 [transform-style:preserve-3d]"
               style={{
                 transformOrigin: 'left center',
-                transform: `rotateY(${isTurned ? -180 : 0}deg)`,
-                transition: prefersReducedMotion
-                  ? 'none'
-                  : `transform ${FLIP_MS}ms cubic-bezier(0.2, 0.7, 0.3, 1)`,
-                zIndex: flipping === k ? leaves.length + 1 : isTurned ? k + 1 : leaves.length - k,
+                transform: `rotateY(${dragging ? drag.angle : isTurned ? -180 : 0}deg)`,
+                // 拖曳時必須關掉過渡，紙才會貼著手指走而不是慢半拍
+                transition:
+                  dragging || prefersReducedMotion
+                    ? 'none'
+                    : `transform ${FLIP_MS}ms cubic-bezier(0.2, 0.7, 0.3, 1)`,
+                zIndex:
+                  dragging || flipping === k
+                    ? leaves.length + 1
+                    : isTurned
+                      ? k + 1
+                      : leaves.length - k,
               }}
             >
               <Face page={leaf.front} side="right" />
@@ -93,17 +160,6 @@ function PageFlipBook({
         })}
       </div>
 
-      <div className="flex items-center justify-center gap-6 mt-6">
-        <FlipButton onClick={() => go(-1)} disabled={!canPrev} label="上一頁">
-          ←
-        </FlipButton>
-        <span className="text-caption opacity-70">
-          {turned} / {leaves.length}
-        </span>
-        <FlipButton onClick={() => go(1)} disabled={!canNext} label="下一頁">
-          →
-        </FlipButton>
-      </div>
     </div>
   )
 }
@@ -115,9 +171,12 @@ function Face({ page, side, back = false }) {
       ? 'bg-gradient-to-l from-black/20 to-transparent right-0'
       : 'bg-gradient-to-r from-black/20 to-transparent left-0'
 
+  // 書脊那一側是裝訂邊，維持直角；只有翻在外面的那一側才有圓角
+  const corners = side === 'left' ? 'rounded-l-lg' : 'rounded-r-lg'
+
   return (
     <div
-      className="absolute inset-0 overflow-hidden bg-white [backface-visibility:hidden]"
+      className={`absolute inset-0 overflow-hidden bg-white [backface-visibility:hidden] ${corners}`}
       style={back ? { transform: 'rotateY(180deg)' } : undefined}
     >
       {page?.src ? (
@@ -129,20 +188,6 @@ function Face({ page, side, back = false }) {
       )}
       <div aria-hidden="true" className={`pointer-events-none absolute top-0 h-full w-[8%] ${spine}`} />
     </div>
-  )
-}
-
-function FlipButton({ onClick, disabled, label, children }) {
-  return (
-    <button
-      type="button"
-      onClick={onClick}
-      disabled={disabled}
-      aria-label={label}
-      className="w-10 h-10 rounded-full text-lg leading-none transition-colors disabled:opacity-30 disabled:cursor-not-allowed enabled:hover:bg-current/10"
-    >
-      {children}
-    </button>
   )
 }
 
