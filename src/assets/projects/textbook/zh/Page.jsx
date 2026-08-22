@@ -82,18 +82,23 @@ import decoClosing from "../image/deco-9@2x.webp";
 const REVIEWS = [
   {
     src: review2,
-    width: 806,
-    height: 601,
+    width: 1552,
+    height: 1202,
     alt: "內頁：「百科全書」譯名的由來",
   },
   {
     src: review1,
-    width: 841,
-    height: 601,
+    width: 1682,
+    height: 1202,
     alt: "內頁：十八世紀法國出版業的圖解",
   },
-  { src: review3, width: 893, height: 601, alt: "內頁：文化與認同的概念圖" },
-  { src: review4, width: 676, height: 601, alt: "內頁：新文化運動的百科全書" },
+  { src: review3, width: 1786, height: 1222, alt: "內頁：文化與認同的概念圖" },
+  {
+    src: review4,
+    width: 1682,
+    height: 1202,
+    alt: "內頁：新文化運動的百科全書",
+  },
 ];
 
 // 跨頁都是去背的書冊造型（2000x1450，四邊透明），直接鋪在深綠底上，
@@ -432,6 +437,9 @@ export default function YoungHistoriansGuidePageZh() {
   // 沒有對應的跨頁文案，所以圖說要另外夾住範圍。
   const [turned, setTurned] = useState(1);
   const spreadIndex = Math.min(SPREADS.length - 1, Math.max(0, turned - 1));
+  // 翻到封面（turned 0）或封底（超出跨頁數）時沒有對應的圖說。用 opacity 藏起來
+  // 而不是拿掉節點，版位才會留著，不然區塊高度會忽高忽低。
+  const onCover = turned === 0 || turned > SPREADS.length;
   const logotypes = useLogotypeReveal(LOGOTYPES.length, WINNER_LOGOTYPE);
 
   return (
@@ -781,7 +789,12 @@ export default function YoungHistoriansGuidePageZh() {
                   turned={turned}
                   onTurnedChange={setTurned}
                 />
-                <figcaption className="mt-6 text-center max-w-[640px] mx-auto">
+                <figcaption
+                  aria-hidden={onCover}
+                  className={`mt-6 text-center max-w-[640px] mx-auto transition-opacity duration-300 ${
+                    onCover ? "opacity-0" : "opacity-100"
+                  }`}
+                >
                   <p className="text-p-strong">{SPREADS[spreadIndex].title}</p>
                   <p className="text-caption mt-2 opacity-80">
                     {SPREADS[spreadIndex].caption}
