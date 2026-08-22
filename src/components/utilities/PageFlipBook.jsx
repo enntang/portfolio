@@ -180,7 +180,15 @@ function Face({ page, side, back = false }) {
       style={back ? { transform: 'rotateY(180deg)' } : undefined}
     >
       {page?.src ? (
-        <img src={page.src} alt={page.alt || ''} className="w-full h-full object-cover" />
+        // draggable=false 擋掉瀏覽器對圖片的原生拖曳（那個半透明鬼影），
+        // 否則一按住頁面就會中斷我們自己的 pointer 拖曳。pointer-events-none
+        // 再讓命中測試一律落到外層書本上。
+        <img
+          src={page.src}
+          alt={page.alt || ''}
+          draggable={false}
+          className="w-full h-full object-cover pointer-events-none"
+        />
       ) : (
         <div className="w-full h-full flex items-center justify-center border border-black/10 bg-black/[0.03]">
           <span className="text-caption text-black/40">{page?.label || ''}</span>
