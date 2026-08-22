@@ -780,7 +780,7 @@ export default function YoungHistoriansGuidePageZh() {
               </P>
             </Container>
 
-            <Container className="mt-12">
+            <Wide className="mt-12">
               <figure>
                 {/* 真的可以翻的書。頁面內容目前是佔位頁，等單頁圖上傳後換掉 BOOK_PAGES。 */}
                 <PageFlipBook
@@ -801,7 +801,7 @@ export default function YoungHistoriansGuidePageZh() {
                   </p>
                 </figcaption>
               </figure>
-            </Container>
+            </Wide>
           </FadeIn>
         </SectionBlock>
 

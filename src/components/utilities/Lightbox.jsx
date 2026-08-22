@@ -87,7 +87,9 @@ function Lightbox({ items, index, onClose, onNavigate }) {
     return () => {
       document.removeEventListener('keydown', onKeyDown)
       document.body.style.overflow = previousOverflow
-      lastFocused.current?.focus?.()
+      // preventScroll 很重要：focus() 預設會把元素捲進畫面，若開啟燈箱前的焦點
+      // 停在頁面別處（例如翻頁書），關閉時整頁就會被拉過去。
+      lastFocused.current?.focus?.({ preventScroll: true })
     }
   }, [isOpen, onClose, go])
 
