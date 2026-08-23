@@ -14,7 +14,7 @@
     "imageAlt": "eHairPOS 封面"
   },
   {
-    "title": "企鵝搶地",
+    "title": "企鵝搶地：回合制網頁遊戲",
     "slug": "penguin-territory",
     "description": "以插畫風格打造的回合制策略遊戲 UI 設計",
     "imageSrc": "/project-cover-penguin.png",
@@ -31,7 +31,7 @@
     "title": "高中歷史課本：給年輕史家的漫遊指南",
     "slug": "textbook",
     "description": "跨越地理位置與時間軸來看歷史的嶄新方法",
-    "imageSrc": "/bg-textbook.png",
+    "imageSrc": "/project-cover-textbook.png",
     "imageAlt": "給年輕史家的漫遊指南內頁"
   }
 ]

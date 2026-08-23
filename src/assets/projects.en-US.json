@@ -14,7 +14,7 @@
     "imageAlt": "eHairPOS cover"
   },
   {
-    "title": "Penguin Territory",
+    "title": "Penguin Territory: Turn-Based Web Game",
     "slug": "penguin-territory",
     "description": "An illustrated UI design for a turn-based strategy game.",
     "imageSrc": "/project-cover-penguin.png",
@@ -31,7 +31,7 @@
     "title": "History Textbook: Young Historians' Guide",
     "slug": "textbook",
     "description": "A history textbook organised by theme, not chronology.",
-    "imageSrc": "/bg-textbook.png",
+    "imageSrc": "/project-cover-textbook.png",
     "imageAlt": "Interior spread of A Traveler's Guide for Young Historians"
   }
 ]
