@@ -35,6 +35,9 @@ function ProjectBanner({
   mainImage,
   mainImageClass = 'max-w-[200px] max-h-[200px]',
   mainImageClassMobile = 'max-w-[130px] max-h-[130px]',
+  // Takes the desktop artwork out of the flex row so it can be as large as it likes
+  // without squeezing the text column. The text sits on top of it (it already carries z-10).
+  mainImageFloat = false,
   aspectClass = BANNER_ASPECT, // only meaningful without banner artwork, where the box is ours to size
   bgColor, // used instead of desktopSrc/mobileSrc when a project has no banner artwork
   bgImage, // full-strength background art, for projects whose own artwork already reads as a banner
@@ -91,7 +94,7 @@ function ProjectBanner({
 
           
           {mainImage && align === 'right' && (
-            <div className='mobile:hidden mr-8'>
+            <div className={mainImageFloat ? 'mobile:hidden absolute left-4 top-1/2 -translate-y-1/2' : 'mobile:hidden mr-8'}>
               <img
                 src={mainImage}
                 alt=''
@@ -136,7 +139,7 @@ function ProjectBanner({
 
           
           {mainImage && align === 'left' && (
-            <div className='mobile:hidden ml-8'>
+            <div className={mainImageFloat ? 'mobile:hidden absolute right-10 top-1/2 -translate-y-1/2' : 'mobile:hidden ml-8'}>
               <img
                 src={mainImage}
                 alt=''
@@ -194,8 +197,11 @@ const projectVisuals = {
     // Kept narrower than Chivalry's logotype: this is the longest title in the list
     // (three lines in English) and the banner box is a fixed aspect, so the text
     // column is what needs the room.
-    mainImageClass: 'max-w-[240px] max-h-[150px]',
-    mainImageClassMobile: 'max-w-[200px] max-h-[125px]',
+    // Floated out of the flex row so its size is independent of the text column.
+    // The text carries z-10, so it reads on top wherever the two meet.
+    mainImageFloat: true,
+    mainImageClass: 'max-w-[294px] max-h-[168px]',
+    mainImageClassMobile: 'max-w-[260px] max-h-[165px]',
     // Longest kicker+title pair in the list, and the background is a texture rather than
     // composed artwork, so the box can afford to be a little taller than the shipped banners.
     aspectClass: 'aspect-[2168/860] mobile:aspect-[7/10]',
@@ -248,6 +254,7 @@ function ProjectsList() {
         mainImage: visuals.mainImage || (visuals.icon ? getPublicPath(visuals.icon) : null),
         mainImageClass: visuals.mainImageClass,
         mainImageClassMobile: visuals.mainImageClassMobile,
+        mainImageFloat: visuals.mainImageFloat,
       }
     })
 
@@ -288,6 +295,7 @@ function ProjectsList() {
               mainImage={b.mainImage}
               mainImageClass={b.mainImageClass}
               mainImageClassMobile={b.mainImageClassMobile}
+              mainImageFloat={b.mainImageFloat}
               aspectClass={b.aspectClass}
               bgColor={b.bgColor}
               bgImage={b.bgImage}
