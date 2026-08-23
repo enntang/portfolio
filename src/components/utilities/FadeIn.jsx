@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from 'react'
+import { FadeInVisibleContext } from './FadeInVisibleContext'
 
 function FadeIn({ children, delay = 0, className = '' }) {
   const ref = useRef(null)
@@ -21,17 +22,19 @@ function FadeIn({ children, delay = 0, className = '' }) {
   }, [delay])
 
   return (
-    <div
-      ref={ref}
-      className={className}
-      style={{
-        opacity: visible ? 1 : 0,
-        transform: visible ? 'translateY(0)' : 'translateY(32px)',
-        transition: 'opacity 0.6s ease, transform 0.6s ease',
-      }}
-    >
-      {children}
-    </div>
+    <FadeInVisibleContext.Provider value={visible}>
+      <div
+        ref={ref}
+        className={className}
+        style={{
+          opacity: visible ? 1 : 0,
+          transform: visible ? 'translateY(0)' : 'translateY(32px)',
+          transition: 'opacity 0.6s ease, transform 0.6s ease',
+        }}
+      >
+        {children}
+      </div>
+    </FadeInVisibleContext.Provider>
   )
 }
 

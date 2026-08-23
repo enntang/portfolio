@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay, FreeMode } from "swiper/modules";
 import "swiper/css";
@@ -12,7 +12,9 @@ import TableOfContents from "../../../../components/utilities/TableOfContents";
 import LazyImage from "../../../../components/utilities/LazyImage";
 import Lightbox from "../../../../components/utilities/Lightbox";
 import Parallax from "../../../../components/utilities/Parallax";
+import PageFlipBook from "../../../../components/utilities/PageFlipBook";
 import FadeIn from "../../../../components/utilities/FadeIn";
+import Typewriter from "../../../../components/utilities/Typewriter";
 import { useHeroIntro } from "../useHeroIntro";
 import { useLogotypeReveal } from "../useLogotypeReveal";
 
@@ -35,19 +37,28 @@ import text3 from "../image/text-3.svg";
 import cover1 from "../image/cover-1.webp";
 import cover2 from "../image/cover-2.webp";
 import cover3 from "../image/cover-3.webp";
+import cover3Back from "../image/cover-3-back.webp";
 
 import review1 from "../image/review-1.webp";
 import review2 from "../image/review-2.webp";
 import review3 from "../image/review-3.webp";
 import review4 from "../image/review-4.webp";
 
-import spread1 from "../image/spread-1.webp";
-import spread2 from "../image/spread-2.webp";
-import spread3 from "../image/spread-3.webp";
-import spread4 from "../image/spread-4.webp";
-import spread5 from "../image/spread-5.webp";
-import spread8 from "../image/spread-8.webp";
-import spread9 from "../image/spread-9.webp";
+// 翻頁書的平面單頁（-1 左頁、-2 右頁）。七個跨頁各一組，school 有兩組。
+import pageBoba1 from "../image/pages-boba-1.webp";
+import pageBoba2 from "../image/pages-boba-2.webp";
+import pageTranslate1 from "../image/pages-translate-1.webp";
+import pageTranslate2 from "../image/pages-translate-2.webp";
+import pageComic1 from "../image/pages-comic-1.webp";
+import pageComic2 from "../image/pages-comic-2.webp";
+import pageIntro1 from "../image/pages-intro-1.webp";
+import pageIntro2 from "../image/pages-intro-2.webp";
+import pageDiderot1 from "../image/pages-diderot-1.webp";
+import pageDiderot2 from "../image/pages-diderot-2.webp";
+import pageSchool1 from "../image/pages-school-1.webp";
+import pageSchool2 from "../image/pages-school-2.webp";
+import pageSchool3 from "../image/pages-school-3.webp";
+import pageSchool4 from "../image/pages-school-4.webp";
 
 import illust1 from "../image/illust-1.webp";
 import illust2 from "../image/illust-2.webp";
@@ -65,88 +76,50 @@ import decoChalk from "../image/deco-1@2x.webp";
 import decoStudents from "../image/deco-2@2x.webp";
 import decoLamp from "../image/deco-3@2x.webp";
 import decoLeaf from "../image/deco-4@2x.webp";
-import decoClosing from "../image/deco-9@2x.webp";
 
 // 滿版自動輪播的內頁截圖。傾斜與高低差由 TILTS 依索引循環套用，
 // 所以要加第五張以上，在這裡多一行就好。
 const REVIEWS = [
   {
     src: review2,
-    width: 806,
-    height: 601,
+    width: 1552,
+    height: 1202,
     alt: "內頁：「百科全書」譯名的由來",
   },
   {
     src: review1,
-    width: 841,
-    height: 601,
+    width: 1682,
+    height: 1202,
     alt: "內頁：十八世紀法國出版業的圖解",
   },
-  { src: review3, width: 893, height: 601, alt: "內頁：文化與認同的概念圖" },
-  { src: review4, width: 676, height: 601, alt: "內頁：新文化運動的百科全書" },
+  { src: review3, width: 1786, height: 1222, alt: "內頁：文化與認同的概念圖" },
+  {
+    src: review4,
+    width: 1682,
+    height: 1202,
+    alt: "內頁：新文化運動的百科全書",
+  },
 ];
 
+// Swiper 的 loop 是把跑到尾巴的 slide 搬到另一頭接上，所以「同時看得到的張數」
+// 之外還得有備援可以搬。四張卡在桌機一次就露出三張，備援不夠就會在接縫處
+// 開一段天窗。把來源接成三輪，版位夠長，接縫才補得起來。
+// index 留著是為了讓傾斜、疊放順序和燈箱都對回原本那一張。
+const REVIEW_LOOP = [0, 1, 2].flatMap((copy) =>
+  REVIEWS.map((review, index) => ({ ...review, copy, index }))
+);
+
 // 跨頁都是去背的書冊造型（2000x1450，四邊透明），直接鋪在深綠底上，
-// 不需要白框或陰影。編號沿用原書頁次，所以中間跳號是正常的。
+// 不需要白框或陰影。
 const SPREADS = [
-  {
-    src: spread1,
-    width: 2000,
-    height: 1450,
-    title: "1. 猜一猜！「Boba」是什麼？",
-    caption:
-      "巨幅手繪珍珠奶茶插畫貫穿版心，搭配溫潤的奶茶色調與圓點裝飾，讓語言學議題有了具體且貼近生活的視覺入口。",
-  },
-  {
-    src: spread2,
-    width: 2000,
-    height: 1450,
-    title: "2. 讓專業的來！嚴復與翻譯的中西對話",
-    caption:
-      "版面以筆記本格線為底，搭配書封掃描直接上版，營造出可以「翻閱」的檔案感。",
-  },
-  {
-    src: spread3,
-    width: 2000,
-    height: 1450,
-    title: "3. 教室裡的筆戰",
-    caption:
-      "採漫畫分鏡與對話框呈現論辯場景，色彩對比鮮明，讓史料辯論多了一層戲劇張力。",
-  },
-  {
-    src: spread4,
-    width: 2000,
-    height: 1450,
-    title: "4. 啟蒙時代的《百科全書》",
-    caption:
-      "左頁以古典油畫風插畫開場，營造啟蒙沙龍的莊重感；右頁轉為俐落的資訊卡片編排，形成古典與現代的對照。",
-  },
-  {
-    src: spread5,
-    width: 2000,
-    height: 1450,
-    title: "5. 觸怒教會的狄德羅",
-    caption:
-      "以詞條卡片相互參照的手法，搭配步驟化圖解，把百科全書背後的商業與盜版邏輯拆解得清楚易懂。",
-  },
-  {
-    src: spread8,
-    width: 2000,
-    height: 1450,
-    title: "6. 班級搶先報",
-    caption:
-      "插畫以教室黑板與海報製作的情境為主視覺，呼應「動一動」實作任務的動手做調性。",
-  },
-  {
-    src: spread9,
-    width: 2000,
-    height: 1450,
-    title: "7. 校園記憶中的口述史",
-    caption:
-      "跨頁以滿版的校園植栽插畫營造開闊、生活化的氛圍，緩和歷史學方法論本身的嚴肅感。",
-  },
-  // 燈箱的 alt 直接沿用標題，不用另外維護一份描述
-].map((item) => ({ ...item, alt: item.title.replace(/^\d+\.\s*/, "") }));
+  { left: pageBoba1, right: pageBoba2 },
+  { left: pageTranslate1, right: pageTranslate2 },
+  { left: pageComic1, right: pageComic2 },
+  { left: pageIntro1, right: pageIntro2 },
+  { left: pageDiderot1, right: pageDiderot2 },
+  { left: pageSchool1, right: pageSchool2 },
+  { left: pageSchool3, right: pageSchool4 },
+];
 
 // 輪播卡片的傾斜與高低差，依索引循環套用，所以 REVIEWS 加到第五張以上
 // 也會自動有錯落感，不用另外設定。
@@ -157,6 +130,9 @@ const TILTS = [
   "rotate-[8deg] -translate-y-2",
 ];
 
+// 兩排各自吃一半。切在模組層而不是 render 裡，參考才穩定，
+// 下面那些吃 items 當相依的 effect 才不會每次 render 都重跑一遍。
+// （ILLUSTRATIONS 定義在後面，所以實際的 slice 放在它下面。）
 // 十一張插畫，全部去背、比例各不相同，所以用 CSS columns 讓它們自然錯落，
 // 不要硬塞進等高格子把直式的壓扁。
 const ILLUSTRATIONS = [
@@ -213,25 +189,43 @@ const ILLUSTRATIONS = [
   },
 ];
 
+// 翻頁書用的單頁清單。turned=k 時攤開的是 pages[2k-1] | pages[2k]，
+// 所以把內封放在最前面，之後每個跨頁貢獻「左頁、右頁」兩張，
+// turned 就剛好等於目前的跨頁編號。真圖到齊後把 label 換成 src/alt 即可。
+const BOOK_PAGES = [
+  { src: cover3, alt: "封面：給年輕史家的漫遊指南" },
+  // 還沒有平面單頁的跨頁先用佔位頁；圖補齊後在上面加 left/right 就會自動接上
+  ...SPREADS.flatMap((s, i) => [
+    s.left
+      ? { src: s.left, alt: `內頁跨頁 ${i + 1}｜左頁` }
+      : { label: `內頁跨頁 ${i + 1}｜左頁` },
+    s.right
+      ? { src: s.right, alt: `內頁跨頁 ${i + 1}｜右頁` }
+      : { label: `內頁跨頁 ${i + 1}｜右頁` },
+  ]),
+  // 補一張讓總數成偶數，否則最後一張紙的背面會是空白
+  { src: cover3Back, alt: "封底" },
+];
+
 const COVERS = [
   {
     src: cover1,
-    width: 746,
-    height: 1001,
+    width: 1492,
+    height: 2002,
     alt: "封面第一版：古書、放大鏡與懷錶的寫實風格",
     caption: "第一版",
   },
   {
     src: cover2,
-    width: 746,
-    height: 1001,
+    width: 1492,
+    height: 2002,
     alt: "封面第二版：藍底、標準字置中的圖像風格",
     caption: "第二版",
   },
   {
     src: cover3,
-    width: 745,
-    height: 1001,
+    width: 1490,
+    height: 2002,
     alt: "封面最終版：淺色留白、標準字置頂",
     caption: "最終版",
   },
@@ -297,6 +291,26 @@ const backgrounds = {
 const EMPTY_ZOOM = { items: [], index: null };
 const zoomAt = (items, index) => ({ items, index });
 
+// 插畫帶的高度：平常一排 / 點開放大。斷點跟 tailwind.config 的 `mobile` 一致，
+// 所以 openHeight() 量出來的數字一定對得上 class 上的高度。
+const ILLUST_H = "h-[200px] mobile:h-[130px]";
+const ILLUST_H_OPEN = "h-[440px] mobile:h-[260px]";
+const GROW_MS = 500;
+const openHeight = () =>
+  window.matchMedia("(max-width: 768px)").matches ? 260 : 440;
+
+// 兩排各吃一半，再各自接成三輪。理由同 REVIEW_LOOP：六張、五張都鋪不滿
+// 一個桌機寬度加上 loop 要搬的備援，接縫處就會開天窗。
+// 接完之後索引是「在這一排裡的位置」，每一份副本都是獨立的一格，
+// 放大時才不會三份一起變大。
+const loopThrice = (items) =>
+  [0, 1, 2].flatMap((copy) =>
+    items.map((item) => ({ ...item, key: `${copy}-${item.src}` }))
+  );
+
+const ILLUSTRATIONS_TOP = loopThrice(ILLUSTRATIONS.slice(0, 6));
+const ILLUSTRATIONS_BOTTOM = loopThrice(ILLUSTRATIONS.slice(6));
+
 // 兩個作品示範圖群組共用的 hover 行為：指到的那張放大並浮到最上層，
 // 左右緊鄰的兩張往外讓開。用 :has() 才選得到「前一個兄弟」。
 //
@@ -329,52 +343,147 @@ function Wide({ children, className = "" }) {
 
 // 連續等速前進的插畫帶。reverse 讓第二排往反方向跑。
 // 插畫比例各不相同，所以固定高度、寬度自適應，跟 partner logo 帶一樣。
+// 點一張就原地長大、把左右的圖推開，不開燈箱——插畫都是去背的，壓在燈箱的
+// 黑底上很難看。expanded 是 ILLUSTRATIONS 的全域索引，兩排共用同一個值，
+// 所以同一時間只會有一張是放大的。
 function IllustrationRow({
   items,
   offset = 0,
-  onSelect,
+  expanded,
+  onToggle,
+  frozen,
   reverse = false,
   className = "",
 }) {
+  const swiperRef = useRef(null);
+  // 置中用的位移。不去動 Swiper 自己的 translate——它會在 transition 結束後
+  // 重算一次把值蓋掉，這在除錯時很難看出來；推外面那一層它就管不到了。
+  const [shift, setShift] = useState(0);
+
+  // 放大時整條帶子要停住。autoplay.stop() 只是不再排下一段，正在跑的
+  // transition 仍會滑到終點，所以得把當下的位移固定下來才是真的停在原地。
+  useEffect(() => {
+    const swiper = swiperRef.current;
+    if (!swiper || swiper.destroyed) return;
+    if (!frozen) {
+      swiper.autoplay?.start();
+      return;
+    }
+    swiper.autoplay?.stop();
+    const at = swiper.getTranslate();
+    swiper.setTransition(0);
+    swiper.setTranslate(at);
+  }, [frozen]);
+
+  // 放大的那張要滑到正中間，旁邊的圖被推出畫面也無所謂。放大後的寬度用比例
+  // 算而不是量——這時候高度的 CSS 過場才剛開始，量到的還是放大前的尺寸。
+  useEffect(() => {
+    const swiper = swiperRef.current;
+    const local = expanded == null ? -1 : expanded - offset;
+    if (!swiper || swiper.destroyed) return;
+    if (local < 0 || local >= items.length) {
+      setShift(0);
+      return;
+    }
+
+    const recentre = () => {
+      // loop 會把 slide 重新排序，DOM 順序不等於邏輯順序，只能靠這個屬性認人
+      const slide = swiper.el.querySelector(
+        `[data-swiper-slide-index="${local}"]`
+      );
+      if (!slide) return;
+
+      const { width, height } = items[local];
+      // 放大後的寬度用比例算而不是量——這時候高度的 CSS 過場才剛開始，
+      // 量到的還是放大前的尺寸。
+      const grownWidth = openHeight() * (width / height);
+
+      // 這張在畫面上的左緣 = 版位位置 + Swiper 的位移 + 我們的位移。
+      // offsetLeft 是版位、不受 transform 影響，所以這個式子重跑幾次結果都
+      // 一樣——StrictMode 在開發模式會把 effect 跑兩次，用累加的寫法會推過頭。
+      setShift(
+        (swiper.el.clientWidth - grownWidth) / 2 -
+          slide.offsetLeft -
+          swiper.getTranslate()
+      );
+    };
+
+    recentre();
+    // Swiper 收尾 loop 時會自己搬 slide、順手改位移，改完得重算一次，
+    // 不然放大的那張會被它帶偏。
+    swiper.on("setTranslate", recentre);
+    return () => swiper.off("setTranslate", recentre);
+  }, [expanded, offset, items]);
+
   return (
-    <Swiper
-      modules={[Autoplay, FreeMode]}
-      slidesPerView="auto"
-      spaceBetween={40}
-      loop
-      freeMode={{ enabled: true, momentum: false }}
-      speed={18000}
-      allowTouchMove={false}
-      autoplay={{
-        delay: 0,
-        disableOnInteraction: false,
-        reverseDirection: reverse,
-      }}
-      // Swiper 只改 transition-duration，不動 timing-function，設一次就一路等速
-      onSwiper={(swiper) => {
-        swiper.wrapperEl.style.transitionTimingFunction = "linear";
-      }}
-      className={className}
-    >
-      {items.map(({ src, width, height, alt }, i) => (
-        <SwiperSlide key={src} className="!w-auto">
-          <button
-            type="button"
-            onClick={() => onSelect(offset + i)}
-            aria-label={`放大檢視：${alt}`}
-            className="block cursor-zoom-in transition-transform duration-300 hover:scale-[1.06]"
-          >
-            <LazyImage
-              src={src}
-              width={width}
-              height={height}
-              alt={alt}
-              className="h-[200px] mobile:h-[130px] w-auto"
-            />
-          </button>
-        </SwiperSlide>
-      ))}
-    </Swiper>
+    // overflow-x-clip 才能單獨關掉一個方向：overflow-hidden 會把另一軸一起變成
+    // auto，放大的插畫就會在上下被切掉。裁切改由這層負責，Swiper 自己放行。
+    <div className={`overflow-x-clip overflow-y-visible ${className}`}>
+      <div
+        style={{
+          transform: `translate3d(${shift}px, 0, 0)`,
+          transition: `transform ${GROW_MS}ms ease-out`,
+        }}
+      >
+        <Swiper
+          modules={[Autoplay, FreeMode]}
+          slidesPerView="auto"
+          spaceBetween={40}
+          loop
+          freeMode={{ enabled: true, momentum: false }}
+          speed={18000}
+          allowTouchMove={false}
+          autoplay={{
+            delay: 0,
+            disableOnInteraction: false,
+            reverseDirection: reverse,
+          }}
+          // Swiper 只改 transition-duration，不動 timing-function，設一次就一路等速
+          onSwiper={(swiper) => {
+            swiperRef.current = swiper;
+            swiper.wrapperEl.style.transitionTimingFunction = "linear";
+          }}
+          className="!overflow-visible"
+        >
+          {items.map(({ src, width, height, alt, key }, i) => {
+            const index = offset + i;
+            const open = expanded === index;
+            return (
+              <SwiperSlide
+                key={key}
+                className={`!w-auto${open ? " relative z-30" : ""}`}
+              >
+                <button
+                  type="button"
+                  onClick={() => onToggle(index)}
+                  aria-expanded={open}
+                  aria-label={open ? `縮小：${alt}` : `放大檢視：${alt}`}
+                  className={`block transition-transform duration-300 ${
+                    open
+                      ? "cursor-zoom-out"
+                      : "cursor-zoom-in hover:scale-[1.06]"
+                  }`}
+                >
+                  <LazyImage
+                    src={src}
+                    width={width}
+                    height={height}
+                    alt={alt}
+                    className={`w-auto ${open ? ILLUST_H_OPEN : ILLUST_H}`}
+                    // 高度的過場寫成 inline：LazyImage 自己會補一個
+                    // transition-opacity，兩個 class 都宣告 transition-property
+                    // 會互相蓋掉，誰贏要看樣式表順序，寫死比較準。
+                    style={{
+                      transition: `height ${GROW_MS}ms ease-out, opacity 300ms`,
+                    }}
+                  />
+                </button>
+              </SwiperSlide>
+            );
+          })}
+        </Swiper>
+      </div>
+    </div>
   );
 }
 
@@ -407,7 +516,18 @@ export default function YoungHistoriansGuidePageZh() {
   const { glowStyle, contentStyle, toggle, revealed } = useHeroIntro();
   // index 為 null 就是燈箱關閉
   const [zoom, setZoom] = useState(EMPTY_ZOOM);
-  const [spreadIndex, setSpreadIndex] = useState(0);
+  // 目前放大的那張插畫（ILLUSTRATIONS 的索引），null 表示全部都是原本大小
+  const [openIllust, setOpenIllust] = useState(null);
+  const toggleIllust = (i) => setOpenIllust((cur) => (cur === i ? null : i));
+
+  useEffect(() => {
+    if (openIllust == null) return;
+    const onKey = (e) => e.key === "Escape" && setOpenIllust(null);
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [openIllust]);
+  // turned = 翻過去的紙數，也就是目前攤開的跨頁編號。
+  const [turned, setTurned] = useState(1);
   const logotypes = useLogotypeReveal(LOGOTYPES.length, WINNER_LOGOTYPE);
 
   return (
@@ -457,7 +577,7 @@ export default function YoungHistoriansGuidePageZh() {
                   src={keyVision}
                   alt=""
                   aria-hidden="true"
-                  className="w-full max-w-[240px] h-auto"
+                  className="w-full max-w-[240px] md:max-w-[264px] h-auto md:mb-4"
                   loading="eager"
                 />
 
@@ -479,7 +599,7 @@ export default function YoungHistoriansGuidePageZh() {
           bgVariant="green"
           backgrounds={backgrounds}
           style={greenStyle}
-          className="overflow-hidden"
+          className="overflow-hidden !pb-72 mobile:!pb-40"
         >
           {/* 裝飾層。純裝飾所以整層 aria-hidden，也不吃點擊。
               每張都帶 width/height，載入前才有版位，不會擠動版面。 */}
@@ -507,10 +627,12 @@ export default function YoungHistoriansGuidePageZh() {
               height={420}
               loading="lazy"
             />
-            {/* 左下角葉子：讓它一部分溢出到版面外，並帶視差 */}
+            {/* 左下角葉子：讓它一部分溢出到版面外，並帶視差。
+                z-30 蓋過內容層（FadeIn 的 z-10）——外層裝飾 div 沒有 z-index，
+                不會關出堆疊環境，所以這個值是直接跟內容層比大小的。 */}
             <Parallax
               strength={70}
-              className="absolute left-0 bottom-[4%] w-[281px] mobile:w-[130px] -translate-x-[28%]"
+              className="absolute left-0 bottom-[4%] z-30 w-[281px] mobile:w-[130px] -translate-x-[28%]"
             >
               <img
                 src={decoLeaf}
@@ -567,15 +689,17 @@ export default function YoungHistoriansGuidePageZh() {
                 </div>
               </TwoColumn>
             </Container>
-            {/* 滿版自動輪播。刻意不放進 Wide，讓卡片一路溢出到螢幕外。 */}
-            <div className="mt-16">
+            {/* 滿版自動輪播。刻意不放進 Wide，讓卡片一路溢出到螢幕外。
+                裁切放在這層而不是 Swiper 上：overflow-x-clip 只關左右，卡片
+                hover 放大時上下才不會被切掉。 */}
+            <div className="mt-8 -mt-4 overflow-x-clip overflow-y-visible">
               <Swiper
                 modules={[Autoplay, FreeMode]}
                 slidesPerView="auto"
                 // 負值讓卡片彼此重疊；手機卡片較窄，重疊量也跟著縮小
                 spaceBetween={-40}
                 breakpoints={{ 769: { spaceBetween: -70 } }}
-                loop={REVIEWS.length > 1}
+                loop={REVIEW_LOOP.length > 1}
                 freeMode={{ enabled: true, momentum: false }}
                 speed={16000}
                 autoplay={{
@@ -588,25 +712,25 @@ export default function YoungHistoriansGuidePageZh() {
                 onSwiper={(swiper) => {
                   swiper.wrapperEl.style.transitionTimingFunction = "linear";
                 }}
-                className={`!py-12 ${HOVER_PUSH_SLIDES}`}
+                className={`!py-8 !overflow-visible ${HOVER_PUSH_SLIDES}`}
               >
-                {REVIEWS.map(({ src, width, height, alt }, i) => (
+                {REVIEW_LOOP.map(({ src, width, height, alt, copy, index }) => (
                   <SwiperSlide
-                    key={alt}
-                    className={`!w-[420px] mobile:!w-[260px] relative ${i % 2 ? "z-20" : "z-10"}`}
+                    key={`${copy}-${alt}`}
+                    className={`!w-[360px] mobile:!w-[240px] relative ${index % 2 ? "z-20" : "z-10"}`}
                   >
                     <button
                       type="button"
-                      onClick={() => setZoom(zoomAt(REVIEWS, i))}
+                      onClick={() => setZoom(zoomAt(REVIEWS, index))}
                       aria-label={`放大檢視：${alt}`}
-                      className={`block w-full rounded-lg shadow-2xl cursor-zoom-in ${TILTS[i % TILTS.length]}`}
+                      className={`block w-full rounded-lg shadow-2xl cursor-zoom-in ${TILTS[index % TILTS.length]}`}
                     >
                       <LazyImage
                         src={src}
                         width={width}
                         height={height}
                         alt={alt}
-                        sizes="(max-width: 768px) 260px, 420px"
+                        sizes="(max-width: 768px) 240px, 360px"
                         className="w-full h-auto rounded-lg"
                       />
                     </button>
@@ -647,11 +771,19 @@ export default function YoungHistoriansGuidePageZh() {
 
           <FadeIn>
             <Container>
-              <H2 id="cover">封面設計</H2>
-              <P>風格與標準字都經過多次的演進過程。</P>
-              <P>
-                最初以金色配色與真實物件堆疊營造歷史感，但因應行銷方向調整，與編輯討論後逐步簡化風格。最終版本改以插畫感的地圖與書頁元素，展示影響詞彙的關鍵書籍，呼應「漫遊」的核心意象。
-              </P>
+              {/* 標題走 Typewriter 而不是 H2，樣式沿用 H2 的 text-h2 / 500 字重 */}
+              <div className="grid grid-cols-1 sm:grid-cols-[4fr_8fr] gap-12 items-start">
+                <Typewriter
+                  as="h2"
+                  id="cover"
+                  className="text-h2"
+                  style={{ fontWeight: 500 }}
+                  text={"多次迭代的\n封面設計"}
+                />
+                <P className="!mb-0">
+                  最初以金色配色與真實物件堆疊營造歷史感，但因應行銷方向調整，與編輯討論後逐步簡化風格。最終版本改以插畫感的地圖與書頁元素，展示影響詞彙的關鍵書籍，呼應「漫遊」的核心意象。
+                </P>
+              </div>
             </Container>
 
             {/* 三本封面階梯式下降，後面的疊在前面之上 */}
@@ -679,7 +811,7 @@ export default function YoungHistoriansGuidePageZh() {
                     </button>
                     <figcaption className="mt-4 mobile:mt-2 text-center">
                       <span
-                        className="inline-block rounded-sm px-4 mobile:px-2 py-1 text-caption"
+                        className="inline-block rounded-full px-4 mobile:px-3 py-1 text-caption"
                         style={greenStyle}
                       >
                         {caption}
@@ -741,66 +873,37 @@ export default function YoungHistoriansGuidePageZh() {
           style={greenStyle}
         >
           <FadeIn>
-            <Container className="text-center">
-              <H2 id="interior">內頁設計</H2>
-              <P>
-                在課本內，我們使用大量的插圖以及引導思考的問答，減去生硬感，增加學生投入意願。
-              </P>
-            </Container>
-
-            <Container className="mt-12">
-              <figure>
-                <button
-                  type="button"
-                  onClick={() => setZoom(zoomAt(SPREADS, spreadIndex))}
-                  aria-label={`放大檢視：${SPREADS[spreadIndex].alt}`}
-                  className="block w-full cursor-zoom-in"
-                >
-                  <LazyImage
-                    key={SPREADS[spreadIndex].src}
-                    src={SPREADS[spreadIndex].src}
-                    width={SPREADS[spreadIndex].width}
-                    height={SPREADS[spreadIndex].height}
-                    alt={SPREADS[spreadIndex].alt}
-                    sizes="(max-width: 768px) 100vw, 1100px"
-                    className="w-full h-auto"
-                    preload
-                  />
-                </button>
-                <figcaption className="mt-6 text-center max-w-[640px] mx-auto">
-                  <p className="text-p-strong">{SPREADS[spreadIndex].title}</p>
-                  <p className="text-caption mt-2 opacity-80">
-                    {SPREADS[spreadIndex].caption}
+            <Container>
+              <div className="grid grid-cols-1 sm:grid-cols-[4fr_8fr] gap-12 items-start">
+                <Typewriter
+                  as="h2"
+                  id="interior"
+                  className="text-h2"
+                  style={{ fontWeight: 500 }}
+                  text={"引人入勝的\n圖文整合"}
+                />
+                <div>
+                  <P className="!mb-0">
+                    使用大量的插圖以及引導思考的問答，減去生硬感，增加學生投入意願。
+                  </P>
+                  <p className="mt-4 text-caption italic opacity-70">
+                    *因涉及版權無法展露全文，部分內文模糊處理
                   </p>
-                </figcaption>
-              </figure>
-
-              <div className="grid grid-cols-7 mobile:grid-cols-4 gap-3 mt-10">
-                {SPREADS.map(({ src, width, height, alt }, i) => (
-                  <button
-                    key={src}
-                    type="button"
-                    onClick={() => setSpreadIndex(i)}
-                    aria-label={`切換到：${alt}`}
-                    aria-current={i === spreadIndex}
-                    className={`block rounded-sm overflow-hidden transition-opacity duration-300 ${
-                      i === spreadIndex
-                        ? "opacity-100 ring-2 ring-white/70"
-                        : "opacity-50 hover:opacity-80"
-                    }`}
-                  >
-                    <LazyImage
-                      src={src}
-                      width={width}
-                      height={height}
-                      alt=""
-                      sizes="140px"
-                      className="w-full h-auto"
-                    />
-                  </button>
-                ))}
+                </div>
               </div>
             </Container>
+
+            <Wide className="mt-12">
+              <figure>
+                {/* 真的可以翻的書。頁面內容目前是佔位頁，等單頁圖上傳後換掉 BOOK_PAGES。 */}
+                <PageFlipBook
+                  pages={BOOK_PAGES}
+                  pageRatio={0.745}
+                  turned={turned}
+                  onTurnedChange={setTurned}
+                />
+              </figure>
+            </Wide>
           </FadeIn>
         </SectionBlock>
 
@@ -810,26 +913,41 @@ export default function YoungHistoriansGuidePageZh() {
         <SectionBlock style={lightStyle}>
           <FadeIn>
             <Container className="text-center">
-              <H2 id="illustration">插畫設計</H2>
+              <Typewriter
+                as="h2"
+                id="illustration"
+                className="text-h2 mb-8"
+                style={{ fontWeight: 500 }}
+                text="貫徹教學內容的靈魂插畫"
+              />
             </Container>
 
             {/* 兩排反向跑的插畫帶，說明面板半透明疊在上面。
                 刻意不放進 Wide，讓插畫一路溢出到螢幕外。 */}
             <div className="mt-12 relative">
               <IllustrationRow
-                items={ILLUSTRATIONS.slice(0, 6)}
-                onSelect={(i) => setZoom(zoomAt(ILLUSTRATIONS, i))}
+                items={ILLUSTRATIONS_TOP}
+                expanded={openIllust}
+                onToggle={toggleIllust}
+                frozen={openIllust != null}
               />
               <IllustrationRow
-                items={ILLUSTRATIONS.slice(6)}
-                offset={6}
-                onSelect={(i) => setZoom(zoomAt(ILLUSTRATIONS, i))}
+                items={ILLUSTRATIONS_BOTTOM}
+                offset={ILLUSTRATIONS_TOP.length}
+                expanded={openIllust}
+                onToggle={toggleIllust}
+                frozen={openIllust != null}
                 reverse
                 className="mt-4"
               />
 
-              {/* Swiper 的 stylesheet 給 .swiper 設了 z-index: 1，所以這層要明確拉高才蓋得住 */}
-              <div className="absolute inset-0 z-10 flex items-center pointer-events-none">
+              {/* Swiper 的 stylesheet 給 .swiper 設了 z-index: 1，所以這層要明確拉高才蓋得住。
+                  有插畫放大時整片讓開，不然半透明的綠底會壓在放大的圖上。 */}
+              <div
+                className={`absolute inset-0 z-10 flex items-center pointer-events-none transition-opacity duration-300 ${
+                  openIllust == null ? "opacity-100" : "opacity-0"
+                }`}
+              >
                 <Wide>
                   <div
                     className="w-[46%] mobile:w-full rounded-lg p-8 mobile:p-6"
@@ -868,16 +986,16 @@ export default function YoungHistoriansGuidePageZh() {
                   歷史並不是離我們非常遙遠的陳年舊事，而是藏在每一次翻譯、每一個新詞彙裡，持續在改寫我們理解世界的方式。
                 </P>
                 <P className="!mb-0">
-                  這也是我想把它做成一本故事書的原因：讓讀者在翻頁之間，發現歷史其實一直都在身邊。
+                  因此，在製作本書時，在排版和插畫設計便致力於營造故事感，讓讀者在翻頁之間，發現歷史其實一直都在身邊。
                 </P>
               </blockquote>
               <img
-                src={decoClosing}
+                src={illust11}
                 alt=""
                 aria-hidden="true"
                 className="mx-auto w-[176px] h-auto mt-10"
-                width={352}
-                height={388}
+                width={1323}
+                height={1582}
                 loading="lazy"
               />
               <p className="text-h3 font-light mt-10">給年輕史家的漫遊指南</p>
