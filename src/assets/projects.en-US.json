@@ -27,5 +27,13 @@
     "imageSrc": "/project-cover-chivalry.png",
     "imageAlt": "Chivalry board game cover",
     "link": "#/project/chivalry"
+  },
+  {
+    "title": "History Textbook: Young Historians' Guide",
+    "slug": "textbook",
+    "description": "A history textbook organised by theme, not chronology.",
+    "imageSrc": "/bg-textbook.png",
+    "imageAlt": "Interior spread of A Traveler's Guide for Young Historians",
+    "link": "#/project/textbook"
   }
 ]

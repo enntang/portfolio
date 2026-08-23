@@ -11,6 +11,9 @@ import { splitProjectTitle } from './utils/projectTitle'
 // Chivalry has no dedicated banner artwork; mirror its case study's palette instead.
 import chivalryCover from './assets/projects/chivalry/image/chivalry-cover-transparent.png'
 import chivalryTexture from './assets/projects/chivalry/image/chivalry-background-rulebook.png'
+// Same story for the textbook: reuse the case study's own background and one of its illustrations.
+import textbookBg from './assets/projects/textbook/image/bg-3@2x.webp'
+import textbookIllust from './assets/projects/textbook/image/illust-1.webp'
 
 const CHIVALRY_BG = '#420C22'
 
@@ -32,8 +35,10 @@ function ProjectBanner({
   mainImage,
   mainImageClass = 'max-w-[200px] max-h-[200px]',
   mainImageClassMobile = 'max-w-[130px] max-h-[130px]',
+  aspectClass = BANNER_ASPECT, // only meaningful without banner artwork, where the box is ours to size
   bgColor, // used instead of desktopSrc/mobileSrc when a project has no banner artwork
-  textureSrc, // optional texture layered over bgColor
+  bgImage, // full-strength background art, for projects whose own artwork already reads as a banner
+  textureSrc, // optional texture layered over bgColor, kept faint on purpose
   t, // translation function
 }) {
   // 根据 variant 决定文字颜色
@@ -50,7 +55,16 @@ function ProjectBanner({
             <img src={desktopSrc} alt={title} className='w-full h-auto block mobile:h-full mobile:object-cover sm:h-full sm:w-full sm:object-cover' />
           </picture>
         ) : (
-          <div className={`block w-full ${BANNER_ASPECT}`} style={{ backgroundColor: bgColor }}>
+          <div className={`block w-full ${aspectClass}`} style={{ backgroundColor: bgColor }}>
+            {bgImage && (
+              <img
+                src={bgImage}
+                alt=''
+                aria-hidden='true'
+                className='pointer-events-none select-none absolute inset-0 w-full h-full object-cover'
+                loading='lazy'
+              />
+            )}
             {textureSrc && (
               <img
                 src={textureSrc}
@@ -171,6 +185,25 @@ const projectVisuals = {
     variant: 'dark',
     align: 'left',
   },
+  'textbook': {
+    // No banner artwork yet — the case study's own cover-section background reads as one,
+    // and it is pale enough to take dark text.
+    bgImage: textbookBg,
+    mainImage: textbookIllust,
+    // The illustration is wide (1862x1091), so height is what actually constrains it.
+    // Kept narrower than Chivalry's logotype: this is the longest title in the list
+    // (three lines in English) and the banner box is a fixed aspect, so the text
+    // column is what needs the room.
+    mainImageClass: 'max-w-[240px] max-h-[150px]',
+    mainImageClassMobile: 'max-w-[200px] max-h-[125px]',
+    // Longest kicker+title pair in the list, and the background is a texture rather than
+    // composed artwork, so the box can afford to be a little taller than the shipped banners.
+    aspectClass: 'aspect-[2168/860] mobile:aspect-[7/10]',
+    // Title reads "<category>: <book>", so the category becomes the kicker.
+    titleLeadsWithCategory: true,
+    variant: 'light',
+    align: 'right',
+  },
 }
 
 function ProjectsList() {
@@ -200,7 +233,9 @@ function ProjectsList() {
         // not imported from /public (Vite disallows that).
         desktopSrc: visuals.imageKey ? getPublicPath(`/projectList-bg-${visuals.imageKey}-desktop.png`) : undefined,
         mobileSrc: visuals.imageKey ? getPublicPath(`/projectList-bg-${visuals.imageKey}-mobile.png`) : undefined,
+        aspectClass: visuals.aspectClass,
         bgColor: visuals.bgColor,
+        bgImage: visuals.bgImage,
         textureSrc: visuals.textureSrc,
         title: leadsWithCategory && subtitle ? subtitle : mainTitle,
         subtitle: leadsWithCategory ? '' : subtitle,
@@ -253,7 +288,9 @@ function ProjectsList() {
               mainImage={b.mainImage}
               mainImageClass={b.mainImageClass}
               mainImageClassMobile={b.mainImageClassMobile}
+              aspectClass={b.aspectClass}
               bgColor={b.bgColor}
+              bgImage={b.bgImage}
               textureSrc={b.textureSrc}
               t={t}
             />
