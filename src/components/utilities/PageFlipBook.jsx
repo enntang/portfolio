@@ -5,6 +5,15 @@ const FLIP_EASE = "cubic-bezier(0.2, 0.7, 0.3, 1)";
 // 指標移動超過這麼多才算「拖曳」，以內都當成點擊
 const CLICK_SLOP = 6;
 
+// 提示動畫：書一進畫面，最上面那張紙自己掀起來又放下，讓人看得出來它會動。
+// 掀的角度刻意不大——目的是「這裡可以翻」，不是替使用者翻一頁。
+const HINT_ANGLE = -20;
+const HINT_MS = 520; // 掀起／放下各花多久
+const HINT_HOLD = 180; // 掀到頂停一下
+const HINT_GAP = 300; // 兩次之間的間隔
+const HINT_TIMES = 2;
+const HINT_DELAY = 450; // 進畫面之後先等一下，捲動停穩了再動
+
 /**
  * 繞書脊旋轉的翻頁書。
  *
@@ -17,6 +26,8 @@ const CLICK_SLOP = 6;
  * 方便在真圖到齊之前先看版面與動態。
  *
  * 翻頁有兩種操作：直接把紙拖過去，或是點一下——點右半邊往前翻、左半邊翻回去。
+ * 兩種都不是一眼看得出來的，所以書捲進畫面時會自己掀一下頁角當作提示，
+ * 下面也帶一行說明；使用者一動就都收掉，不再打擾。
  *
  * 尊重 prefers-reduced-motion：關掉動畫效果時直接切換，不做旋轉。
  */
@@ -26,6 +37,8 @@ function PageFlipBook({
   // 受控元件：翻到第幾張紙由外面決定，縮圖列之類的其他導覽才能一起驅動它
   turned,
   onTurnedChange,
+  // 書下面那行提示文案，傳 null 可以不要
+  hintLabel = "點擊或拖曳頁面即可翻頁",
   className = "",
 }) {
   const leaves = useMemo(() => {
@@ -40,6 +53,13 @@ function PageFlipBook({
   const [flipping, setFlipping] = useState(null);
   // 拖曳中的狀態：{ leaf, forward, angle, startX, moved }
   const [drag, setDrag] = useState(null);
+  // 提示動畫：hintAngle 是當下掀起的角度，hintActive 涵蓋整段過程
+  // （用來換掉過渡時間），engaged 表示使用者已經動過了。
+  const [hintAngle, setHintAngle] = useState(0);
+  const [hintActive, setHintActive] = useState(false);
+  const [engaged, setEngaged] = useState(false);
+  const hintDone = useRef(false);
+  const hintTimers = useRef([]);
   const bookRef = useRef(null);
   const timer = useRef(null);
   const previous = useRef(turned);
@@ -48,6 +68,16 @@ function PageFlipBook({
     typeof window !== "undefined" &&
     typeof window.matchMedia === "function" &&
     window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  // 使用者一有動作就收掉提示，並且不再重來
+  const stopHint = useCallback(() => {
+    hintDone.current = true;
+    hintTimers.current.forEach(clearTimeout);
+    hintTimers.current = [];
+    setHintAngle(0);
+    setHintActive(false);
+    setEngaged(true);
+  }, []);
 
   const go = useCallback(
     (delta) => {
@@ -63,12 +93,44 @@ function PageFlipBook({
     const from = previous.current;
     previous.current = turned;
     if (from === turned) return;
+    stopHint();
     setFlipping(turned > from ? turned - 1 : turned);
     clearTimeout(timer.current);
     timer.current = setTimeout(() => setFlipping(null), FLIP_MS);
-  }, [turned]);
+  }, [turned, stopHint]);
 
   useEffect(() => () => clearTimeout(timer.current), []);
+
+  // 捲到書才提示，而且只提示一次。關掉動畫效果的人就只留下面那行字。
+  useEffect(() => {
+    if (prefersReducedMotion) return;
+    const el = bookRef.current;
+    if (!el) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (!entry.isIntersecting || hintDone.current) return;
+        observer.disconnect();
+        hintDone.current = true;
+
+        const push = (fn, at) => hintTimers.current.push(setTimeout(fn, at));
+        let at = HINT_DELAY;
+        setHintActive(true);
+        for (let i = 0; i < HINT_TIMES; i += 1) {
+          push(() => setHintAngle(HINT_ANGLE), at);
+          at += HINT_MS + HINT_HOLD;
+          push(() => setHintAngle(0), at);
+          at += HINT_MS + HINT_GAP;
+        }
+        push(() => setHintActive(false), at);
+      },
+      { threshold: 0.5 },
+    );
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, [prefersReducedMotion]);
+
+  useEffect(() => () => hintTimers.current.forEach(clearTimeout), []);
 
   // 把指標的水平位置換算成紙張角度。紙的自由邊在旋轉時的水平位置是
   // pageW * cos(angle)，所以反過來用 acos 就能讓那條邊剛好跟著手指走，
@@ -86,6 +148,7 @@ function PageFlipBook({
   const onPointerDown = useCallback(
     (event) => {
       if (event.button > 0) return;
+      stopHint();
       const rect = bookRef.current.getBoundingClientRect();
       // 從右半邊拉是往前翻，從左半邊拉是翻回去
       const forward = event.clientX >= rect.left + rect.width / 2;
@@ -100,7 +163,7 @@ function PageFlipBook({
         moved: false,
       });
     },
-    [turned, leaves.length],
+    [turned, leaves.length, stopHint],
   );
 
   const onPointerMove = useCallback(
@@ -165,6 +228,7 @@ function PageFlipBook({
           if (event.key === "ArrowRight") go(1);
           else if (event.key === "ArrowLeft") go(-1);
           else return;
+          stopHint();
           event.preventDefault();
         }}
         tabIndex={0}
@@ -179,6 +243,8 @@ function PageFlipBook({
         {leaves.map((leaf, k) => {
           const isTurned = k < turned;
           const dragging = drag?.leaf === k && drag.moved;
+          // 提示只掀最上面那張還沒翻過去的紙
+          const peeking = hintActive && !drag && k === turned;
           return (
             <div
               key={k}
@@ -186,15 +252,15 @@ function PageFlipBook({
               style={{
                 transformOrigin: "left center",
                 // 位移要寫在旋轉前面：先搬座標系再繞書脊轉，整本才是一起移動
-                transform: `translateX(${leafShift}%) rotateY(${dragging ? drag.angle : isTurned ? -180 : 0}deg)`,
+                transform: `translateX(${leafShift}%) rotateY(${dragging ? drag.angle : isTurned ? -180 : peeking ? hintAngle : 0}deg)`,
                 // 拖曳時必須關掉過渡，紙才會貼著手指走而不是慢半拍。
                 // 沒被拖到的紙也要一起關掉，不然置中的位移會慢 700ms 才跟上。
                 transition:
                   drag?.moved || prefersReducedMotion
                     ? "none"
-                    : `transform ${FLIP_MS}ms ${FLIP_EASE}`,
+                    : `transform ${peeking ? HINT_MS : FLIP_MS}ms ${FLIP_EASE}`,
                 zIndex:
-                  dragging || flipping === k
+                  dragging || peeking || flipping === k
                     ? leaves.length + 1
                     : isTurned
                       ? k + 1
@@ -207,6 +273,18 @@ function PageFlipBook({
           );
         })}
       </div>
+
+      {/* 說明文字。aria-label 已經講過同樣的事，所以這行只給看得見的人。 */}
+      {hintLabel && (
+        <p
+          aria-hidden="true"
+          className={`mt-4 text-center text-caption text-current transition-opacity duration-500 ${
+            engaged ? "opacity-0" : "opacity-60"
+          }`}
+        >
+          {hintLabel}
+        </p>
+      )}
     </div>
   );
 }
