@@ -62,6 +62,11 @@ export function LanguageProvider({ children }) {
     }
   }, [language])
 
+  // 讓 <html lang> 跟著網址的語言走（分享／SEO 用）
+  useEffect(() => {
+    document.documentElement.lang = language
+  }, [language])
+
   const changeLanguage = (newLang) => {
     if (!SUPPORTED_LANGUAGES[newLang]) {
       console.warn(`Unsupported language: ${newLang}`)

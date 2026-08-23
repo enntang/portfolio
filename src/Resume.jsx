@@ -1,7 +1,6 @@
-import { useState } from 'react'
 import { resumeData } from './assets/resume/resumeData'
 import { getPublicPath } from './utils/path'
-import { buildPath } from './utils/routing'
+import { buildPath, getCurrentLocationPath, navigate, parsePath } from './utils/routing'
 import { useLanguage } from './contexts/LanguageContext'
 import LazyImage from './components/utilities/LazyImage'
 
@@ -23,10 +22,19 @@ function IconMail() {
 }
 
 function Resume({ dataset = resumeData }) {
-  const { language } = useLanguage()
-  const [lang, setLang] = useState(language === 'zh-TW' ? 'zh' : 'en')
+  const { language, changeLanguage } = useLanguage()
+  // 語言以網址為準（/resume = 英文，/tw/resume = 中文），履歷沒有日文版時退回英文
+  const lang = language === 'zh-TW' ? 'zh' : 'en'
   const d = dataset[lang]
   const bodyTracking = lang === 'zh' ? 'tracking-normal' : ''
+
+  // 切換語言＝換網址，讓履歷連結可以直接分享成指定語言
+  const switchLanguage = (newLang) => {
+    if (newLang === language) return
+    const { path: currentPath } = parsePath(getCurrentLocationPath())
+    changeLanguage(newLang)
+    navigate(currentPath, newLang)
+  }
 
   const handleDownload = () => {
     window.print()
@@ -47,14 +55,14 @@ function Resume({ dataset = resumeData }) {
         <div className="flex items-center gap-3">
           <div className="flex items-center gap-1 rounded-full bg-white border border-gray-200 p-1">
             <button
-              onClick={() => setLang('zh')}
+              onClick={() => switchLanguage('zh-TW')}
               className={`px-3 py-1 rounded-full text-sm transition-colors ${lang === 'zh' ? 'bg-gray-900 text-white' : 'text-gray-600 hover:bg-highlight'}`}
               aria-label="切換為中文"
             >
               中
             </button>
             <button
-              onClick={() => setLang('en')}
+              onClick={() => switchLanguage('en-US')}
               className={`px-3 py-1 rounded-full text-sm transition-colors ${lang === 'en' ? 'bg-gray-900 text-white' : 'text-gray-600 hover:bg-highlight'}`}
               aria-label="Switch to English"
             >
