@@ -79,7 +79,12 @@ function Typewriter({ as = 'span', text, speed = SPEED_MS, className = '', ...re
               style={{ height: '0.85em' }}
             />
           )}
-          <span style={{ opacity: i < shown ? 1 : 0 }}>{char}</span>
+          {/* 換行字元走 <br>，textContent 才不會混進空白——目錄是靠它抓標題文字的 */}
+          {char === '\n' ? (
+            <br />
+          ) : (
+            <span style={{ opacity: i < shown ? 1 : 0 }}>{char}</span>
+          )}
         </Fragment>
       ))}
     </Tag>
