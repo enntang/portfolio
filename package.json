@@ -7,7 +7,8 @@
     "dev": "vite",
     "build": "vite build && node scripts/copy-404.mjs",
     "lint": "eslint .",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "sync:projects": "node scripts/notion-sync/projects.mjs"
   },
   "dependencies": {
     "@tailwindcss/typography": "^0.5.19",

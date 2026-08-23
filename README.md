@@ -79,9 +79,9 @@ Vite 提供了極快的 HMR 支援。當你修改代碼時，變更會立即反�
 
 ---
 
-## Notion 文章同步
+## Notion 內容同步
 
-本專案支援從 Notion 資料庫自動同步部落格文章到 GitHub Pages。
+本專案支援從 Notion 資料庫自動同步部落格文章與作品集清單到 GitHub Pages。
 
 ### 功能特色
 
@@ -95,15 +95,18 @@ Vite 提供了極快的 HMR 支援。當你修改代碼時，變更會立即反�
 
 #### 自動同步
 
-- **排程**：每天 UTC 00:00（台灣時間 08:00）自動執行
-- 只同步 Notion 中 `Status = Published` 的文章
-- 有變更時自動 commit 並觸發部署
+- **排程**：每天 UTC 00:00（台灣時間 08:00）自動執行，文章與作品集一起同步
+- 只同步 Notion 中 `Status = Published` 的項目
+- 有變更時自動 commit 並觸發部署（沒有變更就不會產生 commit）
 
 #### 手動同步
 
 1. 前往 GitHub repo 的 **Actions** 頁面
-2. 選擇 **Sync Notion Articles** workflow
-3. 點擊 **Run workflow**
+2. 選擇 **Sync Notion Content** workflow
+3. 點擊 **Run workflow**，並選擇要同步的內容：
+   - `all`：文章 + 作品集（預設）
+   - `articles`：只同步文章
+   - `projects`：只同步作品集清單
 
 ### 設定方式
 
@@ -142,12 +145,48 @@ Vite 提供了極快的 HMR 支援。當你修改代碼時，變更會立即反�
 | Secret 名稱 | 說明 |
 |------------|------|
 | `NOTION_API_KEY` | Notion Integration Token |
-| `NOTION_DATABASE_ID` | Notion 資料庫 ID |
+| `NOTION_DATABASE_ID` | 文章資料庫 ID |
+| `NOTION_PROJECTS_DATABASE_ID` | 作品集資料庫 ID（Portfolio Sync），沒設定時會跳過作品集同步 |
 
 #### 3. Notion Integration 設定
 
 1. 前往 [Notion Integrations](https://www.notion.so/my-integrations) 建立 Integration
 2. 複製 Internal Integration Token
+
+### 作品集清單同步
+
+作品集的列表卡片資料（標題、副標題、描述、封面）集中在 Notion 的 **Portfolio Sync**
+資料庫，由 `scripts/notion-sync/projects.mjs` 同步成三個語系檔：
+
+- `src/assets/projects.zh-TW.json`
+- `src/assets/projects.en-US.json`
+- `src/assets/projects.ja-JP.json`
+
+> ⚠️ 這三個檔案是同步產生的，請不要手動編輯，改 Notion 才是正確做法。
+
+資料庫欄位：
+
+| 欄位 | 類型 | 說明 |
+|-----|------|------|
+| Project | Title | 專案代稱（內部識別用，不會出現在網站上） |
+| Slug | Text | 網址路徑，必填且唯一，對應 `#/project/:slug` |
+| Status | Select | 設為 `Published` 才會同步到網站 |
+| Order | Number | 顯示順序，數字小的排前面 |
+| Cover Path | Text | 封面圖路徑，以 `/` 開頭（檔案放在 `public/`） |
+| Title ZH / EN / JA | Text | 主標題 |
+| Subtitle ZH / EN / JA | Text | 副標題，沒有就留空 |
+| Description ZH / EN / JA | Text | 卡片描述 |
+| Alt ZH / EN / JA | Text | 封面圖替代文字 |
+
+**主標與副標分成兩欄**，同步時才依語系接成 `主標：副標`：中日文用全形 `：`，
+英文用半形 `: `。這樣分隔符號的格式由程式保證，不會再出現各語系寫法不一致的情況。
+
+同步行為：
+
+- 只同步 `Status = Published` 的作品，`Draft` / `Hidden` 不會出現在網站上
+- 每次都整份重寫三個 JSON，Notion 就是唯一的資料來源
+- Slug 重複或查不到任何已發布作品時會直接報錯中止，避免清單被清空
+- 只影響列表卡片；作品內頁仍是 `src/assets/projects/<slug>/<lang>/Page.jsx` 手寫的 JSX
 
 ### 文章刪除機制
 
@@ -164,9 +203,20 @@ npm install
 # 設定環境變數
 export NOTION_API_KEY="your-api-key"
 export NOTION_DATABASE_ID="your-database-id"
+export NOTION_PROJECTS_DATABASE_ID="your-projects-database-id"
 
-# 執行同步
+# 同步文章
 node index.mjs
+
+# 同步作品集清單（先看會改到什麼，不寫檔）
+node projects.mjs --dry-run
+node projects.mjs
+```
+
+安裝過相依套件之後，作品集同步也可以直接從專案根目錄執行：
+
+```bash
+npm run sync:projects
 ```
 
 ### 檔案結構
@@ -174,8 +224,11 @@ node index.mjs
 ```
 portfolio/
 ├── src/assets/blog/           # 文章內容（content.js）
+├── src/assets/projects.*.json # 作品集清單（同步產生，勿手改）
 ├── public/blog-images/        # 文章圖片
-├── scripts/notion-sync/       # 同步腳本
+├── scripts/notion-sync/
+│   ├── index.mjs              # 文章同步腳本
+│   └── projects.mjs           # 作品集清單同步腳本
 ├── .synced-articles.json      # 追蹤由 sync 產生的文章
 └── .github/workflows/
     ├── notion-sync.yml        # 同步 workflow

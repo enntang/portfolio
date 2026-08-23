@@ -7,20 +7,32 @@
 - 路由格式為：`#/project/:slug`（例如 `#/project/mentor`）。
 
 ### 1) 在清單加入專案（列表卡片資料）
-編輯 `src/assets/projects.json`，新增一筆物件（`slug` 必填、唯一）：
 
-```json
-{
-  "title": "My New Project",
-  "slug": "my-new-project",
-  "description": "One-line description",
-  "tags": ["UI/UX", "Graphic Design"],
-  "imageSrc": "/project-cover-my-new.png",
-  "imageAlt": "My New Project cover"
-}
+列表卡片的資料由 Notion 的 **Portfolio Sync** 資料庫管理，**不要直接編輯
+`src/assets/projects.*.json`**，那三個檔案是同步產生的，手改會在下次同步時被覆蓋。
+
+在 Notion 資料庫新增一列，填入：
+
+| 欄位 | 說明 |
+|-----|------|
+| Project | 專案代稱（只給自己看，不會出現在網站上） |
+| Slug | 網址路徑，必填且唯一，決定 `#/project/:slug` |
+| Status | 設為 `Published` 才會出現在網站 |
+| Order | 顯示順序，數字小的排前面 |
+| Cover Path | 封面圖路徑，以 `/` 開頭（檔案放在 `public/`） |
+| Title ZH / EN / JA | 主標題，例如 `Mentor`、`桌上遊戲` |
+| Subtitle ZH / EN / JA | 副標題，例如 `不只是做產品，更是建立團隊`；沒有副標就留空 |
+| Description ZH / EN / JA | 卡片上的一句話描述 |
+| Alt ZH / EN / JA | 封面圖替代文字 |
+
+主標與副標是分開的兩欄，同步時才會依語系接成 `主標：副標`（中日文用全形
+`：`，英文用半形 `: `），所以不需要自己打分隔符號。
+
+填好之後執行同步（見 README 的「Notion 內容同步」）：
+
+```bash
+npm run sync:projects
 ```
-
-- 此資料會顯示在首頁/列表的卡片，也決定卡片點擊導向的 `#/project/my-new-project`。
 
 ### 2) 建立專案資料夾與內容檔
 在 `src/assets/projects/` 底下建立以 `slug` 命名的資料夾，新增 `content.json`：

@@ -21,19 +21,17 @@
     "imageAlt": "ペンギンゲームカバー"
   },
   {
-    "title": "ボードゲーム：騎士道",
+    "title": "騎士道：ボードゲーム",
     "slug": "chivalry",
     "description": "中世の美学を持つイラスト主導のボードゲーム。",
     "imageSrc": "/project-cover-chivalry.png",
-    "imageAlt": "騎士道ボードゲームカバー",
-    "link": "#/project/chivalry"
+    "imageAlt": "騎士道ボードゲームカバー"
   },
   {
     "title": "歴史教科書：若き歴史家の漫遊ガイド",
     "slug": "textbook",
     "description": "地理と時間軸を横断して歴史を見る新しい方法。",
     "imageSrc": "/bg-textbook.png",
-    "imageAlt": "『若き歴史家のための漫遊ガイド』の本文見開き",
-    "link": "#/project/textbook"
+    "imageAlt": "『若き歴史家のための漫遊ガイド』の本文見開き"
   }
 ]

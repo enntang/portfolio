@@ -1,8 +1,17 @@
-name: Sync Notion Articles
+name: Sync Notion Content
 
 on:
-  # 手動觸發
+  # 手動觸發：可以選擇只同步文章或只同步作品集
   workflow_dispatch:
+    inputs:
+      target:
+        description: '要同步的內容'
+        type: choice
+        default: all
+        options:
+          - all
+          - articles
+          - projects
 
   # 定時：每天 UTC 00:00（台灣 08:00）
   schedule:
@@ -11,6 +20,10 @@ on:
 jobs:
   sync:
     runs-on: ubuntu-latest
+    # 拉到 job 層級，這樣下面的步驟才能在 if 條件裡判斷這個 secret 有沒有設定
+    # （secrets context 在 step 的 if 裡讀不到）。
+    env:
+      NOTION_PROJECTS_DATABASE_ID: ${{ secrets.NOTION_PROJECTS_DATABASE_ID }}
 
     steps:
       - name: Checkout
@@ -26,13 +39,27 @@ jobs:
           cd scripts/notion-sync
           npm install
 
-      - name: Sync from Notion
+      - name: Sync articles from Notion
+        # 排程執行時 github.event.inputs 不存在，會被當成空字串，所以預設是全部同步
+        if: github.event.inputs.target == '' || github.event.inputs.target == 'all' || github.event.inputs.target == 'articles'
         env:
           NOTION_API_KEY: ${{ secrets.NOTION_API_KEY }}
           NOTION_DATABASE_ID: ${{ secrets.NOTION_DATABASE_ID }}
         run: |
           cd scripts/notion-sync
           node index.mjs
+
+      # 作品集清單同步。還沒設定 NOTION_PROJECTS_DATABASE_ID 時直接跳過，
+      # 以免影響原本就在運作的文章同步。
+      - name: Sync projects from Notion
+        if: |
+          env.NOTION_PROJECTS_DATABASE_ID != '' &&
+          (github.event.inputs.target == '' || github.event.inputs.target == 'all' || github.event.inputs.target == 'projects')
+        env:
+          NOTION_API_KEY: ${{ secrets.NOTION_API_KEY }}
+        run: |
+          cd scripts/notion-sync
+          node projects.mjs
 
       - name: Check for changes
         id: changes
@@ -49,7 +76,7 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git commit -m "chore: sync articles from Notion"
+          git commit -m "chore: sync content from Notion"
           git pull --rebase origin main || (git rebase --abort && exit 1)
           git push
 

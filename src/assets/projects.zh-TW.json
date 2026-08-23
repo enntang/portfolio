@@ -21,19 +21,17 @@
     "imageAlt": "企鵝遊戲封面"
   },
   {
-    "title": "桌上遊戲：騎士精神",
+    "title": "騎士精神：桌上遊戲",
     "slug": "chivalry",
     "description": "以插畫為主導、中世紀美學的桌遊",
     "imageSrc": "/project-cover-chivalry.png",
-    "imageAlt": "騎士精神桌遊封面",
-    "link": "#/project/chivalry"
+    "imageAlt": "騎士精神桌遊封面"
   },
   {
     "title": "高中歷史課本：給年輕史家的漫遊指南",
     "slug": "textbook",
     "description": "跨越地理位置與時間軸來看歷史的嶄新方法",
     "imageSrc": "/bg-textbook.png",
-    "imageAlt": "給年輕史家的漫遊指南內頁",
-    "link": "#/project/textbook"
+    "imageAlt": "給年輕史家的漫遊指南內頁"
   }
 ]
