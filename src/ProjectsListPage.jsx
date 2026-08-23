@@ -26,7 +26,7 @@ function ProjectBanner({
   mobileSrc,
   title,
   subtitle,
-  kicker, // small label above the title, for titles like "Board Game: Chivalry"
+  kicker, // small category label above the title, e.g. "Board Game" above "Chivalry"
   description,
   align = 'left',
   cta = 'Case Study',
@@ -172,6 +172,8 @@ const projectVisuals = {
   'penguin-territory': {
     imageKey: 'penguin',
     icon: '/projectList-icon-penguin.png',
+    // Subtitle is the medium ("回合制網頁遊戲"), so it reads as a kicker.
+    subtitleAsKicker: true,
     variant: 'light',
     align: 'right',
   },
@@ -183,8 +185,8 @@ const projectVisuals = {
     // The cover is a wide logotype, so it needs more width than the square icons.
     mainImageClass: 'max-w-[280px] max-h-[160px]',
     mainImageClassMobile: 'max-w-[200px] max-h-[112px]',
-    // Title reads "<category>: Chivalry", so the category becomes the kicker.
-    titleLeadsWithCategory: true,
+    // Subtitle is the medium ("Board Game"), so it reads as a kicker.
+    subtitleAsKicker: true,
     variant: 'dark',
     align: 'left',
   },
@@ -205,8 +207,8 @@ const projectVisuals = {
     // Longest kicker+title pair in the list, and the background is a texture rather than
     // composed artwork, so the box can afford to be a little taller than the shipped banners.
     aspectClass: 'aspect-[2168/860] mobile:aspect-[7/10]',
-    // Title reads "<category>: <book>", so the category becomes the kicker.
-    titleLeadsWithCategory: true,
+    // Subtitle is the medium ("History Textbook"), so it reads as a kicker.
+    subtitleAsKicker: true,
     variant: 'light',
     align: 'right',
   },
@@ -228,10 +230,11 @@ function ProjectsList() {
     .map(p => {
       const visuals = projectVisuals[p.slug]
       const { mainTitle, subtitle } = splitProjectTitle(p.title)
-      // Most titles lead with the project name ("Mentor: <tagline>"), so the first
-      // half is the headline. Titles that lead with the category ("Board Game: Chivalry")
-      // demote that half to a kicker so the project name stays the headline.
-      const leadsWithCategory = visuals.titleLeadsWithCategory === true
+      // Notion always stores the project name as the title and the category or tagline as
+      // the subtitle, so the name is always the headline. Subtitles that name a medium
+      // ("Board Game", "回合制網頁遊戲") read better as a small kicker above the name;
+      // tagline-style subtitles ("Not just a product, but a team") stay below it.
+      const subtitleIsCategory = visuals.subtitleAsKicker === true
 
       return {
         href: buildHref(`/project/${p.slug}`),
@@ -243,9 +246,9 @@ function ProjectsList() {
         bgColor: visuals.bgColor,
         bgImage: visuals.bgImage,
         textureSrc: visuals.textureSrc,
-        title: leadsWithCategory && subtitle ? subtitle : mainTitle,
-        subtitle: leadsWithCategory ? '' : subtitle,
-        kicker: leadsWithCategory && subtitle ? mainTitle : '',
+        title: mainTitle,
+        subtitle: subtitleIsCategory ? '' : subtitle,
+        kicker: subtitleIsCategory ? subtitle : '',
         description: p.description,
         align: visuals.align,
         // Every listed project page is live; do not force a "coming soon" state.
