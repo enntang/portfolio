@@ -589,8 +589,15 @@ export default function YoungHistoriansGuidePageZh() {
                   A thematic history textbook that breaks away from traditional
                   chronological narratives.
                 </P>
-                <ScrollHint className="mt-6 text-gray-800" label="往下捲動" />
               </Container>
+            </div>
+            {/* 捲動提示釘在 hero 底部，不進垂直置中的內容流——
+                跟著一起置中的話，主視覺與文案會被它整個往上推。 */}
+            <div
+              className="absolute inset-x-0 bottom-16 z-10 flex justify-center"
+              style={contentStyle}
+            >
+              <ScrollHint className="text-gray-800" label="往下捲動" />
             </div>
           </SectionBlock>
         </header>
