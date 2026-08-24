@@ -1,4 +1,4 @@
-import { StrictMode, useEffect, useState } from 'react'
+import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 import './index.css'
 import Home from './Home.jsx'
@@ -14,42 +14,16 @@ import ProjectPageRouter from './ProjectPageRouter.jsx'
 import LoadingAnimation from './components/utilities/LoadingAnimation.jsx'
 import ErrorBoundary from './components/utilities/ErrorBoundary.jsx'
 import { LanguageProvider } from './contexts/LanguageContext.jsx'
-import { getCurrentLocationPath, parsePath } from './utils/routing'
+import { parsePath } from './utils/routing'
+import { useRouteTransition } from './hooks/useRouteTransition'
 
-function Router() {
-  const [pathname, setPathname] = useState(() => {
-    return getCurrentLocationPath()
-  })
-
-  useEffect(() => {
-    const handlePopState = () => {
-      setPathname(getCurrentLocationPath())
-    }
-    
-    // 監聽瀏覽器前進/後退
-    window.addEventListener('popstate', handlePopState)
-    // 監聽 hash routing（legacy links like #/projects）
-    window.addEventListener('hashchange', handlePopState)
-    
-    // 監聽自定義的導航事件（用於程式化導航）
-    const handleNavigation = () => {
-      setPathname(getCurrentLocationPath())
-    }
-    window.addEventListener('navigate', handleNavigation)
-    
-    return () => {
-      window.removeEventListener('popstate', handlePopState)
-      window.removeEventListener('hashchange', handlePopState)
-      window.removeEventListener('navigate', handleNavigation)
-    }
-  }, [])
-
+function renderRoute(pathname) {
   // 解析路徑，提取語言和實際路徑
   const { path } = parsePath(pathname)
 
   // 根路徑顯示首頁
   if (path === '/') return <Home />
-  
+
   if (path === '/about') return <About />
   if (path === '/resume') return <Resume />
   if (path.startsWith('/resume/')) {
@@ -79,6 +53,18 @@ function Router() {
   }
   if (path === '/404') return <NotFound />
   return <Home />
+}
+
+function Router() {
+  // 換頁動畫由 hook 負責：紙蓋滿畫面的那一刻才換 pathname。
+  const { pathname, sheetRef } = useRouteTransition()
+
+  return (
+    <>
+      {renderRoute(pathname)}
+      <div ref={sheetRef} className="page-sheet" aria-hidden="true" />
+    </>
+  )
 }
 
 createRoot(document.getElementById('root')).render(

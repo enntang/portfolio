@@ -42,6 +42,18 @@
   font-weight: 700;
 }
 
+/* 換頁時從畫面下方升起、蓋住整個視窗再往上離開的紙板（見 useRouteTransition）。
+   起始位置由 GSAP 設定，這裡不放 transform，免得和 yPercent 疊在一起。
+   z-index 要壓過 Navbar 的 z-70，但留在 LoadingAnimation 的 z-9999 之下。 */
+.page-sheet {
+  position: fixed;
+  inset: 0;
+  z-index: 9998;
+  background-color: #2E3854; /* gray-900 */
+  pointer-events: none;
+  will-change: transform;
+}
+
 /* Simple marquee helper */
 .marquee {
   position: relative;

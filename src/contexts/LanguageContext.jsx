@@ -1,5 +1,5 @@
 import { createContext, useContext, useState, useEffect } from 'react'
-import { getCurrentLocationPath, parsePath } from '../utils/routing'
+import { getCurrentLocationPath, parsePath, ROUTE_COMMIT_EVENT } from '../utils/routing'
 
 const LanguageContext = createContext()
 
@@ -48,17 +48,12 @@ export function LanguageProvider({ children }) {
     
     // 初始檢查
     handlePopState()
-    
-    // 監聽瀏覽器前進/後退
-    window.addEventListener('popstate', handlePopState)
-    // 監聽 hash routing（legacy）
-    window.addEventListener('hashchange', handlePopState)
-    // 監聽程式化導航（routing.navigate 會 dispatch 'navigate'）
-    window.addEventListener('navigate', handlePopState)
+
+    // 只聽路由「真的換過去」的那一刻（見 useRouteTransition）：
+    // 直接聽 popstate／navigate 的話，語言會在舊頁面還在退場時就先換掉。
+    window.addEventListener(ROUTE_COMMIT_EVENT, handlePopState)
     return () => {
-      window.removeEventListener('popstate', handlePopState)
-      window.removeEventListener('hashchange', handlePopState)
-      window.removeEventListener('navigate', handlePopState)
+      window.removeEventListener(ROUTE_COMMIT_EVENT, handlePopState)
     }
   }, [language])
 

@@ -165,6 +165,16 @@ export function navigate(path, lang = 'en-US') {
 }
 
 /**
+ * 路由真正切換到新頁面的那一刻（離場動畫播完之後）發出的事件。
+ * 需要跟著網址走的狀態（例如語言）聽這個事件，才會跟畫面同一拍更新。
+ */
+export const ROUTE_COMMIT_EVENT = 'routecommit'
+
+export function emitRouteCommit() {
+  window.dispatchEvent(new Event(ROUTE_COMMIT_EVENT))
+}
+
+/**
  * Get the effective client-side route path.
  * Supports legacy hash routing (#/...) and normal history routing.
  * @returns {string}
