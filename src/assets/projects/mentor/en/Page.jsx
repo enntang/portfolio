@@ -4,6 +4,7 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger'
 
 gsap.registerPlugin(ScrollTrigger)
 import Navbar from '../../../../components/utilities/Navbar'
+import ScrollHint from '../../../../components/utilities/ScrollHint'
 import { useFloatingAnimation } from '../../../../hooks/useFloatingAnimation'
 import Footer from '../../../../components/utilities/Footer'
 import Container from '../../../../components/projects/Container'
@@ -29,7 +30,6 @@ const mentorBackgrounds = {
 import shineImage from '../image/projectInfo-mentor-shine.svg'
 import glintImage from '../image/projectInfo-mentor-glint.svg'
 import mentorImg from '../image/projectInfo-mentor-mentor.png'
-import arrowDown from '../../../../../public/icon-arrow-down.svg'
 import quoteIcon from '../../../../../public/icon-quote.svg'
 import teamChart from '../image/projectInfo-mentor-team-chart.png'
 import priorityTable from '../image/projectInfo-mentor-priority-table.png'
@@ -91,7 +91,6 @@ export default function MentorEnPage() {
     { id: 'point2', x: 38, y: 44, content: 'Each badge has a unique visual identity, displayed in the "Hall of Achievements" interface.', arrowPosition: 'bottom' },
   ]
   const mentorImgRef = useFloatingAnimation({ y: -20, duration: 2 })
-  const arrowDownRef = useFloatingAnimation({ y: -15, duration: 1.8, delay: 0.2 })
   const parentsCircleRef = useRef(null)
   const studentsCircleRef = useRef(null)
 
@@ -155,7 +154,7 @@ export default function MentorEnPage() {
               <P className="w-full md:w-2/3 mb-24">
                 A 0-to-1 AI-integrated learning platform built in one year
               </P>
-              <img ref={arrowDownRef} src={arrowDown} alt="Scroll down" className="mt-16 md:mt-24 w-6 h-6 brightness-0 invert" />
+              <ScrollHint className="mt-6 md:mt-8 text-white" label="Scroll down" />
             </Container>
           </SectionBlock>
         </header>

@@ -5,6 +5,7 @@ import "swiper/css";
 import Navbar from "../../../../components/utilities/Navbar";
 import Footer from "../../../../components/utilities/Footer";
 import Container from "../../../../components/projects/Container";
+import ScrollHint from "../../../../components/utilities/ScrollHint";
 import SectionBlock from "../../../../components/projects/SectionBlock";
 import TwoColumn from "../../../../components/projects/TwoColumn";
 import RelatedProjects from "../../../../components/projects/RelatedProjects";
@@ -588,6 +589,7 @@ export default function YoungHistoriansGuidePageZh() {
                   A thematic history textbook that breaks away from traditional
                   chronological narratives.
                 </P>
+                <ScrollHint className="mt-6 text-gray-800" label="往下捲動" />
               </Container>
             </div>
           </SectionBlock>

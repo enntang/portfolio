@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import Navbar from '../../../../components/utilities/Navbar'
+import ScrollHint from '../../../../components/utilities/ScrollHint'
 import Footer from '../../../../components/utilities/Footer'
 import Container from '../../../../components/projects/Container'
 import SectionBlock from '../../../../components/projects/SectionBlock'
@@ -103,6 +104,7 @@ export default function ChivalryPageEn() {
                   />
                 </div>
                 <H3 className="text-[#DFD6BC]/90">Board Game Design｜Illustration, Visual Design｜2017</H3>
+                <ScrollHint className="mt-6 text-[#DFD6BC]" label="Scroll down" />
               </Container>
             </div>
           </SectionBlock>

@@ -6,6 +6,7 @@ import { Pagination } from 'swiper/modules'
 import 'swiper/css'
 import 'swiper/css/pagination'
 import Navbar from '../../../../components/utilities/Navbar'
+import ScrollHint from '../../../../components/utilities/ScrollHint'
 import { useFloatingAnimation } from '../../../../hooks/useFloatingAnimation'
 import ImageWithHotspots from '../../../../components/utilities/ImageWithHotspots'
 import Footer from '../../../../components/utilities/Footer'
@@ -20,7 +21,6 @@ import LazyImage from '../../../../components/utilities/LazyImage'
 gsap.registerPlugin(ScrollTrigger)
 
 // Import images - you'll need to add these images to the ehairpos folder
-import arrowDown from '../../../../../public/icon-arrow-down.svg'
 import quote from '../../../../../public/icon-quote.svg'
 
 
@@ -71,8 +71,6 @@ import FadeIn from '../../../../components/utilities/FadeIn'
 export default function EHairPOSPageJa() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
 
-  // Use floating animation for arrow down icon
-  const arrowDownRef = useFloatingAnimation({ y: -15, duration: 1.8, delay: 0.2 })
   const iconEhairposRef = useFloatingAnimation({ y: -15, duration: 1.8, delay: 0.2 })
 
   // Hotspot modules (one per screen)
@@ -266,7 +264,7 @@ export default function EHairPOSPageJa() {
               <h1 className='text-large mobile:text-large-mobile text-[#994FDE]'>eHairPOS</h1>
               <H3 className='mb-24 text-gray-900'>サロン管理ツール</H3>
               <P className='w-full md:w-2/3 text-gray-900'>美容サロン向けに設計した総合POSシステム。予約から会計までの流れを一気通貫でつなぎ、現場のオペレーションをスムーズにします。</P>
-              <img ref={arrowDownRef} src={arrowDown} alt="Arrow Down" className="mt-16 md:mt-24 w-6 h-6" />
+              <ScrollHint className="mt-6 md:mt-8 text-gray-900" label="下にスクロール" />
               <img src={decoIcons1} alt="decoIcons1" className='absolute top-4 md:top-0 right-0 w-32 md:w-60 ' />
               <img src={decoIcons2} alt="decoIcons2" className='absolute top-16 md:top-[10vh] left-0 w-24 md:w-32 ' />
 

@@ -7,6 +7,7 @@ import 'swiper/css'
 import 'swiper/css/pagination'
 import 'swiper/css/navigation'
 import Navbar from '../../../../components/utilities/Navbar'
+import ScrollHint from '../../../../components/utilities/ScrollHint'
 import { useFloatingAnimation } from '../../../../hooks/useFloatingAnimation'
 import ImageWithHotspots from '../../../../components/utilities/ImageWithHotspots'
 import Footer from '../../../../components/utilities/Footer'
@@ -37,7 +38,6 @@ import glintImage from '../image/projectInfo-mentor-glint.svg'
 
 import tabletMockup from '../image/projectInfo-mentor-tablet-mockup.png'
 import mentor from '../image/projectInfo-mentor-mentor.png'
-import arrowDown from '../../../../../public/icon-arrow-down.svg'
 import quoteIcon from '../../../../../public/icon-quote.svg'
 import phases from '../image/projectInfo-mentor-phase.png'
 import chartImg from '../image/projectInfo-mentor-chart.png'
@@ -71,8 +71,6 @@ export default function MentorPageZh() {
 
   // Use floating animation hook for mentor image
   const mentorImgRef = useFloatingAnimation({ y: -20, duration: 2 })
-  // Use floating animation for arrow down icon
-  const arrowDownRef = useFloatingAnimation({ y: -15, duration: 1.8, delay: 0.2 })
 
   // Define hotspots
   const learningPersonaHotspots = [
@@ -229,7 +227,7 @@ export default function MentorPageZh() {
               <P className="w-full md:w-2/3">
                 設計 Mentor 不只是打造畫面與流程，更是打造一個團隊、一個故事，以及一份對學習的共同信念。
               </P>
-              <img ref={arrowDownRef} src={arrowDown} alt="Arrow Down" className="mt-16 md:mt-24 w-6 h-6 brightness-0 invert" />
+              <ScrollHint className="mt-6 md:mt-8 text-white" label="往下捲動" />
             </Container>
           </SectionBlock>
         </header>

@@ -2,8 +2,8 @@ import { useState, useEffect, useRef } from 'react'
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import Navbar from '../../../../components/utilities/Navbar'
+import ScrollHint from '../../../../components/utilities/ScrollHint'
 import Footer from '../../../../components/utilities/Footer'
-import { useFloatingAnimation } from '../../../../hooks/useFloatingAnimation'
 import Container from '../../../../components/projects/Container'
 import SectionBlock from '../../../../components/projects/SectionBlock'
 import TwoColumn from '../../../../components/projects/TwoColumn'
@@ -22,7 +22,6 @@ import UL from '../../../../components/post/UL'
 import LI from '../../../../components/post/LI'
 import FadeIn from '../../../../components/utilities/FadeIn'
 
-import arrowDown from '../../../../../public/icon-arrow-down.svg'
 import iconLink from '../../../../../public/icon-link.svg'
 import bgPenguin from '../../../../../public/bg-penguin.png'
 
@@ -64,7 +63,6 @@ const penguinBackgrounds = {
 
 export default function PenguinTerritoryPageZh() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
-  const arrowDownRef = useFloatingAnimation({ y: -15, duration: 1.8, delay: 0.2 })
   const penguin1Ref = useRef(null)
   const penguin3Ref = useRef(null)
 
@@ -234,12 +232,7 @@ export default function PenguinTerritoryPageZh() {
               <h1 className="mt-10  text-large mobile:text-large-mobile">企鵝搶地</h1>
               <H3 className="mb-16">回合制策略網頁遊戲｜UI/UX、插畫、視覺設計</H3>
 
-              <img
-                ref={arrowDownRef}
-                src={arrowDown}
-                alt="往下捲動"
-                className="w-6 h-6 rounded-lg"
-              />
+              <ScrollHint className="text-gray-900" label="往下捲動" />
             </Container>
           </SectionBlock>
         </header>

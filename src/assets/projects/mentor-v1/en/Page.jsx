@@ -7,6 +7,7 @@ import 'swiper/css'
 import 'swiper/css/pagination'
 import 'swiper/css/navigation'
 import Navbar from '../../../../components/utilities/Navbar'
+import ScrollHint from '../../../../components/utilities/ScrollHint'
 import { useFloatingAnimation } from '../../../../hooks/useFloatingAnimation'
 import ImageWithHotspots from '../../../../components/utilities/ImageWithHotspots'
 import Footer from '../../../../components/utilities/Footer'
@@ -36,7 +37,6 @@ import glintImage from '../image/projectInfo-mentor-glint.svg'
 
 import tabletMockup from '../image/projectInfo-mentor-tablet-mockup.png'
 import mentor from '../image/projectInfo-mentor-mentor.png'
-import arrowDown from '../../../../../public/icon-arrow-down.svg'
 import quoteIcon from '../../../../../public/icon-quote.svg'
 import phases from '../image/projectInfo-mentor-phase.png'
 import chartImg from '../image/projectInfo-mentor-chart.png'
@@ -71,8 +71,6 @@ export default function MentorPage() {
 
   // Use floating animation hook for mentor image
   const mentorImgRef = useFloatingAnimation({ y: -20, duration: 2 })
-  // Use floating animation for arrow down icon
-  const arrowDownRef = useFloatingAnimation({ y: -15, duration: 1.8, delay: 0.2 })
 
   // Define hotspots
   const learningPersonaHotspots = [
@@ -224,7 +222,7 @@ export default function MentorPage() {
               <h1 className='text-large mobile:text-large-mobile'>Mentor</h1>
               <H3 className='mb-24'>AI-integrated learning platform</H3>
               <P className='w-full md:w-2/3'>Designing Mentor was more than just shaping screens—it was about shaping a team, a story, and a shared belief in learning.</P>
-              <img ref={arrowDownRef} src={arrowDown} alt="Arrow Down" className="mt-16 md:mt-24 w-6 h-6 brightness-0 invert" />
+              <ScrollHint className="mt-6 md:mt-8 text-white" label="Scroll down" />
             </Container>
           </SectionBlock>
         </header>

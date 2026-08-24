@@ -42,6 +42,61 @@
   font-weight: 700;
 }
 
+/* 專案頁 hero 的捲動提示（見 components/utilities/ScrollHint.jsx）。
+   細線、外框、滾輪都用 currentColor，顏色由外層的 text-* 決定。 */
+.scroll-hint {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 40px;
+  opacity: 0.75;
+}
+
+.scroll-hint__line {
+  width: 1px;
+  height: 70px;
+  background-color: currentColor;
+}
+
+.scroll-hint__mouse {
+  box-sizing: border-box;
+  display: flex;
+  justify-content: center;
+  width: 24px;
+  height: 38px;
+  padding-top: 7px;
+  border: 2px solid currentColor;
+  border-radius: 999px;
+}
+
+.scroll-hint__wheel {
+  width: 3px;
+  height: 7px;
+  border-radius: 2px;
+  background-color: currentColor;
+  animation: scroll-hint-wheel 2.2s cubic-bezier(0.15, 0.41, 0.69, 0.94) infinite;
+}
+
+@keyframes scroll-hint-wheel {
+  0% {
+    opacity: 0;
+  }
+  10% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(14px);
+    opacity: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .scroll-hint__wheel {
+    animation: none;
+  }
+}
+
 /* 換頁時從畫面下方升起、蓋住整個視窗再往上離開的紙板（見 useRouteTransition）。
    起始位置由 GSAP 設定，這裡不放 transform，免得和 yPercent 疊在一起。
    z-index 要壓過 Navbar 的 z-70，但留在 LoadingAnimation 的 z-9999 之下。 */
