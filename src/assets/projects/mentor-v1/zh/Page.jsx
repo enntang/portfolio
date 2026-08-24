@@ -1170,7 +1170,7 @@ export default function MentorPageZh() {
             <p className="text-caption text-gray-300">2019/05 - 2024/06</p>
           </Container>
 
-          <RelatedProjects />
+          <RelatedProjects currentSlug="mentor-v1" />
 
           <hr className="w-full my-8 border-gray-800" />
           <Footer />

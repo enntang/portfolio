@@ -1005,7 +1005,7 @@ export default function YoungHistoriansGuidePageZh() {
             </Container>
           </FadeIn>
 
-          <RelatedProjects />
+          <RelatedProjects currentSlug="textbook" />
 
           <hr className="w-full my-8 border-black/10" />
           <Footer />

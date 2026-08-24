@@ -10,10 +10,14 @@ function RelatedProjects({ currentSlug, count = 3, invert = false }) {
   const { t } = useTranslation()
   const allProjects = getProjectsByLanguage(language)
 
-  // Filter out current project and get random related projects
-  const relatedProjects = allProjects
-    .filter((project) => project.slug !== currentSlug)
-    .slice(0, count)
+  // 從目前這個專案的下一個開始輪、繞一圈回來。固定取名單前幾筆的話，
+  // 排在後面的專案（例如 textbook）在任何一頁都不會被帶到。
+  const currentIndex = allProjects.findIndex((project) => project.slug === currentSlug)
+  const otherProjects = allProjects.filter((project) => project.slug !== currentSlug)
+  const relatedProjects = (currentIndex === -1
+    ? otherProjects
+    : [...otherProjects.slice(currentIndex), ...otherProjects.slice(0, currentIndex)]
+  ).slice(0, count)
 
   if (relatedProjects.length === 0) return null
 

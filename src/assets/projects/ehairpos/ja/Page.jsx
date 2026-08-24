@@ -944,7 +944,7 @@ export default function EHairPOSPageJa() {
           </Container>
         </FadeIn>
 
-          <RelatedProjects />
+          <RelatedProjects currentSlug="ehairpos" />
 
           <hr className='w-full my-8 border-white' />
           <Footer />

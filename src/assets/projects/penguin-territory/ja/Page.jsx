@@ -556,7 +556,7 @@ export default function PenguinTerritoryPageJa() {
           </Container>
         </FadeIn>
 
-          <RelatedProjects />
+          <RelatedProjects currentSlug="penguin-territory" />
 
           <hr className="w-full my-8 border-white/20" />
           <Footer />

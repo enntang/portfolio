@@ -371,7 +371,7 @@ export default function ChivalryPageJa() {
         </FadeIn>
         </SectionBlock>
 
-        <RelatedProjects invert />
+        <RelatedProjects currentSlug="chivalry" invert />
 
         <div className="pt-6 pb-12" style={sectionStyle}>
           <Footer className="text-white/60" />

@@ -1051,7 +1051,7 @@ export default function MentorPage() {
             <p className='text-caption text-gray-300'>May 2019 - June 2024</p>
           </Container>
 
-          <RelatedProjects />
+          <RelatedProjects currentSlug="mentor-v1" />
 
           <hr className='w-full my-8 border-gray-800' />
           <Footer />
