@@ -578,7 +578,7 @@ export default function YoungHistoriansGuidePageZh() {
                   src={keyVision}
                   alt=""
                   aria-hidden="true"
-                  className="w-full max-w-[240px] md:max-w-[264px] h-auto md:mb-4"
+                  className="w-full max-w-[400px] h-auto md:mb-4"
                   loading="eager"
                 />
 
