@@ -3,7 +3,7 @@
     "title": "Mentor: AI-integrated Learning Platform",
     "slug": "mentor",
     "description": "A 0-to-1 AI-integrated learning platform built in one year",
-    "imageSrc": "/project-cover-mentor.png",
+    "imageSrc": "/project-covers/mentor.webp",
     "imageAlt": "Mentor platform cover",
     "tags": [
       "UI/UX"
@@ -13,7 +13,7 @@
     "title": "eHairPOS: Salon Management Tool",
     "slug": "ehairpos",
     "description": "A POS system tailored for hair salons with streamlined workflows.",
-    "imageSrc": "/project-cover-ehairpos.png",
+    "imageSrc": "/project-covers/ehairpos.webp",
     "imageAlt": "eHairPOS cover",
     "tags": [
       "UI/UX"
@@ -23,7 +23,7 @@
     "title": "Penguin Territory: Turn-Based Web Game",
     "slug": "penguin-territory",
     "description": "An illustrated UI design for a turn-based strategy game.",
-    "imageSrc": "/project-cover-penguin.png",
+    "imageSrc": "/project-covers/penguin-territory.webp",
     "imageAlt": "Penguin game cover",
     "tags": [
       "Illustration",
@@ -35,7 +35,7 @@
     "title": "Chivalry: Board Game",
     "slug": "chivalry",
     "description": "Illustration-led board game with a medieval aesthetic.",
-    "imageSrc": "/project-cover-chivalry.png",
+    "imageSrc": "/project-covers/chivalry.webp",
     "imageAlt": "Chivalry board game cover",
     "tags": [
       "Illustration",
@@ -47,7 +47,7 @@
     "title": "Young Historians' Guide: History Textbook",
     "slug": "textbook",
     "description": "A history textbook organised by theme, not chronology.",
-    "imageSrc": "/project-cover-textbook.png",
+    "imageSrc": "/project-covers/textbook.webp",
     "imageAlt": "Interior spread of A Traveler's Guide for Young Historians",
     "tags": [
       "Graphic Design",

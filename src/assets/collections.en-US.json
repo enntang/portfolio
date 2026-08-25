@@ -3,19 +3,24 @@
     "title": "Year of the Tiger: EasyCard Illustration",
     "slug": "year-of-the-tiger",
     "description": "An illustrated commemorative EasyCard welcoming the Year of the Tiger through cats — artwork and layout.",
-    "imageSrc": "",
+    "imageSrc": "/project-covers/year-of-the-tiger.webp",
     "imageAlt": "Year of the Tiger commemorative EasyCard illustration",
     "tags": [
       "Graphic Design",
       "Illustration"
     ],
-    "images": []
+    "images": [
+      "/collection-gallery/year-of-the-tiger/1.webp",
+      "/collection-gallery/year-of-the-tiger/2.webp",
+      "/collection-gallery/year-of-the-tiger/3.webp",
+      "/collection-gallery/year-of-the-tiger/5.webp"
+    ]
   },
   {
     "title": "Membership E-commerce Website",
     "slug": "online-shopping-website",
     "description": "A corporate site selling hair-care products and offering training courses. Green tones and natural elements carry the brand's commitment to natural ingredients.\nProduct purchase and course registration were merged into one seamless flow.\nI defined the information architecture and the full user journey, took it from wireframes to a polished prototype, implemented the responsive front end, and iterated on user feedback.",
-    "imageSrc": "/collection-gallery/online-shopping-website/1.webp",
+    "imageSrc": "/project-covers/online-shopping-website.webp",
     "imageAlt": "Homepage of the membership e-commerce website",
     "tags": [
       "UI/UX",
@@ -30,7 +35,7 @@
     "title": "The Place You Are Not",
     "slug": "you-are-not-here",
     "description": "",
-    "imageSrc": "/collection-gallery/you-are-not-here/1.webp",
+    "imageSrc": "/project-covers/you-are-not-here.webp",
     "imageAlt": "Book cover illustration for The Place You Are Not",
     "tags": [
       "Illustration",
@@ -40,6 +45,59 @@
       "/collection-gallery/you-are-not-here/1.webp",
       "/collection-gallery/you-are-not-here/2.webp",
       "/collection-gallery/you-are-not-here/3.webp"
+    ]
+  },
+  {
+    "title": "Mountain City, Seaside Town",
+    "slug": "mountain-city-seaside-town",
+    "description": "Anping and Jiufen are two of Taiwan's best-known destinations. Both are steeped in history, yet one is defined by the sea and the other by the mountains.\n\"Mountain City\" and \"Seaside Town\" name that contrast, and open a series of landmark illustrations.",
+    "imageSrc": "/project-covers/mountain-city-seaside-town.webp",
+    "imageAlt": "Illustrations from the Mountain City, Seaside Town series",
+    "tags": [
+      "Illustration"
+    ],
+    "images": [
+      "/collection-gallery/mountain-city-seaside-town/1.webp",
+      "/collection-gallery/mountain-city-seaside-town/2.webp",
+      "/collection-gallery/mountain-city-seaside-town/3.webp",
+      "/collection-gallery/mountain-city-seaside-town/4.webp",
+      "/collection-gallery/mountain-city-seaside-town/5.webp",
+      "/collection-gallery/mountain-city-seaside-town/6.webp",
+      "/collection-gallery/mountain-city-seaside-town/7.webp",
+      "/collection-gallery/mountain-city-seaside-town/8.webp",
+      "/collection-gallery/mountain-city-seaside-town/9.webp",
+      "/collection-gallery/mountain-city-seaside-town/10.webp",
+      "/collection-gallery/mountain-city-seaside-town/11.webp",
+      "/collection-gallery/mountain-city-seaside-town/12.webp"
+    ]
+  },
+  {
+    "title": "A Corner of Tainan",
+    "slug": "a-corner-of-tainan",
+    "description": "",
+    "imageSrc": "/project-covers/a-corner-of-tainan.webp",
+    "imageAlt": "A Corner of Tainan illustration",
+    "tags": [
+      "Illustration"
+    ],
+    "images": [
+      "/collection-gallery/a-corner-of-tainan/1.webp"
+    ]
+  },
+  {
+    "title": "Mountain Collection",
+    "slug": "mountain-collection",
+    "description": "",
+    "imageSrc": "/project-covers/mountain-collection.webp",
+    "imageAlt": "Mountain Collection illustration",
+    "tags": [
+      "Illustration"
+    ],
+    "images": [
+      "/collection-gallery/mountain-collection/1.webp",
+      "/collection-gallery/mountain-collection/2.webp",
+      "/collection-gallery/mountain-collection/3.webp",
+      "/collection-gallery/mountain-collection/4.webp"
     ]
   }
 ]

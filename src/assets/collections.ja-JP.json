@@ -3,19 +3,24 @@
     "title": "寅年おめでとう：悠遊カードのイラスト",
     "slug": "year-of-the-tiger",
     "description": "猫の姿で寅年の到来を祝う、記念版・悠遊カードのイラストとレイアウト。",
-    "imageSrc": "",
+    "imageSrc": "/project-covers/year-of-the-tiger.webp",
     "imageAlt": "寅年記念の悠遊カードのイラスト",
     "tags": [
       "Graphic Design",
       "Illustration"
     ],
-    "images": []
+    "images": [
+      "/collection-gallery/year-of-the-tiger/1.webp",
+      "/collection-gallery/year-of-the-tiger/2.webp",
+      "/collection-gallery/year-of-the-tiger/3.webp",
+      "/collection-gallery/year-of-the-tiger/5.webp"
+    ]
   },
   {
     "title": "会員制ECサイトデザイン",
     "slug": "online-shopping-website",
     "description": "ヘアケア用品の販売と美容トレーニングを提供する企業サイト。グリーンを基調とした配色と自然のモチーフで、天然素材へのこだわりを表現しました。\n商品の購入と講座の申し込みを、ひとつのシームレスな体験へ統合。\n情報設計とユーザージャーニーの定義から、ワイヤーフレーム・プロトタイプ制作、レスポンシブ実装、フィードバックに基づく改善までを担当。",
-    "imageSrc": "/collection-gallery/online-shopping-website/1.webp",
+    "imageSrc": "/project-covers/online-shopping-website.webp",
     "imageAlt": "会員制ECサイトのトップページ",
     "tags": [
       "UI/UX",
@@ -30,7 +35,7 @@
     "title": "あなたのいない場所",
     "slug": "you-are-not-here",
     "description": "",
-    "imageSrc": "/collection-gallery/you-are-not-here/1.webp",
+    "imageSrc": "/project-covers/you-are-not-here.webp",
     "imageAlt": "『あなたのいない場所』の装丁イラスト",
     "tags": [
       "Illustration",
@@ -40,6 +45,59 @@
       "/collection-gallery/you-are-not-here/1.webp",
       "/collection-gallery/you-are-not-here/2.webp",
       "/collection-gallery/you-are-not-here/3.webp"
+    ]
+  },
+  {
+    "title": "山の街、海の町",
+    "slug": "mountain-city-seaside-town",
+    "description": "安平と九份は台湾を代表する観光地。長い歴史という共通点を持ちながら、片や山、片や海が第一印象を決める。\n「山の街」「海の町」を題に、ランドマークのイラストシリーズが始まった。",
+    "imageSrc": "/project-covers/mountain-city-seaside-town.webp",
+    "imageAlt": "「山の街、海の町」シリーズのイラスト",
+    "tags": [
+      "Illustration"
+    ],
+    "images": [
+      "/collection-gallery/mountain-city-seaside-town/1.webp",
+      "/collection-gallery/mountain-city-seaside-town/2.webp",
+      "/collection-gallery/mountain-city-seaside-town/3.webp",
+      "/collection-gallery/mountain-city-seaside-town/4.webp",
+      "/collection-gallery/mountain-city-seaside-town/5.webp",
+      "/collection-gallery/mountain-city-seaside-town/6.webp",
+      "/collection-gallery/mountain-city-seaside-town/7.webp",
+      "/collection-gallery/mountain-city-seaside-town/8.webp",
+      "/collection-gallery/mountain-city-seaside-town/9.webp",
+      "/collection-gallery/mountain-city-seaside-town/10.webp",
+      "/collection-gallery/mountain-city-seaside-town/11.webp",
+      "/collection-gallery/mountain-city-seaside-town/12.webp"
+    ]
+  },
+  {
+    "title": "台南の片隅",
+    "slug": "a-corner-of-tainan",
+    "description": "",
+    "imageSrc": "/project-covers/a-corner-of-tainan.webp",
+    "imageAlt": "「台南の片隅」のイラスト",
+    "tags": [
+      "Illustration"
+    ],
+    "images": [
+      "/collection-gallery/a-corner-of-tainan/1.webp"
+    ]
+  },
+  {
+    "title": "山のコレクション",
+    "slug": "mountain-collection",
+    "description": "",
+    "imageSrc": "/project-covers/mountain-collection.webp",
+    "imageAlt": "山のコレクションのイラスト",
+    "tags": [
+      "Illustration"
+    ],
+    "images": [
+      "/collection-gallery/mountain-collection/1.webp",
+      "/collection-gallery/mountain-collection/2.webp",
+      "/collection-gallery/mountain-collection/3.webp",
+      "/collection-gallery/mountain-collection/4.webp"
     ]
   }
 ]
