@@ -146,7 +146,23 @@ npm run sync:projects
 `src/CollectionPage.jsx` 統一渲染，不必為每件作品寫 JSX。頁面內容沒有圖片時會退回
 用 Cover 那一張；兩者都沒有就只顯示文字。
 
-網址帶 `?view=collection` 會直接開在 Collection 區（切換時也會同步更新網址）。
+### 分享篩選好的網址
+
+作品列表頁的分頁和標籤篩選都會寫進網址，所以每一種篩選都有自己的連結，可以直接分享：
+
+| 網址 | 開起來會是 |
+|---|---|
+| `/portfolio` | Case Study，全部 |
+| `/portfolio?tag=ui-ux` | Case Study，只看 UI/UX |
+| `/portfolio?view=collection` | Collection，全部 |
+| `/portfolio?view=collection&tag=web-design` | Collection，只看網頁設計 |
+| `/tw/portfolio?view=collection&tag=illustration` | 中文版的同一個畫面（`/ja/` 則是日文版） |
+
+`tag` 用的是標籤的小寫連字號形式（`UI/UX` → `ui-ux`、`Graphic Design` → `graphic-design`）。
+直接寫標籤原字（`?tag=Graphic%20Design`）也讀得懂，舊連結不會壞。網址上的標籤如果
+不屬於當前分頁，就當成沒有篩選顯示全部，不會出現空清單。
+
+Collection 作品頁上的標籤也是連到這種網址，點下去就會回到列表並套用該標籤。
 
 ### 延伸
 需要新的版型（如圖庫、表格、三欄排版等），可提出需求，我們可以擴充 `sections` 類型並更新渲染器。

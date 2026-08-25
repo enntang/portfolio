@@ -8,7 +8,7 @@ import { getPublicPath } from './utils/path'
 import { useLanguage } from './contexts/LanguageContext'
 import { useTranslation } from './hooks/useTranslation'
 import { getCollectionsByLanguage } from './utils/collectionsLoader'
-import { getTagLabel } from './utils/tags'
+import { getTagLabel, tagToSlug } from './utils/tags'
 import { buildPath } from './utils/routing'
 
 // 圖片牆是「一直緩緩往左流」，不是每隔幾秒跳一張：autoplay 的 delay 設 0，
@@ -91,7 +91,7 @@ function CollectionPage({ slug }) {
                 {item.tags.map(tag => (
                   <li key={tag}>
                     <a
-                      href={`${buildPath('/projects', language)}?view=collection&tag=${encodeURIComponent(tag)}`}
+                      href={`${buildPath('/projects', language)}?view=collection&tag=${tagToSlug(tag)}`}
                       className='inline-block rounded-full border border-gray-300 px-3 py-1 text-caption text-gray-600 transition-colors hover:border-gray-900 hover:text-gray-900 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gray-900 focus-visible:ring-offset-2 focus-visible:ring-offset-bg'
                     >
                       {getTagLabel(t, tag)}

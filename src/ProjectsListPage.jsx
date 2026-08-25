@@ -12,7 +12,7 @@ import CollectionCard from './components/projects/CollectionCard'
 import ProjectViewToggle, { CASE_STUDY_VIEW, COLLECTION_VIEW } from './components/projects/ProjectViewToggle'
 import ProjectTagFilter from './components/projects/ProjectTagFilter'
 import ListLoading from './components/projects/ListLoading'
-import { collectTags, filterByTag } from './utils/tags'
+import { collectTags, filterByTag, resolveTag, tagToSlug } from './utils/tags'
 
 // Chivalry has no dedicated banner artwork; mirror its case study's palette instead.
 import chivalryCover from './assets/projects/chivalry/image/chivalry-cover-transparent.png'
@@ -223,8 +223,8 @@ const projectVisuals = {
 // 換標籤時假裝在載入的時間。純粹是為了讓篩選有「真的在篩」的手感，不是真的在等資料。
 const FILTER_DELAY_MS = 500
 
-// 目前看的是哪一區塊、篩到哪個標籤都會寫進網址（?view=collection&tag=Web+Design），
-// 重新整理或分享連結才不會跳回預設，作品頁上的標籤也才連得回這裡。
+// 目前看的是哪一區塊、篩到哪個標籤都會寫進網址（?view=collection&tag=web-design），
+// 所以每一種篩選都有自己的網址，可以直接分享；重新整理或分享連結都會停在同一個篩選。
 const VIEW_PARAM = 'view'
 const TAG_PARAM = 'tag'
 
@@ -246,7 +246,7 @@ function writeStateToUrl(view, tag) {
   if (view === COLLECTION_VIEW) url.searchParams.set(VIEW_PARAM, COLLECTION_VIEW)
   else url.searchParams.delete(VIEW_PARAM)
 
-  if (tag) url.searchParams.set(TAG_PARAM, tag)
+  if (tag) url.searchParams.set(TAG_PARAM, tagToSlug(tag))
   else url.searchParams.delete(TAG_PARAM)
 
   // 換的是同一頁的檢視，不是換頁，所以用 replaceState 不留下一筆上一頁。
@@ -270,7 +270,7 @@ function ProjectsList() {
   const totalCount = isCollectionView ? allCollections.length : projectsData.length
   // 網址上的 tag 有可能是這個分頁沒有的（手改網址、或作品的標籤後來被拿掉），
   // 這時就當成沒有篩選，而不是顯示一個空清單。
-  const activeTag = availableTags.includes(selectedTag) ? selectedTag : ''
+  const activeTag = resolveTag(selectedTag, availableTags)
 
   const collections = filterByTag(allCollections, activeTag)
 

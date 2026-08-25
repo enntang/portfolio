@@ -20,3 +20,20 @@ export function filterByTag(items, selectedTag) {
   if (!selectedTag) return items
   return items.filter(item => (item.tags || []).includes(selectedTag))
 }
+
+// 標籤在網址上的樣子：'UI/UX' → 'ui-ux'、'Web Design' → 'web-design'。
+// 直接把 Notion 的原字塞進網址會變成 UI%2FUX 這種東西，分享出去不好看也不好讀。
+export function tagToSlug(tag) {
+  return (tag || '')
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, '-')
+    .replace(/^-+|-+$/g, '')
+}
+
+// 把網址上的值對回實際的標籤。傳進來的可以是 slug（分享連結）或標籤原字
+// （站內點選、或早期的舊連結），對不上就回空字串，當成沒有篩選。
+export function resolveTag(value, tags) {
+  if (!value) return ''
+  const slug = tagToSlug(value)
+  return tags.find(tag => tagToSlug(tag) === slug) || ''
+}
