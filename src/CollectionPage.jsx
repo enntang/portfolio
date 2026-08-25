@@ -102,9 +102,9 @@ function CollectionPage({ slug }) {
             )}
           </div>
 
-          {/* 右欄：橫向圖片牆 */}
+          {/* 右欄：橫向圖片牆。右下留邊，才不會貼到瀏覽器邊緣。 */}
           {hasImages && (
-          <div className='flex-1 min-w-0 h-full mobile:h-auto relative mobile:pl-6'>
+          <div className='flex-1 min-w-0 h-full mobile:h-auto relative pr-6 pb-6 mobile:px-6 mobile:pb-0'>
             <Swiper
               modules={[Autoplay, FreeMode]}
               slidesPerView='auto'
@@ -112,9 +112,13 @@ function CollectionPage({ slug }) {
               loop={canLoop}
               speed={canLoop ? MARQUEE_MS_PER_SLIDE : 0}
               freeMode={canLoop ? { enabled: true, momentum: false } : false}
-              // disableOnInteraction：手動拖曳之後同樣停在定點，不再自己流動。
-              // 也不加 pauseOnMouseEnter，只是滑過去不算「操作」。
-              autoplay={canLoop ? { delay: 0, disableOnInteraction: true } : false}
+              // disableOnInteraction 一定要是 false：Swiper 的 autoplay 在
+              // beforeTransitionStart 時，只要那次 transition 不是 autoplay 自己發動的
+              // （例如圖片載入完的 update、loopFix），就會直接 stop() 整個 autoplay，
+              // 結果就是「一進頁面圖就不動了」。停止改由下面自己控制。
+              autoplay={canLoop ? { delay: 0, disableOnInteraction: false } : false}
+              // 真的開始拖曳才算手動操作，這時就停在定點不再自己流動
+              onSliderFirstMove={swiper => swiper.autoplay?.stop()}
               onSwiper={swiper => { swiperRef.current = swiper }}
               // 容器本身圓角（Swiper 的 overflow 是 hidden），圖片被裁掉的那一側就不會是硬邊
               className='collection-marquee w-full h-full mobile:h-auto rounded-2xl'
