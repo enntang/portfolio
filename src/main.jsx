@@ -11,6 +11,7 @@ import { resumeDataEdtech } from './assets/resume/resumeDataEdtech.js'
 import { resumeDataHahow } from './assets/resume/resumeDataHahow.js'
 import NotFound from './NotFound.jsx'
 import ProjectPageRouter from './ProjectPageRouter.jsx'
+import CollectionPage from './CollectionPage.jsx'
 import LoadingAnimation from './components/utilities/LoadingAnimation.jsx'
 import ErrorBoundary from './components/utilities/ErrorBoundary.jsx'
 import { LanguageProvider } from './contexts/LanguageContext.jsx'
@@ -42,6 +43,12 @@ function renderRoute(pathname) {
     return <BlogPost slug={slug} />
   }
   if (path === '/projects') return <ProjectsList />
+  // Collection 作品頁：/collection/:slug（Collection 沒有手寫內頁，版型是共用的）
+  if (path.startsWith('/collection/')) {
+    const slug = decodeURIComponent(path.slice('/collection/'.length).split('/')[0])
+    if (!slug) return <NotFound />
+    return <CollectionPage slug={slug} />
+  }
   // Dynamic project detail route: /project/:slug
   if (path.startsWith('/project/')) {
     const slugPart = path.slice('/project/'.length)

@@ -119,7 +119,25 @@
     "description": "我從 2016 年開始設計，結合清晰的結構與視覺敘事，創造既直覺又富有表現力的作品。合作夥伴形容我的方法專業、深思熟慮且細緻。",
     "caseStudy": "個案研究",
     "comingSoon": "即將推出",
-    "related": "相關專案"
+    "related": "相關專案",
+    "tabs": {
+      "caseStudy": "Case Study",
+      "collection": "Collection",
+      "switchLabel": "切換個案研究與作品集"
+    },
+    "collectionEmpty": "這裡還沒有作品，視覺作品陸續整理中。",
+    "noMatch": "目前沒有符合這些標籤的作品。",
+    "prevImage": "上一張",
+    "nextImage": "下一張",
+    "allTags": "全部",
+    "tagLabels": {
+      "UI/UX": "UI/UX",
+      "Illustration": "插畫",
+      "Graphic Design": "平面設計",
+      "Web Design": "網頁設計",
+      "Game Design": "遊戲設計",
+      "Branding": "品牌識別"
+    }
   },
   "blog": {
     "title": "部落格",

@@ -109,6 +109,13 @@
   will-change: transform;
 }
 
+/* Collection 作品頁的圖片牆（見 CollectionPage.jsx）。
+   Swiper 預設的 ease 會讓每一輪的頭尾變慢，看起來就是「停一下再滑」；
+   改成 linear 才是等速流動。 */
+.collection-marquee .swiper-wrapper {
+  transition-timing-function: linear;
+}
+
 /* Simple marquee helper */
 .marquee {
   position: relative;

@@ -1,65 +1,57 @@
 [
   {
-    "title": "Mentor：AI-integrated Learning Platform",
+    "title": "Mentor：AI統合学習プラットフォーム",
     "slug": "mentor",
     "description": "1年間でゼロからAI統合学習プラットフォームを構築した記録",
-    "imageSrc": "",
-    "imageAlt": "Mentorプラットフォームカバー"
+    "imageSrc": "/project-cover-mentor.png",
+    "imageAlt": "Mentorプラットフォームカバー",
+    "tags": [
+      "UI/UX"
+    ]
   },
   {
     "title": "eHairPOS：サロン管理ツール",
     "slug": "ehairpos",
     "description": "美容院向けに調整された合理化されたワークフローを持つPOSシステム。",
-    "imageSrc": "",
-    "imageAlt": "eHairPOSカバー"
+    "imageSrc": "/project-cover-ehairpos.png",
+    "imageAlt": "eHairPOSカバー",
+    "tags": [
+      "UI/UX"
+    ]
   },
   {
     "title": "ペンギンテリトリー：ターン制ウェブゲーム",
     "slug": "penguin-territory",
     "description": "カジュアル戦略ウェブゲームのフレンドリーなアートディレクション。",
-    "imageSrc": "",
-    "imageAlt": "ペンギンゲームカバー"
+    "imageSrc": "/project-cover-penguin.png",
+    "imageAlt": "ペンギンゲームカバー",
+    "tags": [
+      "Illustration",
+      "UI/UX",
+      "Game Design"
+    ]
   },
   {
     "title": "騎士道：ボードゲーム",
     "slug": "chivalry",
     "description": "中世の美学を持つイラスト主導のボードゲーム。",
-    "imageSrc": "",
-    "imageAlt": "騎士道ボードゲームカバー"
+    "imageSrc": "/project-cover-chivalry.png",
+    "imageAlt": "騎士道ボードゲームカバー",
+    "tags": [
+      "Illustration",
+      "Graphic Design",
+      "Game Design"
+    ]
   },
   {
     "title": "若き歴史家の漫遊ガイド：歴史教科書",
     "slug": "textbook",
     "description": "地理と時間軸を横断して歴史を見る新しい方法。",
-    "imageSrc": "",
-    "imageAlt": "『若き歴史家のための漫遊ガイド』の本文見開き"
-  },
-  {
-    "title": "",
-    "slug": "mountain-collection",
-    "description": "",
-    "imageSrc": "",
-    "imageAlt": ""
-  },
-  {
-    "title": "",
-    "slug": "online-shopping-website",
-    "description": "",
-    "imageSrc": "",
-    "imageAlt": ""
-  },
-  {
-    "title": "",
-    "slug": "year-of-the-tiger",
-    "description": "",
-    "imageSrc": "",
-    "imageAlt": ""
-  },
-  {
-    "title": "",
-    "slug": "you-are-not-here",
-    "description": "",
-    "imageSrc": "",
-    "imageAlt": ""
+    "imageSrc": "/project-cover-textbook.png",
+    "imageAlt": "『若き歴史家のための漫遊ガイド』の本文見開き",
+    "tags": [
+      "Graphic Design",
+      "Illustration"
+    ]
   }
 ]

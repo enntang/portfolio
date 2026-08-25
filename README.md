@@ -155,14 +155,14 @@ Vite 提供了極快的 HMR 支援。當你修改代碼時，變更會立即反�
 
 ### 作品集清單同步
 
-作品集的列表卡片資料（標題、副標題、描述、封面）集中在 Notion 的 **Portfolio Sync**
-資料庫，由 `scripts/notion-sync/projects.mjs` 同步成三個語系檔：
+作品集的列表卡片資料（標題、副標題、描述、封面、標籤）集中在 Notion 的
+**Portfolio Sync** 資料庫，由 `scripts/notion-sync/projects.mjs` 依 `Category`
+分成兩組、各三個語系檔：
 
-- `src/assets/projects.zh-TW.json`
-- `src/assets/projects.en-US.json`
-- `src/assets/projects.ja-JP.json`
+- Case Study → `src/assets/projects.{zh-TW,en-US,ja-JP}.json`
+- Collection → `src/assets/collections.{zh-TW,en-US,ja-JP}.json`
 
-> ⚠️ 這三個檔案是同步產生的，請不要手動編輯，改 Notion 才是正確做法。
+> ⚠️ 這六個檔案是同步產生的，請不要手動編輯，改 Notion 才是正確做法。
 
 資料庫欄位：
 
@@ -171,12 +171,28 @@ Vite 提供了極快的 HMR 支援。當你修改代碼時，變更會立即反�
 | Project | Title | 專案代稱（內部識別用，不會出現在網站上） |
 | Slug | Text | 網址路徑，必填且唯一，對應 `#/project/:slug` |
 | Status | Select | 設為 `Published` 才會同步到網站 |
+| Category | Select | `Case Study` 或 `Collection`；留空當成 Case Study |
 | Order | Number | 顯示順序，數字小的排前面 |
-| Cover Path | Text | 封面圖路徑，以 `/` 開頭（檔案放在 `public/`） |
+| Tags | Multi-select | 作品類型（英文管理），對應列表頁的篩選鈕與卡片標籤 |
+| Cover | Files | 封面圖，直接把檔案拖進來上傳 |
 | Title ZH / EN / JA | Text | 主標題 |
 | Subtitle ZH / EN / JA | Text | 副標題，沒有就留空 |
 | Description ZH / EN / JA | Text | 卡片描述 |
 | Alt ZH / EN / JA | Text | 封面圖替代文字 |
+
+**Tags** 在 Notion 一律用英文（`UI/UX`、`Illustration`、`Graphic Design`、
+`Web Design`、`Game Design`、`Branding`），網站顯示時翻成當前語系；翻譯放在
+`src/locales/*.json` 的 `projects.tagLabels`，查不到翻譯就顯示英文原字。
+
+**Cover** 是 Notion 附件，同步時會下載並轉成 WebP，存到
+`public/project-covers/<slug>.webp`。
+
+**Collection 的輪播圖**取自那一列 Notion **頁面內容**裡的圖片區塊（不是 Cover 欄位），
+同樣轉成 WebP，存到 `public/collection-gallery/<slug>/<n>.webp`，順序照 Notion 上的排列。
+
+這兩個資料夾都由同步腳本管理：每次同步都會刪掉沒對應到 Notion 的檔案，所以不要把
+手動放的圖片放進去。轉檔用 sharp（長邊上限 1600px、quality 82），所以
+`scripts/notion-sync` 要先 `npm install`。
 
 **主標與副標分成兩欄**，同步時才依語系接成 `主標：副標`：中日文用全形 `：`，
 英文用半形 `: `。這樣分隔符號的格式由程式保證，不會再出現各語系寫法不一致的情況。
@@ -184,8 +200,9 @@ Vite 提供了極快的 HMR 支援。當你修改代碼時，變更會立即反�
 同步行為：
 
 - 只同步 `Status = Published` 的作品，`Draft` / `Hidden` 不會出現在網站上
-- 每次都整份重寫三個 JSON，Notion 就是唯一的資料來源
-- Slug 重複或查不到任何已發布作品時會直接報錯中止，避免清單被清空
+- 每次都整份重寫六個 JSON，Notion 就是唯一的資料來源
+- Slug 重複或查不到任何 Case Study 時會直接報錯中止，避免清單被清空
+- Collection 可以是零筆，列表頁會顯示空狀態文案
 - 只影響列表卡片；作品內頁仍是 `src/assets/projects/<slug>/<lang>/Page.jsx` 手寫的 JSX
 
 ### 文章刪除機制
@@ -224,7 +241,8 @@ npm run sync:projects
 ```
 portfolio/
 ├── src/assets/blog/           # 文章內容（content.js）
-├── src/assets/projects.*.json # 作品集清單（同步產生，勿手改）
+├── src/assets/projects.*.json # Case Study 清單（同步產生，勿手改）
+├── src/assets/collections.*.json # Collection 清單（同步產生，勿手改）
 ├── public/blog-images/        # 文章圖片
 ├── scripts/notion-sync/
 │   ├── index.mjs              # 文章同步腳本

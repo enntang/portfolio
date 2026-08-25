@@ -18,8 +18,10 @@
 | Project | 專案代稱（只給自己看，不會出現在網站上） |
 | Slug | 網址路徑，必填且唯一，決定 `#/project/:slug` |
 | Status | 設為 `Published` 才會出現在網站 |
-| Order | 顯示順序，數字小的排前面 |
-| Cover Path | 封面圖路徑，以 `/` 開頭（檔案放在 `public/`） |
+| Category | `Case Study`（有內頁的完整作品）或 `Collection`（只有一張圖的視覺作品）；留空當成 Case Study |
+| Order | 顯示順序，數字小的排前面（兩區各自排序） |
+| Tags | 作品類型，複選，例如「插畫 + UI/UX」。列表頁的篩選鈕和卡片上的標籤都吃這一欄 |
+| Cover | 封面圖，直接把檔案拖進這個附件欄位 |
 | Title ZH / EN / JA | 主標題，例如 `Mentor`、`桌上遊戲` |
 | Subtitle ZH / EN / JA | 副標題，例如 `不只是做產品，更是建立團隊`；沒有副標就留空 |
 | Description ZH / EN / JA | 卡片上的一句話描述 |
@@ -27,6 +29,16 @@
 
 主標與副標是分開的兩欄，同步時才會依語系接成 `主標：副標`（中日文用全形
 `：`，英文用半形 `: `），所以不需要自己打分隔符號。
+
+**Tags**：在 Notion 一律用英文管理（`UI/UX`、`Illustration`、`Graphic Design`、
+`Web Design`、`Game Design`、`Branding`），網站會依當前語系翻成中文／日文顯示。
+要加新選項就直接在 Notion 加，然後到 `src/locales/*.json` 的 `projects.tagLabels`
+補上三語翻譯；沒補翻譯的標籤會直接顯示英文原字，不會壞掉。
+
+**Cover**：附件同步時會下載並轉成 WebP，存到 `public/project-covers/<slug>.webp`。
+Collection 的輪播圖則取自 Notion 頁面內容裡的圖片，存到
+`public/collection-gallery/<slug>/<n>.webp`。這兩個資料夾都由同步腳本管理，每次同步
+都會清掉沒對應到 Notion 的檔案，所以不要把手放的圖片放進去。
 
 填好之後執行同步（見 README 的「Notion 內容同步」）：
 
@@ -105,6 +117,36 @@ npm run sync:projects
   - TOC 只會擷取 `h2`/`h3` 區塊；`relatedPosts`、`relatedProjects` 會自動排除。
 - 卡片沒出現在列表：
   - 確認已在 `projects.json` 新增，並且過濾標籤（`tags`）有被當前頁面選中。
+
+### 新增 Collection 作品（不需要內頁）
+
+作品列表頁（`/portfolio`）上的切換鈕分成兩區，兩區都來自同一個 Notion 資料庫，
+差別只在 **Category** 這一欄：
+
+- **Case Study**：上面 1)~4) 的完整流程，每筆都有自己的內頁。
+- **Collection**：平面設計、網頁視覺等偏視覺的作品，網站上只顯示
+  封面圖 + 標題 + 描述 + 標籤，點圖片用燈箱看大圖。
+
+新增一筆 Collection 作品只要做 1) 那一步，**不需要**建資料夾或 `content.json`：
+
+1. 在 Notion 新增一列，Category 選 `Collection`
+2. 封面拖進 **Cover** 欄位（列表卡片用這張）
+3. **作品頁要橫向捲動的圖片，直接貼在那一列的 Notion 頁面內容裡**（打開該列 → 頁面內容
+   插入圖片），順序就是輪播的順序
+4. 填好 Title / Subtitle / Description / Alt 和 Tags；三語的 Title 留空時會退回用
+   `Project` 欄位的名稱
+5. 跑 `npm run sync:projects`
+
+同步會產生 `src/assets/collections.*.json`（Case Study 則是 `projects.*.json`），
+這六個檔案都是產生出來的，手改會在下次同步時被覆蓋。Collection 一筆都沒有時，
+列表頁會顯示 `projects.collectionEmpty` 的空狀態文案。
+
+**Collection 作品頁**：路徑是 `/collection/<slug>`，版型固定（左邊標題／描述／標籤，
+右邊橫向圖片牆，兩張以上會自動輪播並無限循環，並顯示左右切換鈕），由
+`src/CollectionPage.jsx` 統一渲染，不必為每件作品寫 JSX。頁面內容沒有圖片時會退回
+用 Cover 那一張；兩者都沒有就只顯示文字。
+
+網址帶 `?view=collection` 會直接開在 Collection 區（切換時也會同步更新網址）。
 
 ### 延伸
 需要新的版型（如圖庫、表格、三欄排版等），可提出需求，我們可以擴充 `sections` 類型並更新渲染器。

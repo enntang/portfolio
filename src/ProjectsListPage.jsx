@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import Navbar from './components/utilities/Navbar'
 import BtnWhite from './components/utilities/BtnWhite'
 import { getPublicPath } from './utils/path'
@@ -7,6 +7,12 @@ import { useTranslation } from './hooks/useTranslation'
 import { getProjectsByLanguage } from './utils/projectsLoader'
 import { buildPath } from './utils/routing'
 import { splitProjectTitle } from './utils/projectTitle'
+import { getCollectionsByLanguage } from './utils/collectionsLoader'
+import CollectionCard from './components/projects/CollectionCard'
+import ProjectViewToggle, { CASE_STUDY_VIEW, COLLECTION_VIEW } from './components/projects/ProjectViewToggle'
+import ProjectTagFilter from './components/projects/ProjectTagFilter'
+import ListLoading from './components/projects/ListLoading'
+import { collectTags, filterByTag } from './utils/tags'
 
 // Chivalry has no dedicated banner artwork; mirror its case study's palette instead.
 import chivalryCover from './assets/projects/chivalry/image/chivalry-cover-transparent.png'
@@ -214,18 +220,72 @@ const projectVisuals = {
   },
 }
 
+// 換標籤時假裝在載入的時間。純粹是為了讓篩選有「真的在篩」的手感，不是真的在等資料。
+const FILTER_DELAY_MS = 500
+
+// 目前看的是哪一區塊會寫進網址（?view=collection），重新整理或分享連結才不會跳回 Case Study。
+const VIEW_PARAM = 'view'
+
+function readViewFromUrl() {
+  if (typeof window === 'undefined') return CASE_STUDY_VIEW
+  const params = new URLSearchParams(window.location.search)
+  return params.get(VIEW_PARAM) === COLLECTION_VIEW ? COLLECTION_VIEW : CASE_STUDY_VIEW
+}
+
+function writeViewToUrl(view) {
+  if (typeof window === 'undefined') return
+  const url = new URL(window.location.href)
+  if (view === COLLECTION_VIEW) {
+    url.searchParams.set(VIEW_PARAM, COLLECTION_VIEW)
+  } else {
+    url.searchParams.delete(VIEW_PARAM)
+  }
+  // 換的是同一頁的檢視，不是換頁，所以用 replaceState 不留下一筆上一頁。
+  window.history.replaceState({}, '', url)
+}
+
 function ProjectsList() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
+  const [view, setView] = useState(readViewFromUrl)
+  const [selectedTag, setSelectedTag] = useState('')
+  const [isFiltering, setIsFiltering] = useState(false)
+  const filterTimer = useRef(null)
   const { language } = useLanguage()
   const { t } = useTranslation()
   const projectsData = getProjectsByLanguage(language)
+  const allCollections = getCollectionsByLanguage(language)
+  const collections = filterByTag(allCollections, selectedTag)
+
+  // 兩個分頁各自算自己的標籤清單，切換分頁時清掉選取（不然會停在對面沒有的標籤上）。
+  const isCollectionView = view === COLLECTION_VIEW
+  const availableTags = collectTags(isCollectionView ? allCollections : projectsData)
+  const totalCount = isCollectionView ? allCollections.length : projectsData.length
+
+  const handleTagChange = (nextTag) => {
+    if (nextTag === selectedTag) return
+    setSelectedTag(nextTag)
+    setIsFiltering(true)
+    clearTimeout(filterTimer.current)
+    filterTimer.current = setTimeout(() => setIsFiltering(false), FILTER_DELAY_MS)
+  }
+
+  useEffect(() => () => clearTimeout(filterTimer.current), [])
+
+  const handleViewChange = (next) => {
+    if (next === view) return
+    setView(next)
+    setSelectedTag('')
+    setIsFiltering(false)
+    clearTimeout(filterTimer.current)
+    writeViewToUrl(next)
+  }
 
   // Helper to build path with language prefix
   const buildHref = (path) => {
     return buildPath(path, language)
   }
 
-  const banners = projectsData
+  const banners = filterByTag(projectsData, selectedTag)
     .filter(p => projectVisuals[p.slug])
     .map(p => {
       const visuals = projectVisuals[p.slug]
@@ -270,19 +330,48 @@ function ProjectsList() {
       />
 
       <main className='pt-24 relative'>
-        {/* Page Header */}
-        <div className='max-w-3xl mx-auto px-8'>
-          <h1 className='text-h1 mobile:text-mobile-h1 mb-6 text-center text-gray-800'>
+        {/* 標題和控制列同一個區塊：不吃 max-w-3xl，整個頁面寬只留左右邊距，
+            標題靠左，標籤才也排得開。左右的 px-6 要跟 Navbar 一致，
+            Logo、標題、控制列的左邊界才會切齊。 */}
+        <div className='mb-12 px-6'>
+          <h1 className='text-h1 mobile:text-mobile-h1 mb-8 text-gray-800'>
             {t('projects.title')}
           </h1>
-          <p className='text-p text-center text-gray-600 mb-12'>
-            {t('projects.description')}
-          </p>
+
+          {/* 標籤篩選 + Case Study / Collection 切換。
+              桌機左右並排；手機上下疊，且切換鈕在上（flex-col-reverse）。 */}
+          <div className='flex items-center justify-between gap-x-8 gap-y-4 mobile:flex-col-reverse'>
+            {/* 包一層 flex-1：這樣切換鈕永遠貼在右邊，不會因為標籤少或沒有標籤而跑位 */}
+            <div className='flex-1 min-w-0 mobile:w-full'>
+              <ProjectTagFilter
+                tags={availableTags}
+                selectedTag={selectedTag}
+                onChange={handleTagChange}
+                allLabel={t('projects.allTags')}
+                count={totalCount}
+                t={t}
+              />
+            </div>
+
+            <ProjectViewToggle
+              value={view}
+              onChange={handleViewChange}
+              caseStudyLabel={t('projects.tabs.caseStudy')}
+              collectionLabel={t('projects.tabs.collection')}
+              switchLabel={t('projects.tabs.switchLabel')}
+            />
+          </div>
         </div>
 
         {/* Project Banners */}
+        {view === CASE_STUDY_VIEW && (
         <div className='max-w-3xl mx-auto px-8 space-y-10 mobile:space-y-6 pb-10'>
-          {banners.map(b => (
+          {/* 兩張 banner 加中間的間距（254 * 2 + 40），手機的 banner 是直式所以另外抓 */}
+          {isFiltering && <ListLoading minHeightClass='min-h-[548px] mobile:min-h-[70vh]' />}
+          {!isFiltering && banners.length === 0 && (
+            <p className='text-p text-center text-gray-500 py-16'>{t('projects.noMatch')}</p>
+          )}
+          {!isFiltering && banners.map(b => (
             <ProjectBanner
               key={b.title}
               href={b.href}
@@ -307,6 +396,27 @@ function ProjectsList() {
             />
           ))}
         </div>
+        )}
+
+        {/* Collection：只有一張圖 + 標題 + 描述，點圖片用燈箱看大圖 */}
+        {view === COLLECTION_VIEW && (
+          <div className='max-w-3xl mx-auto px-8 pb-10'>
+            {isFiltering ? (
+              /* Collection 是兩欄，所以「兩個項目」剛好是一列：圖 4:3 加標題與描述 */
+              <ListLoading minHeightClass='min-h-[340px] mobile:min-h-[60vh]' />
+            ) : collections.length > 0 ? (
+              <div className='grid grid-cols-2 mobile:grid-cols-1 gap-x-8 gap-y-12 mobile:gap-y-8'>
+                {collections.map(item => (
+                  <CollectionCard key={item.slug} item={item} />
+                ))}
+              </div>
+            ) : (
+              <p className='text-p text-center text-gray-500 py-16'>
+                {selectedTag ? t('projects.noMatch') : t('projects.collectionEmpty')}
+              </p>
+            )}
+          </div>
+        )}
 
         <div className='max-w-6xl mx-auto px-8 pb-16 text-center text-sm text-gray-400'>
           {t('common.copyright')}

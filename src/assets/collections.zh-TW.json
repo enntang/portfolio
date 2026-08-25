@@ -1,0 +1,45 @@
+[
+  {
+    "title": "虎年大吉大利：悠遊卡插畫設計",
+    "slug": "year-of-the-tiger",
+    "description": "以貓的形象慶祝虎年到來，繪製紀念悠遊卡插畫與版面",
+    "imageSrc": "",
+    "imageAlt": "虎年大吉大利紀念悠遊卡插畫",
+    "tags": [
+      "Graphic Design",
+      "Illustration"
+    ],
+    "images": []
+  },
+  {
+    "title": "會員制購物網站設計",
+    "slug": "online-shopping-website",
+    "description": "專們提供美髮用品與美髮訓練服務的企業網站，在設計上，用綠色系和自然元素凸顯天然原料製作的堅持。\n在服務流程上，將產品採購與課程報名整合為一項流暢無縫的體驗。\n我負責定義系統架構、設計完整的用戶旅程，並從線框圖到精緻的原型設計，打造出響應式使用者介面。此外，我也負責響應式網頁設計（RWD）的實作，並根據用戶反饋進行迭代優化。",
+    "imageSrc": "/collection-gallery/online-shopping-website/1.webp",
+    "imageAlt": "會員制購物網站首頁設計",
+    "tags": [
+      "UI/UX",
+      "Web Design"
+    ],
+    "images": [
+      "/collection-gallery/online-shopping-website/1.webp",
+      "/collection-gallery/online-shopping-website/2.webp"
+    ]
+  },
+  {
+    "title": "你不在的地方",
+    "slug": "you-are-not-here",
+    "description": "",
+    "imageSrc": "/collection-gallery/you-are-not-here/1.webp",
+    "imageAlt": "《你不在的地方》書封插畫",
+    "tags": [
+      "Illustration",
+      "Graphic Design"
+    ],
+    "images": [
+      "/collection-gallery/you-are-not-here/1.webp",
+      "/collection-gallery/you-are-not-here/2.webp",
+      "/collection-gallery/you-are-not-here/3.webp"
+    ]
+  }
+]

@@ -119,7 +119,25 @@
     "description": "2016年からデザインを始め、明確な構造と視覚的なストーリーテリングを組み合わせて、直感的で表現力豊かな作品を作成しています。パートナーは私のアプローチを専門的で、思慮深く、細心の注意を払っていると表現しています。",
     "caseStudy": "ケーススタディ",
     "comingSoon": "近日公開",
-    "related": "関連プロジェクト"
+    "related": "関連プロジェクト",
+    "tabs": {
+      "caseStudy": "Case Study",
+      "collection": "Collection",
+      "switchLabel": "ケーススタディとコレクションを切り替える"
+    },
+    "collectionEmpty": "まだ作品がありません。ビジュアル作品は順次公開予定です。",
+    "noMatch": "このタグに該当する作品はまだありません。",
+    "prevImage": "前の画像",
+    "nextImage": "次の画像",
+    "allTags": "すべて",
+    "tagLabels": {
+      "UI/UX": "UI/UX",
+      "Illustration": "イラスト",
+      "Graphic Design": "グラフィックデザイン",
+      "Web Design": "ウェブデザイン",
+      "Game Design": "ゲームデザイン",
+      "Branding": "ブランディング"
+    }
   },
   "blog": {
     "title": "ブログ",

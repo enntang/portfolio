@@ -149,7 +149,7 @@ function Navbar({ isWhite = false, isDark = false, isMenuOpen = false, onToggleM
   return (
     <>
       <div
-        className={`w-full fixed top-0 left-0 transition-all duration-300 transform py-4 px-8 z-[70] ${
+        className={`w-full fixed top-0 left-0 transition-all duration-300 transform py-4 px-6 z-[70] ${
           isHidden ? '-translate-y-full' : 'translate-y-0'
         } ${isHome || !isWhite ? 'bg-transparent' : 'backdrop-blur-md'}`}
       >

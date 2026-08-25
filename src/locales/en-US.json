@@ -119,7 +119,25 @@
     "description": "I've been designing since 2016, combining clear structure with visual storytelling to create work that feels both intuitive and expressive. Partners describe my approach as professional, thoughtful, and meticulous.",
     "caseStudy": "Case Study",
     "comingSoon": "Coming Soon",
-    "related": "Related Projects"
+    "related": "Related Projects",
+    "tabs": {
+      "caseStudy": "Case Study",
+      "collection": "Collection",
+      "switchLabel": "Switch between case studies and collection"
+    },
+    "collectionEmpty": "Nothing here yet — visual work is on its way.",
+    "noMatch": "No work matches these tags yet.",
+    "prevImage": "Previous image",
+    "nextImage": "Next image",
+    "allTags": "All",
+    "tagLabels": {
+      "UI/UX": "UI/UX",
+      "Illustration": "Illustration",
+      "Graphic Design": "Graphic Design",
+      "Web Design": "Web Design",
+      "Game Design": "Game Design",
+      "Branding": "Branding"
+    }
   },
   "blog": {
     "title": "Blog",
