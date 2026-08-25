@@ -223,8 +223,10 @@ const projectVisuals = {
 // 換標籤時假裝在載入的時間。純粹是為了讓篩選有「真的在篩」的手感，不是真的在等資料。
 const FILTER_DELAY_MS = 500
 
-// 目前看的是哪一區塊會寫進網址（?view=collection），重新整理或分享連結才不會跳回 Case Study。
+// 目前看的是哪一區塊、篩到哪個標籤都會寫進網址（?view=collection&tag=Web+Design），
+// 重新整理或分享連結才不會跳回預設，作品頁上的標籤也才連得回這裡。
 const VIEW_PARAM = 'view'
+const TAG_PARAM = 'tag'
 
 function readViewFromUrl() {
   if (typeof window === 'undefined') return CASE_STUDY_VIEW
@@ -232,14 +234,21 @@ function readViewFromUrl() {
   return params.get(VIEW_PARAM) === COLLECTION_VIEW ? COLLECTION_VIEW : CASE_STUDY_VIEW
 }
 
-function writeViewToUrl(view) {
+function readTagFromUrl() {
+  if (typeof window === 'undefined') return ''
+  return new URLSearchParams(window.location.search).get(TAG_PARAM) || ''
+}
+
+function writeStateToUrl(view, tag) {
   if (typeof window === 'undefined') return
   const url = new URL(window.location.href)
-  if (view === COLLECTION_VIEW) {
-    url.searchParams.set(VIEW_PARAM, COLLECTION_VIEW)
-  } else {
-    url.searchParams.delete(VIEW_PARAM)
-  }
+
+  if (view === COLLECTION_VIEW) url.searchParams.set(VIEW_PARAM, COLLECTION_VIEW)
+  else url.searchParams.delete(VIEW_PARAM)
+
+  if (tag) url.searchParams.set(TAG_PARAM, tag)
+  else url.searchParams.delete(TAG_PARAM)
+
   // 換的是同一頁的檢視，不是換頁，所以用 replaceState 不留下一筆上一頁。
   window.history.replaceState({}, '', url)
 }
@@ -247,23 +256,28 @@ function writeViewToUrl(view) {
 function ProjectsList() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const [view, setView] = useState(readViewFromUrl)
-  const [selectedTag, setSelectedTag] = useState('')
+  const [selectedTag, setSelectedTag] = useState(readTagFromUrl)
   const [isFiltering, setIsFiltering] = useState(false)
   const filterTimer = useRef(null)
   const { language } = useLanguage()
   const { t } = useTranslation()
   const projectsData = getProjectsByLanguage(language)
   const allCollections = getCollectionsByLanguage(language)
-  const collections = filterByTag(allCollections, selectedTag)
 
   // 兩個分頁各自算自己的標籤清單，切換分頁時清掉選取（不然會停在對面沒有的標籤上）。
   const isCollectionView = view === COLLECTION_VIEW
   const availableTags = collectTags(isCollectionView ? allCollections : projectsData)
   const totalCount = isCollectionView ? allCollections.length : projectsData.length
+  // 網址上的 tag 有可能是這個分頁沒有的（手改網址、或作品的標籤後來被拿掉），
+  // 這時就當成沒有篩選，而不是顯示一個空清單。
+  const activeTag = availableTags.includes(selectedTag) ? selectedTag : ''
+
+  const collections = filterByTag(allCollections, activeTag)
 
   const handleTagChange = (nextTag) => {
-    if (nextTag === selectedTag) return
+    if (nextTag === activeTag) return
     setSelectedTag(nextTag)
+    writeStateToUrl(view, nextTag)
     setIsFiltering(true)
     clearTimeout(filterTimer.current)
     filterTimer.current = setTimeout(() => setIsFiltering(false), FILTER_DELAY_MS)
@@ -277,7 +291,7 @@ function ProjectsList() {
     setSelectedTag('')
     setIsFiltering(false)
     clearTimeout(filterTimer.current)
-    writeViewToUrl(next)
+    writeStateToUrl(next, '')
   }
 
   // Helper to build path with language prefix
@@ -285,7 +299,7 @@ function ProjectsList() {
     return buildPath(path, language)
   }
 
-  const banners = filterByTag(projectsData, selectedTag)
+  const banners = filterByTag(projectsData, activeTag)
     .filter(p => projectVisuals[p.slug])
     .map(p => {
       const visuals = projectVisuals[p.slug]
@@ -345,7 +359,7 @@ function ProjectsList() {
             <div className='flex-1 min-w-0 mobile:w-full'>
               <ProjectTagFilter
                 tags={availableTags}
-                selectedTag={selectedTag}
+                selectedTag={activeTag}
                 onChange={handleTagChange}
                 allLabel={t('projects.allTags')}
                 count={totalCount}
@@ -412,7 +426,7 @@ function ProjectsList() {
               </div>
             ) : (
               <p className='text-p text-center text-gray-500 py-16'>
-                {selectedTag ? t('projects.noMatch') : t('projects.collectionEmpty')}
+                {activeTag ? t('projects.noMatch') : t('projects.collectionEmpty')}
               </p>
             )}
           </div>

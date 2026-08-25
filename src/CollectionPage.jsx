@@ -9,6 +9,7 @@ import { useLanguage } from './contexts/LanguageContext'
 import { useTranslation } from './hooks/useTranslation'
 import { getCollectionsByLanguage } from './utils/collectionsLoader'
 import { getTagLabel } from './utils/tags'
+import { buildPath } from './utils/routing'
 
 // 圖片牆是「一直緩緩往左流」，不是每隔幾秒跳一張：autoplay 的 delay 設 0，
 // 由很長的 speed（配上 index.css 裡的 linear timing）撐出等速捲動。
@@ -29,9 +30,10 @@ function CollectionPage({ slug }) {
   const { t } = useTranslation()
   const swiperRef = useRef(null)
 
-  // 手動換頁：緩流是一段長達 5 秒的 transition，而 Swiper 在動畫進行中會直接
-  // 擋掉 slideNext/slidePrev（loopPreventsSliding），所以要先把它凍結在目前位置，
-  // 用比較快的 speed 走一張，再把緩流接回去。
+  // 手動換頁：一旦使用者自己操作，緩流就停在那裡不再自己動。
+  // 緩流是一段長達 5 秒的 transition，而 Swiper 在動畫進行中會直接擋掉
+  // slideNext/slidePrev（loopPreventsSliding），所以要先把它凍結在目前位置，
+  // 才有辦法立刻走下一張。
   const step = (direction) => {
     const swiper = swiperRef.current
     if (!swiper) return
@@ -46,8 +48,6 @@ function CollectionPage({ slug }) {
 
     if (direction === 'next') swiper.slideNext(MANUAL_SPEED_MS)
     else swiper.slidePrev(MANUAL_SPEED_MS)
-
-    setTimeout(() => swiper.autoplay?.start(), MANUAL_SPEED_MS)
   }
 
   const item = getCollectionsByLanguage(language).find(entry => entry.slug === slug)
@@ -60,9 +60,11 @@ function CollectionPage({ slug }) {
 
   return (
     <div className='min-h-screen bg-bg flex flex-col'>
-      {/* 回上頁的方式跟 Case Study 的作品頁一致：左上角一顆返回箭頭 */}
+      {/* 回上頁的方式跟 Case Study 的作品頁一致：左上角一顆返回箭頭。
+          arrow 版型的置中 logo 是 isWhite 為 true 時才轉白字，那是給 Case Study
+          那種深色 hero 用的；這一頁底色是淺的，所以要傳 false 才看得到 logo。 */}
       <Navbar
-        isWhite={true}
+        isWhite={false}
         isMenuOpen={isMenuOpen}
         onToggleMenu={() => setIsMenuOpen(prev => !prev)}
         variant='arrow'
@@ -78,17 +80,22 @@ function CollectionPage({ slug }) {
 
             {/* Notion 的描述可能有換行，whitespace-pre-line 才不會被壓成一整段 */}
             {item.description && (
-              <p className='mt-4 text-p text-gray-700 whitespace-pre-line'>{item.description}</p>
+              <p className='mt-4 text-caption leading-relaxed text-gray-700 whitespace-pre-line'>
+                {item.description}
+              </p>
             )}
 
+            {/* 標籤點下去回到作品列表的 Collection 分頁，並且直接套用那個標籤的篩選 */}
             {item.tags && item.tags.length > 0 && (
               <ul className='mt-6 flex flex-wrap gap-2'>
                 {item.tags.map(tag => (
-                  <li
-                    key={tag}
-                    className='rounded-full border border-gray-300 px-3 py-1 text-caption text-gray-600'
-                  >
-                    {getTagLabel(t, tag)}
+                  <li key={tag}>
+                    <a
+                      href={`${buildPath('/projects', language)}?view=collection&tag=${encodeURIComponent(tag)}`}
+                      className='inline-block rounded-full border border-gray-300 px-3 py-1 text-caption text-gray-600 transition-colors hover:border-gray-900 hover:text-gray-900 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gray-900 focus-visible:ring-offset-2 focus-visible:ring-offset-bg'
+                    >
+                      {getTagLabel(t, tag)}
+                    </a>
                   </li>
                 ))}
               </ul>
@@ -105,8 +112,9 @@ function CollectionPage({ slug }) {
               loop={canLoop}
               speed={canLoop ? MARQUEE_MS_PER_SLIDE : 0}
               freeMode={canLoop ? { enabled: true, momentum: false } : false}
-              // 不加 pauseOnMouseEnter：滑鼠停在圖上就整個停住，看起來像壞掉。
-              autoplay={canLoop ? { delay: 0, disableOnInteraction: false } : false}
+              // disableOnInteraction：手動拖曳之後同樣停在定點，不再自己流動。
+              // 也不加 pauseOnMouseEnter，只是滑過去不算「操作」。
+              autoplay={canLoop ? { delay: 0, disableOnInteraction: true } : false}
               onSwiper={swiper => { swiperRef.current = swiper }}
               // 容器本身圓角（Swiper 的 overflow 是 hidden），圖片被裁掉的那一側就不會是硬邊
               className='collection-marquee w-full h-full mobile:h-auto rounded-2xl'

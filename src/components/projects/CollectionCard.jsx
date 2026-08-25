@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import { getPublicPath } from '../../utils/path'
 import LazyImage from '../utilities/LazyImage'
 import { useLanguage } from '../../contexts/LanguageContext'
@@ -13,16 +14,43 @@ const FOCUS_RING =
 function CollectionCard({ item }) {
   const { slug, title, description, imageSrc, imageAlt } = item
   const { language } = useLanguage()
+  // 橫式圖裁切填滿；正方形和直式圖完整顯示、留白處鋪模糊底。
+  // 還不知道尺寸前先當成直式，因為那個樣式不會裁到圖。
+  const [isLandscape, setIsLandscape] = useState(false)
+
+  const handleImageLoad = (event) => {
+    const { naturalWidth, naturalHeight } = event.currentTarget
+    // LazyImage 一開始畫的是 1x1 的透明佔位圖，那次 load 不能拿來判斷。
+    if (naturalWidth <= 1 || naturalHeight <= 1) return
+    setIsLandscape(naturalWidth > naturalHeight)
+  }
 
   return (
     <a href={buildPath(`/collection/${slug}`, language)} className={`group block ${FOCUS_RING}`}>
+      {/* 封面圖的比例不一定等於 4:3 的框：
+          橫式圖直接裁切填滿；正方形和直式圖整張顯示，留白處鋪上同一張圖
+          放大模糊打淡當底。兩層是同一個網址，瀏覽器只會抓一次。 */}
       <div className='relative overflow-hidden rounded-md bg-gray-100 aspect-[4/3]'>
         {imageSrc && (
-          <LazyImage
-            src={getPublicPath(imageSrc)}
-            alt={imageAlt || title}
-            className='absolute inset-0 w-full h-full object-cover transition-transform duration-500 ease-out group-hover:scale-105'
-          />
+          <>
+            {!isLandscape && (
+              <img
+                src={getPublicPath(imageSrc)}
+                alt=''
+                aria-hidden='true'
+                loading='lazy'
+                className='absolute inset-0 w-full h-full object-cover scale-110 blur-xl opacity-60'
+              />
+            )}
+            <LazyImage
+              src={getPublicPath(imageSrc)}
+              alt={imageAlt || title}
+              onLoad={handleImageLoad}
+              className={`absolute inset-0 w-full h-full transition-transform duration-500 ease-out group-hover:scale-105 ${
+                isLandscape ? 'object-cover' : 'object-contain'
+              }`}
+            />
+          </>
         )}
       </div>
 
