@@ -31,6 +31,22 @@
     ]
   },
   {
+    "title": "あなたのいない場所",
+    "slug": "you-are-not-here",
+    "description": "",
+    "imageSrc": "/project-covers/you-are-not-here.webp",
+    "imageAlt": "『あなたのいない場所』の装丁イラスト",
+    "tags": [
+      "Illustration",
+      "Graphic Design"
+    ],
+    "images": [
+      "/collection-gallery/you-are-not-here/1.webp",
+      "/collection-gallery/you-are-not-here/2.webp",
+      "/collection-gallery/you-are-not-here/3.webp"
+    ]
+  },
+  {
     "title": "山の街、海の町",
     "slug": "mountain-city-seaside-town",
     "description": "安平と九份は台湾を代表する観光地。長い歴史という共通点を持ちながら、片や山、片や海が第一印象を決める。\n「山の街」「海の町」を題に、ランドマークのイラストシリーズが始まった。",
