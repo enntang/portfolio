@@ -1,10 +1,6 @@
 import { useState, useEffect, useRef } from 'react'
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
-import { Swiper, SwiperSlide } from 'swiper/react'
-import { Pagination } from 'swiper/modules'
-import 'swiper/css'
-import 'swiper/css/pagination'
 import Navbar from '../../../components/utilities/Navbar'
 import ScrollHint from '../../../components/utilities/ScrollHint'
 import { useFloatingAnimation } from '../../../hooks/useFloatingAnimation'
@@ -382,23 +378,17 @@ export default function EHairPOSPage() {
         <FadeIn>
           <Container>
           <H2>Design Deliverables</H2>
-            {/* Mobile Swiper */}
+            {/* Mobile Layout */}
             <div className="md:hidden">
-              <Swiper
-                modules={[Pagination]}
-                pagination={{ clickable: true }}
-                spaceBetween={24}
-                slidesPerView={1}
-                className="design-deliverables-swiper"
-              >
-                <SwiperSlide>
+              <div className="space-y-8">
+                <div>
                   <div>
                    
                     <H3>Customer Management with Advanced Filtering</H3>
                     <P>We moved away from modal-based browsing and adopted a split-view layout. Users can now browse the customer list and view full details side-by-side—cutting down on lookup time and reducing clicks.</P>
                   </div>
-                </SwiperSlide>
-                <SwiperSlide>
+                </div>
+                <div>
                   <div>
                     <P>Old version: When browsing the customer list, viewing details opened a full-screen modal. Closing it was required to return to the list.</P>
                     <div className='grid grid-cols-1 gap-4 mb-8 mobile:m-0'>
@@ -406,8 +396,8 @@ export default function EHairPOSPage() {
                       <img src={old2} alt="old2" className='w-full h-auto rounded-lg mobile:hidden' />
                     </div>
                   </div>
-                </SwiperSlide>
-                <SwiperSlide>
+                </div>
+                <div>
                   <div>
                     <P>The new version adopts a split-view layout: clicking a customer in the list will instantly show their details on the right side.</P>
                     <ImageWithHotspots
@@ -417,8 +407,8 @@ export default function EHairPOSPage() {
                       className='mb-8 rounded-lg'
                     />
                   </div>
-                </SwiperSlide>
-                <SwiperSlide>
+                </div>
+                <div>
                   <div>
                     <P>Notes from different stylists are shown in a timeline view, giving teams a shared record of client preferences.</P>
                     <ImageWithHotspots
@@ -428,8 +418,8 @@ export default function EHairPOSPage() {
                       className='mb-8 rounded-lg'
                     />
                   </div>
-                </SwiperSlide>
-                <SwiperSlide>
+                </div>
+                <div>
                   <div>
                     <P>Visual charts summarize visit frequency, spending, and service mix, helping owners spot VIPs.</P>
                     <ImageWithHotspots
@@ -439,8 +429,8 @@ export default function EHairPOSPage() {
                       className='rounded-lg'
                     />
                   </div>
-                </SwiperSlide>
-              </Swiper>
+                </div>
+              </div>
             </div>
 
             {/* Desktop Layout */}
@@ -485,30 +475,24 @@ export default function EHairPOSPage() {
         <SectionBlock backgrounds={ehairposBackgrounds}>
         <FadeIn>
           <Container>
-            {/* Mobile Swiper */}
+            {/* Mobile Layout */}
             <div className="md:hidden">
-              <Swiper
-                modules={[Pagination]}
-                pagination={{ clickable: true }}
-                spaceBetween={24}
-                slidesPerView={1}
-                className="booking-flow-swiper"
-              >
-                <SwiperSlide>
+              <div className="space-y-8">
+                <div>
                   <div>
                     <H3>Flexible, Intuitive Booking Flow</H3>
                     <P>Bookings come from two sources: online forms and in-person entries.<br />
                       We adopted interaction patterns from tools users already know—like Google Calendar—to allow for quick drag-and-drop booking, unscheduled holds, and both daily/monthly views.</P>
                   </div>
-                </SwiperSlide>
-                <SwiperSlide>
+                </div>
+                <div>
                   <div>
                     <div className='flex justify-center'>
                       <img src={draft2} alt="draft2" className='w-full h-auto rounded-lg mix-blend-multiply opacity-50' />
                     </div>
                   </div>
-                </SwiperSlide>
-                <SwiperSlide>
+                </div>
+                <div>
                   <div>
                     <ImageWithHotspots
                       src={screenshot04}
@@ -517,8 +501,8 @@ export default function EHairPOSPage() {
                       className='mb-8 rounded-lg'
                     />
                   </div>
-                </SwiperSlide>
-                <SwiperSlide>
+                </div>
+                <div>
                   <div>
                     <P>The calendar can be switched to a monthly view, making it easier to review and adjust the entire schedule at a glance.</P>
                     <ImageWithHotspots
@@ -528,8 +512,8 @@ export default function EHairPOSPage() {
                       className='rounded-lg'
                     />
                   </div>
-                </SwiperSlide>
-              </Swiper>
+                </div>
+              </div>
             </div>
 
             {/* Desktop Layout */}
@@ -564,30 +548,24 @@ export default function EHairPOSPage() {
         <SectionBlock variant="photo" backgrounds={ehairposBackgrounds}>
         <FadeIn>
           <Container>
-            {/* Mobile Swiper */}
+            {/* Mobile Layout */}
             <div className="md:hidden">
-              <Swiper
-                modules={[Pagination]}
-                pagination={{ clickable: true }}
-                spaceBetween={24}
-                slidesPerView={1}
-                className="checkout-flow-swiper"
-              >
-                <SwiperSlide>
+              <div className="space-y-8">
+                <div>
                   <div>
                     <H3>Checkout Flow Designed for Salon Complexity</H3>
                     <P>
                       Unlike retail POS, salon purchases are often complex: A client might get a cut, color, and buy a product—all in one visit.<br />
                       Our new UI lets staff apply discounts per item, choose payment types, and switch between products quickly. Visual hierarchy and iconography were improved for clarity and speed.</P>
                   </div>
-                </SwiperSlide>
-                <SwiperSlide>
+                </div>
+                <div>
                   <div>
                     <ProjectNote className='mb-4 text-gray-800'>Old version: Lots of unused space. Information lacked hierarchy and was hard to distinguish.</ProjectNote>
                     <img src={old3} alt="old3" className='w-full h-auto rounded-lg mb-8' />
                   </div>
-                </SwiperSlide>
-                <SwiperSlide>
+                </div>
+                <div>
                   <div>
                     <P>The New version sets clear product categories with icons to improve readability.</P>
                     <ImageWithHotspots
@@ -597,8 +575,8 @@ export default function EHairPOSPage() {
                       className='mb-8 rounded-lg'
                     />
                   </div>
-                </SwiperSlide>
-                <SwiperSlide>
+                </div>
+                <div>
                   <div>
                     <P>During checkout, the sidebar displays the purchase amount for staff to review and confirm.</P>
                     <ImageWithHotspots
@@ -608,8 +586,8 @@ export default function EHairPOSPage() {
                       className='rounded-lg'
                     />
                   </div>
-                </SwiperSlide>
-              </Swiper>
+                </div>
+              </div>
             </div>
 
             {/* Desktop Layout */}
@@ -650,16 +628,10 @@ export default function EHairPOSPage() {
         <SectionBlock backgrounds={ehairposBackgrounds}>
         <FadeIn>
           <Container>
-            {/* Mobile Swiper */}
+            {/* Mobile Layout */}
             <div className="md:hidden">
-              <Swiper
-                modules={[Pagination]}
-                pagination={{ clickable: true }}
-                spaceBetween={24}
-                slidesPerView={1}
-                className="membership-wallet-swiper"
-              >
-                <SwiperSlide>
+              <div className="space-y-8">
+                <div>
                   <div>
                     <H3>Membership Wallet That Feels Real</H3>
                     <P>
@@ -668,8 +640,8 @@ export default function EHairPOSPage() {
                       The wallet interface mimics a real wallet—organized, easy to read, and quick to apply at checkout.
                     </P>
                   </div>
-                </SwiperSlide>
-                <SwiperSlide>
+                </div>
+                <div>
                   <div>
                     <ImageWithHotspots
                       src={screenshot09}
@@ -678,8 +650,8 @@ export default function EHairPOSPage() {
                       className='mb-8 rounded-lg'
                     />
                   </div>
-                </SwiperSlide>
-                <SwiperSlide>
+                </div>
+                <div>
                   <div>
                     <ImageWithHotspots
                       src={screenshot10}
@@ -688,8 +660,8 @@ export default function EHairPOSPage() {
                       className='mb-8 rounded-lg'
                     />
                   </div>
-                </SwiperSlide>
-              </Swiper>
+                </div>
+              </div>
             </div>
 
             {/* Desktop Layout */}
@@ -720,16 +692,10 @@ export default function EHairPOSPage() {
         <SectionBlock variant="purple" backgrounds={ehairposBackgrounds}>
         <FadeIn>
           <Container>
-            {/* Mobile Swiper */}
+            {/* Mobile Layout */}
             <div className="md:hidden">
-              <Swiper
-                modules={[Pagination]}
-                pagination={{ clickable: true }}
-                spaceBetween={24}
-                slidesPerView={1}
-                className="visual-reports-swiper"
-              >
-                <SwiperSlide>
+              <div className="space-y-8">
+                <div>
                   <div>
                     <H3>Visual Reports for Better Business Decisions</H3>
                     <P>To help salon owners not only "see numbers" but actually "understand trends," we built two layers of reporting:</P>
@@ -738,25 +704,25 @@ export default function EHairPOSPage() {
                       <LI><strong>Stylist-level reports:</strong> Track individual performance, client return rate, and sales goals over time</LI>
                     </UL>
                   </div>
-                </SwiperSlide>
-                <SwiperSlide>
+                </div>
+                <div>
                   <div>
                     <LazyImage src={screenshot11} alt="screenshot11" className='w-full h-auto rounded-tr-lg rounded-br-lg' />
                     <p className='text-caption text-gray-500 font-light mt-4'>Salon Dashboard: Combines revenue, visits, ticket size, and growth metrics with time filters for a clear view of business performance.</p>
                   </div>
-                </SwiperSlide>
-                <SwiperSlide>
+                </div>
+                <div>
                   <div>
                     <LazyImage src={screenshot12} alt="screenshot12" className='w-full h-auto rounded-tl-lg rounded-bl-lg' />
                     <p className='text-caption text-gray-500 font-light mt-4'>Stylist Dashboard: Each stylist can view their performance trends, client count, and personal growth over time.</p>
                   </div>
-                </SwiperSlide>
-                <SwiperSlide>
+                </div>
+                <div>
                   <div>
                     <P>These dashboards allow both owners and stylists to take ownership of their performance and plan with data, not guesswork.</P>
                   </div>
-                </SwiperSlide>
-              </Swiper>
+                </div>
+              </div>
             </div>
 
             {/* Desktop Layout */}
@@ -787,37 +753,31 @@ export default function EHairPOSPage() {
         <SectionBlock variant="white" backgrounds={ehairposBackgrounds}>
         <FadeIn>
           <Container>
-            {/* Mobile Swiper */}
+            {/* Mobile Layout */}
             <div className="md:hidden">
-              <Swiper
-                modules={[Pagination]}
-                pagination={{ clickable: true }}
-                spaceBetween={24}
-                slidesPerView={1}
-                className="logotype-design-swiper"
-              >
-                <SwiperSlide>
+              <div className="space-y-8">
+                <div>
                   <div>
                     <H2>Logotype Design</H2>
                     <P><strong>Concept:</strong> The logo merges the letters "e" and "P" with the infinity symbol and a pair of salon scissors, creating a ribbon-like shape that feels both soft and professional—symbolizing endless service and creativity in the salon industry.</P>
                   </div>
-                </SwiperSlide>
-                <SwiperSlide>
+                </div>
+                <div>
                   <div>
                     <P><strong>Color Palette:</strong> Inspired by the app's core visual language, the logo uses an analogous purple color scheme to maintain brand consistency and visual harmony.</P>
                   </div>
-                </SwiperSlide>
-                <SwiperSlide>
+                </div>
+                <div>
                   <div>
                     <img src={logo} alt="logo" className='w-full h-auto rounded-lg' />
                   </div>
-                </SwiperSlide>
-                <SwiperSlide>
+                </div>
+                <div>
                   <div>
                     <img src={logo2} alt="logo2" className='w-full h-auto rounded-lg' />
                   </div>
-                </SwiperSlide>
-              </Swiper>
+                </div>
+              </div>
             </div>
 
             {/* Desktop Layout */}
@@ -845,22 +805,16 @@ export default function EHairPOSPage() {
         <SectionBlock variant="purple" backgrounds={ehairposBackgrounds}>
         <FadeIn>
           <Container>
-            {/* Mobile Swiper */}
+            {/* Mobile Layout */}
             <div className="md:hidden">
-              <Swiper
-                modules={[Pagination]}
-                pagination={{ clickable: true }}
-                spaceBetween={24}
-                slidesPerView={1}
-                className="reflections-swiper"
-              >
-                <SwiperSlide>
+              <div className="space-y-8">
+                <div>
                   <div>
                     <H2>Reflections</H2>
                     <P>After launch, the system was adopted by several mid-to-large salon chains. One owner shared:</P>
                   </div>
-                </SwiperSlide>
-                <SwiperSlide>
+                </div>
+                <div>
                   <div>
                     <div className="bg-white/10 backdrop-blur rounded-sm shadow p-5 mb-8">
                       <img src={quote} alt="quote" className='mb-8 rounded-lg' />
@@ -868,8 +822,8 @@ export default function EHairPOSPage() {
                     </div>
                     <P>That feedback validated our core goal—turning POS from a passive system into a decision-making assistant.</P>
                   </div>
-                </SwiperSlide>
-                <SwiperSlide>
+                </div>
+                <div>
                   <div>
                     <H2>Takeaways</H2>
                     <UL>
@@ -878,8 +832,8 @@ export default function EHairPOSPage() {
                       <LI>Collaborating with frontline staff during design helped us ship what truly mattered</LI>
                     </UL>
                   </div>
-                </SwiperSlide>
-              </Swiper>
+                </div>
+              </div>
             </div>
 
             {/* Desktop Layout */}

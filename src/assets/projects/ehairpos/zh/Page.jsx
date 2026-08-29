@@ -1,10 +1,6 @@
 import { useState, useEffect, useRef } from 'react'
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
-import { Swiper, SwiperSlide } from 'swiper/react'
-import { Pagination } from 'swiper/modules'
-import 'swiper/css'
-import 'swiper/css/pagination'
 import Navbar from '../../../../components/utilities/Navbar'
 import ScrollHint from '../../../../components/utilities/ScrollHint'
 import { useFloatingAnimation } from '../../../../hooks/useFloatingAnimation'
@@ -330,16 +326,16 @@ export default function EHairPOSPageZh() {
               <H2>目標使用者</H2>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div className="bg-white/10 backdrop-blur rounded-sm shadow p-5">
-                  <div className="text-sm mb-2 opacity-70">店主 / 店長</div>
-                  <p className='pb-0'>台灣中高端美髮沙龍，常見多店營運</p>
+                  <div className="text-sm mb-2 opacity-70">員工</div>
+                  <p className='pb-0'>第一線人員：在忙碌的現場快速完成顧客、預約與銷售的日常作業</p>
                 </div>
                 <div className="bg-white/10 backdrop-blur rounded-sm shadow p-5">
-                  <div className="text-sm mb-2 opacity-70">設計師與助理</div>
-                  <p className='pb-0'>第一線人員：管理顧客、預約與銷售</p>
+                  <div className="text-sm mb-2 opacity-70">經營者</div>
+                  <p className='pb-0'>掌握多分店的營運狀況，用數據做經營與人事決策</p>
                 </div>
                 <div className="bg-white/10 backdrop-blur rounded-sm shadow p-5">
-                  <div className="text-sm mb-2 opacity-70">合作培訓單位</div>
-                  <p className='pb-0'>將 eHairPOS 納入美髮教育課程的技職院校</p>
+                  <div className="text-sm mb-2 opacity-70">消費者</div>
+                  <p className='pb-0'>輕鬆預約想要的服務與設計師，並用會員卡與優惠消費</p>
                 </div>
               </div>
          
@@ -382,23 +378,17 @@ export default function EHairPOSPageZh() {
         <FadeIn>
           <Container>
           <H2>設計成果</H2>
-            {/* Mobile Swiper */}
+            {/* Mobile Layout */}
             <div className="md:hidden">
-              <Swiper
-                modules={[Pagination]}
-                pagination={{ clickable: true }}
-                spaceBetween={24}
-                slidesPerView={1}
-                className="design-deliverables-swiper"
-              >
-                <SwiperSlide>
+              <div className="space-y-8">
+                <div>
                   <div>
                    
                     <H3>顧客管理：進階篩選與分割視圖</H3>
                     <P>我們捨棄以彈窗為主的瀏覽方式，改採分割視圖。使用者可同時瀏覽顧客清單與右側完整資料，大幅縮短查找時間並減少點擊次數。</P>
                   </div>
-                </SwiperSlide>
-                <SwiperSlide>
+                </div>
+                <div>
                   <div>
                     <P>舊版：瀏覽顧客清單時，點入明細會開啟全螢幕彈窗；必須先關閉才能回到清單。</P>
                     <div className='grid grid-cols-1 gap-4 mb-8 mobile:m-0'>
@@ -406,8 +396,8 @@ export default function EHairPOSPageZh() {
                       <img src={old2} alt="old2" className='w-full h-auto rounded-lg mobile:hidden' />
                     </div>
                   </div>
-                </SwiperSlide>
-                <SwiperSlide>
+                </div>
+                <div>
                   <div>
                     <P>新版：採用分割視圖，點選清單中的顧客即可在右側即時顯示詳細資訊。</P>
                  
@@ -418,8 +408,8 @@ export default function EHairPOSPageZh() {
                       className='mb-8 rounded-lg'
                     />
                   </div>
-                </SwiperSlide>
-                <SwiperSlide>
+                </div>
+                <div>
                   <div>
                     <P>不同設計師的備註以時間軸形式呈現，讓團隊共享顧客偏好紀錄。</P>
                     <ImageWithHotspots
@@ -429,8 +419,8 @@ export default function EHairPOSPageZh() {
                       className='mb-8 rounded-lg'
                     />
                   </div>
-                </SwiperSlide>
-                <SwiperSlide>
+                </div>
+                <div>
                   <div>
                     <P>以圖表摘要來店頻率、消費與服務組合，協助店主快速辨識 VIP 顧客。</P>
                     <ImageWithHotspots
@@ -440,8 +430,8 @@ export default function EHairPOSPageZh() {
                       className='rounded-lg'
                     />
                   </div>
-                </SwiperSlide>
-              </Swiper>
+                </div>
+              </div>
             </div>
 
             {/* Desktop Layout */}
@@ -486,30 +476,24 @@ export default function EHairPOSPageZh() {
         <SectionBlock backgrounds={ehairposBackgrounds}>
         <FadeIn>
           <Container>
-            {/* Mobile Swiper */}
+            {/* Mobile Layout */}
             <div className="md:hidden">
-              <Swiper
-                modules={[Pagination]}
-                pagination={{ clickable: true }}
-                spaceBetween={24}
-                slidesPerView={1}
-                className="booking-flow-swiper"
-              >
-                <SwiperSlide>
+              <div className="space-y-8">
+                <div>
                   <div>
                     <H3>彈性且直覺的預約流程</H3>
                     <P>預約來源有兩種：線上表單與現場新增。<br />
                       我們借鑑使用者熟悉的互動模式（如 Google Calendar），支援快速拖曳排程、未排定的保留時段，以及日/週期（月）視圖切換。</P>
                   </div>
-                </SwiperSlide>
-                <SwiperSlide>
+                </div>
+                <div>
                   <div>
                     <div className='flex justify-center'>
                       <img src={draft2} alt="draft2" className='w-full h-auto rounded-lg mix-blend-multiply opacity-50' />
                     </div>
                   </div>
-                </SwiperSlide>
-                <SwiperSlide>
+                </div>
+                <div>
                   <div>
                     <ImageWithHotspots
                       src={screenshot04}
@@ -518,8 +502,8 @@ export default function EHairPOSPageZh() {
                       className='mb-8 rounded-lg'
                     />
                   </div>
-                </SwiperSlide>
-                <SwiperSlide>
+                </div>
+                <div>
                   <div>
                     <P>行事曆可切換為月視圖，方便一眼檢視並調整整體排程。</P>
                     <ImageWithHotspots
@@ -529,8 +513,8 @@ export default function EHairPOSPageZh() {
                       className='rounded-lg'
                     />
                   </div>
-                </SwiperSlide>
-              </Swiper>
+                </div>
+              </div>
             </div>
 
             {/* Desktop Layout */}
@@ -565,30 +549,24 @@ export default function EHairPOSPageZh() {
         <SectionBlock variant="photo" backgrounds={ehairposBackgrounds}>
         <FadeIn>
           <Container>
-            {/* Mobile Swiper */}
+            {/* Mobile Layout */}
             <div className="md:hidden">
-              <Swiper
-                modules={[Pagination]}
-                pagination={{ clickable: true }}
-                spaceBetween={24}
-                slidesPerView={1}
-                className="checkout-flow-swiper"
-              >
-                <SwiperSlide>
+              <div className="space-y-8">
+                <div>
                   <div>
                     <H3>結帳流程：因應沙龍現場的複雜性</H3>
                     <P>
-                      Unlike retail POS, salon purchases are often complex: A client might get a cut, color, and buy a product—all in one visit.<br />
-                      Our new UI lets staff apply discounts per item, choose payment types, and switch between products quickly. Visual hierarchy and iconography were improved for clarity and speed.</P>
+                      不同於零售業的 POS，沙龍的一次消費往往相當複雜：顧客可能在同一次到店中剪髮、染髮，並順道購買商品。<br />
+                      新版介面讓員工能針對單一品項套用折扣、選擇付款方式，並快速切換商品。同時優化視覺層級與圖示，讓辨識更清楚、操作更迅速。</P>
                   </div>
-                </SwiperSlide>
-                <SwiperSlide>
+                </div>
+                <div>
                   <div>
                     <ProjectNote className='mb-4 text-gray-800'>舊版：留白過多，資訊層級不清，辨識度低。</ProjectNote>
                     <img src={old3} alt="old3" className='w-full h-auto rounded-lg mb-8' />
                   </div>
-                </SwiperSlide>
-                <SwiperSlide>
+                </div>
+                <div>
                   <div>
                     <P>新版以圖示建立清楚的商品分類，提升可讀性。</P>
                     <ImageWithHotspots
@@ -598,8 +576,8 @@ export default function EHairPOSPageZh() {
                       className='mb-8 rounded-lg'
                     />
                   </div>
-                </SwiperSlide>
-                <SwiperSlide>
+                </div>
+                <div>
                   <div>
                     <P>結帳時，側欄會顯示購買金額，方便店員檢視與確認。</P>
                     <ImageWithHotspots
@@ -609,16 +587,16 @@ export default function EHairPOSPageZh() {
                       className='rounded-lg'
                     />
                   </div>
-                </SwiperSlide>
-              </Swiper>
+                </div>
+              </div>
             </div>
 
             {/* Desktop Layout */}
             <div className="hidden md:block">
               <H3>結帳流程：因應沙龍現場的複雜性</H3>
               <P>
-                Unlike retail POS, salon purchases are often complex: A client might get a cut, color, and buy a product—all in one visit.<br />
-                Our new UI lets staff apply discounts per item, choose payment types, and switch between products quickly. Visual hierarchy and iconography were improved for clarity and speed.</P>
+                不同於零售業的 POS，沙龍的一次消費往往相當複雜：顧客可能在同一次到店中剪髮、染髮，並順道購買商品。<br />
+                新版介面讓員工能針對單一品項套用折扣、選擇付款方式，並快速切換商品。同時優化視覺層級與圖示，讓辨識更清楚、操作更迅速。</P>
 
               <div className="relative">
                 <ProjectNote className='absolute top-[30%] right-1/2 w-60 translate-y-1/2 translate-x-1/2 text-gray-800'>舊版：留白過多，資訊層級不清，辨識度低。</ProjectNote>
@@ -651,16 +629,10 @@ export default function EHairPOSPageZh() {
         <SectionBlock backgrounds={ehairposBackgrounds}>
         <FadeIn>
           <Container>
-            {/* Mobile Swiper */}
+            {/* Mobile Layout */}
             <div className="md:hidden">
-              <Swiper
-                modules={[Pagination]}
-                pagination={{ clickable: true }}
-                spaceBetween={24}
-                slidesPerView={1}
-                className="membership-wallet-swiper"
-              >
-                <SwiperSlide>
+              <div className="space-y-8">
+                <div>
                   <div>
                     <H3>像真實錢包一樣的會員錢包</H3>
                     <P>
@@ -669,8 +641,8 @@ export default function EHairPOSPageZh() {
                       介面以真實錢包為靈感：有條理、好閱讀，並能在結帳時快速套用。
                     </P>
                   </div>
-                </SwiperSlide>
-                <SwiperSlide>
+                </div>
+                <div>
                   <div>
                     <ImageWithHotspots
                       src={screenshot09}
@@ -679,8 +651,8 @@ export default function EHairPOSPageZh() {
                       className='mb-8 rounded-lg'
                     />
                   </div>
-                </SwiperSlide>
-                <SwiperSlide>
+                </div>
+                <div>
                   <div>
                     <ImageWithHotspots
                       src={screenshot10}
@@ -689,8 +661,8 @@ export default function EHairPOSPageZh() {
                       className='mb-8 rounded-lg'
                     />
                   </div>
-                </SwiperSlide>
-              </Swiper>
+                </div>
+              </div>
             </div>
 
             {/* Desktop Layout */}
@@ -721,16 +693,10 @@ export default function EHairPOSPageZh() {
         <SectionBlock variant="purple" backgrounds={ehairposBackgrounds}>
         <FadeIn>
           <Container>
-            {/* Mobile Swiper */}
+            {/* Mobile Layout */}
             <div className="md:hidden">
-              <Swiper
-                modules={[Pagination]}
-                pagination={{ clickable: true }}
-                spaceBetween={24}
-                slidesPerView={1}
-                className="visual-reports-swiper"
-              >
-                <SwiperSlide>
+              <div className="space-y-8">
+                <div>
                   <div>
                     <H3>視覺化報表：讓經營決策更有依據</H3>
                     <P>為了讓店主不只「看到數字」，更能「理解趨勢」，我們建立了兩層報表：</P>
@@ -739,25 +705,25 @@ export default function EHairPOSPageZh() {
                       <LI><strong>設計師報表：</strong>追蹤個人表現、回訪率與銷售目標的長期變化</LI>
                     </UL>
                   </div>
-                </SwiperSlide>
-                <SwiperSlide>
+                </div>
+                <div>
                   <div>
                     <LazyImage src={screenshot11} alt="screenshot11" className='w-full h-auto rounded-tr-lg rounded-br-lg' />
                     <p className='text-caption text-gray-500 font-light mt-4'>店鋪儀表板：整合營收、來客數、客單價與成長指標，搭配時間篩選，清楚掌握經營表現。</p>
                   </div>
-                </SwiperSlide>
-                <SwiperSlide>
+                </div>
+                <div>
                   <div>
                     <LazyImage src={screenshot12} alt="screenshot12" className='w-full h-auto rounded-tl-lg rounded-bl-lg' />
                     <p className='text-caption text-gray-500 font-light mt-4'>設計師儀表板：每位設計師可查看個人績效趨勢、顧客數與成長軌跡。</p>
                   </div>
-                </SwiperSlide>
-                <SwiperSlide>
+                </div>
+                <div>
                   <div>
                     <P>這些儀表板讓店主與設計師都能更有掌控感：用數據制定計畫，而不是靠直覺猜測。</P>
                   </div>
-                </SwiperSlide>
-              </Swiper>
+                </div>
+              </div>
             </div>
 
             {/* Desktop Layout */}
@@ -788,37 +754,31 @@ export default function EHairPOSPageZh() {
         <SectionBlock variant="white" backgrounds={ehairposBackgrounds}>
         <FadeIn>
           <Container>
-            {/* Mobile Swiper */}
+            {/* Mobile Layout */}
             <div className="md:hidden">
-              <Swiper
-                modules={[Pagination]}
-                pagination={{ clickable: true }}
-                spaceBetween={24}
-                slidesPerView={1}
-                className="logotype-design-swiper"
-              >
-                <SwiperSlide>
+              <div className="space-y-8">
+                <div>
                   <div>
                     <H2>Logotype 設計</H2>
                     <P><strong>概念：</strong>將字母「e」與「P」結合無限符號與美髮剪刀，形成帶狀的視覺輪廓；兼具柔和與專業感，象徵沙龍產業中「無限延伸的服務」與「創意能量」。</P>
                   </div>
-                </SwiperSlide>
-                <SwiperSlide>
+                </div>
+                <div>
                   <div>
                     <P><strong>色彩：</strong>延續 App 的核心視覺語言，採用相近色紫色系，維持品牌一致性與視覺和諧。</P>
                   </div>
-                </SwiperSlide>
-                <SwiperSlide>
+                </div>
+                <div>
                   <div>
                     <img src={logo} alt="logo" className='w-full h-auto rounded-lg' />
                   </div>
-                </SwiperSlide>
-                <SwiperSlide>
+                </div>
+                <div>
                   <div>
                     <img src={logo2} alt="logo2" className='w-full h-auto rounded-lg' />
                   </div>
-                </SwiperSlide>
-              </Swiper>
+                </div>
+              </div>
             </div>
 
             {/* Desktop Layout */}
@@ -846,22 +806,16 @@ export default function EHairPOSPageZh() {
         <SectionBlock variant="purple" backgrounds={ehairposBackgrounds}>
         <FadeIn>
           <Container>
-            {/* Mobile Swiper */}
+            {/* Mobile Layout */}
             <div className="md:hidden">
-              <Swiper
-                modules={[Pagination]}
-                pagination={{ clickable: true }}
-                spaceBetween={24}
-                slidesPerView={1}
-                className="reflections-swiper"
-              >
-                <SwiperSlide>
+              <div className="space-y-8">
+                <div>
                   <div>
                     <H2>心得回顧</H2>
                     <P>上線後，系統被多家中大型連鎖沙龍採用。一位店主分享：</P>
                   </div>
-                </SwiperSlide>
-                <SwiperSlide>
+                </div>
+                <div>
                   <div>
                     <div className="bg-white/10 backdrop-blur rounded-sm shadow p-5 mb-8">
                       <img src={quote} alt="quote" className='mb-8 rounded-lg' />
@@ -869,8 +823,8 @@ export default function EHairPOSPageZh() {
                     </div>
                     <P>這段回饋驗證了我們的核心目標：讓 POS 從被動紀錄工具，轉變成協助決策的助手。</P>
                   </div>
-                </SwiperSlide>
-                <SwiperSlide>
+                </div>
+                <div>
                   <div>
                     <H2>重點收穫</H2>
                     <UL>
@@ -879,8 +833,8 @@ export default function EHairPOSPageZh() {
                       <LI>在設計過程中與第一線人員協作，能幫助我們交付真正重要的內容</LI>
                     </UL>
                   </div>
-                </SwiperSlide>
-              </Swiper>
+                </div>
+              </div>
             </div>
 
             {/* Desktop Layout */}

@@ -1,10 +1,6 @@
 import { useState, useEffect, useRef } from 'react'
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
-import { Swiper, SwiperSlide } from 'swiper/react'
-import { Pagination } from 'swiper/modules'
-import 'swiper/css'
-import 'swiper/css/pagination'
 import Navbar from '../../../../components/utilities/Navbar'
 import ScrollHint from '../../../../components/utilities/ScrollHint'
 import { useFloatingAnimation } from '../../../../hooks/useFloatingAnimation'
@@ -382,23 +378,17 @@ export default function EHairPOSPageJa() {
         <FadeIn>
           <Container>
           <H2>デザイン成果</H2>
-            {/* Mobile Swiper */}
+            {/* Mobile Layout */}
             <div className="md:hidden">
-              <Swiper
-                modules={[Pagination]}
-                pagination={{ clickable: true }}
-                spaceBetween={24}
-                slidesPerView={1}
-                className="design-deliverables-swiper"
-              >
-                <SwiperSlide>
+              <div className="space-y-8">
+                <div>
                   <div>
                    
                     <H3>顧客管理：高度なフィルターとスプリットビュー</H3>
                     <P>モーダル中心の閲覧から離れ、スプリットビューに変更しました。顧客リストと詳細情報を並べて確認できるため、検索時間を短縮しクリック数も削減できます。</P>
                   </div>
-                </SwiperSlide>
-                <SwiperSlide>
+                </div>
+                <div>
                   <div>
                     <P>旧版：顧客リスト閲覧中に詳細を開くと全画面モーダルになり、閉じないとリストに戻れませんでした。</P>
                     <div className='grid grid-cols-1 gap-4 mb-8 mobile:m-0'>
@@ -406,8 +396,8 @@ export default function EHairPOSPageJa() {
                       <img src={old2} alt="old2" className='w-full h-auto rounded-lg mobile:hidden' />
                     </div>
                   </div>
-                </SwiperSlide>
-                <SwiperSlide>
+                </div>
+                <div>
                   <div>
                     <P>新版：スプリットビューを採用。リストの顧客をクリックすると右側に即座に詳細が表示されます。</P>
                     <ImageWithHotspots
@@ -417,8 +407,8 @@ export default function EHairPOSPageJa() {
                       className='mb-8 rounded-lg'
                     />
                   </div>
-                </SwiperSlide>
-                <SwiperSlide>
+                </div>
+                <div>
                   <div>
                     <P>スタイリストごとのメモはタイムラインで表示され、顧客の好みをチームで共有できます。</P>
                     <ImageWithHotspots
@@ -428,8 +418,8 @@ export default function EHairPOSPageJa() {
                       className='mb-8 rounded-lg'
                     />
                   </div>
-                </SwiperSlide>
-                <SwiperSlide>
+                </div>
+                <div>
                   <div>
                     <P>来店頻度・支出・施術構成をチャートで要約し、VIP顧客を見つけやすくしました。</P>
                     <ImageWithHotspots
@@ -439,8 +429,8 @@ export default function EHairPOSPageJa() {
                       className='rounded-lg'
                     />
                   </div>
-                </SwiperSlide>
-              </Swiper>
+                </div>
+              </div>
             </div>
 
             {/* Desktop Layout */}
@@ -485,30 +475,24 @@ export default function EHairPOSPageJa() {
         <SectionBlock backgrounds={ehairposBackgrounds}>
         <FadeIn>
           <Container>
-            {/* Mobile Swiper */}
+            {/* Mobile Layout */}
             <div className="md:hidden">
-              <Swiper
-                modules={[Pagination]}
-                pagination={{ clickable: true }}
-                spaceBetween={24}
-                slidesPerView={1}
-                className="booking-flow-swiper"
-              >
-                <SwiperSlide>
+              <div className="space-y-8">
+                <div>
                   <div>
                     <H3>彈性且直覺的預約流程</H3>
                     <P>預約來源有兩種：線上表單與現場新增。<br />
                       ユーザーが馴染みのある操作（例：Google Calendar）を取り入れ、ドラッグ＆ドロップでの素早い予約登録、未確定枠の保持、日／月表示の切り替えを可能にしました。</P>
                   </div>
-                </SwiperSlide>
-                <SwiperSlide>
+                </div>
+                <div>
                   <div>
                     <div className='flex justify-center'>
                       <img src={draft2} alt="draft2" className='w-full h-auto rounded-lg mix-blend-multiply opacity-50' />
                     </div>
                   </div>
-                </SwiperSlide>
-                <SwiperSlide>
+                </div>
+                <div>
                   <div>
                     <ImageWithHotspots
                       src={screenshot04}
@@ -517,8 +501,8 @@ export default function EHairPOSPageJa() {
                       className='mb-8 rounded-lg'
                     />
                   </div>
-                </SwiperSlide>
-                <SwiperSlide>
+                </div>
+                <div>
                   <div>
                     <P>カレンダーは月表示に切り替えられ、全体の予定を俯瞰して調整しやすくなります。</P>
                     <ImageWithHotspots
@@ -528,8 +512,8 @@ export default function EHairPOSPageJa() {
                       className='rounded-lg'
                     />
                   </div>
-                </SwiperSlide>
-              </Swiper>
+                </div>
+              </div>
             </div>
 
             {/* Desktop Layout */}
@@ -564,30 +548,24 @@ export default function EHairPOSPageJa() {
         <SectionBlock variant="photo" backgrounds={ehairposBackgrounds}>
         <FadeIn>
           <Container>
-            {/* Mobile Swiper */}
+            {/* Mobile Layout */}
             <div className="md:hidden">
-              <Swiper
-                modules={[Pagination]}
-                pagination={{ clickable: true }}
-                spaceBetween={24}
-                slidesPerView={1}
-                className="checkout-flow-swiper"
-              >
-                <SwiperSlide>
+              <div className="space-y-8">
+                <div>
                   <div>
                     <H3>会計フロー：サロン業務の複雑さに対応</H3>
                     <P>
                       Unlike retail POS, salon purchases are often complex: A client might get a cut, color, and buy a product—all in one visit.<br />
                       Our new UI lets staff apply discounts per item, choose payment types, and switch between products quickly. Visual hierarchy and iconography were improved for clarity and speed.</P>
                   </div>
-                </SwiperSlide>
-                <SwiperSlide>
+                </div>
+                <div>
                   <div>
                     <ProjectNote className='mb-4 text-gray-800'>旧版：余白が多く、情報の階層が不明瞭で判別しづらい。</ProjectNote>
                     <img src={old3} alt="old3" className='w-full h-auto rounded-lg mb-8' />
                   </div>
-                </SwiperSlide>
-                <SwiperSlide>
+                </div>
+                <div>
                   <div>
                     <P>新版はアイコン付きのカテゴリで商品を整理し、視認性を高めました。</P>
                     <ImageWithHotspots
@@ -597,8 +575,8 @@ export default function EHairPOSPageJa() {
                       className='mb-8 rounded-lg'
                     />
                   </div>
-                </SwiperSlide>
-                <SwiperSlide>
+                </div>
+                <div>
                   <div>
                     <P>会計時にはサイドバーに購入金額が表示され、スタッフが確認しやすくなります。</P>
                     <ImageWithHotspots
@@ -608,8 +586,8 @@ export default function EHairPOSPageJa() {
                       className='rounded-lg'
                     />
                   </div>
-                </SwiperSlide>
-              </Swiper>
+                </div>
+              </div>
             </div>
 
             {/* Desktop Layout */}
@@ -650,16 +628,10 @@ export default function EHairPOSPageJa() {
         <SectionBlock backgrounds={ehairposBackgrounds}>
         <FadeIn>
           <Container>
-            {/* Mobile Swiper */}
+            {/* Mobile Layout */}
             <div className="md:hidden">
-              <Swiper
-                modules={[Pagination]}
-                pagination={{ clickable: true }}
-                spaceBetween={24}
-                slidesPerView={1}
-                className="membership-wallet-swiper"
-              >
-                <SwiperSlide>
+              <div className="space-y-8">
+                <div>
                   <div>
                     <H3>リアルな財布のような会員ウォレット</H3>
                     <P>
@@ -668,8 +640,8 @@ export default function EHairPOSPageJa() {
                       UIは「実際の財布」を想起させる構成で、整理されて見やすく、会計時にも素早く適用できます。
                     </P>
                   </div>
-                </SwiperSlide>
-                <SwiperSlide>
+                </div>
+                <div>
                   <div>
                     <ImageWithHotspots
                       src={screenshot09}
@@ -678,8 +650,8 @@ export default function EHairPOSPageJa() {
                       className='mb-8 rounded-lg'
                     />
                   </div>
-                </SwiperSlide>
-                <SwiperSlide>
+                </div>
+                <div>
                   <div>
                     <ImageWithHotspots
                       src={screenshot10}
@@ -688,8 +660,8 @@ export default function EHairPOSPageJa() {
                       className='mb-8 rounded-lg'
                     />
                   </div>
-                </SwiperSlide>
-              </Swiper>
+                </div>
+              </div>
             </div>
 
             {/* Desktop Layout */}
@@ -720,16 +692,10 @@ export default function EHairPOSPageJa() {
         <SectionBlock variant="purple" backgrounds={ehairposBackgrounds}>
         <FadeIn>
           <Container>
-            {/* Mobile Swiper */}
+            {/* Mobile Layout */}
             <div className="md:hidden">
-              <Swiper
-                modules={[Pagination]}
-                pagination={{ clickable: true }}
-                spaceBetween={24}
-                slidesPerView={1}
-                className="visual-reports-swiper"
-              >
-                <SwiperSlide>
+              <div className="space-y-8">
+                <div>
                   <div>
                     <H3>可視化レポート：意思決定を支える</H3>
                     <P>オーナーが「数字を見る」だけでなく「傾向を理解」できるよう、2層のレポートを用意しました：</P>
@@ -738,25 +704,25 @@ export default function EHairPOSPageJa() {
                       <LI><strong>スタイリスト別レポート：</strong>個人の成果、リピート率、売上目標の推移を追跡</LI>
                     </UL>
                   </div>
-                </SwiperSlide>
-                <SwiperSlide>
+                </div>
+                <div>
                   <div>
                     <LazyImage src={screenshot11} alt="screenshot11" className='w-full h-auto rounded-tr-lg rounded-br-lg' />
                     <p className='text-caption text-gray-500 font-light mt-4'>店舗ダッシュボード：売上・来店数・客単価・成長指標を統合し、期間フィルターで経営状況を把握。</p>
                   </div>
-                </SwiperSlide>
-                <SwiperSlide>
+                </div>
+                <div>
                   <div>
                     <LazyImage src={screenshot12} alt="screenshot12" className='w-full h-auto rounded-tl-lg rounded-bl-lg' />
                     <p className='text-caption text-gray-500 font-light mt-4'>スタイリストダッシュボード：個人の成果トレンド、顧客数、成長の推移を確認。</p>
                   </div>
-                </SwiperSlide>
-                <SwiperSlide>
+                </div>
+                <div>
                   <div>
                     <P>これらのダッシュボードにより、オーナーもスタイリストも自分の成果を主体的に捉え、勘ではなくデータで計画できるようになります。</P>
                   </div>
-                </SwiperSlide>
-              </Swiper>
+                </div>
+              </div>
             </div>
 
             {/* Desktop Layout */}
@@ -787,37 +753,31 @@ export default function EHairPOSPageJa() {
         <SectionBlock variant="white" backgrounds={ehairposBackgrounds}>
         <FadeIn>
           <Container>
-            {/* Mobile Swiper */}
+            {/* Mobile Layout */}
             <div className="md:hidden">
-              <Swiper
-                modules={[Pagination]}
-                pagination={{ clickable: true }}
-                spaceBetween={24}
-                slidesPerView={1}
-                className="logotype-design-swiper"
-              >
-                <SwiperSlide>
+              <div className="space-y-8">
+                <div>
                   <div>
                     <H2>ロゴタイプデザイン</H2>
                     <P><strong>コンセプト：</strong>「e」と「P」を無限記号、サロンのハサミと組み合わせ、リボンのような形状に落とし込みました。柔らかさとプロフェッショナルさを両立し、「終わりのないサービス」と「創造性」を象徴しています。</P>
                   </div>
-                </SwiperSlide>
-                <SwiperSlide>
+                </div>
+                <div>
                   <div>
                     <P><strong>カラーパレット：</strong>アプリのコアビジュアルに合わせ、近接したパープル系でブランド一貫性と調和を保ちました。</P>
                   </div>
-                </SwiperSlide>
-                <SwiperSlide>
+                </div>
+                <div>
                   <div>
                     <img src={logo} alt="logo" className='w-full h-auto rounded-lg' />
                   </div>
-                </SwiperSlide>
-                <SwiperSlide>
+                </div>
+                <div>
                   <div>
                     <img src={logo2} alt="logo2" className='w-full h-auto rounded-lg' />
                   </div>
-                </SwiperSlide>
-              </Swiper>
+                </div>
+              </div>
             </div>
 
             {/* Desktop Layout */}
@@ -845,22 +805,16 @@ export default function EHairPOSPageJa() {
         <SectionBlock variant="purple" backgrounds={ehairposBackgrounds}>
         <FadeIn>
           <Container>
-            {/* Mobile Swiper */}
+            {/* Mobile Layout */}
             <div className="md:hidden">
-              <Swiper
-                modules={[Pagination]}
-                pagination={{ clickable: true }}
-                spaceBetween={24}
-                slidesPerView={1}
-                className="reflections-swiper"
-              >
-                <SwiperSlide>
+              <div className="space-y-8">
+                <div>
                   <div>
                     <H2>振り返り</H2>
                     <P>リリース後、本システムは複数の中〜大規模サロンチェーンに採用されました。あるオーナーからは次の声がありました：</P>
                   </div>
-                </SwiperSlide>
-                <SwiperSlide>
+                </div>
+                <div>
                   <div>
                     <div className="bg-white/10 backdrop-blur rounded-sm shadow p-5 mb-8">
                       <img src={quote} alt="quote" className='mb-8 rounded-lg' />
@@ -868,8 +822,8 @@ export default function EHairPOSPageJa() {
                     </div>
                     <P>このフィードバックは、POSを“受動的な記録ツール”から“意思決定を支えるアシスタント”へ変えるという私たちの目標を裏付けました。</P>
                   </div>
-                </SwiperSlide>
-                <SwiperSlide>
+                </div>
+                <div>
                   <div>
                     <H2>学び</H2>
                     <UL>
@@ -878,8 +832,8 @@ export default function EHairPOSPageJa() {
                       <LI>現場スタッフとの協業は、本当に重要なものを届ける助けになる</LI>
                     </UL>
                   </div>
-                </SwiperSlide>
-              </Swiper>
+                </div>
+              </div>
             </div>
 
             {/* Desktop Layout */}
