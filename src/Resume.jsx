@@ -83,7 +83,7 @@ function Resume({ dataset = resumeData }) {
       {/* Resume document */}
       <div
         id="resume-doc"
-        className="resume-doc max-w-5xl mx-auto my-6 md:my-10 md:flex md:items-stretch bg-white md:rounded-2xl md:shadow-sm overflow-hidden print:flex print:flex-row print:items-stretch print:my-0 print:max-w-full print:shadow-none print:rounded-none"
+        className="resume-doc max-w-5xl mx-auto my-6 md:my-10 md:flex md:items-stretch bg-white md:rounded-2xl md:shadow-sm overflow-hidden print:overflow-visible print:flex print:flex-row print:items-stretch print:my-0 print:max-w-full print:shadow-none print:rounded-none"
       >
         {/* Sidebar */}
         <aside className="resume-sidebar md:w-[300px] print:w-[200px] shrink-0 bg-gray-900 text-white p-8 flex flex-col gap-8 print:p-5 print:gap-3.5">

@@ -34,6 +34,26 @@
   .resume-exp-item {
     break-inside: avoid;
   }
+
+  /* Anything that clips overflow silently drops every page after the first —
+     the printed output gets cut off at the bottom of page 1. `#resume-doc`
+     carries `overflow-hidden` for its rounded corners on screen, so it's reset
+     via `print:overflow-visible` in Resume.jsx; these ancestors are the rest
+     of the chain that has to stay unclipped. */
+  html,
+  body,
+  #root {
+    height: auto !important;
+    overflow: visible !important;
+  }
+
+  /* Full-screen fixed overlays (route-transition sheet, initial loader). Fixed
+     elements are repainted on every printed page, so an idle one that's only
+     hidden by having zero size would still cover the whole resume. */
+  .loading-overlay,
+  .page-sheet {
+    display: none !important;
+  }
 }
 
 /* Ensure strong inside paragraphs has sufficient contrast against light-weight base text */
