@@ -40,7 +40,7 @@ export const resumeDataHahow = {
       },
     ],
     about: [
-      'UI/UX 設計師，具備 8 年以上網頁與數位產品設計經驗，擅長 B2B 後台管理系統與 EdTech 產品設計，致力於在商業目標與使用者體驗之間找到平衡。具備帶領 4 人設計團隊的經驗，並能與 PM、工程師及跨部門團隊緊密協作，習慣將 AI 工具融入設計流程以加速研究、探索方案與原型驗證。',
+      'UI/UX 設計師，具備多年網頁與數位產品設計經驗，擅長 B2B 後台管理系統與 EdTech 產品設計，致力於在商業目標與使用者體驗之間找到平衡。具備帶領 4 人設計團隊的經驗，並能與 PM、工程師及跨部門團隊緊密協作，習慣將 AI 工具融入設計流程以加速研究、探索方案與原型驗證。',
       '在最新一項經歷中，擔任 Design Lead 從零建立 4 人設計團隊，主導一套整合 AI 技術的學習平台從 0 到 1 上線，過程中需拆解學生、家長、教師等多方使用者需求並轉化為設計決策，並透過使用者滿意度調查正向驗證了成效。',
     ],
     focus: [
@@ -152,7 +152,7 @@ export const resumeDataHahow = {
       },
     ],
     about: [
-      "A UI/UX designer with 8+ years of experience in web and digital product design, specializing in B2B back-office management systems and EdTech products, dedicated to balancing business goals with user experience. Experienced in leading a 4-person design team and collaborating closely with PMs, engineers, and cross-functional teams, with a habit of integrating AI tools into the design process to accelerate research, exploration, and prototype validation.",
+      "A UI/UX designer with extensive experience in web and digital product design, specializing in B2B back-office management systems and EdTech products, dedicated to balancing business goals with user experience. Experienced in leading a 4-person design team and collaborating closely with PMs, engineers, and cross-functional teams, with a habit of integrating AI tools into the design process to accelerate research, exploration, and prototype validation.",
       'In my most recent role, I served as Design Lead, building a 4-person design team from scratch and leading an AI-integrated learning platform from 0 to 1 launch — a process that required breaking down the needs of students, parents, and teachers into design decisions, with success positively validated through a user satisfaction survey.',
     ],
     focus: [

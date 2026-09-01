@@ -40,7 +40,7 @@ export const resumeData = {
       },
     ],
     about: [
-      'UI/UX 設計師，8 年數位產品設計經驗，其中 5 年以上深耕教育科技領域。相信好的教育產品始於精準的問題定義與跨團隊的信任，擅長從需求探索、跨部門協作到介面落地的完整流程。',
+      'UI/UX 設計師，多年數位產品設計經驗，其中 5 年以上深耕教育科技領域。相信好的教育產品始於精準的問題定義與跨團隊的信任，擅長從需求探索、跨部門協作到介面落地的完整流程。',
       '在最新一項經歷中，以 Design Lead 身份從零招募並建立 4 人設計團隊，統籌跨部門需求，主導 AI 整合學習平台從 0 到 1 上線，並透過使用者滿意度調查正向驗證了成效。日常工作中持續運用 AI 工具提升設計與協作效率，樂於在設計師角色中持續加深對需求探索與產品規劃的參與。',
     ],
     focus: [
@@ -152,7 +152,7 @@ export const resumeData = {
       },
     ],
     about: [
-      "A UI/UX designer with 8 years of digital product design experience, including 5+ years focused on EdTech. I believe great education products start with precise problem definition and cross-team trust, and I'm skilled across the full process — from discovery and cross-departmental collaboration to interface execution.",
+      "A UI/UX designer with extensive experience in digital product design, including 5+ years focused on EdTech. I believe great education products start with precise problem definition and cross-team trust, and I'm skilled across the full process — from discovery and cross-departmental collaboration to interface execution.",
       'In my most recent role, I served as Design Lead, recruiting and building a 4-person design team from scratch, coordinating cross-departmental requirements, and leading an AI-integrated learning platform from 0 to 1 launch — with its success positively validated through a user satisfaction survey. I continue to use AI tools day-to-day to improve design and collaboration efficiency, and enjoy deepening my involvement in discovery and product planning as a designer.',
     ],
     focus: [
