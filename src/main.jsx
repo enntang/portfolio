@@ -9,6 +9,7 @@ import BlogPost from './BlogPost.jsx'
 import Resume from './Resume.jsx'
 import { resumeDataEdtech } from './assets/resume/resumeDataEdtech.js'
 import { resumeDataHahow } from './assets/resume/resumeDataHahow.js'
+import { resumeDataGoons } from './assets/resume/resumeDataGoons.js'
 import NotFound from './NotFound.jsx'
 import ProjectPageRouter from './ProjectPageRouter.jsx'
 import CollectionPage from './CollectionPage.jsx'
@@ -32,6 +33,7 @@ function renderRoute(pathname) {
     const resumeVariants = {
       'product-designer-edtech': resumeDataEdtech,
       'hahow-product-designer': resumeDataHahow,
+      'goons': resumeDataGoons,
     }
     if (!resumeVariants[slug]) return <NotFound />
     return <Resume dataset={resumeVariants[slug]} />
