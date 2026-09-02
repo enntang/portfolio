@@ -41,7 +41,7 @@ export const resumeDataGoons = {
       },
     ],
     about: [
-      'UI/UX 設計師，具多年數位產品設計經驗，其中 5 年以上深耕教育科技領域。擅長從需求探索、問題定義與資訊架構出發，將複雜需求轉化為具體的產品體驗，並與跨職能團隊協作推動設計落地。',
+      'UI/UX 設計師，具多年數位產品設計經驗。擅長從需求探索、問題定義與資訊架構出發，將複雜需求轉化為具體的產品體驗，並與跨職能團隊協作推動設計落地。',
       '曾於三貝德擔任 Design Lead，從零建立 4 人設計團隊，負責人才招募、培訓與專案分工。團隊成員背景多元，我依據成員專長與發展方向進行任務配置，並協助跨領域成員轉型 UI/UX，逐步建立兼具設計與前端技術能力的團隊。',
       '帶領團隊期間，同時推進既有產品改版與新產品 0 到 1 開發，透過人力調度與密集的跨部門協作完成產品落地，並以使用者滿意度調查正向驗證改版成效。具備從需求釐清、設計執行到前端交付的完整專案經驗，期待在設計與技術並重的環境中，持續參與產品策略與專案推進。',
     ],
@@ -154,7 +154,7 @@ export const resumeDataGoons = {
       },
     ],
     about: [
-      'A UI/UX designer with extensive experience in digital product design, including 5+ years focused on EdTech. I work from discovery, problem definition, and information architecture, turning complex requirements into concrete product experiences and collaborating with cross-functional teams to bring designs to launch.',
+      'A UI/UX designer with extensive experience in digital product design. I work from discovery, problem definition, and information architecture, turning complex requirements into concrete product experiences and collaborating with cross-functional teams to bring designs to launch.',
       'At Somebest, I served as Design Lead, building a 4-person design team from scratch and taking charge of recruiting, training, and project allocation. The team came from diverse backgrounds, so I assigned work according to each member\'s strengths and growth direction, and helped members transitioning from other fields move into UI/UX — gradually building a team fluent in both design and front-end development.',
       'While leading the team, I drove a redesign of existing products and 0-to-1 development of new ones in parallel, bringing both to launch through careful resourcing and close cross-departmental collaboration, with the redesign positively validated by a user satisfaction survey. I have end-to-end project experience from requirements clarification through design execution to front-end delivery, and I am looking for an environment that values design and technology equally, where I can keep contributing to product strategy and project momentum.',
     ],
