@@ -46,7 +46,6 @@ export const resumeDataGoons = {
       '帶領團隊期間，同時推進既有產品改版與新產品 0 到 1 開發，透過人力調度與密集的跨部門協作完成產品落地，並以使用者滿意度調查正向驗證改版成效。具備從需求釐清、設計執行到前端交付的完整專案經驗，期待在設計與技術並重的環境中，持續參與產品策略與專案推進。',
     ],
     focus: [
-      { label: '教育科技產品經驗', text: '5 年以上教育領域資歷（AI 整合學習平台、幼兒英語學習 App、教科書出版），熟悉不同年齡層學習者的使用情境與需求' },
       { label: '需求統籌與跨部門協作', text: '於 0 到 1 產品開發過程中，統籌研發、內容、行銷等跨部門需求，轉化為設計決策與規劃方向' },
       { label: 'UI/UX 實務', text: '從需求釐清、資訊架構規劃，到介面設計與前端交付，具備獨立執行完整專案流程經驗' },
       { label: 'Design System 建立', text: '在 POS 產品與 AI 整合學習平台等專案中，主導建立可擴展的設計規範' },
@@ -159,7 +158,6 @@ export const resumeDataGoons = {
       'While leading the team, I drove a redesign of existing products and 0-to-1 development of new ones in parallel, bringing both to launch through careful resourcing and close cross-departmental collaboration, with the redesign positively validated by a user satisfaction survey. I have end-to-end project experience from requirements clarification through design execution to front-end delivery, and I am looking for an environment that values design and technology equally, where I can keep contributing to product strategy and project momentum.',
     ],
     focus: [
-      { label: 'EdTech Product Experience', text: '5+ years in education, spanning an AI-integrated learning platform, an early-childhood English learning app, and textbook publishing — familiar with the usage contexts and needs of learners across different age groups' },
       { label: 'Requirements Coordination & Cross-Team Collaboration', text: 'Coordinated cross-departmental requirements from R&D, content, and marketing throughout 0-to-1 product development, translating them into design decisions and direction' },
       { label: 'UI/UX Practice', text: 'End-to-end experience independently executing full project workflows, from requirement clarification and information architecture planning to interface design and frontend handoff' },
       { label: 'Design System Development', text: 'Led the creation of scalable design standards across projects such as POS products and AI-integrated learning platforms' },
