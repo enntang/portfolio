@@ -11,6 +11,8 @@ import RelatedProjects from '../../../../components/projects/RelatedProjects'
 import TableOfContents from '../../../../components/utilities/TableOfContents'
 import LazyImage from '../../../../components/utilities/LazyImage'
 import ImageWithHotspots from '../../../../components/utilities/ImageWithHotspots'
+import ZoomableImage from '../../../../components/utilities/ZoomableImage'
+import Lightbox from '../../../../components/utilities/Lightbox'
 import quote from '../../../../../public/icon-quote.svg'
 
 gsap.registerPlugin(ScrollTrigger)
@@ -61,10 +63,69 @@ const penguinBackgrounds = {
   penguinBg2: bg2,
 }
 
+// 燈箱相簿。同段落的圖歸成一組，左右鍵只會在組內切換，不會跨段落亂跳。
+const COMPARE_TURN = [
+  { src: designGoal2, alt: 'Early interface screenshot 2' },
+  { src: turn02, alt: 'New interface screenshot 2' },
+]
+const COMPARE_RESULT = [
+  { src: designGoal3, alt: 'Early interface screenshot 3' },
+  { src: resultImg, alt: 'New interface screenshot 3' },
+]
+const PROCESS_IMAGES = [
+  { src: miro, alt: 'Miro online whiteboard' },
+  { src: wireframe, alt: 'Wireframe' },
+  { src: wireframeNoText1, alt: 'Wireframe (no text) 1' },
+  { src: wireframeNoText2, alt: 'Wireframe (no text) 2' },
+]
+const ONBOARDING_IMAGES = [
+  { src: loginImg, alt: 'Login screen' },
+  { src: roomListImg, alt: 'Room list' },
+  { src: roomWaitingImg, alt: 'Room waiting: player not ready' },
+]
+const TURN_IMAGES = [
+  { src: turn01, alt: "Player's turn 01" },
+  { src: turn02, alt: "Player's turn 02" },
+  { src: turn04, alt: "Player's turn 04" },
+  { src: videoGif, alt: 'Gameplay preview: sidebar with battle status, player order, scoring, and highlighted move numbers on the hex grid' },
+]
+const TIPS_IMAGES = [
+  { src: tips1, alt: 'Rule instructions 1' },
+  { src: tips2, alt: 'Rule instructions 2' },
+  { src: tips3, alt: 'Rule instructions 3' },
+]
+const RESULT_IMAGES = [
+  { src: resultImg, alt: 'Results screen' },
+]
+const VISUAL_IMAGES = [
+  { src: addRoomImg, alt: 'Add room' },
+  { src: logoutPopupImg, alt: 'Confirm logout popup' },
+  { src: watercolorOriginal, alt: 'Original artwork painted with gouache' },
+]
+// 三隻手繪企鵝散落在各段落，串成一組相簿，點開就能一路看完。
+const PENGUIN_ART = [
+  { src: penguin1, alt: 'Penguin illustration 1' },
+  { src: penguin2, alt: 'Penguin illustration 2' },
+  { src: penguin3, alt: 'Penguin illustration 3' },
+]
+
+const EMPTY_ZOOM = { items: [], index: null }
+const zoomAt = (items, index) => ({ items, index })
+const ZOOM_PREFIX = 'Zoom in: '
+
 export default function PenguinTerritoryPageEn() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
+  const [zoom, setZoom] = useState(EMPTY_ZOOM)
   const penguin1Ref = useRef(null)
   const penguin3Ref = useRef(null)
+
+  // 圖片說明統一交給 button 的 aria-label，img 的 alt 就留空，讀螢幕不會唸兩次。
+  const zoomable = (items, index) => ({
+    src: items[index].src,
+    alt: '',
+    label: `${ZOOM_PREFIX}${items[index].alt}`,
+    onZoom: () => setZoom(zoomAt(items, index)),
+  })
 
   // Hotspot modules (one per screen)
   // Coordinates are in percentage relative to image width/height and can be fine-tuned visually in the browser.
@@ -255,7 +316,11 @@ export default function PenguinTerritoryPageEn() {
                   Target Users: Web board game players (accustomed to playing on desktop/laptop with online multiplayer needs)
                 </P>
                 <div ref={penguin1Ref} className="w-48 h-auto self-end mb-4 absolute bottom-20 right-0">
-                  <LazyImage src={penguin1} alt="" className="w-full h-auto -scale-x-100 rounded-lg" />
+                  <ZoomableImage
+                    {...zoomable(PENGUIN_ART, 0)}
+                    className="w-full"
+                    imgClassName="w-full h-auto -scale-x-100 rounded-lg"
+                  />
                 </div>
               </div>
               <div className="flex flex-col gap-2">
@@ -285,7 +350,11 @@ export default function PenguinTerritoryPageEn() {
 
             <H2>Design Goals</H2>
             <div ref={penguin3Ref} className="w-48 h-auto self-end mb-4 absolute top-[-60px] left-0">
-              <LazyImage src={penguin3} alt="" className="w-full h-auto -scale-x-100 rounded-lg" />
+              <ZoomableImage
+                {...zoomable(PENGUIN_ART, 2)}
+                className="w-full"
+                imgClassName="w-full h-auto -scale-x-100 rounded-lg"
+              />
             </div>
             <div className="bg-white/60 backdrop-blur rounded-sm shadow p-6 md:p-8">
             <img src={quote} alt="quote" className='mb-2 rounded-lg' />
@@ -305,7 +374,12 @@ export default function PenguinTerritoryPageEn() {
 
 
                 {/* Old version 2 with hover to new version */}
-                <div className="relative group cursor-pointer transform -rotate-3 w-[640px] ">
+                <button
+                  type="button"
+                  onClick={() => setZoom(zoomAt(COMPARE_TURN, 1))}
+                  aria-label={`${ZOOM_PREFIX}Before & After In-game screen`}
+                  className="relative group cursor-zoom-in transform -rotate-3 w-[640px] block text-left"
+                >
                   <div className="relative overflow-hidden rounded-lg shadow aspect-[17/10]">
                     {/* Old version image */}
                     <div className="relative transition-opacity duration-300 group-hover:opacity-0 w-full h-full">
@@ -320,10 +394,15 @@ export default function PenguinTerritoryPageEn() {
                       <span className=" text-white/60 select-none">Before & After: In-game screen</span>
                     </div>
                   </div>
-                </div>
+                </button>
 
                 {/* Old version 3 with hover to new version */}
-                <div className="relative group cursor-pointer transform rotate-3 w-[600px] ml-[-120px] mt-32">
+                <button
+                  type="button"
+                  onClick={() => setZoom(zoomAt(COMPARE_RESULT, 1))}
+                  aria-label={`${ZOOM_PREFIX}Before & After Score summary`}
+                  className="relative group cursor-zoom-in transform rotate-3 w-[600px] ml-[-120px] mt-32 block text-left"
+                >
                   <div className="relative overflow-hidden rounded-lg shadow aspect-[16:10]">
                     {/* Old version image */}
                     <div className="relative transition-opacity duration-300 group-hover:opacity-0 w-full h-full">
@@ -338,7 +417,7 @@ export default function PenguinTerritoryPageEn() {
                       <span className="text-white/60 select-none">Before & After: Score summary</span>
                     </div>
                   </div>
-                </div>
+                </button>
               </div></div>
           </Container>
         </FadeIn>
@@ -352,11 +431,27 @@ export default function PenguinTerritoryPageEn() {
             <P>
               I adjusted the overall layout through wireframes, detailed all state changes during gameplay, and exchanged ideas on Miro's online whiteboard.
             </P>
-            <LazyImage src={miro} alt="Miro online whiteboard" className="w-full h-auto rounded-lg shadow mb-4" />
-              <LazyImage src={wireframe} alt="Wireframe" className="w-full h-auto rounded-lg shadow" />
+            <ZoomableImage
+              {...zoomable(PROCESS_IMAGES, 0)}
+              className="w-full mb-4"
+              imgClassName="w-full h-auto rounded-lg shadow"
+            />
+              <ZoomableImage
+                {...zoomable(PROCESS_IMAGES, 1)}
+                className="w-full"
+                imgClassName="w-full h-auto rounded-lg shadow"
+              />
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
-              <LazyImage src={wireframeNoText1} alt="Wireframe (no text) 1" className="w-full h-auto rounded-lg shadow" />
-              <LazyImage src={wireframeNoText2} alt="Wireframe (no text) 2" className="w-full h-auto rounded-lg shadow" />
+              <ZoomableImage
+                {...zoomable(PROCESS_IMAGES, 2)}
+                className="w-full"
+                imgClassName="w-full h-auto rounded-lg shadow"
+              />
+              <ZoomableImage
+                {...zoomable(PROCESS_IMAGES, 3)}
+                className="w-full"
+                imgClassName="w-full h-auto rounded-lg shadow"
+              />
             </div>
           </Container>
         </FadeIn>
@@ -372,9 +467,9 @@ export default function PenguinTerritoryPageEn() {
             <P>Players can choose to log in with an account or play as a guest.</P>
             <P>After logging in, the flow is straightforward: players enter the waiting queue → select a penguin → wait in the room.</P>
             <div className="grid grid-cols-1 gap-4 mt-8">
-              <ImageWithHotspots src={loginImg} alt="Login screen" hotspots={loginHotspots} className="w-full h-auto rounded-lg shadow" />
-              <ImageWithHotspots src={roomListImg} alt="Room list" hotspots={roomListHotspots} className="w-full h-auto rounded-lg shadow" />
-              <ImageWithHotspots src={roomWaitingImg} hotspots={waitingHotspots} alt="Room waiting: player not ready" className="w-full h-auto rounded-lg shadow" />
+              <ImageWithHotspots {...zoomable(ONBOARDING_IMAGES, 0)} hotspots={loginHotspots} className="w-full h-auto rounded-lg shadow" />
+              <ImageWithHotspots {...zoomable(ONBOARDING_IMAGES, 1)} hotspots={roomListHotspots} className="w-full h-auto rounded-lg shadow" />
+              <ImageWithHotspots {...zoomable(ONBOARDING_IMAGES, 2)} hotspots={waitingHotspots} className="w-full h-auto rounded-lg shadow" />
             </div>
             <P className="mt-6">
               The room list scrolls vertically with differentiated states: open rooms can be joined anytime; full rooms display "Starting Soon" and are locked.
@@ -394,17 +489,17 @@ export default function PenguinTerritoryPageEn() {
                 After a player confirms their action, it automatically moves to the next player's turn. When it's a player's turn, a modal message appears to prevent players from missing the state and delaying the game.
               </P>
               <div className="grid grid-cols-1 gap-4 mt-8">
-                <ImageWithHotspots src={turn01} alt="Player's turn 01" className="w-full h-auto rounded-lg shadow" />
-                <ImageWithHotspots src={turn02} alt="Player's turn 02" hotspots={turnHotspots1} className="w-full h-auto rounded-lg shadow" />
-                <ImageWithHotspots src={turn04} alt="Player's turn 04" hotspots={turnHotspots2} className="w-full h-auto rounded-lg shadow" />
+                <ImageWithHotspots {...zoomable(TURN_IMAGES, 0)} className="w-full h-auto rounded-lg shadow" />
+                <ImageWithHotspots {...zoomable(TURN_IMAGES, 1)} hotspots={turnHotspots1} className="w-full h-auto rounded-lg shadow" />
+                <ImageWithHotspots {...zoomable(TURN_IMAGES, 2)} hotspots={turnHotspots2} className="w-full h-auto rounded-lg shadow" />
               </div>
               <P className="mt-6">
                 I designed the sidebar to display battle status, with player order on the left and real-time scoring on the right. When distributing, the "numbers" for source and destination are important information, so they're highlighted with a black background.
               </P>
-              <LazyImage
-                src={videoGif}
-                alt="Gameplay preview: sidebar with battle status, player order, scoring, and highlighted move numbers on the hex grid"
-                className="w-full h-auto rounded-lg shadow mt-8"
+              <ZoomableImage
+                {...zoomable(TURN_IMAGES, 3)}
+                className="w-full mt-8"
+                imgClassName="w-full h-auto rounded-lg shadow"
               />
             </div>
 
@@ -412,9 +507,21 @@ export default function PenguinTerritoryPageEn() {
               <H3>Clear Rule Instructions</H3>
               <P>Players can view rule instructions at any time during the game. Each page includes simplified illustrations to avoid lengthy text.</P>
               <div className="flex flex-col -space-y-12 mobile:-space-y-8 [&>*]:relative mt-8 w-[60%] mobile:w-full mx-auto">
-                <LazyImage src={tips1} alt="Rule instructions 1" className=" -rotate-3 -left-10 mobile:left-0 w-full h-auto rounded-lg shadow" />
-                <LazyImage src={tips2} alt="Rule instructions 2" className=" rotate-3 left-10 mobile:left-0 w-full h-auto rounded-lg shadow" />
-                <LazyImage src={tips3} alt="Rule instructions 3" className=" -rotate-3 -left-10 mobile:left-0 w-full h-auto rounded-lg shadow" />
+                <ZoomableImage
+                  {...zoomable(TIPS_IMAGES, 0)}
+                  className="w-full -rotate-3 -left-10 mobile:left-0"
+                  imgClassName="w-full h-auto rounded-lg shadow"
+                />
+                <ZoomableImage
+                  {...zoomable(TIPS_IMAGES, 1)}
+                  className="w-full rotate-3 left-10 mobile:left-0"
+                  imgClassName="w-full h-auto rounded-lg shadow"
+                />
+                <ZoomableImage
+                  {...zoomable(TIPS_IMAGES, 2)}
+                  className="w-full -rotate-3 -left-10 mobile:left-0"
+                  imgClassName="w-full h-auto rounded-lg shadow"
+                />
               </div>
             </div>
 
@@ -423,7 +530,7 @@ export default function PenguinTerritoryPageEn() {
               <P>
                 When victory conditions are met, the game ends and displays the results screen. The highest-scoring winner shines in the largest panel, while other players' scores are also displayed in ranked order.
               </P>
-              <ImageWithHotspots src={resultImg} alt="Results screen" hotspots={resultHotspots} className="w-full h-auto rounded-lg shadow mt-8" />
+              <ImageWithHotspots {...zoomable(RESULT_IMAGES, 0)} hotspots={resultHotspots} className="w-full h-auto rounded-lg shadow mt-8" />
             </div>
           </Container>
         </FadeIn>
@@ -438,17 +545,25 @@ export default function PenguinTerritoryPageEn() {
               The overall design uses a refreshing color palette based on ice fields and ocean water, with hand-drawn style to add warmth. The interface employs extensive rounded corners and soft shadows to create a friendly, relaxed gaming atmosphere.
             </P>
 
-            <LazyImage src={addRoomImg} alt="Add room" className="w-full h-auto rounded-lg shadow mb-10" />
-            <LazyImage src={logoutPopupImg} alt="Confirm logout popup" className="w-full h-auto rounded-lg shadow" />
+            <ZoomableImage
+              {...zoomable(VISUAL_IMAGES, 0)}
+              className="w-full mb-10"
+              imgClassName="w-full h-auto rounded-lg shadow"
+            />
+            <ZoomableImage
+              {...zoomable(VISUAL_IMAGES, 1)}
+              className="w-full"
+              imgClassName="w-full h-auto rounded-lg shadow"
+            />
 
             <P className="mt-10">
               Penguin illustrations are integrated into UI states and operation hints, creating a consistent style that enhances immersion. To make the visuals more story-driven, the penguin artwork was hand-drawn,
               primarily using gouache: painted on paper, then photographed, scanned, and digitally finished.
             </P>
-            <LazyImage
-              src={watercolorOriginal}
-              alt="Original artwork painted with gouache"
-              className="w-full h-auto rounded-lg shadow mt-8"
+            <ZoomableImage
+              {...zoomable(VISUAL_IMAGES, 2)}
+              className="w-full mt-8"
+              imgClassName="w-full h-auto rounded-lg shadow"
             />
             <p className="text-caption text-gray-500 font-light mt-3">Original artwork painted with gouache</p>
           </Container>
@@ -468,7 +583,11 @@ export default function PenguinTerritoryPageEn() {
                   Games differ from apps—<strong>action feedback</strong> greatly impacts comprehension difficulty.
                 </P>
                 <P>Providing "next step hints" without disrupting the visual experience was a major challenge.</P>
-                <LazyImage src={penguin2} alt="" className="w-60 h-auto -scale-x-100 rounded-lg" />
+                <ZoomableImage
+                  {...zoomable(PENGUIN_ART, 1)}
+                  className="w-60"
+                  imgClassName="w-full h-auto -scale-x-100 rounded-lg"
+                />
                 <P>
                   Additionally, I leveraged my multi-media style; the fusion of illustration and UI made the product more appealing and received positive user feedback.
                   After the project concluded, I also documented the process in a short video—feel free to click and watch.
@@ -562,6 +681,14 @@ export default function PenguinTerritoryPageEn() {
           <Footer />
         </SectionBlock>
       </main>
+
+      <Lightbox
+        items={zoom.items}
+        index={zoom.index}
+        onClose={() => setZoom(EMPTY_ZOOM)}
+        onNavigate={(index) => setZoom((current) => ({ ...current, index }))}
+        labels={{ dialog: 'Image viewer', close: 'Close', prev: 'Previous image', next: 'Next image' }}
+      />
     </div>
   )
 }

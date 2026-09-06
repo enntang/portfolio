@@ -10,8 +10,17 @@ const FADE_MS = 250
  *
  * index 傳 null 就是關閉狀態，所以呼叫端只要維護一個 useState 即可。
  * 關閉時會多留 FADE_MS 才卸載，淡出才播得完。
+ *
+ * labels 給非中文頁面覆寫按鈕的 aria-label，預設是中文。
  */
-function Lightbox({ items, index, onClose, onNavigate }) {
+function Lightbox({ items, index, onClose, onNavigate, labels = {} }) {
+  const {
+    dialog = '圖片檢視',
+    close = '關閉',
+    prev = '上一張',
+    next = '下一張',
+  } = labels
+
   const isOpen = index !== null && index !== undefined && !!items[index]
 
   // mounted 撐住淡出的那段時間；shown 才是實際的 opacity 開關
@@ -103,7 +112,7 @@ function Lightbox({ items, index, onClose, onNavigate }) {
       ref={dialogRef}
       role="dialog"
       aria-modal="true"
-      aria-label={item.alt || '圖片檢視'}
+      aria-label={item.alt || dialog}
       tabIndex={-1}
       onClick={onClose}
       style={{ transition: `opacity ${FADE_MS}ms ease` }}
@@ -119,7 +128,7 @@ function Lightbox({ items, index, onClose, onNavigate }) {
             stop(event)
             onClose()
           }}
-          aria-label="關閉"
+          aria-label={close}
           className="w-10 h-10 rounded-full hover:bg-white/10 text-2xl leading-none"
         >
           ×
@@ -153,7 +162,7 @@ function Lightbox({ items, index, onClose, onNavigate }) {
           <button
             type="button"
             onClick={() => go(-1)}
-            aria-label="上一張"
+            aria-label={prev}
             className="absolute left-4 top-1/2 -translate-y-1/2 z-10 w-12 h-12 rounded-full text-2xl leading-none text-white/80 bg-white/5 hover:bg-white/20 transition-colors"
           >
             ←
@@ -161,7 +170,7 @@ function Lightbox({ items, index, onClose, onNavigate }) {
           <button
             type="button"
             onClick={() => go(1)}
-            aria-label="下一張"
+            aria-label={next}
             className="absolute right-4 top-1/2 -translate-y-1/2 z-10 w-12 h-12 rounded-full text-2xl leading-none text-white/80 bg-white/5 hover:bg-white/20 transition-colors"
           >
             →
