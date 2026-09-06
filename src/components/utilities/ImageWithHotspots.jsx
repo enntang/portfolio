@@ -130,6 +130,8 @@ function Tooltip({ content, x, y, arrowPosition = 'bottom' }) {
  * @param {string} className - Additional CSS classes for the image
  * @param {string} containerClassName - Additional CSS classes for the container
  * @param {string} colorVariant - Color variant: 'blue', 'purple', or 'highlight' (default: 'blue')
+ * @param {Function} onZoom - Optional. When given, clicking the image (but not a hotspot) opens a lightbox.
+ * @param {string} label - Optional aria-label for that zoom button; falls back to alt.
  * 
  * @example
  * const hotspots = [
@@ -151,6 +153,8 @@ export default function ImageWithHotspots({
   className = '',
   containerClassName = '',
   colorVariant = 'blue',
+  onZoom,
+  label,
 }) {
   const { containerRef, activeHotspot, setActiveHotspot, handleHotspotClick } = useImageHotspots()
 
@@ -169,11 +173,23 @@ export default function ImageWithHotspots({
       onClick={() => setActiveHotspot(null)}
     >
       <div className={`w-full ${roundedWrapperClassName}`.trim()}>
-        <LazyImage 
-          src={src} 
-          alt={alt} 
-          className={lazyImageClassName}
-        />
+        {/* 熱點按鈕是這層的兄弟節點，點熱點不會冒泡到這裡，所以放大和看說明不會打架。 */}
+        {onZoom ? (
+          <button
+            type="button"
+            onClick={onZoom}
+            aria-label={label || alt}
+            className="block w-full cursor-zoom-in"
+          >
+            <LazyImage src={src} alt="" className={lazyImageClassName} />
+          </button>
+        ) : (
+          <LazyImage 
+            src={src} 
+            alt={alt} 
+            className={lazyImageClassName}
+          />
+        )}
       </div>
       
       {/* Render hotspot buttons */}

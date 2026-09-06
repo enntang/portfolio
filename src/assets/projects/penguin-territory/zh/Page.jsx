@@ -11,6 +11,8 @@ import RelatedProjects from '../../../../components/projects/RelatedProjects'
 import TableOfContents from '../../../../components/utilities/TableOfContents'
 import LazyImage from '../../../../components/utilities/LazyImage'
 import ImageWithHotspots from '../../../../components/utilities/ImageWithHotspots'
+import ZoomableImage from '../../../../components/utilities/ZoomableImage'
+import Lightbox from '../../../../components/utilities/Lightbox'
 import quote from '../../../../../public/icon-quote.svg'
 
 gsap.registerPlugin(ScrollTrigger)
@@ -61,10 +63,69 @@ const penguinBackgrounds = {
   penguinBg2: bg2,
 }
 
+// 燈箱相簿。同段落的圖歸成一組，左右鍵只會在組內切換，不會跨段落亂跳。
+const COMPARE_TURN = [
+  { src: designGoal2, alt: '早期介面截圖 2' },
+  { src: turn02, alt: '新版介面截圖 2' },
+]
+const COMPARE_RESULT = [
+  { src: designGoal3, alt: '早期介面截圖 3' },
+  { src: resultImg, alt: '新版介面截圖 3' },
+]
+const PROCESS_IMAGES = [
+  { src: miro, alt: 'Miro 線上白板' },
+  { src: wireframe, alt: 'Wireframe' },
+  { src: wireframeNoText1, alt: 'Wireframe（無文字）1' },
+  { src: wireframeNoText2, alt: 'Wireframe（無文字）2' },
+]
+const ONBOARDING_IMAGES = [
+  { src: loginImg, alt: '登入畫面' },
+  { src: roomListImg, alt: '房間列表' },
+  { src: roomWaitingImg, alt: '房間等待：玩家本人尚未準備好' },
+]
+const TURN_IMAGES = [
+  { src: turn01, alt: '輪到玩家本人 01' },
+  { src: turn02, alt: '輪到玩家本人 02' },
+  { src: turn04, alt: '輪到玩家本人 04' },
+  { src: videoGif, alt: '遊戲畫面預覽：側邊欄顯示戰況、玩家順序與即時計分，六角格上強調來源與目的數字' },
+]
+const TIPS_IMAGES = [
+  { src: tips1, alt: '規則說明 1' },
+  { src: tips2, alt: '規則說明 2' },
+  { src: tips3, alt: '規則說明 3' },
+]
+const RESULT_IMAGES = [
+  { src: resultImg, alt: '結算畫面' },
+]
+const VISUAL_IMAGES = [
+  { src: addRoomImg, alt: '新增房間' },
+  { src: logoutPopupImg, alt: '確認登出 popup' },
+  { src: watercolorOriginal, alt: '使用不透明水彩繪製的原稿' },
+]
+// 三隻手繪企鵝散落在各段落，串成一組相簿，點開就能一路看完。
+const PENGUIN_ART = [
+  { src: penguin1, alt: '企鵝插畫 1' },
+  { src: penguin2, alt: '企鵝插畫 2' },
+  { src: penguin3, alt: '企鵝插畫 3' },
+]
+
+const EMPTY_ZOOM = { items: [], index: null }
+const zoomAt = (items, index) => ({ items, index })
+const ZOOM_PREFIX = '放大檢視：'
+
 export default function PenguinTerritoryPageZh() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
+  const [zoom, setZoom] = useState(EMPTY_ZOOM)
   const penguin1Ref = useRef(null)
   const penguin3Ref = useRef(null)
+
+  // 圖片說明統一交給 button 的 aria-label，img 的 alt 就留空，讀螢幕不會唸兩次。
+  const zoomable = (items, index) => ({
+    src: items[index].src,
+    alt: '',
+    label: `${ZOOM_PREFIX}${items[index].alt}`,
+    onZoom: () => setZoom(zoomAt(items, index)),
+  })
 
   // Hotspot modules (one per screen)
   // Coordinates are in percentage relative to image width/height and can be fine-tuned visually in the browser.
@@ -255,7 +316,11 @@ export default function PenguinTerritoryPageZh() {
                   目標使用者：網頁桌遊玩家（習慣在桌機/筆電操作遊戲，且有連線對戰需求）
                 </P>
                 <div ref={penguin1Ref} className="w-48 h-auto self-end mb-4 absolute bottom-20 right-0">
-                  <LazyImage src={penguin1} alt="" className="w-full h-auto -scale-x-100 rounded-lg" />
+                  <ZoomableImage
+                    {...zoomable(PENGUIN_ART, 0)}
+                    className="w-full"
+                    imgClassName="w-full h-auto -scale-x-100 rounded-lg"
+                  />
                 </div>
               </div>
               <div className="flex flex-col gap-2">
@@ -285,7 +350,11 @@ export default function PenguinTerritoryPageZh() {
 
             <H2>設計目標</H2>
             <div ref={penguin3Ref} className="w-48 h-auto self-end mb-4 absolute top-[-60px] left-0">
-              <LazyImage src={penguin3} alt="" className="w-full h-auto -scale-x-100 rounded-lg" />
+              <ZoomableImage
+                {...zoomable(PENGUIN_ART, 2)}
+                className="w-full"
+                imgClassName="w-full h-auto -scale-x-100 rounded-lg"
+              />
             </div>
             <div className="bg-white/60 backdrop-blur rounded-sm shadow p-6 md:p-8">
             <img src={quote} alt="quote" className='mb-2 rounded-lg' />
@@ -305,7 +374,12 @@ export default function PenguinTerritoryPageZh() {
 
 
                 {/* Old version 2 with hover to new version */}
-                <div className="relative group cursor-pointer transform -rotate-3 w-[640px] ">
+                <button
+                  type="button"
+                  onClick={() => setZoom(zoomAt(COMPARE_TURN, 1))}
+                  aria-label={`${ZOOM_PREFIX}新舊對照 遊戲進行中畫面`}
+                  className="relative group cursor-zoom-in transform -rotate-3 w-[640px] block text-left"
+                >
                   <div className="relative overflow-hidden rounded-lg shadow aspect-[17/10]">
                     {/* Old version image */}
                     <div className="relative transition-opacity duration-300 group-hover:opacity-0 w-full h-full">
@@ -320,10 +394,15 @@ export default function PenguinTerritoryPageZh() {
                       <span className=" text-white/60 select-none">新舊對照：遊戲進行中畫面</span>
                     </div>
                   </div>
-                </div>
+                </button>
 
                 {/* Old version 3 with hover to new version */}
-                <div className="relative group cursor-pointer transform rotate-3 w-[600px] ml-[-120px] mt-32">
+                <button
+                  type="button"
+                  onClick={() => setZoom(zoomAt(COMPARE_RESULT, 1))}
+                  aria-label={`${ZOOM_PREFIX}新舊對照 分數結算`}
+                  className="relative group cursor-zoom-in transform rotate-3 w-[600px] ml-[-120px] mt-32 block text-left"
+                >
                   <div className="relative overflow-hidden rounded-lg shadow aspect-[16:10]">
                     {/* Old version image */}
                     <div className="relative transition-opacity duration-300 group-hover:opacity-0 w-full h-full">
@@ -338,7 +417,7 @@ export default function PenguinTerritoryPageZh() {
                       <span className="text-white/60 select-none">新舊對照：分數結算</span>
                     </div>
                   </div>
-                </div>
+                </button>
               </div></div>
           </Container>
         </FadeIn>
@@ -352,11 +431,27 @@ export default function PenguinTerritoryPageZh() {
             <P>
               我透過 wireframe 進行整體 layout 佈局調整，詳列所有遊戲進行中的狀態變化，並在 Miro 線上白板交換想法。
             </P>
-            <LazyImage src={miro} alt="Miro 線上白板" className="w-full h-auto rounded-lg shadow mb-4" />
-              <LazyImage src={wireframe} alt="Wireframe" className="w-full h-auto rounded-lg shadow" />
+            <ZoomableImage
+              {...zoomable(PROCESS_IMAGES, 0)}
+              className="w-full mb-4"
+              imgClassName="w-full h-auto rounded-lg shadow"
+            />
+              <ZoomableImage
+                {...zoomable(PROCESS_IMAGES, 1)}
+                className="w-full"
+                imgClassName="w-full h-auto rounded-lg shadow"
+              />
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
-              <LazyImage src={wireframeNoText1} alt="Wireframe（無文字）1" className="w-full h-auto rounded-lg shadow" />
-              <LazyImage src={wireframeNoText2} alt="Wireframe（無文字）2" className="w-full h-auto rounded-lg shadow" />
+              <ZoomableImage
+                {...zoomable(PROCESS_IMAGES, 2)}
+                className="w-full"
+                imgClassName="w-full h-auto rounded-lg shadow"
+              />
+              <ZoomableImage
+                {...zoomable(PROCESS_IMAGES, 3)}
+                className="w-full"
+                imgClassName="w-full h-auto rounded-lg shadow"
+              />
             </div>
           </Container>
         </FadeIn>
@@ -372,9 +467,9 @@ export default function PenguinTerritoryPageZh() {
             <P>可選擇登入玩家帳號，或是以訪客身份進行遊玩。</P>
             <P>登入遊戲後的流程相當單純：使玩家進入等待序列 → 選企鵝 → 房間等待。</P>
             <div className="grid grid-cols-1 gap-4 mt-8">
-              <ImageWithHotspots src={loginImg} alt="登入畫面" hotspots={loginHotspots} className="w-full h-auto rounded-lg shadow" />
-              <ImageWithHotspots src={roomListImg} alt="房間列表" hotspots={roomListHotspots} className="w-full h-auto rounded-lg shadow" />
-              <ImageWithHotspots src={roomWaitingImg} hotspots={waitingHotspots} alt="房間等待：玩家本人尚未準備好" className="w-full h-auto rounded-lg shadow" />
+              <ImageWithHotspots {...zoomable(ONBOARDING_IMAGES, 0)} hotspots={loginHotspots} className="w-full h-auto rounded-lg shadow" />
+              <ImageWithHotspots {...zoomable(ONBOARDING_IMAGES, 1)} hotspots={roomListHotspots} className="w-full h-auto rounded-lg shadow" />
+              <ImageWithHotspots {...zoomable(ONBOARDING_IMAGES, 2)} hotspots={waitingHotspots} className="w-full h-auto rounded-lg shadow" />
             </div>
             <P className="mt-6">
               房間列表縱向捲動，不同狀態區別化顯示：開放中的房間可隨時加入；滿員的房間會顯示「即將開始」並且禁止進入。
@@ -394,17 +489,17 @@ export default function PenguinTerritoryPageZh() {
                 玩家確認動作結束後自動輪下一位玩家行動。當輪到該位玩家的時候，出現蓋版訊息，避免玩家忽略狀態、導致整體遊戲時間延宕。
               </P>
               <div className="grid grid-cols-1 gap-4 mt-8">
-                <ImageWithHotspots src={turn01} alt="輪到玩家本人 01" className="w-full h-auto rounded-lg shadow" />
-                <ImageWithHotspots src={turn02} alt="輪到玩家本人 02" hotspots={turnHotspots1} className="w-full h-auto rounded-lg shadow" />
-                <ImageWithHotspots src={turn04} alt="輪到玩家本人 04" hotspots={turnHotspots2} className="w-full h-auto rounded-lg shadow" />
+                <ImageWithHotspots {...zoomable(TURN_IMAGES, 0)} className="w-full h-auto rounded-lg shadow" />
+                <ImageWithHotspots {...zoomable(TURN_IMAGES, 1)} hotspots={turnHotspots1} className="w-full h-auto rounded-lg shadow" />
+                <ImageWithHotspots {...zoomable(TURN_IMAGES, 2)} hotspots={turnHotspots2} className="w-full h-auto rounded-lg shadow" />
               </div>
               <P className="mt-6">
                 我在設計上利用側邊欄顯示戰況，畫面左右分別是玩家順序和即時計分。分配時，來源與目的的「數字」是重要資訊，所以以黑色底襯托。
               </P>
-              <LazyImage
-                src={videoGif}
-                alt="遊戲畫面預覽：側邊欄顯示戰況、玩家順序與即時計分，六角格上強調來源與目的數字"
-                className="w-full h-auto rounded-lg shadow mt-8"
+              <ZoomableImage
+                {...zoomable(TURN_IMAGES, 3)}
+                className="w-full mt-8"
+                imgClassName="w-full h-auto rounded-lg shadow"
               />
             </div>
 
@@ -412,9 +507,21 @@ export default function PenguinTerritoryPageZh() {
               <H3>清楚的規則說明</H3>
               <P>遊戲過程中可隨時查看規則說明，每頁搭配簡化插圖，避免文字過長。</P>
               <div className="flex flex-col -space-y-12 mobile:-space-y-8 [&>*]:relative mt-8 w-[60%] mobile:w-full mx-auto">
-                <LazyImage src={tips1} alt="規則說明 1" className=" -rotate-3 -left-10 mobile:left-0 w-full h-auto rounded-lg shadow" />
-                <LazyImage src={tips2} alt="規則說明 2" className=" rotate-3 left-10 mobile:left-0 w-full h-auto rounded-lg shadow" />
-                <LazyImage src={tips3} alt="規則說明 3" className=" -rotate-3 -left-10 mobile:left-0 w-full h-auto rounded-lg shadow" />
+                <ZoomableImage
+                  {...zoomable(TIPS_IMAGES, 0)}
+                  className="w-full -rotate-3 -left-10 mobile:left-0"
+                  imgClassName="w-full h-auto rounded-lg shadow"
+                />
+                <ZoomableImage
+                  {...zoomable(TIPS_IMAGES, 1)}
+                  className="w-full rotate-3 left-10 mobile:left-0"
+                  imgClassName="w-full h-auto rounded-lg shadow"
+                />
+                <ZoomableImage
+                  {...zoomable(TIPS_IMAGES, 2)}
+                  className="w-full -rotate-3 -left-10 mobile:left-0"
+                  imgClassName="w-full h-auto rounded-lg shadow"
+                />
               </div>
             </div>
 
@@ -423,7 +530,7 @@ export default function PenguinTerritoryPageZh() {
               <P>
                 當勝利條件達成時，遊戲結束並顯示結算畫面。最高分的勝利者會在最大的欄位閃耀光芒，其餘玩家的分數也會一並顯示在面板上、依序排名。
               </P>
-              <ImageWithHotspots src={resultImg} alt="結算畫面" hotspots={resultHotspots} className="w-full h-auto rounded-lg shadow mt-8" />
+              <ImageWithHotspots {...zoomable(RESULT_IMAGES, 0)} hotspots={resultHotspots} className="w-full h-auto rounded-lg shadow mt-8" />
             </div>
           </Container>
         </FadeIn>
@@ -438,17 +545,25 @@ export default function PenguinTerritoryPageZh() {
               整體使用冰原、海水為主的清爽配色，並且用手繪風格增加親切感。在介面上採用大量圓角、柔和陰影，營造友善輕鬆的遊戲氛圍。
             </P>
 
-            <LazyImage src={addRoomImg} alt="新增房間" className="w-full h-auto rounded-lg shadow mb-10" />
-            <LazyImage src={logoutPopupImg} alt="確認登出 popup" className="w-full h-auto rounded-lg shadow" />
+            <ZoomableImage
+              {...zoomable(VISUAL_IMAGES, 0)}
+              className="w-full mb-10"
+              imgClassName="w-full h-auto rounded-lg shadow"
+            />
+            <ZoomableImage
+              {...zoomable(VISUAL_IMAGES, 1)}
+              className="w-full"
+              imgClassName="w-full h-auto rounded-lg shadow"
+            />
 
             <P className="mt-10">
               企鵝插圖穿插在 UI 狀態與操作提示上，形成一致的風格增加遊玩沈浸感。為了讓視覺更具有故事感，企鵝美術以手繪完成，
               媒材主要是不透明水彩：紙上作畫後，拍照掃描進電腦後製完成。
             </P>
-            <LazyImage
-              src={watercolorOriginal}
-              alt="使用不透明水彩繪製的原稿"
-              className="w-full h-auto rounded-lg shadow mt-8"
+            <ZoomableImage
+              {...zoomable(VISUAL_IMAGES, 2)}
+              className="w-full mt-8"
+              imgClassName="w-full h-auto rounded-lg shadow"
             />
             <p className="text-caption text-gray-500 font-light mt-3">使用不透明水彩繪製的原稿</p>
           </Container>
@@ -468,7 +583,11 @@ export default function PenguinTerritoryPageZh() {
                   遊戲與 App 不同，<strong>動作回饋（Feedback）</strong> 對理解難度影響極大。
                 </P>
                 <P>如何在不干擾視覺的條件下給予「下一步提示」，是一個很大的挑戰。</P>
-                <LazyImage src={penguin2} alt="" className="w-60 h-auto -scale-x-100 rounded-lg" />
+                <ZoomableImage
+                  {...zoomable(PENGUIN_ART, 1)}
+                  className="w-60"
+                  imgClassName="w-full h-auto -scale-x-100 rounded-lg"
+                />
                 <P>
                   另外，我發揮了個人的多媒材風格，插畫與 UI 的融合讓產品更具吸引力，獲得了不錯的使用回饋。
                   在專案告一段落後，也用短影片把過程記錄了下來，歡迎點擊觀看。
@@ -562,6 +681,13 @@ export default function PenguinTerritoryPageZh() {
           <Footer />
         </SectionBlock>
       </main>
+
+      <Lightbox
+        items={zoom.items}
+        index={zoom.index}
+        onClose={() => setZoom(EMPTY_ZOOM)}
+        onNavigate={(index) => setZoom((current) => ({ ...current, index }))}
+      />
     </div>
   )
 }
