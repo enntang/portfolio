@@ -39,6 +39,9 @@ function PageFlipBook({
   onTurnedChange,
   // 書下面那行提示文案，傳 null 可以不要
   hintLabel = "點擊或拖曳頁面即可翻頁",
+  // 螢幕閱讀器聽到的整本書說明。非中文的頁面覆寫它。
+  describe = (turned, total) =>
+    `翻頁書，共 ${total} 頁，目前第 ${turned} 頁。用左右方向鍵翻頁，也可以直接點擊或拖曳頁面。`,
   className = "",
 }) {
   const leaves = useMemo(() => {
@@ -233,7 +236,7 @@ function PageFlipBook({
         }}
         tabIndex={0}
         role="group"
-        aria-label={`翻頁書，共 ${leaves.length} 頁，目前第 ${turned} 頁。用左右方向鍵翻頁，也可以直接點擊或拖曳頁面。`}
+        aria-label={describe(turned, leaves.length)}
         // pan-y 讓手機上的直向捲動照常，只攔截水平拖曳
         className={`relative mx-auto w-full select-none touch-pan-y [perspective:2400px] ${
           drag?.moved ? "cursor-grabbing" : "cursor-pointer"
