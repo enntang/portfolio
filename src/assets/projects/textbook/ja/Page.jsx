@@ -1,2 +1,1067 @@
-// TODO: 骨架階段先共用中文版。日文原稿到齊後再複製 zh/Page.jsx 翻成日文。
-export { default } from '../zh/Page.jsx'
+import { useEffect, useRef, useState } from "react";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Autoplay, FreeMode } from "swiper/modules";
+import "swiper/css";
+import Navbar from "../../../../components/utilities/Navbar";
+import Footer from "../../../../components/utilities/Footer";
+import Container from "../../../../components/projects/Container";
+import ScrollHint from "../../../../components/utilities/ScrollHint";
+import SectionBlock from "../../../../components/projects/SectionBlock";
+import TwoColumn from "../../../../components/projects/TwoColumn";
+import RelatedProjects from "../../../../components/projects/RelatedProjects";
+import TableOfContents from "../../../../components/utilities/TableOfContents";
+import LazyImage from "../../../../components/utilities/LazyImage";
+import Lightbox from "../../../../components/utilities/Lightbox";
+import Parallax from "../../../../components/utilities/Parallax";
+import PageFlipBook from "../../../../components/utilities/PageFlipBook";
+import FadeIn from "../../../../components/utilities/FadeIn";
+import Typewriter from "../../../../components/utilities/Typewriter";
+import { useHeroIntro } from "../useHeroIntro";
+import { useLogotypeReveal } from "../useLogotypeReveal";
+
+import P from "../../../../components/post/P";
+import H2 from "../../../../components/post/H2";
+import H3 from "../../../../components/post/H3";
+import UL from "../../../../components/post/UL";
+import LI from "../../../../components/post/LI";
+
+// Images live in src/assets/projects/textbook/image
+import bgHero from "../image/bg-1@2x.webp";
+import bgGreen from "../image/bg-2@2x.webp";
+import bgCover from "../image/bg-3@2x.webp";
+import bgClosing from "../image/bg-4@2x.webp";
+import keyVision from "../image/key-vision.svg";
+import text1 from "../image/text-1.svg";
+import text2 from "../image/text-2.svg";
+import text3 from "../image/text-3.svg";
+
+import cover1 from "../image/cover-1.webp";
+import cover2 from "../image/cover-2.webp";
+import cover3 from "../image/cover-3.webp";
+import cover3Back from "../image/cover-3-back.webp";
+
+import review1 from "../image/review-1.webp";
+import review2 from "../image/review-2.webp";
+import review3 from "../image/review-3.webp";
+import review4 from "../image/review-4.webp";
+
+// 翻頁書的平面單頁（-1 左頁、-2 右頁）。七個跨頁各一組，school 有兩組。
+import pageBoba1 from "../image/pages-boba-1.webp";
+import pageBoba2 from "../image/pages-boba-2.webp";
+import pageTranslate1 from "../image/pages-translate-1.webp";
+import pageTranslate2 from "../image/pages-translate-2.webp";
+import pageComic1 from "../image/pages-comic-1.webp";
+import pageComic2 from "../image/pages-comic-2.webp";
+import pageIntro1 from "../image/pages-intro-1.webp";
+import pageIntro2 from "../image/pages-intro-2.webp";
+import pageDiderot1 from "../image/pages-diderot-1.webp";
+import pageDiderot2 from "../image/pages-diderot-2.webp";
+import pageSchool1 from "../image/pages-school-1.webp";
+import pageSchool2 from "../image/pages-school-2.webp";
+import pageSchool3 from "../image/pages-school-3.webp";
+import pageSchool4 from "../image/pages-school-4.webp";
+
+import illust1 from "../image/illust-1.webp";
+import illust2 from "../image/illust-2.webp";
+import illust3 from "../image/illust-3.webp";
+import illust4 from "../image/illust-4.webp";
+import illust5 from "../image/illust-5.webp";
+import illust6 from "../image/illust-6.webp";
+import illust7 from "../image/illust-7.webp";
+import illust8 from "../image/illust-8.webp";
+import illust9 from "../image/illust-9.webp";
+import illust10 from "../image/illust-10.webp";
+import illust11 from "../image/illust-11.webp";
+
+import decoChalk from "../image/deco-1@2x.webp";
+import decoStudents from "../image/deco-2@2x.webp";
+import decoLamp from "../image/deco-3@2x.webp";
+import decoLeaf from "../image/deco-4@2x.webp";
+
+// 滿版自動輪播的內頁截圖。傾斜與高低差由 TILTS 依索引循環套用，
+// 所以要加第五張以上，在這裡多一行就好。
+const REVIEWS = [
+  {
+    src: review2,
+    width: 1552,
+    height: 1202,
+    alt: "本文ページ：「百科全書」という訳語の由来",
+  },
+  {
+    src: review1,
+    width: 1682,
+    height: 1202,
+    alt: "本文ページ：18世紀フランスの出版業の図解",
+  },
+  {
+    src: review3,
+    width: 1786,
+    height: 1222,
+    alt: "本文ページ：文化とアイデンティティの概念図",
+  },
+  {
+    src: review4,
+    width: 1682,
+    height: 1202,
+    alt: "本文ページ：新文化運動と百科全書",
+  },
+];
+
+// Swiper 的 loop 是把跑到尾巴的 slide 搬到另一頭接上，所以「同時看得到的張數」
+// 之外還得有備援可以搬。四張卡在桌機一次就露出三張，備援不夠就會在接縫處
+// 開一段天窗。把來源接成三輪，版位夠長，接縫才補得起來。
+// index 留著是為了讓傾斜、疊放順序和燈箱都對回原本那一張。
+const REVIEW_LOOP = [0, 1, 2].flatMap((copy) =>
+  REVIEWS.map((review, index) => ({ ...review, copy, index })),
+);
+
+// 跨頁都是去背的書冊造型（2000x1450，四邊透明），直接鋪在深綠底上，
+// 不需要白框或陰影。
+const SPREADS = [
+  { left: pageBoba1, right: pageBoba2 },
+  { left: pageTranslate1, right: pageTranslate2 },
+  { left: pageComic1, right: pageComic2 },
+  { left: pageIntro1, right: pageIntro2 },
+  { left: pageDiderot1, right: pageDiderot2 },
+  { left: pageSchool1, right: pageSchool2 },
+  { left: pageSchool3, right: pageSchool4 },
+];
+
+// 輪播卡片的傾斜與高低差，依索引循環套用，所以 REVIEWS 加到第五張以上
+// 也會自動有錯落感，不用另外設定。
+const TILTS = [
+  "-rotate-[7deg] translate-y-3",
+  "rotate-[5deg] -translate-y-4",
+  "-rotate-[4deg] translate-y-5",
+  "rotate-[8deg] -translate-y-2",
+];
+
+// 兩排各自吃一半。切在模組層而不是 render 裡，參考才穩定，
+// 下面那些吃 items 當相依的 effect 才不會每次 render 都重跑一遍。
+// （ILLUSTRATIONS 定義在後面，所以實際的 slice 放在它下面。）
+// 十一張插畫，全部去背、比例各不相同，所以用 CSS columns 讓它們自然錯落，
+// 不要硬塞進等高格子把直式的壓扁。
+const ILLUSTRATIONS = [
+  {
+    src: illust1,
+    width: 1862,
+    height: 1091,
+    alt: "天秤とパソコンの前で考える2人：判断と取捨選択",
+  },
+  {
+    src: illust2,
+    width: 2525,
+    height: 1988,
+    alt: "中華鍋と飛び散る食材：文化の混ざり合い",
+  },
+  {
+    src: illust3,
+    width: 1551,
+    height: 1146,
+    alt: "KNOWLEDGE と記された汽船と矢印：海を渡る知識",
+  },
+  {
+    src: illust4,
+    width: 1464,
+    height: 1017,
+    alt: "猿から人への進化の連なりと読書する人",
+  },
+  {
+    src: illust5,
+    width: 974,
+    height: 1353,
+    alt: "長衣の人物が頭をかいて困惑している",
+  },
+  {
+    src: illust6,
+    width: 974,
+    height: 1353,
+    alt: "長衣の人物が椅子に座って本をめくる",
+  },
+  {
+    src: illust7,
+    width: 2470,
+    height: 1895,
+    alt: "対話する2人、思考の雲に Nation・Culture・Belief などの語が浮かぶ",
+  },
+  {
+    src: illust8,
+    width: 1928,
+    height: 1678,
+    alt: "各国の国旗と署名の場面：条約と翻訳",
+  },
+  {
+    src: illust9,
+    width: 1704,
+    height: 800,
+    alt: "積み上がった本の間で読書する2人",
+  },
+  {
+    src: illust10,
+    width: 1354,
+    height: 1838,
+    alt: "2人の人物と空白の吹き出し：これから書き込まれる視点",
+  },
+  {
+    src: illust11,
+    width: 1323,
+    height: 1582,
+    alt: "「有口皆碑／潮到出水」ポスター風のイラスト",
+  },
+];
+
+// 翻頁書用的單頁清單。turned=k 時攤開的是 pages[2k-1] | pages[2k]，
+// 所以把內封放在最前面，之後每個跨頁貢獻「左頁、右頁」兩張，
+// turned 就剛好等於目前的跨頁編號。真圖到齊後把 label 換成 src/alt 即可。
+const BOOK_PAGES = [
+  { src: cover3, alt: "表紙：若き歴史家の漫遊ガイド" },
+  // 還沒有平面單頁的跨頁先用佔位頁；圖補齊後在上面加 left/right 就會自動接上
+  ...SPREADS.flatMap((s, i) => [
+    s.left
+      ? { src: s.left, alt: `本文見開き ${i + 1}｜左ページ` }
+      : { label: `本文見開き ${i + 1}｜左ページ` },
+    s.right
+      ? { src: s.right, alt: `本文見開き ${i + 1}｜右ページ` }
+      : { label: `本文見開き ${i + 1}｜右ページ` },
+  ]),
+  // 補一張讓總數成偶數，否則最後一張紙的背面會是空白
+  { src: cover3Back, alt: "裏表紙" },
+];
+
+const COVERS = [
+  {
+    src: cover1,
+    width: 1492,
+    height: 2002,
+    alt: "表紙 第1案：古書・虫眼鏡・懐中時計を写実的に配置",
+    caption: "第1案",
+  },
+  {
+    src: cover2,
+    width: 1492,
+    height: 2002,
+    alt: "表紙 第2案：青地にロゴタイプを中央配置したイラスト調",
+    caption: "第2案",
+  },
+  {
+    src: cover3,
+    width: 1490,
+    height: 2002,
+    alt: "表紙 最終案：淡い色と余白、ロゴタイプを上部に配置",
+    caption: "最終案",
+  },
+];
+
+// 三本封面階梯式下降，後面的疊在前面之上。負的左邊距讓相鄰兩本略為重疊。
+const COVER_STAIR = [
+  "mt-0 z-10",
+  "mt-[10%] -ml-[3%] z-20",
+  "mt-[20%] -ml-[3%] z-30",
+];
+
+// 標準字提案。三個比例差很多（直排 100x191、橫排 223x132、斜置 300x120），
+// 所以各自用高度對齊視覺重量，不要硬塞進等寬格子。
+// 勝出的是第二款：它就是 cover-3 最終封面上用的那個版型
+const WINNER_LOGOTYPE = 1;
+
+const LOGOTYPES = [
+  {
+    src: text1,
+    alt: "ロゴタイプ案：縦組み",
+    size: "h-[168px] mobile:h-[112px]",
+  },
+  {
+    src: text2,
+    alt: "ロゴタイプ案：横2行（最終採用）",
+    size: "h-[104px] mobile:h-[68px]",
+  },
+  {
+    src: text3,
+    alt: "ロゴタイプ案：斜めの横組み",
+    size: "h-[84px] mobile:h-[56px]",
+  },
+];
+
+// 取樣自 bg-2@2x.png 的平均色，當底紋圖還沒載入時的底色
+const GREEN = "#0E473D";
+const GREEN_TEXT = "#F2EFE6";
+const LIGHT = "#F4F5F8";
+
+const greenStyle = { backgroundColor: GREEN, color: GREEN_TEXT };
+// 疊在插畫帶上的說明面板。0.85 是「還看得到底下插畫」和「米色字仍過 AA 對比」
+// 之間的平衡點，要更透就調這個數字。
+const panelStyle = {
+  backgroundColor: "rgba(14, 71, 61, 0.85)",
+  color: GREEN_TEXT,
+};
+const lightStyle = { backgroundColor: LIGHT };
+
+// 空心字：只描邊、不填色。等傾斜底圖進來之後，描邊色大概會改成白色。
+const OUTLINE_TEXT = {
+  color: "transparent",
+  WebkitTextStroke: `1px ${GREEN}`,
+  whiteSpace: "nowrap",
+};
+
+// SectionBlock 會鋪成 fixed 背景（iOS 不支援 fixed，會自動退回平鋪）。
+const backgrounds = {
+  hero: bgHero,
+  green: bgGreen,
+  cover: bgCover,
+  closing: bgClosing,
+};
+
+// 燈箱。內頁和封面在手機上縮到螢幕寬就讀不到字，一律可以點開放大。
+// 兩組各自是獨立的相簿，從封面按「下一張」不會跳到內頁去。
+const EMPTY_ZOOM = { items: [], index: null };
+const zoomAt = (items, index) => ({ items, index });
+
+// 插畫帶的高度：平常一排 / 點開放大。斷點跟 tailwind.config 的 `mobile` 一致，
+// 所以 openHeight() 量出來的數字一定對得上 class 上的高度。
+const ILLUST_H = "h-[200px] mobile:h-[130px]";
+const ILLUST_H_OPEN = "h-[440px] mobile:h-[260px]";
+const GROW_MS = 500;
+const openHeight = () =>
+  window.matchMedia("(max-width: 768px)").matches ? 260 : 440;
+
+// 兩排各吃一半，再各自接成三輪。理由同 REVIEW_LOOP：六張、五張都鋪不滿
+// 一個桌機寬度加上 loop 要搬的備援，接縫處就會開天窗。
+// 接完之後索引是「在這一排裡的位置」，每一份副本都是獨立的一格，
+// 放大時才不會三份一起變大。
+const loopThrice = (items) =>
+  [0, 1, 2].flatMap((copy) =>
+    items.map((item) => ({ ...item, key: `${copy}-${item.src}` })),
+  );
+
+const ILLUSTRATIONS_TOP = loopThrice(ILLUSTRATIONS.slice(0, 6));
+const ILLUSTRATIONS_BOTTOM = loopThrice(ILLUSTRATIONS.slice(6));
+
+// 兩個作品示範圖群組共用的 hover 行為：指到的那張放大並浮到最上層，
+// 左右緊鄰的兩張往外讓開。用 :has() 才選得到「前一個兄弟」。
+//
+// 兩份寫法只差在選擇器：封面是容器的直接子元素，輪播的卡片則包在
+// Swiper 自己的 .swiper-wrapper 底下。不能用樣板字串合成——Tailwind 掃的是
+// 原始碼裡的字面字串，組出來的 class 不會被產生。
+const HOVER_PUSH_COVERS =
+  "[&>*]:transition-transform [&>*]:duration-300 [&>*]:ease-out " +
+  "[&>*:hover]:scale-[1.08] [&>*:hover]:z-40 " +
+  "[&>*:hover+*]:translate-x-7 [&>*:has(+*:hover)]:-translate-x-7";
+
+// transform 要加 !：Swiper 的 .swiper-backface-hidden .swiper-slide 也宣告了
+// transform: translateZ(0)，不標 important 的話位移和縮放會被它蓋掉。
+const HOVER_PUSH_SLIDES =
+  "[&_.swiper-slide]:transition-transform [&_.swiper-slide]:duration-300 [&_.swiper-slide]:ease-out " +
+  "[&_.swiper-slide:hover]:!scale-[1.08] [&_.swiper-slide:hover]:z-40 " +
+  "[&_.swiper-slide:hover+.swiper-slide]:!translate-x-7 " +
+  "[&_.swiper-slide:has(+.swiper-slide:hover)]:!-translate-x-7";
+
+// 比內文欄（640px）寬、但沒有到滿版的容器。設計稿上多數圖組都落在這個寬度。
+function Wide({ children, className = "" }) {
+  return (
+    <div
+      className={`max-w-[1100px] mx-auto w-full px-16 mobile:px-8 ${className}`}
+    >
+      {children}
+    </div>
+  );
+}
+
+// 連續等速前進的插畫帶。reverse 讓第二排往反方向跑。
+// 插畫比例各不相同，所以固定高度、寬度自適應，跟 partner logo 帶一樣。
+// 點一張就原地長大、把左右的圖推開，不開燈箱——插畫都是去背的，壓在燈箱的
+// 黑底上很難看。expanded 是 ILLUSTRATIONS 的全域索引，兩排共用同一個值，
+// 所以同一時間只會有一張是放大的。
+function IllustrationRow({
+  items,
+  offset = 0,
+  expanded,
+  onToggle,
+  frozen,
+  reverse = false,
+  className = "",
+}) {
+  const swiperRef = useRef(null);
+  // 置中用的位移。不去動 Swiper 自己的 translate——它會在 transition 結束後
+  // 重算一次把值蓋掉，這在除錯時很難看出來；推外面那一層它就管不到了。
+  const [shift, setShift] = useState(0);
+
+  // 放大時整條帶子要停住。autoplay.stop() 只是不再排下一段，正在跑的
+  // transition 仍會滑到終點，所以得把當下的位移固定下來才是真的停在原地。
+  useEffect(() => {
+    const swiper = swiperRef.current;
+    if (!swiper || swiper.destroyed) return;
+    if (!frozen) {
+      swiper.autoplay?.start();
+      return;
+    }
+    swiper.autoplay?.stop();
+    const at = swiper.getTranslate();
+    swiper.setTransition(0);
+    swiper.setTranslate(at);
+  }, [frozen]);
+
+  // 放大的那張要滑到正中間，旁邊的圖被推出畫面也無所謂。放大後的寬度用比例
+  // 算而不是量——這時候高度的 CSS 過場才剛開始，量到的還是放大前的尺寸。
+  useEffect(() => {
+    const swiper = swiperRef.current;
+    const local = expanded == null ? -1 : expanded - offset;
+    if (!swiper || swiper.destroyed) return;
+    if (local < 0 || local >= items.length) {
+      setShift(0);
+      return;
+    }
+
+    const recentre = () => {
+      // loop 會把 slide 重新排序，DOM 順序不等於邏輯順序，只能靠這個屬性認人
+      const slide = swiper.el.querySelector(
+        `[data-swiper-slide-index="${local}"]`,
+      );
+      if (!slide) return;
+
+      const { width, height } = items[local];
+      // 放大後的寬度用比例算而不是量——這時候高度的 CSS 過場才剛開始，
+      // 量到的還是放大前的尺寸。
+      const grownWidth = openHeight() * (width / height);
+
+      // 這張在畫面上的左緣 = 版位位置 + Swiper 的位移 + 我們的位移。
+      // offsetLeft 是版位、不受 transform 影響，所以這個式子重跑幾次結果都
+      // 一樣——StrictMode 在開發模式會把 effect 跑兩次，用累加的寫法會推過頭。
+      setShift(
+        (swiper.el.clientWidth - grownWidth) / 2 -
+          slide.offsetLeft -
+          swiper.getTranslate(),
+      );
+    };
+
+    recentre();
+    // Swiper 收尾 loop 時會自己搬 slide、順手改位移，改完得重算一次，
+    // 不然放大的那張會被它帶偏。
+    swiper.on("setTranslate", recentre);
+    return () => swiper.off("setTranslate", recentre);
+  }, [expanded, offset, items]);
+
+  return (
+    // overflow-x-clip 才能單獨關掉一個方向：overflow-hidden 會把另一軸一起變成
+    // auto，放大的插畫就會在上下被切掉。裁切改由這層負責，Swiper 自己放行。
+    <div className={`overflow-x-clip overflow-y-visible ${className}`}>
+      <div
+        style={{
+          transform: `translate3d(${shift}px, 0, 0)`,
+          transition: `transform ${GROW_MS}ms ease-out`,
+        }}
+      >
+        <Swiper
+          modules={[Autoplay, FreeMode]}
+          slidesPerView="auto"
+          spaceBetween={40}
+          loop
+          freeMode={{ enabled: true, momentum: false }}
+          speed={18000}
+          allowTouchMove={false}
+          autoplay={{
+            delay: 0,
+            disableOnInteraction: false,
+            reverseDirection: reverse,
+          }}
+          // Swiper 只改 transition-duration，不動 timing-function，設一次就一路等速
+          onSwiper={(swiper) => {
+            swiperRef.current = swiper;
+            swiper.wrapperEl.style.transitionTimingFunction = "linear";
+          }}
+          className="!overflow-visible"
+        >
+          {items.map(({ src, width, height, alt, key }, i) => {
+            const index = offset + i;
+            const open = expanded === index;
+            return (
+              <SwiperSlide
+                key={key}
+                className={`!w-auto${open ? " relative z-30" : ""}`}
+              >
+                <button
+                  type="button"
+                  onClick={() => onToggle(index)}
+                  aria-expanded={open}
+                  aria-label={open ? `縮小：${alt}` : `拡大表示：${alt}`}
+                  className={`block transition-transform duration-300 ${
+                    open
+                      ? "cursor-zoom-out"
+                      : "cursor-zoom-in hover:scale-[1.06]"
+                  }`}
+                >
+                  <LazyImage
+                    src={src}
+                    width={width}
+                    height={height}
+                    alt={alt}
+                    className={`w-auto ${open ? ILLUST_H_OPEN : ILLUST_H}`}
+                    // 高度的過場寫成 inline：LazyImage 自己會補一個
+                    // transition-opacity，兩個 class 都宣告 transition-property
+                    // 會互相蓋掉，誰贏要看樣式表順序，寫死比較準。
+                    style={{
+                      transition: `height ${GROW_MS}ms ease-out, opacity 300ms`,
+                    }}
+                  />
+                </button>
+              </SwiperSlide>
+            );
+          })}
+        </Swiper>
+      </div>
+    </div>
+  );
+}
+
+// 佔位框。圖切好放進 image/ 之後，把整個 <Slot> 換成 <LazyImage> 就好。
+// label 寫這格是什麼，spec 寫我需要的匯出規格（見討論串的寬度等級）。
+function Slot({
+  label,
+  spec,
+  ratio = "16 / 9",
+  tone = "light",
+  className = "",
+}) {
+  const skin =
+    tone === "dark"
+      ? "border-white/25 bg-white/5 text-white/70"
+      : "border-black/15 bg-black/[0.03] text-black/50";
+  return (
+    <div
+      className={`w-full rounded-lg border-2 border-dashed flex flex-col items-center justify-center text-center p-6 ${skin} ${className}`}
+      style={{ aspectRatio: ratio }}
+    >
+      <span className="text-p-strong">{label}</span>
+      <span className="text-caption mt-1 opacity-80">{spec}</span>
+    </div>
+  );
+}
+
+export default function YoungHistoriansGuidePageJa() {
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const { glowStyle, contentStyle, toggle, revealed } = useHeroIntro();
+  // index 為 null 就是燈箱關閉
+  const [zoom, setZoom] = useState(EMPTY_ZOOM);
+  // 目前放大的那張插畫（ILLUSTRATIONS 的索引），null 表示全部都是原本大小
+  const [openIllust, setOpenIllust] = useState(null);
+  const toggleIllust = (i) => setOpenIllust((cur) => (cur === i ? null : i));
+
+  useEffect(() => {
+    if (openIllust == null) return;
+    const onKey = (e) => e.key === "Escape" && setOpenIllust(null);
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [openIllust]);
+  // turned = 翻過去的紙數，也就是目前攤開的跨頁編號。
+  const [turned, setTurned] = useState(1);
+  const logotypes = useLogotypeReveal(LOGOTYPES.length, WINNER_LOGOTYPE);
+
+  return (
+    <div
+      className="min-h-screen overflow-x-hidden"
+      style={{ backgroundColor: LIGHT }}
+    >
+      <Navbar
+        isWhite={true}
+        isMenuOpen={isMenuOpen}
+        onToggleMenu={() => setIsMenuOpen((prev) => !prev)}
+        variant="arrow"
+      />
+
+      <main style={{ backgroundColor: LIGHT }}>
+        {/* ── 01 Hero ─────────────────────────────────────────────
+            滿版實拍照，先單獨顯示兩秒，接著白色光暈與主視覺淡入（見 ../useHeroIntro）。
+            手機待決：這張橫幅照在 375px 會裁到剩中間，可能需要一張直式裁切版本。 */}
+        <header className="relative overflow-hidden">
+          <SectionBlock
+            className="relative min-h-screen flex items-center"
+            bgVariant="hero"
+            backgrounds={backgrounds}
+            style={lightStyle}
+            textDarkOnBg
+          >
+            <TableOfContents />
+            {/* 主視覺背後的白色光暈 */}
+            <div
+              aria-hidden="true"
+              className="pointer-events-none select-none absolute inset-0"
+              style={glowStyle}
+            />
+            {/* 點擊切換光暈與主視覺；用 button 才有鍵盤與螢幕閱讀器支援 */}
+            <button
+              type="button"
+              onClick={toggle}
+              aria-pressed={revealed}
+              aria-label="キービジュアルの表示を切り替える"
+              className="absolute inset-0 z-20 cursor-pointer"
+            />
+            <div className="relative z-10 w-full" style={contentStyle}>
+              <Container className="flex flex-col items-center justify-center text-center">
+                <h1 className="sr-only">若き歴史家の漫遊ガイド</h1>
+
+                <img
+                  src={keyVision}
+                  alt=""
+                  aria-hidden="true"
+                  className="w-full max-w-[400px] h-auto md:mb-4"
+                  loading="eager"
+                />
+
+                <H3 className="text-gray-800">
+                  南一書局
+                  高校歴史教科書｜エディトリアルデザイン・イラスト｜2018
+                </H3>
+                <P className="mt-6 w-full md:w-2/3 text-gray-800">
+                  A thematic history textbook that breaks away from traditional
+                  chronological narratives.
+                </P>
+              </Container>
+            </div>
+            {/* 捲動提示釘在 hero 底部，不進垂直置中的內容流——
+                跟著一起置中的話，主視覺與文案會被它整個往上推。 */}
+            <div
+              className="absolute inset-x-0 bottom-16 z-10 flex justify-center"
+              style={contentStyle}
+            >
+              <ScrollHint className="text-gray-800" label="下にスクロール" />
+            </div>
+          </SectionBlock>
+        </header>
+
+        {/* ── 02 專案簡介 ──────────────────────────────────────────
+            深綠底紋。左文右資訊卡，下方是滿版自動輪播的內頁截圖 + 吊燈／葉子／粉筆軌跡／學生裝飾。 */}
+        <SectionBlock
+          bgVariant="green"
+          backgrounds={backgrounds}
+          style={greenStyle}
+          className="overflow-hidden !pb-72 mobile:!pb-40"
+        >
+          {/* 裝飾層。純裝飾所以整層 aria-hidden，也不吃點擊。
+              每張都帶 width/height，載入前才有版位，不會擠動版面。 */}
+          <div
+            aria-hidden="true"
+            data-parallax-scope
+            className="pointer-events-none select-none absolute inset-0 overflow-hidden"
+          >
+            {/* 吊燈：自帶垂線，所以貼齊區塊上緣 */}
+            <img
+              src={decoLamp}
+              alt=""
+              className="absolute top-0 right-[9%] w-[134px] mobile:w-[76px] h-auto"
+              width={268}
+              height={298}
+              loading="lazy"
+            />
+            {/* 粉筆軌跡：這條線是右下角兩個學生畫出來的，所以高度要對齊他們舉筆的
+                位置。用固定的 bottom 而不是百分比，區塊變高時才不會跟著飄走。 */}
+            <img
+              src={decoChalk}
+              alt=""
+              className="absolute left-0 bottom-[40px] mobile:bottom-[24px] w-full min-w-[900px] h-auto"
+              width={2682}
+              height={420}
+              loading="lazy"
+            />
+            {/* 左下角葉子：讓它一部分溢出到版面外，並帶視差。
+                z-30 蓋過內容層（FadeIn 的 z-10）——外層裝飾 div 沒有 z-index，
+                不會關出堆疊環境，所以這個值是直接跟內容層比大小的。 */}
+            <Parallax
+              strength={70}
+              className="absolute left-0 bottom-[4%] z-30 w-[281px] mobile:w-[130px] -translate-x-[28%]"
+            >
+              <img
+                src={decoLeaf}
+                alt=""
+                className="w-full h-auto"
+                width={562}
+                height={692}
+                loading="lazy"
+              />
+            </Parallax>
+            {/* 右下角兩個學生 */}
+            <img
+              src={decoStudents}
+              alt=""
+              className="absolute right-[3%] bottom-0 w-[380px] mobile:w-[190px] h-auto"
+              width={1174}
+              height={646}
+              loading="lazy"
+            />
+          </div>
+
+          <FadeIn className="relative z-10">
+            <Container>
+              <H2 id="brief">プロジェクト概要</H2>
+
+              {/* TwoColumn 預設是 md（768px）才分欄，平板會掉成上下欄；
+                  加上 sm 讓 640px 以上就維持左右兩欄 */}
+              <TwoColumn className="items-start sm:grid-cols-2">
+                <div>
+                  <P>
+                    新学習指導要領に合わせ、南一書局の高校歴史チームと著者陣が心血を注いで作った教科書です。言語と翻訳がどのように日常をかたちづくってきたかを扱い、地理と時間軸を横断して歴史を捉える新しい方法を示しています。
+                  </P>
+                  <P>
+                    私は全体のビジュアルの方向づけと誌面デザインを担当し、イラストレーターとして重要な知識点の図版と文章の統合も手がけました。漫画や図解が教科書に入ることで、堅苦しくないページになっています。
+                  </P>
+                  <p className="mt-4 text-caption italic opacity-70">
+                    ※著作権の都合で全文は掲載できないため、一部の本文にぼかしをかけています
+                  </p>
+                </div>
+
+                <div className="bg-white/10 backdrop-blur rounded-sm shadow p-5">
+                  <p className="text-h3 mb-2">担当</p>
+                  <P className="mb-6">グラフィックデザイナー</P>
+
+                  <p className="text-h3 mb-2">期間</p>
+                  <P className="mb-6">2017年12月 – 2018年11月</P>
+
+                  <p className="text-h3 mb-2">ツール</p>
+                  <UL>
+                    <LI>Adobe Photoshop</LI>
+                    <LI>Adobe Illustrator</LI>
+                    <LI>Adobe InDesign</LI>
+                  </UL>
+                </div>
+              </TwoColumn>
+            </Container>
+            {/* 滿版自動輪播。刻意不放進 Wide，讓卡片一路溢出到螢幕外。
+                裁切放在這層而不是 Swiper 上：overflow-x-clip 只關左右，卡片
+                hover 放大時上下才不會被切掉。 */}
+            <div className="mt-8 -mt-4 overflow-x-clip overflow-y-visible">
+              <Swiper
+                modules={[Autoplay, FreeMode]}
+                slidesPerView="auto"
+                // 負值讓卡片彼此重疊；手機卡片較窄，重疊量也跟著縮小
+                spaceBetween={-40}
+                breakpoints={{ 769: { spaceBetween: -70 } }}
+                loop={REVIEW_LOOP.length > 1}
+                freeMode={{ enabled: true, momentum: false }}
+                speed={16000}
+                autoplay={{
+                  delay: 0,
+                  disableOnInteraction: false,
+                  pauseOnMouseEnter: true,
+                }}
+                // Swiper 只會改 transition-duration，不會動 timing-function，
+                // 所以在這裡設一次 linear 就能一路等速，不會每段都 ease 出停頓感。
+                onSwiper={(swiper) => {
+                  swiper.wrapperEl.style.transitionTimingFunction = "linear";
+                }}
+                className={`!py-8 !overflow-visible ${HOVER_PUSH_SLIDES}`}
+              >
+                {REVIEW_LOOP.map(({ src, width, height, alt, copy, index }) => (
+                  <SwiperSlide
+                    key={`${copy}-${alt}`}
+                    className={`!w-[360px] mobile:!w-[240px] relative ${index % 2 ? "z-20" : "z-10"}`}
+                  >
+                    <button
+                      type="button"
+                      onClick={() => setZoom(zoomAt(REVIEWS, index))}
+                      aria-label={`拡大表示：${alt}`}
+                      className={`block w-full rounded-lg shadow-2xl cursor-zoom-in ${TILTS[index % TILTS.length]}`}
+                    >
+                      <LazyImage
+                        src={src}
+                        width={width}
+                        height={height}
+                        alt={alt}
+                        sizes="(max-width: 768px) 240px, 360px"
+                        className="w-full h-auto rounded-lg"
+                      />
+                    </button>
+                  </SwiperSlide>
+                ))}
+              </Swiper>
+            </div>
+          </FadeIn>
+        </SectionBlock>
+
+        {/* ── 03 封面設計 ──────────────────────────────────────────
+            bg-3 是很淡的傾斜書頁照，當整區的底。空心跑馬燈、三本封面、
+            標準字面板都長在同一塊背景上，中間不切斷。 */}
+        <SectionBlock
+          bgVariant="cover"
+          backgrounds={backgrounds}
+          style={lightStyle}
+          className="overflow-hidden"
+          textDarkOnBg
+        >
+          {/* 空心英文跑馬燈。沿用首頁的 .marquee（src/index.css），只描邊不填色。 */}
+          <div className="flex items-center pointer-events-none select-none mb-20 mobile:mb-12">
+            <div className="marquee">
+              <div
+                className="marquee__inner text-large mobile:text-large-mobile"
+                style={OUTLINE_TEXT}
+              >
+                <span className="mx-6">
+                  A Traveler’s Guide for Young Historians
+                </span>
+                {/* 複製一份才能無縫接回，跟首頁一樣 */}
+                <span className="mx-6">
+                  A Traveler’s Guide for Young Historians
+                </span>
+              </div>
+            </div>
+          </div>
+
+          <FadeIn>
+            <Container>
+              {/* 標題走 Typewriter 而不是 H2，樣式沿用 H2 的 text-h2 / 500 字重 */}
+              <div className="grid grid-cols-1 sm:grid-cols-[4fr_8fr] gap-12 items-start">
+                <Typewriter
+                  as="h2"
+                  id="cover"
+                  className="text-h2"
+                  style={{ fontWeight: 500 }}
+                  text={"何度も重ねた\n表紙デザイン"}
+                />
+                <P className="!mb-0">
+                  当初は金色の配色と実物の重なりで歴史感を出していましたが、マーケティングの方向に合わせ、編集と相談しながら少しずつ簡潔にしていきました。最終版はイラスト調の地図と本のページに変え、言葉を変えていった重要な書物を見せることで、「漫遊」という核となるイメージに応えています。
+                </P>
+              </div>
+            </Container>
+
+            {/* 三本封面階梯式下降，後面的疊在前面之上 */}
+            <Wide className="mt-12">
+              <div className={`flex items-start ${HOVER_PUSH_COVERS}`}>
+                {COVERS.map(({ src, width, height, alt, caption }, i) => (
+                  <figure
+                    key={caption}
+                    className={`relative w-1/3 ${COVER_STAIR[i]}`}
+                  >
+                    <button
+                      type="button"
+                      onClick={() => setZoom(zoomAt(COVERS, i))}
+                      aria-label={`拡大表示：${alt}`}
+                      className="block w-full rounded-lg shadow-2xl cursor-zoom-in"
+                    >
+                      <LazyImage
+                        src={src}
+                        width={width}
+                        height={height}
+                        alt={alt}
+                        sizes="(max-width: 768px) 30vw, 330px"
+                        className="w-full h-auto rounded-lg"
+                      />
+                    </button>
+                    <figcaption className="mt-4 mobile:mt-2 text-center">
+                      <span
+                        className="inline-block rounded-full px-4 mobile:px-3 py-1 text-caption"
+                        style={greenStyle}
+                      >
+                        {caption}
+                      </span>
+                    </figcaption>
+                  </figure>
+                ))}
+              </div>
+            </Wide>
+
+            {/* 標準字：副標在面板外，面板右上角有一個指回「最終版」的三角形 */}
+            <Wide className="mt-16">
+              {/* 收合的寬度掛在外層，副標才會跟著面板一起縮進來、不會被留在最左邊 */}
+              <div className="mx-auto" style={logotypes.panelStyle}>
+                <p className="text-p-strong mb-4">
+                  ロゴタイプの候補たち。最後に選ばれたのは⋯
+                </p>
+
+                <div
+                  ref={logotypes.panelRef}
+                  className="relative rounded-lg p-16 mobile:p-10"
+                  style={greenStyle}
+                >
+                  <div
+                    aria-hidden="true"
+                    className="absolute -top-3 right-[12%] mobile:right-[8%] w-0 h-0 border-l-[14px] border-r-[14px] border-b-[14px] border-l-transparent border-r-transparent"
+                    style={{ borderBottomColor: GREEN }}
+                  />
+                  {/* 依序浮現 → 停一秒 → 落選淡出 → 勝出者放大、面板收合。
+                    整段時序在 ../useLogotypeReveal。 */}
+                  <div className="flex flex-wrap items-center justify-center gap-12 mobile:gap-10">
+                    {LOGOTYPES.map(({ src, alt, size }, i) => (
+                      <img
+                        key={alt}
+                        ref={
+                          i === WINNER_LOGOTYPE
+                            ? logotypes.winnerRef
+                            : undefined
+                        }
+                        src={src}
+                        alt={alt}
+                        className={`w-auto ${size} ${logotypes.isRemoved(i) ? "hidden" : ""}`}
+                        style={logotypes.itemStyle(i)}
+                        loading="lazy"
+                      />
+                    ))}
+                  </div>
+                </div>
+              </div>
+            </Wide>
+          </FadeIn>
+        </SectionBlock>
+        {/* ── 04 內頁設計 ──────────────────────────────────────────
+            深綠底紋。一張大跨頁 + 底下縮圖列。
+            手機待決（最大的坑）：跨頁在 375px 讀不到字，要單頁裁切／橫滑／燈箱三選一。 */}
+        <SectionBlock
+          bgVariant="green"
+          backgrounds={backgrounds}
+          style={greenStyle}
+        >
+          <FadeIn>
+            <Container>
+              <div className="grid grid-cols-1 sm:grid-cols-[4fr_8fr] gap-12 items-start">
+                <Typewriter
+                  as="h2"
+                  id="interior"
+                  className="text-h2"
+                  style={{ fontWeight: 500 }}
+                  text={"引き込まれる\n図版と文章"}
+                />
+                <div>
+                  <P className="!mb-0">
+                    たくさんのイラストと、考えを促す問いかけで堅さを取り除き、生徒が入り込みやすくしています。
+                  </P>
+                  <p className="mt-4 text-caption italic opacity-70">
+                    ※著作権の都合で全文は掲載できないため、一部の本文にぼかしをかけています
+                  </p>
+                </div>
+              </div>
+            </Container>
+
+            <Wide className="mt-12">
+              <figure>
+                {/* 真的可以翻的書。頁面內容目前是佔位頁，等單頁圖上傳後換掉 BOOK_PAGES。 */}
+                <PageFlipBook
+                  pages={BOOK_PAGES}
+                  pageRatio={0.745}
+                  hintLabel="ページをクリック、またはドラッグするとめくれます"
+                  describe={(turned, total) =>
+                    `めくれる本、全 ${total} 枚のうち ${turned} 枚目。左右の矢印キー、クリックやドラッグでページをめくれます。`
+                  }
+                  turned={turned}
+                  onTurnedChange={setTurned}
+                />
+              </figure>
+            </Wide>
+          </FadeIn>
+        </SectionBlock>
+
+        {/* ── 05 插畫設計 ──────────────────────────────────────────
+            一整排插畫 + 疊在上面的深綠說明面板。
+            手機待決：面板疊著一定爆版，建議落到圖下方；插畫每隻獨立切才能重排。 */}
+        <SectionBlock style={lightStyle}>
+          <FadeIn>
+            <Container className="text-center">
+              <Typewriter
+                as="h2"
+                id="illustration"
+                className="text-h2 mb-8"
+                style={{ fontWeight: 500 }}
+                text="教材の内容を貫くイラスト"
+              />
+            </Container>
+
+            {/* 兩排反向跑的插畫帶，說明面板半透明疊在上面。
+                刻意不放進 Wide，讓插畫一路溢出到螢幕外。 */}
+            <div className="mt-12 relative">
+              <IllustrationRow
+                items={ILLUSTRATIONS_TOP}
+                expanded={openIllust}
+                onToggle={toggleIllust}
+                frozen={openIllust != null}
+              />
+              <IllustrationRow
+                items={ILLUSTRATIONS_BOTTOM}
+                offset={ILLUSTRATIONS_TOP.length}
+                expanded={openIllust}
+                onToggle={toggleIllust}
+                frozen={openIllust != null}
+                reverse
+                className="mt-4"
+              />
+
+              {/* Swiper 的 stylesheet 給 .swiper 設了 z-index: 1，所以這層要明確拉高才蓋得住。
+                  有插畫放大時整片讓開，不然半透明的綠底會壓在放大的圖上。 */}
+              <div
+                className={`absolute inset-0 z-10 flex items-center pointer-events-none transition-opacity duration-300 ${
+                  openIllust == null ? "opacity-100" : "opacity-0"
+                }`}
+              >
+                <Wide>
+                  <div
+                    className="w-[46%] mobile:w-full rounded-sm p-8 mobile:p-6"
+                    style={panelStyle}
+                  >
+                    <P>
+                      本書のイラストはすべて手描きです。手描きの線とやわらかな色面を主体に、人物はできるだけ生活感のある造形にして説教くささを消し、歴史上の人物が冷たい肖像ではなく、生徒と対話できる存在に見えるようにしました。
+                    </P>
+                    <P className="!mb-0">
+                      同時にイラストは図解の役割も担い、制度や出来事、因果関係を一目で分かる視覚的な語りに翻訳することで、長い文章への抵抗感を減らしています。
+                    </P>
+                  </div>
+                </Wide>
+              </div>
+            </div>
+          </FadeIn>
+        </SectionBlock>
+
+        {/* ── 06 結語 ────────────────────────────────────────────
+            bg-4 是淺藍底紋。相關專案與頁尾本來就在同一個 SectionBlock 裡，
+            所以一起吃到這張背景。 */}
+        <SectionBlock
+          bgVariant="closing"
+          backgrounds={backgrounds}
+          style={lightStyle}
+          textDarkOnBg
+        >
+          <FadeIn>
+            <Container className="text-center">
+              {/* 字級字重沿用全站的 text-p（透過 <P>），不另外加大 */}
+              <blockquote className="w-full md:w-2/3 mx-auto text-gray-800">
+                <P>
+                  アートディレクターとイラストレーターを兼ねた仕事として、色や誌面から一枚一枚の手描きイラストまで、「教科書」を「めくれる物語」として捉え直す練習でした。
+                </P>
+                <P>
+                  歴史は遠い昔の出来事ではなく、翻訳のたび、新しい言葉のたびにそこに潜んでいて、世界の見方を書き換え続けています。
+                </P>
+                <P className="!mb-0">
+                  だからこの本では、レイアウトもイラストも物語性を立ち上げることに力を注ぎました。ページをめくるあいだに、歴史がずっとすぐそばにあったと気づいてもらえるように。
+                </P>
+              </blockquote>
+              <img
+                src={illust11}
+                alt=""
+                aria-hidden="true"
+                className="mx-auto w-[176px] h-auto mt-10"
+                width={1323}
+                height={1582}
+                loading="lazy"
+              />
+              <p className="text-h3 font-light mt-10">
+                若き歴史家の漫遊ガイド
+              </p>
+              <p className="text-caption text-gray-500 font-light">2018</p>
+            </Container>
+          </FadeIn>
+
+          <RelatedProjects currentSlug="textbook" />
+
+          <hr className="w-full my-8 border-black/10" />
+          <Footer />
+        </SectionBlock>
+      </main>
+
+      <Lightbox
+        items={zoom.items}
+        index={zoom.index}
+        onClose={() => setZoom(EMPTY_ZOOM)}
+        onNavigate={(index) => setZoom((current) => ({ ...current, index }))}
+        labels={{
+          dialog: "画像ビューア",
+          close: "閉じる",
+          prev: "前の画像",
+          next: "次の画像",
+        }}
+      />
+    </div>
+  );
+}
