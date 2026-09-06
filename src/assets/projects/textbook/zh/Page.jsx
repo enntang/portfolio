@@ -959,7 +959,7 @@ export default function YoungHistoriansGuidePageZh() {
               >
                 <Wide>
                   <div
-                    className="w-[46%] mobile:w-full rounded-lg p-8 mobile:p-6"
+                    className="w-[46%] mobile:w-full rounded-sm p-8 mobile:p-6"
                     style={panelStyle}
                   >
                     <P>
