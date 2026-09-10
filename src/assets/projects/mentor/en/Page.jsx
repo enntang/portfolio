@@ -837,7 +837,10 @@ export default function MentorEnPage() {
         </SectionBlock>
 
         <RelatedProjects currentSlug="mentor" />
-        <Footer />
+
+        <div className="pb-16 mobile:pb-10">
+          <Footer />
+        </div>
       </main>
     </div>
   )
